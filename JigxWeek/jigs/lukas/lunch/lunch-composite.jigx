@@ -1,0 +1,45 @@
+name: Lunch
+referenceId: lunch-composite
+type: '@jigx/jig/composite'
+description: ='Today is ' & $substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",") & ' of JigxWeek21 see your lunch buddies for the day and have a wonderfull day!'
+
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title:  Lunch
+      source:
+        uri: "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/04/blog_chandigarh-1030x538.jpg"
+
+datasources: 
+  numbers:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/lu
+      queryParameters:
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+        email: =@ctx.user.email
+      query: |
+        SELECT
+          '$.group',
+          '$.email',
+          '$.day'
+        FROM[default/lu] where '$.email' = @email and '$.day' = @day
+   
+views:
+  2x2:
+    componentId: '@jigx/jw-universal'
+    options:
+      center:
+        componentId: '@jigx/jc-avatar'
+        options:
+          text: ''
+          uri: "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/04/blog_chandigarh-1030x538.jpg"
+children:
+  - componentId: lunch-list
+    inputs:
+      lunch-group: =@ctx.data.numbers.group
+  - componentId: restaurant-list

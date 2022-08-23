@@ -1,0 +1,41 @@
+name: Team 3
+type: '@jigx/jig/list'
+referenceId: third-team
+
+
+
+
+datasources:  
+  people:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/bd
+      queryParameters:
+        groups: "3"
+      query: |
+        SELECT
+          '$.id',
+          '$.photo',
+          '$.group',
+          '$.person',
+          '$.email',
+          '$.voted'
+        FROM[default/bd] where '$.group' = @groups
+        
+data: =@ctx.data.people
+item:
+  componentId: '@jigx/jc-list-item'
+  options:
+    title: =@ctx.parents.list-data.item.person
+    subtitle: =@ctx.parents.list-data.item.email
+    leftElement: 
+      type: avatar
+      text: ''
+      uri: =@ctx.parents.list-data.item.photo
+
+
+          
+          

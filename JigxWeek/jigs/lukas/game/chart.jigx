@@ -1,0 +1,39 @@
+
+name: Current scores
+referenceId: chart
+type: '@jigx/jig/default'
+
+datasources:
+  points:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/guesses
+        - default/facts
+      query: |
+        SELECT
+          f.id as fid, 
+          g.id as gid,
+          COUNT(g.id) as points,
+          json_extract(g.data, '$.factid') as factid,
+          json_extract(g.data, '$.guessuser') as guessuser,
+          json_extract(f.data, '$.user') as user,
+          json_extract(g.data, '$.player') as player
+        FROM [default/guesses] g
+        JOIN [default/facts] f on f.id = factid
+        WHERE fid = factid and user = guessuser
+        GROUP BY player   
+        ORDER BY points DESC
+        Limit 10
+
+children:
+  - componentId: '@jigx/jc-bar-chart'
+    options:
+      yAxis:
+        min: 0
+        max: 19
+      series:
+        - data: "=[{'x': '#1', 'y': $exists(@ctx.data.points[0]) ? @ctx.data.points[0].points : 0, 'color': 'color2'},{'x': '#2', 'y': $exists(@ctx.data.points[1]) ? @ctx.data.points[1].points : 0, 'color': 'color3'},{'x': '#3', 'y': $exists(@ctx.data.points[2]) ? @ctx.data.points[2].points : 0, 'color': 'color4'},{'x': '#4', 'y': $exists(@ctx.data.points[3]) ? @ctx.data.points[3].points : 0, 'color': 'color5'}, {'x': '#5', 'y': $exists(@ctx.data.points[4]) ? @ctx.data.points[4].points : 0, 'color': 'color6'},{'x': '#6', 'y': $exists(@ctx.data.points[5]) ? @ctx.data.points[5].points : 0, 'color': 'color6'}, {'x': '#7', 'y': $exists(@ctx.data.points[6]) ? @ctx.data.points[6].points : 0, 'color': 'color8'}, {'x': '#8', 'y': $exists(@ctx.data.points[7]) ? @ctx.data.points[7].points : 0, 'color': 'color9'}, {'x': '#9', 'y': $exists(@ctx.data.points[8]) ? @ctx.data.points[8].points : 0, 'color': 'color10'}]"
+          dataLabels:
+            - isEnabled: true

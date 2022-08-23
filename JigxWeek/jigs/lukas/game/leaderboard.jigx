@@ -1,0 +1,65 @@
+name: Leaderboard
+referenceId: leaderboard
+type: '@jigx/jig/list'
+
+placeholders:
+  - when: =@ctx.data.gamestatus.status != 'done'
+    title: " "
+    icon: is-offline
+
+datasources:
+  gamestatus:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/gamestatus
+      query: |
+        SELECT
+          id,
+          '$.status'
+        FROM [default/gamestatus]
+        
+  points:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/guesses
+        - default/facts
+        - default/teammates
+      query: |
+        SELECT
+          f.id as fid, 
+          g.id as gid,
+          t.id as tid,
+          COUNT(g.id) as points,
+          json_extract(g.data, '$.factid') as factid,
+          json_extract(g.data, '$.guessuser') as guessuser,
+          json_extract(f.data, '$.user') as user,
+          json_extract(g.data, '$.player') as player,
+          json_extract(t.data, '$.email') as email,
+          json_extract(t.data, '$.name') as playername,
+          json_extract(t.data, '$.avatar') as avatar
+        FROM [default/guesses] g
+        JOIN [default/facts] f on f.id = factid
+        JOIN [default/teammates] t on email = player
+        WHERE fid = factid and user = guessuser
+        GROUP BY player   
+        ORDER BY points DESC
+        Limit 10
+
+data: =@ctx.data.points
+
+item: 
+  componentId: '@jigx/jc-list-item'
+  options:
+    title: =@ctx.parents.list-data.item.playername
+    leftElement: 
+      type: avatar
+      text: ""
+      uri: =@ctx.parents.list-data.item.avatar
+    rightElement: 
+      type: value
+      text: "=@ctx.parents.list-data.item.points & ' points'"

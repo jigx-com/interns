@@ -1,0 +1,162 @@
+name: Fun Fact
+type: '@jigx/jig/form'
+referenceId: fact
+icon: question-circle
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title: 🧐 Guess who it is
+      source:
+        uri: "https://calendarmedia.blob.core.windows.net/assets/b69e9c75-0faa-4802-bb13-a4b399e55776.jpg"
+
+actions:
+  - children:
+    - instanceId: fact
+      componentId: '@jigx/ja-submit-form'
+      options:
+        title: Submit your guess
+      
+
+placeholders:
+  - when: "=@ctx.data.gamestatus.status = 'done'"
+    title: 🏆 Game over 🏆
+    icon: is-offline
+  - when: =$count(@ctx.data.facts[user = @ctx.user.email]) = 0
+    title: Tell us some fun fact about yourself
+    icon: missing-data
+    onPress: 
+      componentId: '@jigx/ja-go-to'
+      options:
+        title: Tell us now
+        linkTo: myfact
+  - when: "=@ctx.data.gamestatus.status != 'open' or $count(@ctx.data.facts[active = 'true']) = 0"
+    title: Now, let's wait until Grant starts the game
+    icon: is-offline
+  - when: "=@ctx.data.facts[active = 'true'].user = @ctx.user.email"
+    title: For obvious reasons you must skip this round :)
+    icon: is-offline
+  - when: "=$count(@ctx.data.guesses[factid = @ctx.data.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
+    title: Let's wait for Grant...
+    icon: is-offline
+
+
+datasources:
+  gamestatus:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/gamestatus
+      query: |
+        SELECT
+          id,
+          '$.status'
+        FROM [default/gamestatus]
+        
+  facts:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/facts
+      query: |
+        SELECT
+          id,
+          '$.user',
+          '$.fact',
+          '$.active'
+        FROM [default/facts] 
+  
+  guesses:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/guesses
+      query: |
+        SELECT
+          id,
+          '$.factid',
+          '$.guessid',
+          '$.player'
+        FROM [default/guesses] 
+
+  teammates:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/teammates
+      query: |
+        SELECT
+          id,
+          '$.name',
+          '$.avatar',
+          '$.email'
+        FROM [default/teammates] ORDER BY '$.name' ASC       
+        
+views:
+  4x2: 
+    componentId: '@jigx/jw-list'
+    options:
+      title: "🧐 Guess, who it is:"
+      data: "=[ @ctx.data.facts[active = 'true'] ]"
+      item:         
+        componentId: '@jigx/jc-list-item'
+        options:
+          title: ='"' & @ctx.parents.list-data.item.fact & '"'
+          rightElement: 
+            type: button
+            title: ⁉️
+            onPress: 
+              componentId: '@jigx/ja-go-to'
+              options:
+                title: goto
+                linkTo: fact
+          
+provider: DATA_PROVIDER_DYNAMIC
+entity: default/guesses
+method: create
+
+children:
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: id
+      label: id
+      isHidden: true
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: factid
+      label: factid
+      initialValue: =@ctx.data.facts[active = 'true'].id
+      isHidden: true
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: player
+      label: player
+      initialValue: =@ctx.user.email
+      isHidden: true
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: fact
+      isIgnored: true
+      label: Fun Fact
+      initialValue: =@ctx.data.facts[active = 'true'].fact
+      style:
+        isDisabled: true
+      isMultiline: true
+      textArea: dynamic
+      isHidden: false
+  - componentId: "@jigx/jc-dropdown"
+    options:
+      label: Guess the teammate
+      property: guessuser
+      data: =@ctx.data.teammates
+      type: single
+      mapping:
+        title: name
+        value: email
+      isSearchable: true

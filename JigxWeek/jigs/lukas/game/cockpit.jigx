@@ -1,0 +1,123 @@
+name: Grants cockpit
+type: '@jigx/jig/list'
+
+actions:
+  - when: "=@ctx.data.gamestatus.status = 'init'"
+    children:
+      - componentId: '@jigx/ja-execute-entity'
+        options:
+          title: Start game
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/gamestatus
+          method: update
+          goBack: off
+          data: 
+            id: =@ctx.data.gamestatus.id
+            status: 'open'
+      - componentId: '@jigx/ja-execute-entity'
+        options:
+          title: Reset game
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/gamestatus
+          method: update
+          goBack: off
+          data: 
+            id: =@ctx.data.gamestatus.id
+            status: 'init'
+  - when: "=@ctx.data.gamestatus.status = 'open'"
+    children:
+      - componentId: '@jigx/ja-execute-entity'
+        options:
+          title: End game
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/gamestatus
+          method: update
+          data: 
+            id: =@ctx.data.gamestatus.id
+            status: 'done'
+      - componentId: '@jigx/ja-execute-entity'
+        options:
+          title: Reset game
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/gamestatus
+          method: update
+          goBack: off
+          data: 
+            id: =@ctx.data.gamestatus.id
+            status: 'init'
+  - when: "=@ctx.data.gamestatus.status = 'done'"
+    children:
+      - componentId: '@jigx/ja-execute-entity'
+        options:
+          title: Start game
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/gamestatus
+          method: update
+          goBack: off
+          data: 
+            id: =@ctx.data.gamestatus.id
+            status: 'open'
+      - componentId: '@jigx/ja-execute-entity'
+        options:
+          title: Reset game
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/gamestatus
+          method: update
+          goBack: off
+          data: 
+            id: =@ctx.data.gamestatus.id
+            status: 'init'
+      
+        
+datasources:
+  gamestatus:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/gamestatus
+      query: |
+        SELECT
+          id,
+          '$.status'
+        FROM [default/gamestatus]
+        
+  facts:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/facts
+      query: |
+        SELECT
+          id,
+          '$.user',
+          '$.fact',
+          '$.active',
+          '$.completed'
+        FROM [default/facts] 
+        ORDER BY id
+
+
+data: "=@ctx.data.gamestatus.status = 'open' ? @ctx.data.facts : []"
+item: 
+  componentId: '@jigx/jc-list-item'
+  options:
+    title: =@ctx.parents.list-data.item.fact
+    subtitle: =@ctx.parents.list-data.item.user
+    style:
+      isDisabled: =@ctx.parents.list-data.item.completed
+    rightElement: 
+      type: button
+      title: Activate
+      onPress: 
+        componentId: '@jigx/ja-execute-entities'
+        options:
+          
+          title: doit
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts
+          method: update
+          goBack: off
+          data: "=@ctx.data.facts[].{ 'id': id, 'active': id = @ctx.parents.list-data.item.id ? 'true' : 'false', 'completed': id = @ctx.parents.list-data.item.id or completed = 'true' ? 'true' : 'false' }[]"

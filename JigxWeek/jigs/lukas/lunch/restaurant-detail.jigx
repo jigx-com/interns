@@ -1,0 +1,68 @@
+name: Restaurant detail
+referenceId: restaurant-detail
+type: '@jigx/jig/default'
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title:  Restaurant detail
+      source:
+        uri: =@ctx.data.place.photo
+   
+
+datasources:
+  place:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/lr
+      queryParameters:
+        id: =@ctx.jig.inputs.id
+      query: |
+        SELECT
+          id,
+          '$.day',
+          '$.restaurant',
+          '$.description',
+          '$.photo',
+          '$.location',
+          '$.deeplink',
+          '$.url'
+        FROM[default/lr] WHERE id = @id
+
+                
+children:
+  - componentId: '@jigx/jc-entity'
+    options:
+      children:
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Restaurant name
+            value: =@ctx.data.place.restaurant
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Food preferences
+            value: =@ctx.data.place.description
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Website link
+            value: =@ctx.data.place.url
+            isMultiline: true
+            type: link
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Deeplink map
+            value: =@ctx.data.place.deeplink
+            isMultiline: true
+            type: link
+  - componentId: '@jigx/jc-location'
+    options:
+      address: =@ctx.data.place.location 
+      
+      
+

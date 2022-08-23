@@ -1,0 +1,36 @@
+name: Challenge
+referenceId: challenge
+type: '@jigx/jig/default'
+
+datasources:
+  grup:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/wk
+      queryParameters:
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+        email: =@ctx.user.email
+      query: |
+        SELECT
+        id,
+        '$.group',
+        '$.photo',
+        '$.email',
+        '$.person',
+        '$.challange',
+        '$.day'
+        FROM [default/wk] where '$.email' = @email and '$.day' = @day
+
+
+children:
+  - componentId: '@jigx/jc-entity'
+    options:
+      children:
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Challenge for a day
+            value: =@ctx.data.grup.challange
+            isMultiline: true
+            rightIcon: love-it

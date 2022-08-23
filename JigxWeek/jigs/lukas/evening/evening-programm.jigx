@@ -1,0 +1,76 @@
+name: Evening program
+referenceId: evening-programm
+type: '@jigx/jig/default'
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title:  Evening program
+      source:
+        uri: =@ctx.data.place.image
+   
+
+datasources:
+  place:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/evening
+      queryParameters:
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+      query: |
+        SELECT
+          id,
+          '$.day',
+          '$.plan',
+          '$.restaurant',
+          '$.location',
+          '$.deeplink',
+          '$.image',
+          '$.link'
+        FROM[default/evening] WHERE '$.day' = @day
+
+                
+children:
+  - componentId: '@jigx/jc-entity'
+    options:
+      children:
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Restaurant
+            value: =@ctx.data.place.restaurant
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Programm
+            value: =@ctx.data.place.plan
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Restaurant link
+            value: =@ctx.data.place.link
+            isMultiline: true
+            type: link
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Location restaurant
+            value: =@ctx.data.place.deeplink
+            isMultiline: true
+            type: link
+  - componentId: '@jigx/jc-location'
+    options:
+      address: =@ctx.data.place.location 
+      
+views:
+  2x2:
+    componentId: '@jigx/jw-universal'
+    options:
+      center:
+        componentId: '@jigx/jc-avatar'
+        options:
+          text: ''
+          uri: =@ctx.data.place.image
+

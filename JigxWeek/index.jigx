@@ -1,0 +1,24 @@
+title: Expenses
+category: communications
+referenceId: lukas-app
+
+favorites: 
+  - children: lunch-composite
+    size: 2x2
+  - children: evening-programm
+    size: 2x2
+  - children: walking-composite
+    size: 2x2
+  - children: ranking
+    size: 4x2
+  - children: fact
+    size: 4x2
+  - children: teams-composite
+    size: 1x1
+  - children: programm-calendar
+    size: 1x1
+
+
+    
+stories: 
+  - story-line

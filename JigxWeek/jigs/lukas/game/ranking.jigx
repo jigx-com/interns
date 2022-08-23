@@ -1,0 +1,90 @@
+name: Realtime scores
+type: '@jigx/jig/composite'
+referenceId: ranking
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title: Realtime scores
+      source:
+        uri: "https://www.esma-3d.fr/wp-content/uploads/2019/05/award-animation-review-career.jpg"
+
+placeholders:
+  - when: "=@ctx.data.gamestatus.status = 'init'"
+    title: Stay tuned
+    icon: is-offline
+
+actions:
+  - when: "=@ctx.user.email = 'markus@jigx.com'"
+    children:
+      - componentId: '@jigx/ja-go-to'
+        options:
+          title: Grants game cockpit
+          linkTo: cockpit
+        
+children:
+  - componentId: chart
+  - componentId: leaderboard
+
+datasources:
+  
+  gamestatus:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/gamestatus
+      query: |
+        SELECT
+          id,
+          '$.status'
+        FROM [default/gamestatus]
+        
+  points:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/guesses
+        - default/facts
+      query: |
+        SELECT
+          f.id as fid, 
+          g.id as gid,
+          COUNT(g.id) as points,
+          json_extract(g.data, '$.factid') as factid,
+          json_extract(g.data, '$.guessuser') as guessuser,
+          json_extract(f.data, '$.user') as user,
+          json_extract(g.data, '$.player') as player
+        FROM [default/guesses] g
+        JOIN [default/facts] f on f.id = factid
+        WHERE fid = factid and user = guessuser
+        GROUP BY player   
+        ORDER BY points DESC
+        Limit 10
+        
+        
+views:
+  4x2:
+    componentId: '@jigx/jw-group'
+    options:
+      children:
+        - componentId: '@jigx/jw-value'
+          options:
+            value: =@ctx.data.points[player = @ctx.user.email].points
+            title: My Points
+        - componentId: '@jigx/jw-chart'
+          options:
+            chart: 
+              componentId: '@jigx/jc-bar-chart'
+              options:
+                yAxis:
+                  min: 0
+                  max: 19
+                series:
+                  - data: "=[{'x': '#1', 'y': $exists(@ctx.data.points[0]) ? @ctx.data.points[0].points : 0, 'color': 'color2'},{'x': '#2', 'y': $exists(@ctx.data.points[1]) ? @ctx.data.points[1].points : 0, 'color': 'color3'},{'x': '#3', 'y': $exists(@ctx.data.points[2]) ? @ctx.data.points[2].points : 0, 'color': 'color4'}]"
+                    dataLabels:
+                      - isEnabled: true
+                    

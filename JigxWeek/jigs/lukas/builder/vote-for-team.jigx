@@ -1,0 +1,104 @@
+name: Voting
+type: '@jigx/jig/form'
+referenceId: vote-for-team
+
+actions:
+  - children:
+    - instanceId: voting
+      componentId: '@jigx/ja-submit-form'
+      options:
+        style:
+          isDisabled: =(@ctx.data.vote.state = "Voted" ? 'True':'False')
+        title: =(@ctx.data.vote.state = "Voted" ? 'You already voted':'Vote for this team')
+        formId: voting
+        onSuccess:
+          title: =('You have succesfully voted') 
+          actions:
+            - componentId: '@jigx/ja-go-back'
+              options:
+                title: ''
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title: Voting
+      source:
+        uri: "https://variety.com/wp-content/uploads/2020/11/Game-Awards-2020-Twitter-Voting-Exclusive.png"
+
+
+datasources:
+  vote:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/voting
+      queryParameters:
+        email: =@ctx.user.email
+      query: |
+        SELECT
+          id,
+          '$.email',
+          '$.state'
+        FROM[default/voting] where '$.email' = @email
+
+
+provider: DATA_PROVIDER_DYNAMIC
+entity: default/voting
+method: create
+children:
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: id
+      label: Id
+      style:
+        isDisabled: true
+      isHidden: true
+  - componentId: '@jigx/jc-dropdown'
+    options:
+      property: team
+      label: Team name
+      data: 
+        - title: Team 1
+          value: Team 1
+          property: team
+        - title: Team 2
+          value: Team 2
+          property: team
+        - title: Team 3
+          value: Team 3
+          property: team
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: person
+      label: Person
+      value: =@ctx.user.displayName
+      style:
+        isDisabled: true
+      isHidden: true
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: email
+      label: Email
+      value: =@ctx.user.email
+      style:
+        isDisabled: true
+      isHidden: true
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: points
+      label: Points
+      value: =$number(1)
+      style:
+        isDisabled: true
+      isHidden: true
+  - componentId: '@jigx/jc-text-field'
+    options:
+      property: state
+      label: State
+      value: Voted
+      style:
+        isDisabled: true
+      isHidden: true

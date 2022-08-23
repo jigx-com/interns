@@ -1,0 +1,98 @@
+name: Builder day leaderboard
+referenceId: points-overview
+type: '@jigx/jig/default'
+
+   
+
+datasources:
+  team1:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/voting
+      query: |
+        WITH cte AS (
+        SELECT
+        '$.team' as team,
+        '$.points' as points
+        FROM [default/voting] where team = "Team 1")
+        SELECT
+        'Team 1' as x,
+        SUM(points) as y,
+        'color2' as color
+        FROM cte
+  team2:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/voting
+      query: |
+        WITH cte AS (
+        SELECT
+        '$.team' as team,
+        '$.points' as points
+        FROM [default/voting] where team = "Team 2")
+        SELECT
+        'Team 2' as x,
+        SUM(points) as y,
+        'color4' as color
+        FROM cte
+  team3:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/voting
+      query: |
+        WITH cte AS (
+        SELECT
+        '$.team' as team,
+        '$.points' as points
+        FROM [default/voting] where team = "Team 3")
+        SELECT
+        'Team 3' as x,
+        SUM(points) as y,
+        'color3' as color
+        FROM cte
+
+                
+children:
+  - componentId: '@jigx/jc-bar-chart'
+    options:
+      series:
+        - data: =[@ctx.data.team1,@ctx.data.team2,@ctx.data.team3]
+          dataLabels:
+            - isEnabled: true
+        # - data: =@ctx.data.team2
+        #   name: "Team2"
+        #   description: Team2
+        #   dataLabels:
+        #     - isEnabled: true
+        # - data: =@ctx.data.team3
+        #   name: "Team3"
+        #   description: Team3
+        #   dataLabels:
+        #     - isEnabled: true
+      yAxis:
+        labels:
+          format:
+            numberStyle: decimal
+
+        
+            
+            
+
+            
+
+  
+        
+        
+        
+  
+  
+

@@ -1,0 +1,99 @@
+name: Daily storyline
+referenceId: story-line
+type: '@jigx/jig/default'
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title:  Daily storyline
+      source:
+        uri: 'https://www.gotobrno.cz/wp-content/uploads/2017/05/07-No%C4%8Dn%C3%AD-%C5%BEivot-v-ulici%C3%ADch-HD-1-e1499022857454.jpg'
+   
+
+datasources:
+  place:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/story
+      queryParameters:
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+      query: |
+        SELECT
+          id,
+          '$.day',
+          '$.plan1',
+          '$.plan2',
+          '$.plan3',
+          '$.lunch',
+          '$.link_restaurant',
+          '$.location_restaurant'
+        FROM[default/story] WHERE '$.day' = @day
+        
+  jigxweek:
+    componentId: '@jigx/jd-static'
+    options:
+      data:
+        - title: ='Today is ' & $substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",") & ' of JigxWeek21'
+          subtitle: "We hope that you will enjoy it as much as you can! Have a great day!"
+          uri: 'https://www.gotobrno.cz/wp-content/uploads/2017/05/07-No%C4%8Dn%C3%AD-%C5%BEivot-v-ulici%C3%ADch-HD-1-e1499022857454.jpg'
+
+                
+children:
+  - componentId: '@jigx/jc-entity'
+    options:
+      children:
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Morning plan
+            value: =@ctx.data.place.plan1
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Afternoon plan
+            value: =(@ctx.data.place.lunch & '\n' & @ctx.data.place.plan2)
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Evening plan
+            value: =@ctx.data.place.plan3
+            isMultiline: true
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Location evening event
+            value: =@ctx.data.place.location_restaurant
+            isMultiline: true
+            type: copy
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Evening restaurant link
+            value: =@ctx.data.place.link_restaurant
+            isMultiline: true
+            type: link
+  - componentId: '@jigx/jc-location'
+    options:
+      address: =@ctx.data.place.location_restaurant 
+
+
+stories:
+  componentId: "@jigx/jc-story-group"
+  options:
+    data: =@ctx.data.jigxweek
+    groupName: JigxWeek
+    item:
+      componentId: "@jigx/jc-image"
+      options:
+        resizeMode: contain
+        height: 400
+        title: ='Today is ' & $substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",") & ' of JigxWeek21'
+        subtitle: =@ctx.parents.list-data.item.subtitle
+        onPress:
+          componentId: "@jigx/ja-go-to"
+          options:
+            title: Check daily program
+            linkTo: programm-calendar
+        source:
+          uri: =@ctx.parents.list-data.item.uri

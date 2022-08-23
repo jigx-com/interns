@@ -1,0 +1,22 @@
+name: Map area
+referenceId: walking-map
+type: '@jigx/jig/default'
+
+
+                
+children:
+  - componentId: '@jigx/jc-entity'
+    options:
+      children:
+        - componentId: '@jigx/jc-entity-field'
+          options:
+            label: Maps link
+            value: "https://bit.ly/3BzhskV"
+            isMultiline: true
+            type: link
+  - componentId: '@jigx/jc-location'
+    options:
+      address: "Hotel Barceló Brno Palace, střed, střed, Šilingrovo nám. 265/2, Brno-město, 602 00 Brno-střed"
+      
+      
+

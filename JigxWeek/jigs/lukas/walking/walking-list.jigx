@@ -1,0 +1,47 @@
+name: Duo
+referenceId: walking-list
+type: '@jigx/jig/default'
+
+
+datasources:
+  people:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/wk
+      queryParameters:
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+        number: =@ctx.jig.inputs.group
+      query: |
+        SELECT
+        id
+        '$.group',
+        '$.photo',
+        '$.email',
+        '$.person',
+        '$.challange',
+        '$.day'
+        FROM [default/wk] where '$.group' = @number and '$.day' = @day
+        
+children:
+  - componentId: '@jigx/jc-list'
+    options:
+      data: =@ctx.data.people
+      item:
+        componentId: '@jigx/jc-list-item'
+        options:
+          title: =@ctx.parents.list-data.item.person
+          subtitle: =@ctx.parents.list-data.item.email
+          leftElement: 
+            type: avatar
+            text: ''
+            uri: =@ctx.parents.list-data.item.photo
+
+        
+
+
+
+          
+          

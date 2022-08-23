@@ -1,0 +1,84 @@
+name: My buddy
+referenceId: walking-composite
+icon: house
+description: See bellow your walking buddy and challenge for the day! How a great day.
+type: '@jigx/jig/composite'
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title:  My buddy
+      source:
+        uri: "https://www.insportline.cz/upload/source/K/leki_trek_header.jpg"
+   
+
+datasources:
+  grup:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/wk
+      queryParameters:
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+        email: =@ctx.user.email
+      query: |
+        SELECT
+        id,
+        '$.group',
+        '$.photo',
+        '$.email',
+        '$.person',
+        '$.challange',
+        '$.day'
+        FROM [default/wk] where '$.email' = @email and '$.day' = @day
+        
+  people:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/wk
+      queryParameters:
+        number: =@ctx.data.grup.group
+        email: =@ctx.user.email
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+      query: |
+        SELECT
+        id
+        '$.group',
+        '$.photo',
+        '$.email',
+        '$.person',
+        '$.challange',
+        '$.day'
+        FROM [default/wk] where '$.group' = @number and '$.email' <> @email and '$.day' = @day
+
+        
+children:
+  - componentId: walking-list
+    inputs:
+      group: =@ctx.data.grup.group
+    
+  - componentId: challenge
+  - componentId: walking-map
+
+    
+views:
+  2x2:
+    componentId: '@jigx/jw-universal'
+    options:
+      center:
+        componentId: '@jigx/jc-avatar'
+        options:
+          text: ''
+          uri: =@ctx.data.people.photo
+    
+        
+
+
+
+          
+          

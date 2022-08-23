@@ -1,0 +1,44 @@
+name: Builder day
+referenceId: teams-composite
+type: '@jigx/jig/composite'
+description: 'Select a team for which u would like to vote.'
+
+actions:
+  - children:
+    - componentId: '@jigx/ja-go-to'
+      options:
+        style:
+          isDisabled: =(@ctx.data.vote.state = "Voted" ? 'True':'False')
+        title: =(@ctx.data.vote.state = "Voted" ? 'You already voted':'Vote for team')
+        linkTo: vote-for-team
+
+header:
+  children: 
+    componentId: '@jigx/jc-image'
+    options:
+      title: Builder day teams
+      source:
+        uri: "https://ugc.futurelearn.com/uploads/images/a9/dc/header_a9dce648-8eda-49b1-a620-a548c7251418.jpg"
+        
+datasources:
+  vote:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/voting
+      queryParameters:
+        email: =@ctx.user.email
+      query: |
+        SELECT
+          id,
+          '$.email',
+          '$.state'
+        FROM[default/voting] where '$.email' = @email
+
+children:
+  - componentId: points-overview
+  - componentId: first-team
+  - componentId: second-team
+  - componentId: third-team

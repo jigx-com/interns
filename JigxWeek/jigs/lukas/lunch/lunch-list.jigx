@@ -1,0 +1,43 @@
+name: My group
+type: '@jigx/jig/list'
+referenceId: lunch-list
+icon: house
+
+datasources:
+  lunch_people:
+    componentId: '@jigx/jd-sqlite'
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - entity: default/lu
+      queryParameters:
+        groups: =@ctx.jig.inputs.lunch-group
+        day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
+      query: |
+        SELECT
+          '$.id',
+          '$.photo',
+          '$.group',
+          '$.person',
+          '$.email',
+          '$.leader'
+        FROM[default/lu] where '$.group' = @groups and '$.day' = @day
+        
+data: =@ctx.data.lunch_people
+item:
+  componentId: '@jigx/jc-list-item'
+  options:
+    title: =@ctx.parents.list-data.item.person
+    subtitle: =@ctx.parents.list-data.item.email
+    # description: =('Group nr.' & ' ' & @ctx.parents.list-data.item.group)
+    leftElement: 
+      type: avatar
+      text: ''
+      uri: =@ctx.parents.list-data.item.photo
+    rightElement: 
+      type: value
+      text: =(@ctx.parents.list-data.item.leader = "leader" ? '👑' :'')
+
+          
+          
