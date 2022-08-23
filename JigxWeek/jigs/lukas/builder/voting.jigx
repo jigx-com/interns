@@ -1,33 +1,41 @@
-name: Voting
-type: '@jigx/jig/form'
-referenceId: voting
+title: Voting
+type: jig.default
 
 actions:
   - children:
-    - instanceId: voting
-      componentId: '@jigx/ja-submit-form'
-      options:
-        title: Vote for team
-        formId: voting
-        onSuccess:
-          title: =('You have succesfully voted for ' & @ctx.data.points.x) 
-          actions:
-            - componentId: '@jigx/ja-go-back'
-              options:
-                title: ''
+      - type: action.submit-form
+        options:
+          formId: myForm
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Update Record
+          entity: default/bp
+          method: update
+          recordId: =@ctx.components.id.state.value
+          goBack: previous
+      
+    # - instanceId: voting
+    #   componentId: '@jigx/ja-submit-form'
+    #   options:
+    #     title: Vote for team
+    #     formId: voting
+    #     onSuccess:
+    #       title: =('You have succesfully voted for ' & @ctx.data.points.x) 
+    #       actions:
+    #         - componentId: '@jigx/ja-go-back'
+    #           options:
+    #             title: ''
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title: Voting
-      source:
-        uri: "https://variety.com/wp-content/uploads/2020/11/Game-Awards-2020-Twitter-Voting-Exclusive.png"
+  type: component.image
+  options:
+    title: Voting
+    source:
+      uri: "https://variety.com/wp-content/uploads/2020/11/Game-Awards-2020-Twitter-Voting-Exclusive.png"
 
 
 datasources:
   points:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -42,41 +50,40 @@ datasources:
           json_extract(data,'$.team') as x,
           json_extract(data,'$.points') as y
         FROM[default/bp] where groupin = @group_number
-
-
-provider: DATA_PROVIDER_DYNAMIC
-entity: default/bp
-method: update
-initialValues: =@ctx.data.points
+        
 children:
-  - componentId: '@jigx/jc-text-field'
+  - type: component.form
+    instanceId: myForm
     options:
-      property: id
-      value: =@ctx.data.points.id
-      label: Id
-      style:
-        isDisabled: true
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: team
-      value: =@ctx.data.points.x
-      label: Team name
-      style:
-        isDisabled: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: group
-      label: Group
-      value: =@ctx.data.points.groupin
-      style:
-        isDisabled: true
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: points
-      label: Points
-      value: =($number(@ctx.data.points.y) + 1)
-      style:
-        isDisabled: true
-      isHidden: true
+      children:
+        - type: component.text-field
+          instanceId: id
+          options:
+            value: =@ctx.data.points.id
+            label: Id
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: team
+          options:
+            value: =@ctx.data.points.x
+            label: Team name
+            style:
+              isDisabled: true
+        - type: component.text-field
+          instanceId: group
+          options:
+            label: Group
+            value: =@ctx.data.points.groupin
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: points
+          options:
+            label: Points
+            value: =($number(@ctx.data.points.y) + 1)
+            style:
+              isDisabled: true
+            isHidden: true

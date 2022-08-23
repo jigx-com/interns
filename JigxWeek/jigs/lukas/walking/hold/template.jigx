@@ -1,0 +1,19 @@
+title: Name
+description: Description of your Jig
+type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: 
+
+children:
+  - type: component.form
+    instanceId: myForm
+    options:
+      children:
+        - type: component.text-field
+          instanceId: myText
+          options:
+            label: First Name
