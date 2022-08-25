@@ -16,7 +16,7 @@ datasources:
 stories:
   type: component.story-group
   options:
-    actionButtonTitle: Check in
+    actionButtonTitle: Barcelona Itinerary
     data: =@ctx.datasources.story-example
     groupName: Welcome!
     item: 

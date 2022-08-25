@@ -1,5 +1,5 @@
-title: Name
-description: Description of your Jig
+title: Agenda List
+description: Hello, welcome to the day of Jigx Week 2022! Below is your walking buddy and daily itineray
 type: jig.list
 
 header: 
@@ -17,7 +17,7 @@ datasources:
         - id: 1
           icon: apple
           title: Breakfast
-          timeframe: 7:00 - 9:00
+          timeframe: " 7:00 - 9:00 "
 
 data: =@ctx.datasources.day0list
 item:
@@ -29,6 +29,3 @@ item:
       name: =@ctx.current.item.icon
     label:
       title: =@ctx.current.item.timeframe
-      color:
-        - when: true
-          color: color12
