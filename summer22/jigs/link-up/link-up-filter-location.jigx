@@ -38,7 +38,7 @@ item:
     title: =@ctx.current.item.name
     # subtitle: =@ctx.current.item.datasourcefield
     label:
-      title: =@ctx
+      title: =@ctx.current.item.decknumber
     leftElement: 
       element: avatar
       text: =($contains(@ctx.current.item.name, " ") ? ($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) ) :@ctx.current.item.name)
