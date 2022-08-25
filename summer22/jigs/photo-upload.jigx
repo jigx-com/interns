@@ -1,5 +1,5 @@
 title: Upload Photo
-description: Description of your Jig
+description: Share photos and quotes 
 type: jig.default
 
 # datasources:
@@ -21,3 +21,17 @@ children:
           options:
             label: Upload a Photo
             mediaType: image
+        - type: component.checkbox
+          instanceId: cruiseFilter
+          options:
+            label: Add JigxCruise22 filter 
+            isRequired: false
+        
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: sharePhotos
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/Photos
+          title: Upload Photo
