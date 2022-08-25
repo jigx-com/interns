@@ -9,7 +9,7 @@ widgets:
   - size: "2x2"
     jigId: myfirstjig
   - size: "1x1"
-    jigId: myfirstjig
+    jigId: day1-checkIn-from
   - size: "1x1"
     jigId: myfirstjig
   - size: "1x1"
