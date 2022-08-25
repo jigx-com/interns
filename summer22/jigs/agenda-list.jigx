@@ -9,7 +9,7 @@ header:
       uri: https://cdn.pixabay.com/photo/2018/04/13/16/49/laptop-3317007_1280.jpg
   
 datasources:
-  agendatStatic: 
+  agendaStatic: 
     type: datasource.static
     options:
       data:
@@ -43,7 +43,7 @@ datasources:
           timeframe: "18:00-21:00"
 
           
-data: =@ctx.datasources.agendatStatic
+data: =@ctx.datasources.agendaStatic
 item:
   type: component.list-item
   options:
@@ -54,14 +54,15 @@ item:
     label:
       title: =@ctx.current.item.timeframe
       
-widgets:
-  2x2: 
-    type: widget.list
-    options:
-      data: =@ctx.datasources.agendatStatic
-      item: 
-        type: component.list-item
-        options:
-          title: =@ctx.current.item.title
-          label:
-            title: t
+# Widget displays title and timeframe => 3 upcoming/current events
+# widgets:
+#   2x2: 
+#     type: widget.list
+#     options:
+#       data: =@ctx.datasources.agendaStatic
+#       item: 
+#         type: component.list-item
+#         options:
+#           title: =@ctx.current.item.title
+#           label:
+#             title: t
