@@ -10,9 +10,13 @@ datasources:
           uri: https://images.unsplash.com/photo-1622227614434-a7a26021879f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80
           title: Welcome to Jigx Week 2022
           subtitle: Enjoy your day in Barcelona!
+          linkTo: day0-welcome-story
+
+
 stories:
   type: component.story-group
   options:
+    actionButtonTitle: Check in
     data: =@ctx.datasources.story-example
     groupName: Welcome!
     item: 
@@ -22,8 +26,11 @@ stories:
         subtitle: =@ctx.current.item.subtitle 
         source:
           uri: =@ctx.current.item.uri
-
-
+        onPress: 
+          type: action.go-to
+          options:
+            title: Check in
+            linkTo: =@ctx.current.item.linkTo
 
 children:
   - type: component.entity
