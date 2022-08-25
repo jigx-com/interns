@@ -26,7 +26,7 @@ datasources:
       entities:
         - default/Location
   
-      query: SELECT id, '$.name', '$.type', '$.avatar' FROM [default/Location] WHERE '$.type' LIKE @filter
+      query: SELECT id, '$.name', '$.type', '$.avatar', '$.decknumber' FROM [default/Location] WHERE '$.type' LIKE @filter
       queryParameters:
         filter: =@ctx.jig.state.filter
 
@@ -37,6 +37,8 @@ item:
   options:
     title: =@ctx.current.item.name
     # subtitle: =@ctx.current.item.datasourcefield
+    label:
+      title: =@ctx
     leftElement: 
       element: avatar
       text: =($contains(@ctx.current.item.name, " ") ? ($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) ) :@ctx.current.item.name)
