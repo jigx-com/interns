@@ -15,18 +15,18 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Members
+        - default/testMembers
   
       query: 
         SELECT 
           id, 
-          '$.firstName', 
-          '$.lastName' 
-        FROM [default/Members] 
-        WHERE '$.firstName' LIKE '%'||@search||'%' 
-        OR '$.lastName' LIKE '%'||@search||'%' 
-        OR '$.firstName' AND '$.lastName' LIKE '%'||@search||'%'
-        OR @search IS NULL
+          '$.firstName' AS firstName, 
+          '$.lastName' AS lastName,
+          '$.avatar' AS avatar,
+          '$.location' AS location,
+          '$.time-of-location' AS timeOfLocation
+        FROM [default/testMembers] 
+        WHERE firstName || ' ' || lastName LIKE '%'||@search||'%' OR @search IS NULL
       queryParameters:
         search: =@ctx.jig.state.searchText
 
@@ -37,4 +37,8 @@ item:
   type: component.list-item
   options:
     title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
-    subtitle: =('Currently at - ' & @ctx.current.item.location & ' as of ... hrs ago')
+    subtitle: =('At the ' & @ctx.current.item.location & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
+    leftElement: 
+      element: avatar
+      text: ''
+      uri: =@ctx.current.item.avatar
