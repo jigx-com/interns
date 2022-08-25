@@ -1,20 +1,35 @@
 name: summer-22
 title: Summer 22
 category: miscellaneous
+
+stories:
+  - welcome-story
+  - agenda-story
+  - photo-story
+  - games-story
+
 widgets:
-  - size: "4x2"
-    jigId: myfirstjig
   - size: "2x2"
-    jigId: myfirstjig
+    jigId: agenda-list
+    
   - size: "2x2"
-    jigId: myfirstjig
+    jigId: food-composite
+    
   - size: "1x1"
     jigId: day1-checkIn-from
+
+  # After day 1
+  # - size: "1x1"
+  #   jigId: link-up
+
   - size: "1x1"
-    jigId: myfirstjig
+    jigId: find-my-peers-list
+    
   - size: "1x1"
-    jigId: myfirstjig
+    jigId: photo-upload
+    
   - size: "1x1"
-    jigId: myfirstjig
+    jigId: calendar-agenda
+    
   - size: "4x2"
-    jigId: myfirstjig
+    jigId: map-composite
