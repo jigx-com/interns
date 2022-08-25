@@ -49,5 +49,14 @@ children:
             label: Spouse 
             isRequired: false
             
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: check-in-form
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/Members
+          title: Check-In
+            
             
               
