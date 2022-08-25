@@ -33,3 +33,6 @@ widgets:
     
   - size: "4x2"
     jigId: map-composite
+    
+  - size: "1x1"
+    jigId: link-up-filter-location
