@@ -1,0 +1,20 @@
+title: Name
+description: Description of your Jig
+type: jig.default
+
+datasources:
+  test:
+    type: datasource.static
+    options:
+      data:
+        - avatar: 
+        - avatar:
+        - avatar:
+        - avatar:
+
+children:
+  # - type: component.list
+  #   options:
+  #     data: =@ctx.datasources.
+  #     maximumItemsToRender: 8
+  #     item: 

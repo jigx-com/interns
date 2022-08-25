@@ -1,0 +1,8 @@
+title: Lunch
+description: Lunch Options
+type: jig.composite
+
+children:
+  - jigId: mygroup
+    
+  - jigId: restaurants

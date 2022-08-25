@@ -1,4 +1,5 @@
 {
     "jigx.isJigxUser": false,
-    "workbench.iconTheme": "jigx"
+    "workbench.iconTheme": "jigx",
+    "jigx.attachedDevice": ""
 }
