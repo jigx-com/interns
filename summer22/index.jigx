@@ -2,5 +2,19 @@ name: summer-22
 title: Summer 22
 category: miscellaneous
 widgets:
-  - size: 1x1 # choose size of the widget on the home hub
+  - size: "4x2"
+    jigId: myfirstjig
+  - size: "2x2"
+    jigId: myfirstjig
+  - size: "2x2"
+    jigId: myfirstjig
+  - size: "1x1"
+    jigId: myfirstjig
+  - size: "1x1"
+    jigId: myfirstjig
+  - size: "1x1"
+    jigId: myfirstjig
+  - size: "1x1"
+    jigId: myfirstjig
+  - size: "4x2"
     jigId: myfirstjig
