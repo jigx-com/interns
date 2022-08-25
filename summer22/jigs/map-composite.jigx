@@ -1,11 +1,12 @@
 title: Map
 type: jig.composite
 
+
 widgets:
   "4x2": 
     type: widget.location
     options:
-      zoomLevel: 3.75
+      zoomLevel: 3.65
       pathsData:
         #Barcelona
         - lat: 41.357270
