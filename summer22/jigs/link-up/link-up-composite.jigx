@@ -1,0 +1,10 @@
+title: Link-up
+description: Description of your Jig
+type: jig.composite
+
+children:
+  - jigId: link-up-list
+    inputs:
+      recordid: =@ctx.jig.inputs.LOC
+  - jigId: link-up-location
+  - jigId: link-up-images

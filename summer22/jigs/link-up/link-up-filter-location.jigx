@@ -43,3 +43,9 @@ item:
       element: avatar
       text: =($contains(@ctx.current.item.name, " ") ? ($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) ) :@ctx.current.item.name)
       uri: =@ctx.current.item.avatar
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: link-up-composite
+        parameters:
+          LOC: =@ctx.current.item.name

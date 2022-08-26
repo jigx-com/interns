@@ -1,0 +1,24 @@
+title: location images
+description: Description of your Jig
+type: jig.default
+
+# datasources:
+#   mydata: 
+
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: false
+      data: =@ctx.datasources.static-data-llinkup-images
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: =@ctx.current.item.name
+          divider: solid
+          horizontalItemSize: large
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.image
