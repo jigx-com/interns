@@ -1,5 +1,6 @@
 title: Check-In
 type: jig.default
+icon: check-circle-1
 
 # datasources:
 #   mydata: 

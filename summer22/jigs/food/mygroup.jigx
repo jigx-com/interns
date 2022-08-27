@@ -1,5 +1,4 @@
-title: Name
-description: Description of your Jig
+title: My Group
 type: jig.default
 
 datasources:
@@ -7,14 +6,27 @@ datasources:
     type: datasource.static
     options:
       data:
-        - avatar: 
-        - avatar:
-        - avatar:
-        - avatar:
+        - avatar: https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGhlYWRzaG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+          name: Jane Stevens
+        - avatar: https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGhlYWRzaG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+          name: Micheal Philhower
+        - avatar: https://cdn.pixabay.com/photo/2022/03/04/05/59/fashion-model-7046622_1280.jpg
+          name: Melinda Terry 
+        - avatar: https://cdn.pixabay.com/photo/2022/08/06/10/57/black-man-7368384__480.jpg
+          name: Gary Hill 
 
 children:
-  # - type: component.list
-  #   options:
-  #     data: =@ctx.datasources.
-  #     maximumItemsToRender: 8
-  #     item: 
+  - type: component.list
+    options:
+      data: =@ctx.datasources.test
+      maximumItemsToRender: 8
+      isHorizontal: true
+      item: 
+        type: component.list-item
+        options:
+          title: =@ctx.current.item.name
+          horizontalItemSize: large
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.avatar

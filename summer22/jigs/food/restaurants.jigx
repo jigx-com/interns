@@ -9,13 +9,49 @@ datasources:
         - id: 1
           culinary-region-icon: ca
           title: Le Québec
-          rating: ⭐⭐⭐⭐
+          rating: ⭐⭐⭐⭐(4.0)
           price: $$
           address: 43 Rue Massena, 06000 Nice, France
           hours: 11:30 AM – 1:00 AM
-          walking-distance-workshop: 240 - 300 meters
-          walking-time-workshop: 3 - 4 minutes
-          
+          walking-distance-workshop: 240 meters
+          walking-time-workshop: 3 minutes
+        - id: 2
+          culinary-region-icon: it
+          title: La Pizza Cresci
+          rating: ⭐⭐⭐⭐(4.3)
+          price: $$
+          address: 34 Rue Massena, 06000 Nice, France
+          hours: 11:30 AM – 1:00 AM
+          walking-distance-workshop: 240 meters
+          walking-time-workshop: 3 minutes
+        - id: 3
+          culinary-region-icon: lb
+          title: Téta Marie
+          rating: ⭐⭐⭐⭐⭐(4.9)
+          price: $$ / $$$
+          address: 1 Rue Dalpozzo, 06000 Nice, France
+          hours: 12:00 PM – 3:00 PM
+          walking-distance-workshop: 200 meters
+          walking-time-workshop: 3 minutes
+        - id: 4
+          culinary-region-icon: it
+          title: Vabbuo
+          rating: ⭐⭐⭐⭐(4.6)
+          price: $$ 
+          address: 10 Rue Meyerbeer, 06000 Nice, France
+          hours: 12:00 – 2:30 PM
+          walking-distance-workshop: 280 meters
+          walking-time-workshop: 4 minutes
+        - id: 5
+          culinary-region-icon: fr
+          title: Olim Meyerbeer
+          rating: ⭐⭐⭐⭐(4.4)
+          price: $$
+          address: 12 Rue Meyerbeer, 06000 Nice, France
+          hours: 8:30 AM – 11:00 PM
+          walking-distance-workshop: 290 meters
+          walking-time-workshop: 4 minutes
+        
   locationPath:
     type: datasource.static
     options:
@@ -73,6 +109,7 @@ item:
                       value: =@ctx.current.item.walking-time-workshop
       - type: component.location
         options:
+          zoomLevel: 15
           pathsData:
             - lat: 43.695810
               lng: 7.263350
@@ -80,12 +117,3 @@ item:
               lng: 7.263200
             - lat: 43.696825
               lng: 7.265340
-          zoomLevel: 14
-      - type: component.list
-        options:
-          data: =@ctx.datasources.locationPath
-          maximumItemsToRender: 8
-          item: 
-            type: component.list-item
-            options:
-              title: =@ctx.current.item.directions

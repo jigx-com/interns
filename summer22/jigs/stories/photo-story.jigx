@@ -7,18 +7,18 @@ datasources:
     options:
       data:
         - id: 1
-          uri: https://images.unsplash.com/photo-1622227614434-a7a26021879f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80
-          title: Welcome to Jigx Week 2022
-          subtitle: Enjoy your day in Barcelona!
-          linkTo: 
+          uri: https://images.unsplash.com/photo-1565130083573-0d787ac28c27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGdyb3VwJTIwcGhvdG98ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
+          title: Photo Slideshow
+          subtitle: Share your photos below!
+          linkTo: photo-upload
 
 
 stories:
   type: component.story-group
   options:
-    actionButtonTitle: Check in
+    actionButtonTitle: Upload Photo
     data: =@ctx.datasources.story-example
-    groupName: Welcome!
+    groupName: Pictures
     item: 
       type: component.image
       options:
@@ -29,7 +29,7 @@ stories:
         onPress: 
           type: action.go-to
           options:
-            title: Check in
+            title: Upload Photo
             linkTo: =@ctx.current.item.linkTo
 
 children:
