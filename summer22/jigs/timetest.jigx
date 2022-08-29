@@ -1,0 +1,25 @@
+title: time tester
+type: jig.default
+
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: true?
+            value: "=($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '10:10:00' ? true: false)" 
+            
+        - type: component.entity-field
+          options:
+            label: false? (before midnight)
+            value: "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01'))" 
+            
+            #$expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
+            #$expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
+            
+        - type: component.entity-field
+          options:
+            label: time
+            value: "=$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')"

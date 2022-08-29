@@ -30,3 +30,8 @@ children:
             element: image
             text: ''
             uri: =@ctx.current.item.avatar
+          # For testing time --> REPLACE W/ MEMBER DETAILS JIG
+          onPress: 
+            type: action.go-to
+            options:
+              linkTo: timetest
