@@ -11,13 +11,23 @@ stories:
 widgets:
   - size: "2x2"
     jigId: agenda-list
-    
+
+
+  # Food Widget - Breakfast, Lunch, Dinner
+  - size: "2x2"
+    jigId: breakfast-composite
+    isHidden: "=($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '10:30:00' ? true: false)" 
   - size: "2x2"
     jigId: lunch-composite
-    
+    isHidden: "=($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:00' ? true: false)" 
+  - size: "2x2"
+    jigId: dinner-composite
+    isHidden: "=($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '23:59:59' ? true: false)" 
+
+
+  # Tool Widgets
   - size: "1x1"
     jigId: day1-checkIn-form
-
   # After day 1
   # - size: "1x1"
   #   jigId: link-up
@@ -30,9 +40,13 @@ widgets:
     
   - size: "1x1"
     jigId: calendar-agenda
-    
+
+
+  # Navigation widgets
   - size: "4x2"
     jigId: map-composite
-    
+
+
+  # Placeholder widgets
   - size: "1x1"
     jigId: link-up-filter-location
