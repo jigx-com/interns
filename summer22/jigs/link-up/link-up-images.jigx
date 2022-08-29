@@ -1,24 +1,53 @@
-title: location images
+title: Images
 description: Description of your Jig
 type: jig.default
 
-# datasources:
-#   mydata: 
+datasources:
+  currentLocation:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+  
+      query: |
+        SELECT Location.id, 
+         JSON_extract(Location.data, '$.name') as name
+        FROM [default/Location] 
+        
+  photos: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Photos
+  
+      query: |
+        SELECT id, 
+        '$.location', 
+        '$.uploadPhoto' 
+        FROM [default/Photos] 
+        WHERE '$.location' LIKE @myParam
+      queryParameters:
+        # does not have the imput for LOCname from location filter jig
+        myParam: =@ctx.jig.inputs.
 
 children:
   - type: component.list
     options:
       isHorizontal: true
       isHorizontalScrollIndicatorHidden: false
-      data: =@ctx.datasources.static-data-llinkup-images
+      data: =@ctx.datasources.photos
       maximumItemsToRender: 8
       item: 
         type: component.list-item
         options:
-          title: =@ctx.current.item.name
+          title: =@ctx.current.item.location
           divider: solid
           horizontalItemSize: large
           leftElement: 
             element: image
             text: ''
-            uri: =@ctx.current.item.image
+            uri: =@ctx.current.item.uploadPhoto

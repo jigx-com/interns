@@ -3,8 +3,16 @@ description: Share photos and quotes
 type: jig.default
 icon: camera
 
-# datasources:
-#   mydata: 
+datasources:
+  locationDropdown: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+  
+      query: SELECT id, '$.name' FROM [default/Location]
   
 header: 
   type: component.image
@@ -26,6 +34,20 @@ children:
           options:
             label: Add JigxCruise22 filter 
             isRequired: false
+        - type: component.dropdown
+          instanceId: location
+          options:
+            label: Choose a Location
+            data: =@ctx.datasources.locationDropdown
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.name
+                value: =@ctx.current.item.name
+            # isSearchable: true
+            isRequired: true
+            
+
         
 actions:
   - children:
@@ -35,3 +57,4 @@ actions:
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/Photos
           title: Upload Photo
+          

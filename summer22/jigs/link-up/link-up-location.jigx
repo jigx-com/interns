@@ -1,5 +1,18 @@
-title: Location Map
+title: TBD
 type: jig.default
+
+datasources:
+  location:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+  
+      query: SELECT id, '$.name', '$.decknumber' FROM [default/Location] WHERE id = @LOC
+      queryParameters:
+        LOC: =@ctx.jig.inputs.
 
 children:
   - type: component.image
