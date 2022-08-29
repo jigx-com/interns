@@ -16,9 +16,9 @@ children:
     options:
       children:
         - type: component.avatar-field
-          instanceId: add-avatar 
+          instanceId: avatar 
           options:
-            label: Add Avatar 
+            label: Add avatar 
         - type: component.field-row
           options:
             children:
@@ -43,11 +43,17 @@ children:
                 instanceId: roomNumber
                 options:
                   label: 'Room #'
+                  isRequired: false
         - type: component.checkbox
           instanceId: isSpouse 
           options:
             label: Spouse 
             isRequired: false
+        - type: component.text-field
+          instanceId: strtLocation
+          options:
+            label: Location 
+            isHidden: true
             
 actions:
   - children:
@@ -55,7 +61,7 @@ actions:
         options:
           formId: check-in-form
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/Members
+          entity: default/testMembers
           title: Check-In
             
             

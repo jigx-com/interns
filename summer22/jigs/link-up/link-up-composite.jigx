@@ -1,10 +1,45 @@
 title: Link-up
-description: Description of your Jig
+description:  =@ctx.datasources.memberInfo.id
 type: jig.composite
 
+datasources:
+  memberInfo:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      isDocument: true
+      entities:
+        - default/testMembers
+  
+      query: |
+          SELECT 
+            id, 
+            '$.email',
+            '$.firstName',
+            '$.lastName',
+            '$.location'
+          FROM [default/testMembers] 
+          WHERE '$.email' LIKE @myParam
+      queryParameters:
+        myParam: =@ctx.user.email
+
 children:
-  - jigId: link-up-list
+  - jigId: link-up-list-members
     inputs:
-      recordid: =@ctx.jig.inputs.LOC
+      LOC: =@ctx.jig.inputs.LOC
   - jigId: link-up-location
   - jigId: link-up-images
+
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Join Party
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/testMembers
+          method: update
+          goBack: previous
+          data:
+            id: =@ctx.datasources.memberInfo.id
+            location: =@ctx.jig.inputs.LOC
+            time-of-location: =$now()
