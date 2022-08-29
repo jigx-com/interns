@@ -29,7 +29,7 @@ stories:
         onPress: 
           type: action.go-to
           options:
-            title: Check in
+            title: Barcelona Itinerary
             linkTo: =@ctx.current.item.linkTo
 
 children:

@@ -1,6 +1,7 @@
 title: Upload Photo
 description: Share photos and quotes 
 type: jig.default
+icon: camera
 
 # datasources:
 #   mydata: 

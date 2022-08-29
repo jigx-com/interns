@@ -13,7 +13,7 @@ widgets:
     jigId: agenda-list
     
   - size: "2x2"
-    jigId: restaurants
+    jigId: lunch-composite
     
   - size: "1x1"
     jigId: day1-checkIn-form

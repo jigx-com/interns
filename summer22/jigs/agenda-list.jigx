@@ -1,4 +1,4 @@
-title: Name
+title: Day {Day#} Agenda
 description: Hello, welcome to the {day} day of Jigx Week 2022! Below is your walking buddy and daily itinerary
 type: jig.list
 icon: suitcase
@@ -55,14 +55,12 @@ item:
       title: =@ctx.current.item.timeframe
       
 # Widget displays title and timeframe => 3 upcoming/current events
-# widgets:
-#   2x2: 
-#     type: widget.list
-#     options:
-#       data: =@ctx.datasources.agendaStatic
-#       item: 
-#         type: component.list-item
-#         options:
-#           title: =@ctx.current.item.title
-#           label:
-#             title: t
+widgets:
+  2x2: 
+    type: widget.list
+    options:
+      data: =@ctx.datasources.agendaStatic
+      item: 
+        type: component.list-item
+        options:
+          title: =(@ctx.current.item.title & ' | ' & @ctx.current.item.timeframe)

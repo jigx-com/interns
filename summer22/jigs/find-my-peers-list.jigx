@@ -37,7 +37,7 @@ item:
   type: component.list-item
   options:
     title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
-    subtitle: =('At the ' & @ctx.current.item.location & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
+    subtitle: =('At ' & @ctx.current.item.location & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
     leftElement: 
       element: avatar
       text: ''
