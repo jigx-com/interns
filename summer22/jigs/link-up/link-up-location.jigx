@@ -1,4 +1,4 @@
-title: TBD
+title: =@ctx.datasources.location.decknumber
 type: jig.default
 
 datasources:
@@ -10,12 +10,15 @@ datasources:
       entities:
         - default/Location
   
-      query: SELECT id, '$.name', '$.decknumber' FROM [default/Location] WHERE id = @LOC
+      query: SELECT id, '$.name', '$.decknumber', '$.deckMap' FROM [default/Location] WHERE id = @LOC
       queryParameters:
-        LOC: =@ctx.jig.inputs.
+        LOC: =@ctx.jig.inputs.LOC
 
 children:
-  - type: component.image
+  - type: component.interactive-image
     options:
       source:
-        uri: =@ctx.datasources.static-data-map-loc.image
+        uri: =@ctx.datasources.location.deckMap
+        
+
+        

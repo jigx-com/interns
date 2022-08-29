@@ -31,7 +31,6 @@ datasources:
         FROM [default/Photos] 
         WHERE '$.location' LIKE @myParam
       queryParameters:
-        # does not have the imput for LOCname from location filter jig
         myParam: =@ctx.jig.inputs.LOC
 
 children:
