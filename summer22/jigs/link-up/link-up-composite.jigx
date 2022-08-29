@@ -1,5 +1,4 @@
 title: Link-up
-description:  =@ctx.datasources.memberInfo.id
 type: jig.composite
 
 datasources:

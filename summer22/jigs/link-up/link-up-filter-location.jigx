@@ -1,7 +1,7 @@
-title: Location Search 
-description: Search to see where your peers are at 
+title: Link-up
+description: TBD
 type: jig.list
-icon: notes
+icon: search-1
 
 filter: 
   - title: Activities 
@@ -15,8 +15,7 @@ header:
   type: component.image
   options:
     source:
-      uri: https://images.unsplash.com/photo-1567443022715-0d7ad3a48a9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80
-
+      uri: https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80
 datasources:
   filter-location: 
     type: datasource.sqlite
@@ -48,4 +47,6 @@ item:
       options:
         linkTo: link-up-composite
         parameters:
-          LOC: =@ctx.current.item.name
+          LOC: =@ctx.current.item.id
+  
+        

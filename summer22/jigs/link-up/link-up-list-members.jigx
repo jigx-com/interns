@@ -21,9 +21,9 @@ datasources:
       entities:
         - default/testMembers
   
-      query: SELECT id, '$.email', '$.avatar', '$.firstName', '$.lastName', '$.location' FROM [default/testMembers] WHERE '$.location' = @locName
+      query: SELECT id, '$.email', '$.avatar', '$.firstName', '$.lastName', '$.location' FROM [default/testMembers] WHERE '$.location' = @locID
       queryParameters:
-        locName: =@ctx.jig.inputs.LOC
+        locID: =@ctx.jig.inputs.LOC
 
 data: =@ctx.datasources.currentMembers
 item:
