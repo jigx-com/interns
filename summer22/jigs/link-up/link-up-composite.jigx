@@ -1,4 +1,4 @@
-title: Link-up
+title: =@ctx.jig.inputs.LOCname
 type: jig.composite
 
 datasources:

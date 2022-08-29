@@ -48,5 +48,6 @@ item:
         linkTo: link-up-composite
         parameters:
           LOC: =@ctx.current.item.id
+          LOCname: =@ctx.current.item.name
   
         
