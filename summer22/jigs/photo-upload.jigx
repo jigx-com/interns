@@ -43,7 +43,7 @@ children:
               type: component.dropdown-item
               options:
                 title: =@ctx.current.item.name
-                value: =@ctx.current.item.name
+                value: =@ctx.current.item.id
             # isSearchable: true
             isRequired: true
             

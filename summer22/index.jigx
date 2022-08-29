@@ -30,7 +30,7 @@ widgets:
     jigId: day1-checkIn-form
   # After day 1
   # - size: "1x1"
-  #   jigId: link-up
+  #   jigId: link-up composite 
 
   - size: "1x1"
     jigId: find-my-peers-list

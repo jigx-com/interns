@@ -26,8 +26,15 @@ children:
   - jigId: link-up-list-members
     inputs:
       LOC: =@ctx.jig.inputs.LOC
+      LOCname: =@ctx.jig.inputs.LOCname
   - jigId: link-up-location
+    inputs:
+      LOC: =@ctx.jig.inputs.LOC
+      LOCname: =@ctx.jig.inputs.LOCname
   - jigId: link-up-images
+    inputs:
+      LOC: =@ctx.jig.inputs.LOC
+      LOCname: =@ctx.jig.inputs.LOCname
 
 actions:
   - children:

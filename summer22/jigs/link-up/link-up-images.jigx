@@ -1,4 +1,4 @@
-title: Images
+title: =('Photos taken at ' & @ctx.jig.inputs.LOCname)
 description: Description of your Jig
 type: jig.default
 
@@ -32,7 +32,7 @@ datasources:
         WHERE '$.location' LIKE @myParam
       queryParameters:
         # does not have the imput for LOCname from location filter jig
-        myParam: =@ctx.jig.inputs.
+        myParam: =@ctx.jig.inputs.LOC
 
 children:
   - type: component.list
@@ -44,7 +44,7 @@ children:
       item: 
         type: component.list-item
         options:
-          title: =@ctx.current.item.location
+          title: TBD
           divider: solid
           horizontalItemSize: large
           leftElement: 
