@@ -1,0 +1,14 @@
+title: Time & Location
+type: jig.default
+
+isCollapsible: true
+isInitiallyCollapsed: true
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: tbd
+            value: tbd
