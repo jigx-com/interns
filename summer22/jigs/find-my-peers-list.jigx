@@ -24,10 +24,9 @@ datasources:
           json_extract(tM.data, '$.avatar') AS avatar,
           json_extract(tM.data, '$.location') AS location,
           json_extract(tM.data, '$.time-of-location') AS timeOfLocation,
-          
-          json_extract(L.data, '$.name') AS name
+          json_extract(L.data, '$.name') AS locname
         FROM [default/testMembers] AS tM LEFT JOIN [default/Location] AS L
-        ON tM.id = L.id
+        ON json_extract(tM.data, '$.location') = L.id
         WHERE firstName || ' ' || lastName LIKE '%'||@search||'%' OR @search IS NULL
       queryParameters:
         search: =@ctx.jig.state.searchText
@@ -39,7 +38,7 @@ item:
   type: component.list-item
   options:
     title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
-    subtitle: =('At ' & @ctx.current.item.name & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
+    subtitle: =('At ' & @ctx.current.item.locname & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
     leftElement: 
       element: avatar
       text: ''
