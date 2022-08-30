@@ -38,17 +38,15 @@ children:
           instanceId: location
           options:
             label: Choose a Location
-            data: =@ctx.datasources.locationDropdown
+            data: =$filter(@ctx.datasources.locationDropdown, function($v){@ctx.datasources.locationDropdown ? $contains($string($v.name),$string(@ctx.components.dropdown-in.state.searchText != null ? @ctx.components.dropdown-in.state.searchText:'')) :true})[]
             item:
               type: component.dropdown-item
               options:
                 title: =@ctx.current.item.name
                 value: =@ctx.current.item.id
-            # isSearchable: true
             isRequired: false
-            
+            isSearchable: true
 
-        
 actions:
   - children:
       - type: action.submit-form
