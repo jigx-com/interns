@@ -1,4 +1,4 @@
-title: Members currently at this location
+title: =('Members currently at ' & @ctx.jig.inputs.LOCname)
 type: jig.list
 icon: contact
 

@@ -15,7 +15,14 @@ datasources:
         LOC: =@ctx.jig.inputs.LOC
 
 children:
-  - type: component.interactive-image
+  - type: component.image
     options:
       source:
         uri: =@ctx.datasources.location.deckMap
+      resizeMode: contain
+      onPress: 
+        type: action.go-to
+        options:
+          linkTo: link-up-location-large
+          parameters:
+            MAP: =@ctx.datasources.location.deckMap
