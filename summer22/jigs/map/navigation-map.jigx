@@ -1,0 +1,53 @@
+title: Point of Interests
+description: Swipe to navigate
+type: jig.list
+
+datasources:
+  poiNice:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testpoi
+  
+      query: 
+        SELECT 
+          id, 
+          '$.name' AS name, 
+          '$.description' AS description, 
+          '$.avatar' AS avatar, 
+          '$.address' AS address,
+          '$.rating' AS rating,  
+          '$.hours' AS hours 
+        FROM [default/testpoi]
+        ORDER BY name ASC
+
+data: =@ctx.datasources.poiNice
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.name
+    description: =@ctx.current.item.description
+    leftElement: 
+      element: image
+      text: =@ctx.current.item.name
+      uri: =@ctx.current.item.avatar
+    swipeable:
+      left:
+        - label: location
+          icon: pin
+          color: primary
+          onPress: 
+            type: action.go-to
+            options:
+              linkTo: poi-selection
+              parameters:
+                name: =@ctx.current.item.name
+                description: =@ctx.current.item.description
+                avatar: =@ctx.current.item.avatar
+                address: =@ctx.current.item.address
+                rating: =@ctx.current.item.rating
+                hours: =@ctx.current.item.hours
+                
+    
