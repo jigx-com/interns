@@ -26,9 +26,9 @@ widgets:
         #Barcelona
         - lat: 41.357270
           lng: 2.182192
-        
+
 
 children:
   - jigId: navigation-map
 
-  - jigId: cruise-ship-map
+  - jigId: cruise-ship-map-list

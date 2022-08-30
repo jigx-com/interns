@@ -19,6 +19,3 @@ children:
     options:
       source:
         uri: =@ctx.datasources.location.deckMap
-        
-
-        
