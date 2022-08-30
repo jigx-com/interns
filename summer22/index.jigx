@@ -10,8 +10,8 @@ stories:
 
 widgets:
   # Agenda Widget
-  - size: "2x2"
-    jigId: agenda-list
+  - size: "4x2"
+    jigId: agenda-composite
 
 
   # Food Widget - Breakfast, Lunch, Dinner

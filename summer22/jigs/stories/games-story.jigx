@@ -11,6 +11,11 @@ datasources:
           title: Daily Games
           subtitle: Participate in daily activities!
           linkTo: index
+        - id: 1
+          uri: https://images.unsplash.com/photo-1614096602618-38a342f139c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njh8fGdhbWVzfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=700&q=60
+          title: Daily Games
+          subtitle: Participate in daily activities!
+          linkTo: index  
 
 
 stories:

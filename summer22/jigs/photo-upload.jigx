@@ -45,7 +45,7 @@ children:
                 title: =@ctx.current.item.name
                 value: =@ctx.current.item.id
             # isSearchable: true
-            isRequired: true
+            isRequired: false
             
 
         

@@ -1,8 +1,31 @@
 title: time tester
 type: jig.default
 
+datasources:
+  photoStory: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Photos
+  
+      query: SELECT id, '$.uploadPhoto' FROM [default/Photos]
 
 children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      data: =@ctx.datasources.photoStory
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: Test
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.uploadPhoto
   - type: component.entity
     options:
       children:
