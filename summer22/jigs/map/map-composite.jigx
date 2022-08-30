@@ -1,6 +1,11 @@
 title: Map
 type: jig.composite
 
+header: 
+  type: component.location
+  options:
+    address: Barcelona
+    zoomLevel: 5
 
 widgets:
   "4x2": 
