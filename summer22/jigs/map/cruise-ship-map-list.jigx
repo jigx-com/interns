@@ -11,16 +11,22 @@ datasources:
       entities:
         - default/Location
   
-      query: SELECT id, '$.name', '$.decknumber', '$.deckMap', COUNT(id) as numDeck FROM [default/Location] 
+      query: SELECT DISTINCT id, '$.name', '$.decknumber', '$.deckMap', '$.deckNUM' FROM [default/Location] GROUP BY decknumber ORDER BY deckNUM 
 
 data: =@ctx.datasources.location
 item:
   type: component.expander
   options:
-    title: =@ctx.current.item.name
-    subtitle: =@ctx.current.item.deckNumber
+    header:
+      centerElement: 
+        type: component.titles
+        options:
+          title: =@ctx.current.item.decknumber
     children:
       - type: component.interactive-image
         options:
           source:
             uri: =@ctx.current.item.deckMap
+          imageHeight: 500
+    
+          
