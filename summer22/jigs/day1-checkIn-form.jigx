@@ -39,12 +39,27 @@ children:
                 options:
                   label: Email
                   style:
-                    flex: 3
-              - type: component.number-field
-                instanceId: roomNumber
+                    flex: 2
+              - type: component.date-picker
+                instanceId: DOB
                 options:
-                  label: 'Room #'
+                  label: DOB
+                  format: L
                   isRequired: false
+        - type: component.dropdown
+          instanceId: shirtSize
+          options:
+            label: Choose a shirt size
+            data: =@ctx.datasources.tshirt-sizes
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.size
+                value: =@ctx.current.item.id
+        - type: component.text-field
+          instanceId: dietReq
+          options:
+            label: Dietary Requirement
         - type: component.checkbox
           instanceId: isSpouse 
           options:

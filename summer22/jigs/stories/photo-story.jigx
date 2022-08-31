@@ -1,6 +1,13 @@
 title: Welcome
 type: jig.default
 
+onLoad: 
+  type: action.sync-entities
+  options:
+    provider: DATA_PROVIDER_DYNAMIC
+    entities:
+      - entity: default/Photos
+
 datasources:
   photoStory: 
     type: datasource.sqlite

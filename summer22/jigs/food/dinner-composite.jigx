@@ -32,7 +32,7 @@ actions:
 children:
   - jigId: mygroup
     
-  #- jigId: dinner-menu
+  - jigId: dinner-menu
     
   - jigId: timeAndLocation
     

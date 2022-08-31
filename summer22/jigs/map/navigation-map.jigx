@@ -21,8 +21,6 @@ datasources:
           '$.rating' AS rating,  
           '$.hours' AS hours 
         FROM [default/testpoi] ORDER BY name ASC
-      # queryParameters: 
-      #   Si: Mount Si
 
 data: =@ctx.datasources.poiNice
 item:

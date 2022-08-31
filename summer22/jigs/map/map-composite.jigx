@@ -4,7 +4,7 @@ type: jig.composite
 header: 
   type: component.location
   options:
-    address: Barcelona
+    address: France (Nice)
     zoomLevel: 5
 
 widgets:
