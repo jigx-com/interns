@@ -12,6 +12,7 @@ datasources:
   
       query: SELECT id, '$.uploadPhoto' FROM [default/Photos]
 
+
 children:
   - type: component.list
     options:
@@ -31,23 +32,40 @@ children:
       children:
         - type: component.entity-field
           options:
-            label: true?
-            value: "=($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '10:10:00' ? true: false)" 
+            label: current time
+            value: =$substring(@ctx.jig.inputs.hours, 0, 5)
+        - type: component.entity-field
+          options:
+            label: timeframe
+            value: =@ctx.jig.inputs.timeframe
             
         - type: component.entity-field
           options:
-            label: false? (before midnight)
-            value: "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') and ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01'))" 
+            label: time
+            value: "=($substring(@ctx.jig.inputs.hours, 0, 5) > @ctx.jig.inputs.timeframe ? true: false)"
             
-            #$expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
-            #$expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
-            # Current Time Test Examples:
-            # "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01'))"
-            # "=( $expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
-            #     $expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
-            #   ($expr1 AND $expr2) ? true: false)"
-            # "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND (($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')) ? false: true)" 
+            
+        - type: component.entity-field
+          options:
+            label: Time Test
+            value: "=(
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                      ($substring($hours, 0, 5) > @ctx.current.item.timeframe) ? true: false
+                    )" 
+
+
+
         - type: component.entity-field
           options:
             label: time
             value: "=$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')"
+            
+# Past Time Table Expressions      
+#$expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
+#$expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
+# Current Time Test Examples:
+# "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01'))"
+# "=( $expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
+#     $expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
+#   ($expr1 AND $expr2) ? true: false)"
+# "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND (($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')) ? false: true)" 
