@@ -11,7 +11,7 @@ datasources:
       entities:
         - default/testpoi
   
-      query: 
+      query: |
         SELECT 
           id, 
           '$.name' AS name, 
@@ -20,8 +20,9 @@ datasources:
           '$.address' AS address,
           '$.rating' AS rating,  
           '$.hours' AS hours 
-        FROM [default/testpoi]
-        ORDER BY name ASC
+        FROM [default/testpoi] ORDER BY name ASC
+      # queryParameters: 
+      #   Si: Mount Si
 
 data: =@ctx.datasources.poiNice
 item:
