@@ -13,6 +13,7 @@ datasources:
           price: $$
           address: 43 Rue Massena, 06000 Nice, France
           hours: 11:30 AM – 1:00 AM
+          cuisine-type: Canadian
           walking-distance-workshop: 240 meters
           walking-time-workshop: 3 minutes
         - id: 2
@@ -22,6 +23,7 @@ datasources:
           price: $$
           address: 34 Rue Massena, 06000 Nice, France
           hours: 11:30 AM – 1:00 AM
+          cuisine-type: Canadian
           walking-distance-workshop: 240 meters
           walking-time-workshop: 3 minutes
         - id: 3
@@ -31,6 +33,7 @@ datasources:
           price: $$ / $$$
           address: 1 Rue Dalpozzo, 06000 Nice, France
           hours: 12:00 PM – 3:00 PM
+          cuisine-type: Canadian
           walking-distance-workshop: 200 meters
           walking-time-workshop: 3 minutes
         - id: 4
@@ -40,6 +43,7 @@ datasources:
           price: $$ 
           address: 10 Rue Meyerbeer, 06000 Nice, France
           hours: 12:00 – 2:30 PM
+          cuisine-type: Canadian
           walking-distance-workshop: 280 meters
           walking-time-workshop: 4 minutes
         - id: 5
@@ -49,6 +53,7 @@ datasources:
           price: $$
           address: 12 Rue Meyerbeer, 06000 Nice, France
           hours: 8:30 AM – 11:00 PM
+          cuisine-type: Canadian
           walking-distance-workshop: 290 meters
           walking-time-workshop: 4 minutes
           pathsData:
@@ -97,12 +102,19 @@ item:
           children:
             - type: component.entity-field
               options:
-                label: address
+                label: Address
                 value: =@ctx.current.item.address
-            - type: component.entity-field
+            - type: component.field-row
               options:
-                label: Hours
-                value: =@ctx.current.item.hours
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Hours
+                      value: =@ctx.current.item.hours
+                  - type: component.entity-field
+                    options:
+                      label: Cuisine Type
+                      value: =@ctx.current.item.cuisine-type
             - type: component.field-row
               options:
                 children:
