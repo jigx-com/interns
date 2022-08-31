@@ -67,5 +67,3 @@ widgets:
   - size: "1x1"
     jigId: link-up-filter-location
   
-  - size: "1x1"
-    jigId: link-up-location
