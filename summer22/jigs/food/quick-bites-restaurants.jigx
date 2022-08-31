@@ -8,12 +8,12 @@ datasources:
       data:
         - id: 1
           culinary-region-icon: fr
-          genre: Patisserie
           title: ARMAND
           rating: ⭐⭐⭐⭐(4.4)
           price: $$
           address: 19 Rue de France, 06000 Nice, France
           hours: 7:00 AM – 9:00 PM
+          cuisine-type: Patisserie
           walking-distance-workshop: 66 meters
           walking-time-workshop: 1 minute
           pathsData:
@@ -26,12 +26,12 @@ datasources:
         
         - id: 2
           culinary-region-icon: fr
-          genre: French Fast Food Waffles
           title: YUMMY & GUILT FREE
           rating: ⭐⭐⭐⭐⭐(4.8)
           price: $
           address: 37 Rue Massena, 06000 Nice, France
           hours: 12:00 PM – 11:00 PM
+          cuisine-type: French Fast Food Waffles
           walking-distance-workshop: 260 meters
           walking-time-workshop: 3 minutes
           pathsData:
@@ -44,12 +44,12 @@ datasources:
         
         - id: 3
           culinary-region-icon: fr
-          genre: French Fast Food Cakes
           title: La Quéquetterie
           rating: ⭐⭐⭐⭐(4.5)
           price: $$
           address: 30 Rue Massena, 06000 Nice, France
           hours: 2:00 PM – 11:00 PM
+          cuisine-type: French Fast Food Cakes
           walking-distance-workshop: 270 meters
           walking-time-workshop: 3 minutes
           pathsData:
@@ -64,12 +64,12 @@ datasources:
           
         - id: 4
           culinary-region-icon: fr
-          genre: Crêperie
           title: Creperie Suzette
           rating: ⭐⭐⭐⭐(4.6)
           price: $
           address: 26 Rue Massena, 06000 Nice, France
           hours: 8:00 AM – 10:00 PM
+          cuisine-type: Crêperie
           walking-distance-workshop: 300 meters
           walking-time-workshop: 4 minutes
           pathsData:
@@ -84,12 +84,12 @@ datasources:
           
         - id: 5
           culinary-region-icon: br
-          genre: Healthy Food
           title: Oakberry Açai
           rating: ⭐⭐⭐⭐⭐(5.0)
           price: $
           address: 7 Rue Halévy, 06000 Nice, France
           hours: 10:00 AM – 9:00 PM 
+          cuisine-type: Healthy Food & Smoothies
           walking-distance-workshop: 300 meters
           walking-time-workshop: 4 minutes
           pathsData:
@@ -104,12 +104,12 @@ datasources:
           
         - id: 6
           culinary-region-icon: it
-          genre: Italian Fast Pizza
           title: Pizza da Francesco
           rating: ⭐⭐⭐⭐⭐(4.7)
           price: $
           address: 1 Rue Dalpozzo, 06000 Nice, France
           hours: 11:30 AM – 10:30 PM
+          cuisine-type: Italian Fast Pizza
           walking-distance-workshop: 190 meters
           walking-time-workshop: 2 minutes
           pathsData:
@@ -126,12 +126,12 @@ datasources:
           
         - id: 7
           culinary-region-icon: it
-          genre: Bakery
           title: Les Petits Pains de Méditerranée
           rating: ⭐⭐⭐⭐(4.5)
           price: $
           address: 41 Rue de France, 06000 Nice, France
           hours: 7:15 AM – 1:00 PM
+          cuisine-type: Bakery
           walking-distance-workshop: 210 meters
           walking-time-workshop: 3 minutes
           pathsData:

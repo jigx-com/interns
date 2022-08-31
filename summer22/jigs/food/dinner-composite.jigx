@@ -13,10 +13,26 @@ header:
     source:
       uri: https://cdn.pixabay.com/photo/2016/11/23/13/45/celebration-1852926__480.jpg
 
+actions:
+  - children:
+      - type: action.confirm
+        options:
+          title: View Menu
+          isConfirmedAutomatically: false
+          onConfirmed: 
+            type: action.go-to
+            options:
+              linkTo: dinner-menu
+          modal:
+            title: WHAT HAPPENED
+            cancel: NOO!!
+            confirm: SURE
+            description: Why am I here?
+
 children:
   - jigId: mygroup
     
-  - jigId: dinner-menu
+  #- jigId: dinner-menu
     
   - jigId: timeAndLocation
     

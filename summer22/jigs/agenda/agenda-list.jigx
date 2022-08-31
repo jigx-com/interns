@@ -37,7 +37,9 @@ icon: suitcase
 #           title: Dinner
 #           timeframe: "18:00-21:00"
 
-          
+
+
+
 data: =@ctx.datasources.statis-data-agenda-list
 item:
   type: component.list-item
@@ -48,4 +50,15 @@ item:
       name: =@ctx.current.item.icon
     label:
       title: =@ctx.current.item.timeframe
-    
+    style:
+      isDisabled: "=(
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                      ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
+                    )" 
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: timetest
+        parameters:
+          timeframe: =$substringAfter(@ctx.current.item.timeframe, '-')
+          hours: =$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')

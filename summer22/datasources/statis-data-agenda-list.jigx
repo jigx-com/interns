@@ -4,15 +4,15 @@ options:
         - id: 1
           icon: apple
           title: Breakfast
-          timeframe: "7:00-9:00"
+          timeframe: "07:00-09:00"
         - id: 2
           icon: taxi-driver
           title: Uber Pickup
-          timeframe: "9:15"
+          timeframe: "09:15"
         - id: 3
           icon: suitcase
           title: Workshop
-          timeframe: "9:30-12:30"
+          timeframe: "09:30-12:30"
         - id: 4
           icon: restaurant-food-truck
           title: Lunch

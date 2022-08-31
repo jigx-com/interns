@@ -2,19 +2,6 @@ title: Composite Agenda
 description: Hello, welcome to the {day} day of Jigx Week 2022! Below is your walking buddy and daily itinerary
 type: jig.composite
 
-header: 
-  type: component.image
-  options:
-    source:
-      uri: https://cdn.pixabay.com/photo/2018/04/13/16/49/laptop-3317007_1280.jpg
-
-children:
-  - jigId: mygroup
-    inputs:
-      recordid: =@ctx.jig.inputs.parameter
-  - jigId: agenda-list
-
-
 # Widget displays title and timeframe => 3 upcoming/current events
 widgets:
   4x2: 
@@ -30,3 +17,17 @@ widgets:
             name: =@ctx.current.item.icon
           label:
             title: =@ctx.current.item.timeframe
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://cdn.pixabay.com/photo/2018/04/13/16/49/laptop-3317007_1280.jpg
+
+
+children:
+  - jigId: mygroup
+    inputs:
+      recordid: =@ctx.jig.inputs.parameter
+  - jigId: agenda-list
+
