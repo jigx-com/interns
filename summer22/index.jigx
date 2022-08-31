@@ -29,10 +29,10 @@ widgets:
                 )" 
   - size: "2x2"
     jigId: lunch-composite
-  #   isHidden: "=(
-  #                 $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-  #                 (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
-  #               )" 
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
+                )" 
   - size: "2x2"
     jigId: dinner-composite
     isHidden: "=(
