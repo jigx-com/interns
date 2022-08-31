@@ -1,0 +1,37 @@
+title: =(@ctx.jig.inputs.firstName & ' ' & @ctx.jig.inputs.lastName)
+description: =@ctx.jig.inputs.locationTime
+type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.jig.inputs.avatar
+      
+datasources:
+  funfact:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          fact: "This is a fun fact"
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.section
+          options:
+            title: Contact Details
+            children:
+              - type: component.entity-field
+                options:
+                  label: Fun Fact
+                  value: =(@ctx.datasources.funfact.fact)
+                  isMultiline: false
+              - type: component.entity-field
+                options:
+                  label: email
+                  value: =@ctx.jig.inputs.email
+                  contentType: email
+                  isMultiline: false
