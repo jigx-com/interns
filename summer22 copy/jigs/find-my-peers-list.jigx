@@ -1,0 +1,46 @@
+title: Find my Peers
+description: Search for where someone is
+type: jig.list
+icon: search
+header:
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1570129130524-a27a0fbc1e0e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNydWlzZXxlbnwwfDB8MHx8&auto=format&fit=crop&w=700&q=60
+
+datasources:
+  members: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testMembers
+  
+      query: 
+        SELECT  
+          json_extract(tM.data, '$.firstName') AS firstName, 
+          json_extract(tM.data, '$.lastName') AS lastName,
+          json_extract(tM.data, '$.avatar') AS avatar,
+          json_extract(tM.data, '$.location') AS location,
+          json_extract(tM.data, '$.time-of-location') AS timeOfLocation,
+          
+          json_extract(L.data, '$.name') AS name
+        FROM [default/testMembers] AS tM LEFT JOIN [default/Location] AS L
+        ON tM.id = L.id
+        WHERE firstName || ' ' || lastName LIKE '%'||@search||'%' OR @search IS NULL
+      queryParameters:
+        search: =@ctx.jig.state.searchText
+
+
+isSearchable: true
+data: =@ctx.datasources.members
+item:
+  type: component.list-item
+  options:
+    title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+    subtitle: =('At ' & @ctx.current.item.name & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
+    leftElement: 
+      element: avatar
+      text: ''
+      uri: =@ctx.current.item.avatar

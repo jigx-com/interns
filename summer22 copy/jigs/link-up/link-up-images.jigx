@@ -1,0 +1,52 @@
+title: =('Photos taken at ' & @ctx.jig.inputs.LOCname)
+description: Description of your Jig
+type: jig.default
+
+datasources:
+  currentLocation:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+  
+      query: |
+        SELECT Location.id, 
+         JSON_extract(Location.data, '$.name') as name
+        FROM [default/Location] 
+        
+  photos: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Photos
+  
+      query: |
+        SELECT id, 
+        '$.location', 
+        '$.uploadPhoto' 
+        FROM [default/Photos] 
+        WHERE '$.location' LIKE @myParam
+      queryParameters:
+        myParam: =@ctx.jig.inputs.LOC
+
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: false
+      data: =@ctx.datasources.photos
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: TBD
+          divider: solid
+          horizontalItemSize: large
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.uploadPhoto

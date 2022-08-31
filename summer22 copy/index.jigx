@@ -1,0 +1,68 @@
+name: summer-22
+title: Summer 22
+category: miscellaneous
+
+stories:
+  - welcome-story
+  - agenda-story
+  - photo-story
+  - games-story
+
+widgets:
+  # Agenda Widget
+  - size: "4x2"
+    jigId: agenda-composite
+
+
+  # Food Widget - Breakfast, Lunch, Dinner
+      # Boolean function that stores `hours` as current time in "HH:MM:SS" format; verifies it's in range of x & y time 
+      #           --> (Currently at GMT-0700 [PST])
+      #  "=(
+      #     $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+      #     (($hours > 'x') and ($hours < 'y')) ? false: true
+      #   )" 
+  - size: "2x2"
+    jigId: breakfast-composite
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
+                )" 
+  - size: "2x2"
+    jigId: lunch-composite
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
+                )" 
+  - size: "2x2"
+    jigId: dinner-composite
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '17:00:01') and ($hours < '23:59:59')) ? false: true
+                )" 
+
+
+  # Tool Widgets
+  - size: "1x1"
+    jigId: day1-checkIn-form
+      # After day 1
+      # - size: "1x1"
+      #   jigId: link-up composite 
+
+  - size: "1x1"
+    jigId: find-my-peers-list
+    
+  - size: "1x1"
+    jigId: photo-upload
+    
+  - size: "1x1"
+    jigId: calendar-agenda
+
+
+  # Navigation Widget
+  - size: "4x2"
+    jigId: map-composite
+
+
+  # Placeholder Widget
+  - size: "1x1"
+    jigId: link-up-filter-location

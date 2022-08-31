@@ -1,0 +1,8 @@
+title: Document
+type: jig.document
+
+source:
+  documentType: HTML
+  uri: https://www.royalcaribbean.com/cruisingpower/content/shared_assets/svg/svg_r_VI_2146/IDP-DECK06.svg
+  
+  # Need to add all vertical images into data table if this is how we want to go about it

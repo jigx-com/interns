@@ -1,0 +1,46 @@
+title: =@ctx.jig.inputs.name
+type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.jig.inputs.avatar
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: Location Description
+                  value: =@ctx.jig.inputs.description
+                  isMultiline: false
+        - type: component.section
+          options:
+            title: Details
+            children:
+              - type: component.field-row
+                options:
+                  children:
+                    - type: component.entity-field
+                      options:
+                        label: Rating
+                        value: =@ctx.jig.inputs.rating
+              - type: component.field-row
+                options:
+                  children:
+                    - type: component.entity-field
+                      options:
+                        label: Hours
+                        value: =@ctx.jig.inputs.hours
+              - type: component.field-row
+                options:
+                  children:
+                    - type: component.entity-field
+                      options:
+                        label: Address
+                        value: =@ctx.jig.inputs.address

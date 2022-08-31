@@ -1,0 +1,53 @@
+title: Link-up
+description: TBD
+type: jig.list
+icon: search-1
+
+filter: 
+  - title: Activities 
+    value: 'Activity'
+  - title: Bars
+    value: 'Bar'
+  - title: Dining 
+    value: 'Dining'
+    
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1575037614876-c38a4d44f5b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80
+datasources:
+  filter-location: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+  
+      query: SELECT id, '$.name', '$.type', '$.avatar', '$.decknumber' FROM [default/Location] WHERE '$.type' LIKE @filter
+      queryParameters:
+        filter: =@ctx.jig.state.filter
+
+
+data: =@ctx.datasources.filter-location
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.name
+    # subtitle: =@ctx.current.item.datasourcefield
+    label:
+      title: =@ctx.current.item.decknumber
+    leftElement: 
+      element: avatar
+      text: =($contains(@ctx.current.item.name, " ") ? ($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) ) :@ctx.current.item.name)
+      uri: =@ctx.current.item.avatar
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: link-up-composite
+        parameters:
+          LOC: =@ctx.current.item.id
+          LOCname: =@ctx.current.item.name
+  
+        

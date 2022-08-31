@@ -1,0 +1,19 @@
+title: Lunch
+type: jig.composite
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://images.unsplash.com/photo-1585238342070-61e1e768b1ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bHVuY2h8ZW58MHwyfDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1576867757603-05b134ebc379?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bHVuY2h8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
+
+children:
+  - jigId: mygroup
+    
+  - jigId: restaurants
