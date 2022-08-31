@@ -37,6 +37,8 @@ datasources:
           pathsData:
             - lat: 43.6958967782869
               lng: 7.263335025815267
+            - lat: 43.69633411681362
+              lng: 7.263224905452357
             - lat: 43.6967448603818
               lng: 7.265057782018579
             - lat: 43.69697757044755
@@ -165,10 +167,17 @@ item:
               options:
                 label: address
                 value: =@ctx.current.item.address
-            - type: component.entity-field
+            - type: component.field-row
               options:
-                label: Hours
-                value: =@ctx.current.item.hours
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Hours
+                      value: =@ctx.current.item.hours
+                  - type: component.entity-field
+                    options:
+                      label: Cuisine Type
+                      value: =@ctx.current.item.cuisine-type
             - type: component.field-row
               options:
                 children:

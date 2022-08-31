@@ -6,10 +6,10 @@ datasources:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-  
+
       entities:
         - default/Photos
-  
+
       query: SELECT id, '$.uploadPhoto' FROM [default/Photos]
 
 
