@@ -21,9 +21,3 @@ children:
         uri: =@ctx.datasources.location.deckMap
       height: 500
       resizeMode: contain
-      onPress: 
-        type: action.go-to
-        options:
-          linkTo: link-up-location-large
-          parameters:
-            MAP: =@ctx.datasources.location.deckMap
