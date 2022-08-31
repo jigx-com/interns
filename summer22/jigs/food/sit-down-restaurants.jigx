@@ -8,12 +8,12 @@ datasources:
       data:
         - id: 1
           culinary-region-icon: ca
-          genre: Canadian
           title: Le Québec
           rating: ⭐⭐⭐⭐(4.0)
           price: $$
           address: 43 Rue Massena, 06000 Nice, France
           hours: 11:30 AM – 1:00 AM
+          cuisine-type: Canadian
           walking-distance-workshop: 240 meters
           walking-time-workshop: 3 minutes
           pathsData:
@@ -26,12 +26,12 @@ datasources:
 
         - id: 2
           culinary-region-icon: it
-          genre: Pizza
           title: La Pizza Cresci
           rating: ⭐⭐⭐⭐(4.3)
           price: $$
           address: 34 Rue Massena, 06000 Nice, France
           hours: 11:30 AM – 1:00 AM
+          cuisine-type: Pizza
           walking-distance-workshop: 240 meters
           walking-time-workshop: 3 minutes
           pathsData:
@@ -44,12 +44,12 @@ datasources:
 
         - id: 3
           culinary-region-icon: lb
-          genre: Lebanese
           title: Téta Marie
           rating: ⭐⭐⭐⭐⭐(4.9)
           price: $$ / $$$
           address: 1 Rue Dalpozzo, 06000 Nice, France
           hours: 12:00 PM – 3:00 PM
+          cuisine-type: Lebanese
           walking-distance-workshop: 200 meters
           walking-time-workshop: 3 minutes
           pathsData:
@@ -66,12 +66,12 @@ datasources:
 
         - id: 4
           culinary-region-icon: it
-          genre: Italian
           title: Vabbuo
           rating: ⭐⭐⭐⭐(4.6)
           price: $$ 
           address: 10 Rue Meyerbeer, 06000 Nice, France
           hours: 12:00 – 2:30 PM
+          cuisine-type: Italian
           walking-distance-workshop: 280 meters
           walking-time-workshop: 4 minutes
           pathsData:
@@ -88,12 +88,12 @@ datasources:
 
         - id: 5
           culinary-region-icon: fr
-          genre: French
           title: Olim Meyerbeer
           rating: ⭐⭐⭐⭐(4.4)
           price: $$
           address: 12 Rue Meyerbeer, 06000 Nice, France
           hours: 8:30 AM – 11:00 PM
+          cuisine-type: French
           walking-distance-workshop: 290 meters
           walking-time-workshop: 4 minutes
           pathsData:
@@ -110,12 +110,12 @@ datasources:
         
         - id: 6
           culinary-region-icon: fr
-          genre: Modern
           title: Gago France
           rating: ⭐⭐⭐⭐⭐(4.9)
           price: $$
           address: 4 Rue du Congrès, 06000 Nice, France
           hours: 10:00 AM – 3:00 PM
+          cuisine-type: Modern
           walking-distance-workshop: 43 meters
           walking-time-workshop: 1 minute
           pathsData:
@@ -126,12 +126,12 @@ datasources:
         
         - id: 7
           culinary-region-icon: fr
-          genre: Beachfront Seafood
           title: Le Galet
           rating: ⭐⭐⭐⭐(4.3)
           price: $$$
           address: 3 Prom. des Anglais, 06200 Nice, France
           hours: 8:30 AM – 11:00 PM
+          cuisine-type: Beachfront Seafood
           walking-distance-workshop: 300 meters
           walking-time-workshop: 4 minutes
           pathsData:
@@ -164,10 +164,17 @@ item:
               options:
                 label: address
                 value: =@ctx.current.item.address
-            - type: component.entity-field
+            - type: component.field-row
               options:
-                label: Hours
-                value: =@ctx.current.item.hours
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Hours
+                      value: =@ctx.current.item.hours
+                  - type: component.entity-field
+                    options:
+                      label: Cuisine Type
+                      value: =@ctx.current.item.cuisine-type
             - type: component.field-row
               options:
                 children:

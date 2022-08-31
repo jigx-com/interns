@@ -16,4 +16,6 @@ header:
 children:
   - jigId: mygroup
     
-  - jigId: restaurants
+  - jigId: sit-down-restaurants
+    
+  - jigId: quick-bites-restaurants
