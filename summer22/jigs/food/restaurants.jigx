@@ -51,6 +51,13 @@ datasources:
           hours: 8:30 AM – 11:00 PM
           walking-distance-workshop: 290 meters
           walking-time-workshop: 4 minutes
+          pathsData:
+            - lat: 43.695810
+              lng: 7.263350
+            - lat: 43.696355
+              lng: 7.263200
+            - lat: 43.696825
+              lng: 7.265340
         
   locationPath:
     type: datasource.static
@@ -110,10 +117,10 @@ item:
       - type: component.location
         options:
           zoomLevel: 15
-          pathsData:
-            - lat: 43.695810
-              lng: 7.263350
-            - lat: 43.696355
-              lng: 7.263200
-            - lat: 43.696825
-              lng: 7.265340
+          pathsData: =@ctx.current.item.pathsData
+            # - lat: 43.695810
+            #   lng: 7.263350
+            # - lat: 43.696355
+            #   lng: 7.263200
+            # - lat: 43.696825
+            #   lng: 7.265340
