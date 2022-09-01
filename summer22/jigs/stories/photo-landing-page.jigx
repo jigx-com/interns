@@ -1,0 +1,60 @@
+title: PICTURE TITLE
+type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.jig.inputs.avatar
+
+# Is action supposed to have submit form (create/update/delete)?
+# actions:
+#   - children:
+#       - type: action.confirm
+#         options:
+#           title: Vote for this Photo
+#           isConfirmedAutomatically: false
+#           onConfirmed:
+#           modal:
+#             title: "Confirm:"
+#             description: Do you want to vote for this photo?
+#             confirm: "Yes"
+#             cancel: "No"
+          
+            
+children:
+  - type: component.list
+    options:
+      data: =@ctx.datasources.TBD[COMMENTS/REPLIES]
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: COMMENTER (PERSON)
+          subtitle: COMMENT 
+          # Swipe to like comment
+          # swipeable:
+          #   left:
+          #     - label: like
+          #       icon: up
+          #       color: primary
+          #       onPress: 
+  - type: component.form
+    instanceId: photoComment
+    options:
+      children:
+        - type: component.text-field
+          instanceId: commentField
+          options:
+            label: Comment Here
+            isMultiline: true
+            textArea: dynamic
+  - type: component.form
+    instanceId: photoVote
+    options:
+      children:
+        - type: component.checkbox
+          instanceId: formVote
+          options:
+            label: Vote
+            isHidden: true

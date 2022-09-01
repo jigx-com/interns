@@ -37,7 +37,9 @@ stories:
           type: action.go-to
           options:
             title: Vote
-            linkTo: =@ctx.LinkToTBD
+            linkTo: photo-landing-page
+            parameters:
+              avatar: =@ctx.current.item.uploadPhoto
 
 children:
   - type: component.entity
