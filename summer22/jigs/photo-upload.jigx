@@ -12,10 +12,9 @@ datasources:
       entities:
         - default/Location
   
-      query: SELECT id, '$.name' FROM [default/Location] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL
+      query: SELECT id, '$.name' FROM [default/Location] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL ORDER BY '$.name'
       queryParameters:
-        search: =@ctx.jig.state.searchText
-  
+        search: =@ctx.components.location.state.searchText  
 header: 
   type: component.image
   options:

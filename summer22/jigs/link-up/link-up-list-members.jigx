@@ -21,7 +21,16 @@ datasources:
       entities:
         - default/testMembers
   
-      query: SELECT id, '$.email', '$.avatar', '$.firstName', '$.lastName', '$.location' FROM [default/testMembers] WHERE '$.location' = @locID
+      query: |
+        SELECT 
+          id, 
+          '$.email', 
+          '$.avatar', 
+          '$.firstName', 
+          '$.lastName', 
+          '$.location' 
+        FROM [default/testMembers] 
+        WHERE '$.location' = @locID
       queryParameters:
         locID: =@ctx.jig.inputs.LOC
 
@@ -35,4 +44,13 @@ item:
       element: avatar
       text: =($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) )
       uri: =@ctx.current.item.avatar
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: member-landing-page
+        parameters:
+          firstName: =@ctx.current.item.firstName
+          lastName: =@ctx.current.item.lastName
+          avatar: =@ctx.current.item.avatar
+          email: =@ctx.current.item.email
     

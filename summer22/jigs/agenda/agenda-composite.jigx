@@ -2,21 +2,52 @@ title: Composite Agenda
 description: Hello, welcome to the {day} day of Jigx Week 2022! Below is your walking buddy and daily itinerary
 type: jig.composite
 
-# Widget displays title and timeframe => 3 upcoming/current events
+
+datasources:
+  testList:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testList
+  
+      query: |
+        SELECT 
+          id, 
+          '$.title', 
+          '$.icon', 
+          '$.timeframe' 
+        FROM [default/testList] 
+        WHERE '$.time' > @currentTime
+        ORDER BY '$.time'
+      queryParameters:
+        currentTime: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' '))
+
+
+# Widget displays title and timeframe <= 3 upcoming/current events
 widgets:
   4x2: 
     type: widget.list
     options:
-      data: =@ctx.datasources.statis-data-agenda-list
+      footerAlign: center
+      data: =@ctx.datasources.testList
       item: 
         type: component.list-item
         options:
+          divider: solid
           title: =@ctx.current.item.title
           leftElement: 
             element: icon
             name: =@ctx.current.item.icon
           label:
             title: =@ctx.current.item.timeframe
+          style:
+            isDisabled: "=(
+                          $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                          ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
+                        )" 
+
 
 header: 
   type: component.image
@@ -30,4 +61,3 @@ children:
     inputs:
       recordid: =@ctx.jig.inputs.parameter
   - jigId: agenda-list
-
