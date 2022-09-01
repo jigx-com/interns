@@ -1,60 +1,164 @@
-title: PICTURE TITLE
+title: =@ctx.jig.inputs.photoTitle
+description: Vote for the image by tapping on it!
 type: jig.default
 
-header: 
-  type: component.image
-  options:
-    source:
-      uri: =@ctx.jig.inputs.avatar
+datasources:
+  commentData: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testComment
+  
+      query: |
+        SELECT
+          tC.id AS testCommentID,
+          json_extract(tM.data, '$.avatar') AS avatar,
+          json_extract(tM.data, '$.firstName') AS firstName,
+          json_extract(tM.data, '$.lastName') AS lastName,
+          json_extract(tC.data, '$.comment') AS comment,
+          json_extract(tC.data, '$.reactions') AS reactions
+        FROM [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
+        ON json_extract(tC.data, '$.commenterEmail') = json_extract(tM.data, '$.email')
+        WHERE json_extract(tC.data, '$.photoId') = @sort
+      queryParameters:
+        sort: =@ctx.jig.inputs.photoId
+  
+  currentUser:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/table-name
+  
+      query: |
+          SELECT 
+            id
+          FROM [default/testMembers] 
+          WHERE '$.email' LIKE @myParam
+      queryParameters:
+        myParam: =@ctx.user.email
 
 # Is action supposed to have submit form (create/update/delete)?
-# actions:
-#   - children:
-#       - type: action.confirm
-#         options:
-#           title: Vote for this Photo
-#           isConfirmedAutomatically: false
-#           onConfirmed:
-#           modal:
-#             title: "Confirm:"
-#             description: Do you want to vote for this photo?
-#             confirm: "Yes"
-#             cancel: "No"
-          
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: photoComment
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Comment
+          entity: default/testComment
+          method: create
+          goBack: stay
+          onSuccess:
+            actions:
+              - type: action.confirm
+                options:
+                  title: Commented
+                  isConfirmedAutomatically: true
+                  onConfirmed:
+                    type: action.go-back
+                  modal:
+                    title: ""
             
 children:
-  - type: component.list
+  # Image
+  - type: component.image
     options:
-      data: =@ctx.datasources.TBD[COMMENTS/REPLIES]
-      maximumItemsToRender: 8
-      item: 
-        type: component.list-item
+      source:
+        uri: =@ctx.jig.inputs.avatar
+      height: 300
+      resizeMode: center
+      onPress: 
+        type: action.confirm
         options:
-          title: COMMENTER (PERSON)
-          subtitle: COMMENT 
-          # Swipe to like comment
-          # swipeable:
-          #   left:
-          #     - label: like
-          #       icon: up
-          #       color: primary
-          #       onPress: 
+          isConfirmedAutomatically: false
+          onConfirmed: 
+            type: action.execute-entity
+            options:
+              provider: DATA_PROVIDER_DYNAMIC
+              entity: default/testMembers
+              method: update
+              goBack: stay
+              data:
+                id: =@ctx.datasources.currentUser.id
+                dailyVote: =@ctx.jig.inputs.photoId
+          modal:
+            title: Submit your vote
+            description: Do you want to use your daily vote on this photo?
+            confirm: "Yes"
+            cancel: "No"
+  # Commenting
   - type: component.form
     instanceId: photoComment
     options:
       children:
         - type: component.text-field
-          instanceId: commentField
+          instanceId: comment
           options:
-            label: Comment Here
+            label: Leave a comment!
             isMultiline: true
             textArea: dynamic
-  - type: component.form
-    instanceId: photoVote
-    options:
-      children:
-        - type: component.checkbox
-          instanceId: formVote
+        - type: component.text-field
+          instanceId: reactions
           options:
-            label: Vote
+            label: ""
+            value: "0"
             isHidden: true
+            isRequired: false
+        - type: component.text-field
+          instanceId: photoId
+          options:
+            label: ""
+            value: =@ctx.jig.inputs.photoId
+            isHidden: true
+            isRequired: false
+        - type: component.text-field
+          instanceId: commenter
+          options:
+            label: ""
+            value: =@ctx.user.displayName
+            isHidden: true
+        - type: component.text-field
+          instanceId: commenterEmail
+          options:
+            label: ""
+            value: =@ctx.user.email
+            isHidden: true
+  # Comments & Reactions
+  - type: component.list
+    options:  
+      data: =@ctx.datasources.commentData
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+          subtitle: =@ctx.current.item.comment 
+          leftElement: 
+            element: avatar
+            text: ''
+            uri: =@ctx.current.item.avatar
+          label:
+            title: =(@ctx.current.item.reactions & ($number(@ctx.current.item.reactions) = 1 ? ' reaction' :' reactions'))
+            color:
+              - when: true
+                color: color8
+          # Swipe to like comment
+          swipeable:
+            left:
+              - label: R E A C T
+                icon: champagne-cheers
+                color: primary
+                onPress: 
+                  type: action.execute-entity
+                  options:
+                    provider: DATA_PROVIDER_DYNAMIC
+                    entity: default/testComment
+                    method: update
+                    goBack: stay
+                    data:
+                      id: =@ctx.datasources.commentData.testCommentID
+                      reactions: =($number(@ctx.datasources.commentData.reactions) + $number(1))
