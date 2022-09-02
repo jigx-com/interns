@@ -1,12 +1,12 @@
-name: Builder day leaderboard
-referenceId: points-overview
-type: '@jigx/jig/default'
+title: Builder day leaderboard
+jigId: points-overview
+type: jig.default
 
-   
+
 
 datasources:
   team1:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -24,7 +24,7 @@ datasources:
         'color2' as color
         FROM cte
   team2:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -42,7 +42,7 @@ datasources:
         'color4' as color
         FROM cte
   team3:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -62,18 +62,18 @@ datasources:
 
                 
 children:
-  - componentId: '@jigx/jc-bar-chart'
+  - type: component.bar-chart
     options:
       series:
-        - data: =[@ctx.data.team1,@ctx.data.team2,@ctx.data.team3]
+        - data: =[@ctx.datasources.team1,@ctx.datasources.team2,@ctx.datasources.team3]
           dataLabels:
             - isEnabled: true
-        # - data: =@ctx.data.team2
+        # - data: =@ctx.datasources.team2
         #   name: "Team2"
         #   description: Team2
         #   dataLabels:
         #     - isEnabled: true
-        # - data: =@ctx.data.team3
+        # - data: =@ctx.datasources.team3
         #   name: "Team3"
         #   description: Team3
         #   dataLabels:
@@ -82,17 +82,3 @@ children:
         labels:
           format:
             numberStyle: decimal
-
-        
-            
-            
-
-            
-
-  
-        
-        
-        
-  
-  
-

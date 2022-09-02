@@ -1,35 +1,37 @@
-name: Voting
-type: '@jigx/jig/form'
-referenceId: vote-for-team
+title: Voting
+type: jig.default
+jigId: vote-for-team
 
 actions:
   - children:
     - instanceId: voting
-      componentId: '@jigx/ja-submit-form'
+      type: action.submit-form
       options:
         style:
-          isDisabled: =(@ctx.data.vote.state = "Voted" ? 'True':'False')
-        title: =(@ctx.data.vote.state = "Voted" ? 'You already voted':'Vote for this team')
+          isDisabled: =(@ctx.datasources.vote.state = "Voted" ? 'True':'False')
+        title: =(@ctx.datasources.vote.state = "Voted" ? 'You already voted':'Vote for this team')
         formId: voting
+        provider: DATA_PROVIDER_DYNAMIC
+        entity: default/voting
+        method: create
         onSuccess:
           title: =('You have succesfully voted') 
           actions:
-            - componentId: '@jigx/ja-go-back'
+            - type: action.go-back
               options:
                 title: ''
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title: Voting
-      source:
-        uri: "https://variety.com/wp-content/uploads/2020/11/Game-Awards-2020-Twitter-Voting-Exclusive.png"
+  type: component.image
+  options:
+    title: Voting
+    source:
+      uri: "https://variety.com/wp-content/uploads/2020/11/Game-Awards-2020-Twitter-Voting-Exclusive.png"
 
 
 datasources:
   vote:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -43,62 +45,74 @@ datasources:
           '$.email',
           '$.state'
         FROM[default/voting] where '$.email' = @email
-
-
-provider: DATA_PROVIDER_DYNAMIC
-entity: default/voting
-method: create
-children:
-  - componentId: '@jigx/jc-text-field'
+        
+  teams:
+    type: datasource.static
     options:
-      property: id
-      label: Id
-      style:
-        isDisabled: true
-      isHidden: true
-  - componentId: '@jigx/jc-dropdown'
-    options:
-      property: team
-      label: Team name
-      data: 
+      data:
         - title: Team 1
           value: Team 1
-          property: team
+          instanceId: team
         - title: Team 2
           value: Team 2
-          property: team
+          instanceId: team
         - title: Team 3
           value: Team 3
-          property: team
-  - componentId: '@jigx/jc-text-field'
+          instanceId: team
+
+
+
+children:
+  - type: component.form
+    instanceId: voting
     options:
-      property: person
-      label: Person
-      value: =@ctx.user.displayName
-      style:
-        isDisabled: true
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: email
-      label: Email
-      value: =@ctx.user.email
-      style:
-        isDisabled: true
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: points
-      label: Points
-      value: =$number(1)
-      style:
-        isDisabled: true
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: state
-      label: State
-      value: Voted
-      style:
-        isDisabled: true
-      isHidden: true
+      children:
+        - type: component.text-field
+          instanceId: id
+          options:            
+            label: Id
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.dropdown
+          instanceId: team
+          options:
+            data: =@ctx.datasources.teams
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.title
+                value: =@ctx.current.item.value
+            label: Team name
+        - type: component.text-field
+          instanceId: person
+          options:            
+            label: Person
+            value: =@ctx.user.displayName
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: email
+          options:            
+            label: Email
+            value: =@ctx.user.email
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: points
+          options:            
+            label: Points
+            value: =$number(1)
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: state
+          options:            
+            label: State
+            value: Voted
+            style:
+              isDisabled: true
+            isHidden: true

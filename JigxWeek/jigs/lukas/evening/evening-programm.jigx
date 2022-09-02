@@ -1,19 +1,18 @@
-name: Evening program
-referenceId: evening-programm
-type: '@jigx/jig/default'
+title: Evening program
+jigId: evening-programm
+type: jig.default
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title:  Evening program
-      source:
-        uri: =@ctx.data.place.image
-   
+  type: component.image
+  options:
+    title:  Evening program
+    source:
+      uri: =@ctx.datasources.place.image
+
 
 datasources:
   place:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -35,42 +34,37 @@ datasources:
 
                 
 children:
-  - componentId: '@jigx/jc-entity'
+  - type: component.entity
     options:
       children:
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Restaurant
-            value: =@ctx.data.place.restaurant
+            value: =@ctx.datasources.place.restaurant
             isMultiline: true
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Programm
-            value: =@ctx.data.place.plan
+            value: =@ctx.datasources.place.plan
             isMultiline: true
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Restaurant link
-            value: =@ctx.data.place.link
+            value: =@ctx.datasources.place.link
             isMultiline: true
-            type: link
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Location restaurant
-            value: =@ctx.data.place.deeplink
+            value: =@ctx.datasources.place.deeplink
             isMultiline: true
-            type: link
-  - componentId: '@jigx/jc-location'
+  - type: component.location
     options:
-      address: =@ctx.data.place.location 
+      address: =@ctx.datasources.place.location 
       
-views:
+widgets:
   2x2:
-    componentId: '@jigx/jw-universal'
+    type: widget.avatar
     options:
-      center:
-        componentId: '@jigx/jc-avatar'
-        options:
-          text: ''
-          uri: =@ctx.data.place.image
+      text: ''
+      uri: =@ctx.datasources.place.image
 

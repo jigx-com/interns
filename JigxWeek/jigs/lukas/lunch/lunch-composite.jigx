@@ -1,20 +1,19 @@
-name: Lunch
-referenceId: lunch-composite
-type: '@jigx/jig/composite'
+title: Lunch
+jigId: lunch-composite
+type: jig.composite
 description: ='Today is ' & $substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",") & ' of JigxWeek21 see your lunch buddies for the day and have a wonderfull day!'
 
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title:  Lunch
-      source:
-        uri: "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/04/blog_chandigarh-1030x538.jpg"
+  type: component.image
+  options:
+    title:  Lunch
+    source:
+      uri: "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/04/blog_chandigarh-1030x538.jpg"
 
 datasources: 
   numbers:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -28,18 +27,17 @@ datasources:
           '$.email',
           '$.day'
         FROM[default/lu] where '$.email' = @email and '$.day' = @day
-   
-views:
+
+widgets:
   2x2:
-    componentId: '@jigx/jw-universal'
+    type: widget.avatar
     options:
-      center:
-        componentId: '@jigx/jc-avatar'
-        options:
-          text: ''
-          uri: "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/04/blog_chandigarh-1030x538.jpg"
+      text: ''
+      uri: "https://blog.dineout-cdn.co.in/blog/wp-content/uploads/2019/04/blog_chandigarh-1030x538.jpg"
+
+
 children:
-  - componentId: lunch-list
+  - jigId: lunch-list
     inputs:
-      lunch-group: =@ctx.data.numbers.group
-  - componentId: restaurant-list
+      lunch-group: =@ctx.datasources.numbers.group
+  - jigId: restaurant-list

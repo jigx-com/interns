@@ -1,11 +1,11 @@
-name: Agenda
-referenceId: programm-calendar
-type: "@jigx/jig/calendar"
+title: Agenda
+jigId: programm-calendar
+type: jig.calendar
 description: "JigxWeek21 Agenda"
 
 datasources:
   events:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -28,14 +28,14 @@ datasources:
         
 
 
-data: =@ctx.data.events
+data: =@ctx.datasources.events
 item: 
-  componentId: "@jigx/jc-event"
+  type: component.event
   options:
-    title: =$string(@ctx.parents.list-data.item.title)
-    location: =$string(@ctx.parents.list-data.item.location)
-    description: =$string(@ctx.parents.list-data.item.description)
-    from: =$string(@ctx.parents.list-data.item.from)
-    to: =$string(@ctx.parents.list-data.item.to)
-    people: "=[{'fullName': $string(@ctx.parents.list-data.item.full_name), 'avatarUrl': @ctx.parents.list-data.item.avatar = '' ? 'https://avatars.githubusercontent.com/u/54961807?s=200&v=4':@ctx.parents.list-data.item.avatar}]"
-    tags: "=[{'title': @ctx.parents.list-data.item.title_tag, 'color': @ctx.parents.list-data.item.color}]"
+    title: =$string(@ctx.current.item.title)
+    location: =$string(@ctx.current.item.location)
+    description: =$string(@ctx.current.item.description)
+    from: =$string(@ctx.current.item.from)
+    to: =$string(@ctx.current.item.to)
+    people: "=[{'fullName': $string(@ctx.current.item.full_name), 'avatarUrl': @ctx.current.item.avatar = '' ? 'https://avatars.githubusercontent.com/u/54961807?s=200&v=4':@ctx.current.item.avatar}]"
+    tags: "=[{'title': @ctx.current.item.title_tag, 'color': @ctx.current.item.color}]"

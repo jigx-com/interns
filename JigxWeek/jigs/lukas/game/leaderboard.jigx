@@ -1,15 +1,15 @@
-name: Leaderboard
-referenceId: leaderboard
-type: '@jigx/jig/list'
+title: Leaderboard
+jigId: leaderboard
+type: jig.list
 
 placeholders:
-  - when: =@ctx.data.gamestatus.status != 'done'
+  - when: =@ctx.datasources.gamestatus.status != 'done'
     title: " "
     icon: is-offline
 
 datasources:
   gamestatus:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -22,7 +22,7 @@ datasources:
         FROM [default/gamestatus]
         
   points:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -50,16 +50,15 @@ datasources:
         ORDER BY points DESC
         Limit 10
 
-data: =@ctx.data.points
-
+data: =@ctx.datasources.points
 item: 
-  componentId: '@jigx/jc-list-item'
+  type: component.list-item
   options:
-    title: =@ctx.parents.list-data.item.playername
+    title: =@ctx.current.item.playername
     leftElement: 
-      type: avatar
+      element: avatar
       text: ""
-      uri: =@ctx.parents.list-data.item.avatar
+      uri: =@ctx.current.item.avatar
     rightElement: 
-      type: value
-      text: "=@ctx.parents.list-data.item.points & ' points'"
+      element: value
+      text: "=@ctx.current.item.points & ' points'"

@@ -1,24 +1,22 @@
 title: Expenses
 category: communications
-referenceId: lukas-app
+name: jigxweektest
 
-favorites: 
-  - children: lunch-composite
+widgets: 
+  - jigId: lunch-composite
     size: 2x2
-  - children: evening-programm
+  - jigId: evening-programm
     size: 2x2
-  - children: walking-composite
+  - jigId: walking-composite
     size: 2x2
-  - children: ranking
+  - jigId: ranking
     size: 4x2
-  - children: fact
+  - jigId: fact
     size: 4x2
-  - children: teams-composite
+  - jigId: teams-composite
     size: 1x1
-  - children: programm-calendar
+  - jigId: programm-calendar
     size: 1x1
-
-
     
 stories: 
   - story-line

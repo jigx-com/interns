@@ -19,7 +19,7 @@ actions:
     #     title: Vote for team
     #     formId: voting
     #     onSuccess:
-    #       title: =('You have succesfully voted for ' & @ctx.data.points.x) 
+    #       title: =('You have succesfully voted for ' & @ctx.datasources.points.x) 
     #       actions:
     #         - componentId: '@jigx/ja-go-back'
     #           options:
@@ -59,7 +59,7 @@ children:
         - type: component.text-field
           instanceId: id
           options:
-            value: =@ctx.data.points.id
+            value: =@ctx.datasources.points.id
             label: Id
             style:
               isDisabled: true
@@ -67,7 +67,7 @@ children:
         - type: component.text-field
           instanceId: team
           options:
-            value: =@ctx.data.points.x
+            value: =@ctx.datasources.points.x
             label: Team name
             style:
               isDisabled: true
@@ -75,7 +75,7 @@ children:
           instanceId: group
           options:
             label: Group
-            value: =@ctx.data.points.groupin
+            value: =@ctx.datasources.points.groupin
             style:
               isDisabled: true
             isHidden: true
@@ -83,7 +83,7 @@ children:
           instanceId: points
           options:
             label: Points
-            value: =($number(@ctx.data.points.y) + 1)
+            value: =($number(@ctx.datasources.points.y) + 1)
             style:
               isDisabled: true
             isHidden: true
