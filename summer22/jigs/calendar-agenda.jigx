@@ -1,6 +1,8 @@
 title: Calendar
 type: jig.calendar
 
+
+
 data: =@ctx.datasources.mydata
 item:
   type: component.event

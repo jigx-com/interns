@@ -7,10 +7,8 @@ datasources:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-  
       entities:
         - default/testComment
-  
       query: |
         SELECT
           tC.id AS testCommentID,
@@ -19,7 +17,8 @@ datasources:
           json_extract(tM.data, '$.lastName') AS lastName,
           json_extract(tC.data, '$.comment') AS comment,
           json_extract(tC.data, '$.reactions') AS reactions
-        FROM [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
+        FROM 
+          [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
         ON json_extract(tC.data, '$.commenterEmail') = json_extract(tM.data, '$.email')
         WHERE json_extract(tC.data, '$.photoId') = @sort
       queryParameters:
@@ -29,10 +28,8 @@ datasources:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-  
       entities:
         - default/table-name
-  
       query: |
           SELECT 
             id
@@ -150,7 +147,7 @@ children:
           swipeable:
             left:
               - label: R E A C T
-                icon: champagne-cheers
+                icon: love-it
                 color: primary
                 onPress: 
                   type: action.execute-entity
