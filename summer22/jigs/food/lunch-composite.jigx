@@ -12,6 +12,7 @@ header:
   options:
     source:
       uri: https://images.unsplash.com/photo-1576867757603-05b134ebc379?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bHVuY2h8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
+      
 
 children:
   - jigId: mygroup

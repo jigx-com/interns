@@ -1,11 +1,11 @@
-title: Map
+title: Map & CRUISE
 type: jig.composite
 
 header: 
   type: component.location
   options:
     address: France (Nice)
-    zoomLevel: 5
+    zoomLevel: 7
 
 widgets:
   "4x2": 
@@ -34,6 +34,8 @@ widgets:
 
 
 children:
-  - jigId: navigation-map
-
   - jigId: cruise-ship-map-list
+    
+  - jigId: navigation-map
+    inputs:
+      title: "Upcoming " 

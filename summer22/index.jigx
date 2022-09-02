@@ -47,28 +47,33 @@ widgets:
       # After day 1
       # - size: "1x1"
       #   jigId: link-up composite 
-
   - size: "1x1"
     jigId: find-my-peers-list
-    
   - size: "1x1"
     jigId: photo-upload
-    
   - size: "1x1"
     jigId: calendar-agenda
 
 
   # Navigation Widget
   - size: "4x2"
-    jigId: map-composite
+    jigId: map-composite-poi
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
+                )"
+  - size: "4x2"
+    jigId: map-composite-cruise
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
+                )"
 
 
   # Placeholder Widget
   - size: "1x1"
     jigId: link-up-filter-location
-  
   - size: 1x1
-    jigId: testlist
-    
+    jigId: timetest
   - size: 1x1
     jigId: calendar-entries

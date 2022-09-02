@@ -1,0 +1,13 @@
+type: datasource.static
+options:
+  data:
+    - id: 1
+      field1: value
+      field2: value
+
+
+# =@ctx.datasources.restaurant-location[name = @ctx.current.item.title].pathsData
+
+# "=(
+#    @ctx.datasources.restaurant-location.name = @ctx.current.item.title ? @ctx.datasources.restaurant-location.pathsData: null
+#   )"
