@@ -1,0 +1,39 @@
+title: Name
+description: Description of your Jig
+type: jig.list
+icon: contact
+
+datasources:
+  commentData: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testComment
+  
+      query: |
+        SELECT
+          json_extract(tM.data, '$.avatar') AS avatar,
+          json_extract(tM.data, '$.firstName') AS firstName,
+          json_extract(tM.data, '$.lastName') AS lastName,
+          json_extract(tC.data, '$.comment') AS comment,
+          json_extract(tC.data, '$.reactions') AS reactions
+        FROM [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
+        ON json_extract(tC.data, '$.commenterEmail') = json_extract(tM.data, '$.email')
+        WHERE json_extract(tC.data, '$.photoId') = @sort 
+      queryParameters:
+        sort: =@ctx.jig.inputs.photoId
+
+sections:
+  - title: Comments
+    data: =@ctx.datasources.commentData
+item: 
+  type: component.list-item
+  options:
+    title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+    subtitle: =@ctx.current.item.comment 
+    leftElement: 
+      element: avatar
+      text: ''
+      uri: =@ctx.current.item.avatar

@@ -7,6 +7,12 @@ onLoad:
     provider: DATA_PROVIDER_DYNAMIC
     entities:
       - entity: default/Photos
+onFocus: 
+  type: action.sync-entities
+  options:
+    provider: DATA_PROVIDER_DYNAMIC
+    entities:
+      - entity: default/Photos
 
 datasources:
   photoStory: 
@@ -17,7 +23,7 @@ datasources:
       entities:
         - default/Photos
   
-      query: SELECT id, '$.uploadPhoto' FROM [default/Photos]
+      query: SELECT id, '$.uploadPhoto', '$.title' FROM [default/Photos]
 
 
 stories:
@@ -30,14 +36,18 @@ stories:
       type: component.image
       options:
         title: Photos 
-        subtitle: Vote for oyur favorite photo!
+        subtitle: Vote for your favorite photo!
         source:
           uri: =@ctx.current.item.uploadPhoto
         onPress: 
           type: action.go-to
           options:
-            title: Vote
-            linkTo: =@ctx.LinkToTBD
+            title: Comment or Vote!
+            linkTo: photo-landing-page
+            parameters:
+              avatar: =@ctx.current.item.uploadPhoto
+              photoId: =@ctx.current.item.id
+              photoTitle: =@ctx.current.item.title
 
 children:
   - type: component.entity

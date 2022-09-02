@@ -44,7 +44,6 @@ children:
             label: time
             value: "=($substring(@ctx.jig.inputs.hours, 0, 5) > @ctx.jig.inputs.timeframe ? true: false)"
             
-            
         - type: component.entity-field
           options:
             label: Time Test

@@ -12,15 +12,15 @@ datasources:
       entities:
         - default/Location
   
-      query: SELECT id, '$.name' FROM [default/Location] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL
+      query: SELECT id, '$.name' FROM [default/Location] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL ORDER BY '$.name'
       queryParameters:
-        search: =@ctx.jig.state.searchText
-  
+        search: =@ctx.components.location.state.searchText  
 header: 
   type: component.image
   options:
     source:
       uri: https://images.unsplash.com/photo-1497942304796-b8bc2cc898f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80
+
 children:
   - type: component.form
     instanceId: sharePhotos
@@ -36,6 +36,11 @@ children:
           options:
             label: Add JigxCruise22 filter 
             isRequired: false
+        - type: component.text-field
+          instanceId: title
+          options:
+            label: Photo Title
+            isMultiline: false
         - type: component.dropdown
           instanceId: location
           options:
