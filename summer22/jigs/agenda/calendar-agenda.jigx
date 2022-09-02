@@ -1,0 +1,51 @@
+title: Calendar
+type: jig.calendar
+
+datasources:
+  agendaCal: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testCal
+  
+      query: |
+        SELECT
+          id,
+          '$.subject',
+          '$.startDateTime',
+          '$.endDateTime',
+          '$.location',
+          '$.speakerOne',
+          '$.speakerTwo',
+          '$.speakerOneEmail',
+          '$.speakerTwoEmail'
+        FROM
+          [default/testCal]
+      #   WHERE id = @myParam
+      # queryParameters:
+      #   myParam: value
+
+data: =@ctx.datasources.agendaCal
+item:
+  type: component.event
+  options:
+    from: =@ctx.current.item.startDateTime
+    to: =@ctx.current.item.endDateTime
+    title: =@ctx.current.item.subject
+    description: =@ctx.current.item.location
+    onButtonPress: 
+      type: action.go-to
+      options:
+        title: View Event
+        linkTo: calendar-event-view
+        parameters:
+          subject: =@ctx.current.item.subject
+          startDateTime: =@ctx.current.item.startDateTime
+          endDateTime: =@ctx.current.item.endDateTime
+          location: =@ctx.current.item.location
+          speakerOne: =@ctx.current.item.speakerOne
+          speakerTwo: =@ctx.current.item.speakerTwo
+          speakerOneEmail: =@ctx.current.item.speakerOneEmail
+          speakerTwoEmail: =@ctx.current.item.speakerTwoEmail

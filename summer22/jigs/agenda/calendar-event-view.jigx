@@ -1,0 +1,56 @@
+title: View Event
+type: jig.default
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: Subject
+            value: =@ctx.jig.inputs.subject
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: Start Time
+                  value: =@ctx.jig.inputs.startDateTime
+              - type: component.entity-field
+                options:
+                  label: End Time
+                  value: =@ctx.jig.inputs.endDateTime
+        - type: component.entity-field
+          options:
+            label: Location
+            value: =@ctx.jig.inputs.location
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: Speaker
+                  value: =@ctx.jig.inputs.speakerOne
+              - type: component.entity-field
+                options:
+                  label: Speaker
+                  value: =@ctx.jig.inputs.speakerTwo
+                  
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Add Event to My Calendar
+          method: functionCall
+          provider: DATA_PROVIDER_REST
+          function: myfirstfunction
+          entity: ''
+          functionParameters:
+            accessToken: outlook
+            subject: =@ctx.jig.inputs.subject
+            startDateTime: =@ctx.jig.inputs.startDateTime
+            endDateTime: =@ctx.jig.inputs.endDateTime
+            location: =@ctx.jig.inputs.location
+            speakerOne: =@ctx.jig.inputs.speakerOne
+            speakerTwo: =@ctx.jig.inputs.speakerTwo
+            

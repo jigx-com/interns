@@ -69,3 +69,6 @@ widgets:
   
   - size: 1x1
     jigId: testlist
+    
+  - size: 1x1
+    jigId: calendar-entries

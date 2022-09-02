@@ -1,0 +1,65 @@
+provider: DATA_PROVIDER_REST
+url: https://graph.microsoft.com/v1.0/me/events
+method: POST
+inputTransform: |
+  $.{
+    "subject":  subject,
+    "start": {
+        "dateTime": startDateTime,
+        "timeZone": "timeZone"
+    },
+    "end": {
+        "dateTime": endDateTime,
+        "timeZone": "timeZone"
+    },
+    "location": {
+        "displayName": location
+    },
+    "attendees": [
+      {
+        "emailAddress": {
+          "address": speakerOneEmail,
+          "name": speakerOne
+        }
+      },
+      {
+        "emailAddress": {
+          "address": speakerTwoEmail,
+          "name": speakerTwo
+        }
+      }
+    ]
+  }
+parameters:
+  accessToken: 
+    type: outlook
+    location: header
+    value: outlook
+    required: true
+  subject: 
+    type: string
+    location: body
+    required: true
+  startDateTime:
+    type: string
+    location: body
+    required: true
+  endDateTime:
+    type: string
+    location: body
+    required: true
+  location:
+    type: string
+    location: body
+  speakerOneEmail:
+    type: string
+    location: body
+  speakerOne:
+    type: string
+    location: body
+  speakerTwoEmail:
+    type: string
+    location: body
+  speakerTwo:
+    type: string
+    location: body

@@ -19,7 +19,8 @@ datasources:
           '$.avatar' AS avatar, 
           '$.address' AS address,
           '$.rating' AS rating,  
-          '$.hours' AS hours 
+          '$.hours' AS hours,
+          '$.about' AS about
         FROM [default/testpoi] ORDER BY name ASC
 
 data: =@ctx.datasources.poiNice
@@ -48,5 +49,6 @@ item:
                 address: =@ctx.current.item.address
                 rating: =@ctx.current.item.rating
                 hours: =@ctx.current.item.hours
+                about: =@ctx.current.item.about
                 
     
