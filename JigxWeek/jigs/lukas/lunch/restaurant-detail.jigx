@@ -1,19 +1,18 @@
-name: Restaurant detail
-referenceId: restaurant-detail
-type: '@jigx/jig/default'
+title: Restaurant detail
+jigId: restaurant-detail
+type: jig.default
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title:  Restaurant detail
-      source:
-        uri: =@ctx.data.place.photo
-   
+  type: component.image
+  options:
+    title:  Restaurant detail
+    source:
+      uri: =@ctx.datasources.place.photo
+
 
 datasources:
   place:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -35,34 +34,29 @@ datasources:
 
                 
 children:
-  - componentId: '@jigx/jc-entity'
+  - type: component.entity
     options:
       children:
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Restaurant name
-            value: =@ctx.data.place.restaurant
+            value: =@ctx.datasources.place.restaurant
             isMultiline: true
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Food preferences
-            value: =@ctx.data.place.description
+            value: =@ctx.datasources.place.description
             isMultiline: true
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Website link
-            value: =@ctx.data.place.url
+            value: =@ctx.datasources.place.url
             isMultiline: true
-            type: link
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Deeplink map
-            value: =@ctx.data.place.deeplink
+            value: =@ctx.datasources.place.deeplink
             isMultiline: true
-            type: link
-  - componentId: '@jigx/jc-location'
+  - type: component.location
     options:
-      address: =@ctx.data.place.location 
-      
-      
-
+      address: =@ctx.datasources.place.location 

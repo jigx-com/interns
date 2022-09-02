@@ -1,50 +1,52 @@
-name: Fun Fact
-type: '@jigx/jig/form'
-referenceId: fact
+title: Fun Fact
+type: jig.default
+jigId: fact
 icon: question-circle
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title: 🧐 Guess who it is
-      source:
-        uri: "https://calendarmedia.blob.core.windows.net/assets/b69e9c75-0faa-4802-bb13-a4b399e55776.jpg"
+  type: component.image
+  options:
+    title: 🧐 Guess who it is
+    source:
+      uri: "https://calendarmedia.blob.core.windows.net/assets/b69e9c75-0faa-4802-bb13-a4b399e55776.jpg"
 
 actions:
   - children:
     - instanceId: fact
-      componentId: '@jigx/ja-submit-form'
+      type: action.execute-entity
       options:
         title: Submit your guess
-      
+        provider: DATA_PROVIDER_DYNAMIC
+        entity: default/guesses
+        method: create
+        
 
 placeholders:
-  - when: "=@ctx.data.gamestatus.status = 'done'"
+  - when: "=@ctx.datasources.gamestatus.status = 'done'"
     title: 🏆 Game over 🏆
     icon: is-offline
-  - when: =$count(@ctx.data.facts[user = @ctx.user.email]) = 0
+  - when: =$count(@ctx.datasources.facts[user = @ctx.user.email]) = 0
     title: Tell us some fun fact about yourself
     icon: missing-data
     onPress: 
-      componentId: '@jigx/ja-go-to'
+      type: action.go-to
       options:
         title: Tell us now
         linkTo: myfact
-  - when: "=@ctx.data.gamestatus.status != 'open' or $count(@ctx.data.facts[active = 'true']) = 0"
+  - when: "=@ctx.datasources.gamestatus.status != 'open' or $count(@ctx.datasources.facts[active = 'true']) = 0"
     title: Now, let's wait until Grant starts the game
     icon: is-offline
-  - when: "=@ctx.data.facts[active = 'true'].user = @ctx.user.email"
+  - when: "=@ctx.datasources.facts[active = 'true'].user = @ctx.user.email"
     title: For obvious reasons you must skip this round :)
     icon: is-offline
-  - when: "=$count(@ctx.data.guesses[factid = @ctx.data.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
+  - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
     title: Let's wait for Grant...
     icon: is-offline
 
 
 datasources:
   gamestatus:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -57,7 +59,7 @@ datasources:
         FROM [default/gamestatus]
         
   facts:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -71,7 +73,7 @@ datasources:
         FROM [default/facts] 
   
   guesses:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -85,7 +87,7 @@ datasources:
         FROM [default/guesses] 
 
   teammates:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -98,65 +100,69 @@ datasources:
           '$.email'
         FROM [default/teammates] ORDER BY '$.name' ASC       
         
-views:
+widgets:
   4x2: 
-    componentId: '@jigx/jw-list'
+    type: widget.list
     options:
-      title: "🧐 Guess, who it is:"
-      data: "=[ @ctx.data.facts[active = 'true'] ]"
-      item:         
-        componentId: '@jigx/jc-list-item'
+      top:
+        type: component.trend
         options:
-          title: ='"' & @ctx.parents.list-data.item.fact & '"'
+          title: "🧐 Guess, who it is:"
+      data: "=[ @ctx.datasources.facts[active = 'true'] ]"
+      item:         
+        type: component.list-item
+        options:
+          title: ='"' & @ctx.current.item.fact & '"'
           rightElement: 
-            type: button
+            element: button
             title: ⁉️
             onPress: 
-              componentId: '@jigx/ja-go-to'
+              type: action.go-to
               options:
-                title: goto
                 linkTo: fact
-          
-provider: DATA_PROVIDER_DYNAMIC
-entity: default/guesses
-method: create
+
 
 children:
-  - componentId: '@jigx/jc-text-field'
+  - type: component.form
+    instanceId: fact
     options:
-      property: id
-      label: id
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: factid
-      label: factid
-      initialValue: =@ctx.data.facts[active = 'true'].id
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: player
-      label: player
-      initialValue: =@ctx.user.email
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: fact
-      isIgnored: true
-      label: Fun Fact
-      initialValue: =@ctx.data.facts[active = 'true'].fact
-      style:
-        isDisabled: true
-      isMultiline: true
-      textArea: dynamic
-      isHidden: false
-  - componentId: "@jigx/jc-dropdown"
-    options:
-      label: Guess the teammate
-      property: guessuser
-      data: =@ctx.data.teammates
-      type: single
-      mapping:
-        title: name
-        value: email
-      isSearchable: true
+      children:
+        - type: component.text-field
+          instanceId: id
+          options:
+            label: id
+            isHidden: true
+        - type: component.text-field
+          instanceId: factid
+          options:
+            label: factid
+            initialValue: =@ctx.datasources.facts[active = 'true'].id
+            isHidden: true
+        - type: component.text-field
+          instanceId: player
+          options:
+            label: player
+            initialValue: =@ctx.user.email
+            isHidden: true
+        - type: component.text-field
+          instanceId: fact
+          options:            
+            isIgnored: true
+            label: Fun Fact
+            initialValue: =@ctx.datasources.facts[active = 'true'].fact
+            style:
+              isDisabled: true
+            isMultiline: true
+            textArea: dynamic
+            isHidden: false
+        - type: component.dropdown
+          instanceId: guessuser
+          options:
+            label: Guess the teammate
+            data: =@ctx.datasources.teammates
+            item:
+              type: component.dropdown-item
+              options:
+                title: name
+                value: =@ctx.current.item.id
+            isSearchable: true

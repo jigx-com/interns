@@ -1,13 +1,11 @@
-name: Team 3
-type: '@jigx/jig/list'
-referenceId: third-team
-
-
+title: Team 3
+type: jig.list
+jigId: third-team
 
 
 datasources:  
   people:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -25,17 +23,13 @@ datasources:
           '$.voted'
         FROM[default/bd] where '$.group' = @groups
         
-data: =@ctx.data.people
+data: =@ctx.datasources.people
 item:
-  componentId: '@jigx/jc-list-item'
+  type: component.list-item
   options:
-    title: =@ctx.parents.list-data.item.person
-    subtitle: =@ctx.parents.list-data.item.email
+    title: =@ctx.current.item.person
+    subtitle: =@ctx.current.item.email
     leftElement: 
-      type: avatar
+      element: avatar
       text: ''
-      uri: =@ctx.parents.list-data.item.photo
-
-
-          
-          
+      uri: =@ctx.current.item.photo

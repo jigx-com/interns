@@ -1,11 +1,11 @@
-name: Restaurants
-type: '@jigx/jig/list'
-referenceId: restaurant-list
+title: Restaurants
+type: jig.list
+jigId: restaurant-list
 icon: house
 
 datasources:
   place:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
@@ -24,25 +24,22 @@ datasources:
           '$.photo',
           '$.url'
         FROM[default/lr] WHERE '$.day' = @day
-  
 
-        
-data: =@ctx.data.place
+
+
+data: =@ctx.datasources.place
 item:
-  componentId: '@jigx/jc-list-item'
+  type: component.list-item
   options:
-    title: =@ctx.parents.list-data.item.restaurant
-    subtitle: =@ctx.parents.list-data.item.description
+    title: =@ctx.current.item.restaurant
+    subtitle: =@ctx.current.item.description
     leftElement: 
-      type: avatar
+      element: avatar
       text: ''
-      uri: =@ctx.parents.list-data.item.photo
+      uri: =@ctx.current.item.photo
     onPress: 
-      componentId: '@jigx/ja-go-to'
+      type: action.go-to
       options:
-        title: open
         linkTo: restaurant-detail
         parameters:
-          id: =@ctx.parents.list-data.item.id
-          
-          
+          id: =@ctx.current.item.id

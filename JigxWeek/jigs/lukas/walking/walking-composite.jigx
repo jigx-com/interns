@@ -1,21 +1,20 @@
-name: My buddy
-referenceId: walking-composite
+title: My buddy
+jigId: walking-composite
 icon: house
 description: See bellow your walking buddy and challenge for the day! How a great day.
-type: '@jigx/jig/composite'
+type: jig.composite
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title:  My buddy
-      source:
-        uri: "https://www.insportline.cz/upload/source/K/leki_trek_header.jpg"
-   
+  type: component.image
+  options:
+    title:  My buddy
+    source:
+      uri: "https://www.insportline.cz/upload/source/K/leki_trek_header.jpg"
+
 
 datasources:
   grup:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -35,14 +34,14 @@ datasources:
         FROM [default/wk] where '$.email' = @email and '$.day' = @day
         
   people:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: false
       provider: DATA_PROVIDER_DYNAMIC
       entities:
         - default/wk
       queryParameters:
-        number: =@ctx.data.grup.group
+        number: =@ctx.datasources.grup.group
         email: =@ctx.user.email
         day: =$substringBefore($toMillis($now()) ~> $fromMillis('[FNn], [D1o] [MNn] [YI]'),",")
       query: |
@@ -58,27 +57,17 @@ datasources:
 
         
 children:
-  - componentId: walking-list
+  - jigId: walking-list
     inputs:
-      group: =@ctx.data.grup.group
+      group: =@ctx.datasources.grup.group
     
-  - componentId: challenge
-  - componentId: walking-map
+  - jigId: challenge
+  - jigId: walking-map
 
     
-views:
+widgets:
   2x2:
-    componentId: '@jigx/jw-universal'
+    type: widget.avatar
     options:
-      center:
-        componentId: '@jigx/jc-avatar'
-        options:
-          text: ''
-          uri: =@ctx.data.people.photo
-    
-        
-
-
-
-          
-          
+      text: ''
+      uri: =@ctx.datasources.people.photo

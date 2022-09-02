@@ -1,22 +1,18 @@
-name: Map area
-referenceId: walking-map
-type: '@jigx/jig/default'
+title: Map area
+jigId: walking-map
+type: jig.default
 
 
-                
+
 children:
-  - componentId: '@jigx/jc-entity'
+  - type: component.entity
     options:
       children:
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Maps link
             value: "https://bit.ly/3BzhskV"
             isMultiline: true
-            type: link
-  - componentId: '@jigx/jc-location'
+  - type: component.location
     options:
       address: "Hotel Barceló Brno Palace, střed, střed, Šilingrovo nám. 265/2, Brno-město, 602 00 Brno-střed"
-      
-      
-

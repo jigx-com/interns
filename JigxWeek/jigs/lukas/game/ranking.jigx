@@ -1,14 +1,13 @@
-name: Realtime scores
-type: '@jigx/jig/composite'
-referenceId: ranking
+title: Realtime scores
+type: jig.composite
+jigId: ranking
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title: Realtime scores
-      source:
-        uri: "https://www.esma-3d.fr/wp-content/uploads/2019/05/award-animation-review-career.jpg"
+  type: component.image
+  options:
+    title: Realtime scores
+    source:
+      uri: "https://www.esma-3d.fr/wp-content/uploads/2019/05/award-animation-review-career.jpg"
 
 placeholders:
   - when: "=@ctx.data.gamestatus.status = 'init'"
@@ -18,19 +17,18 @@ placeholders:
 actions:
   - when: "=@ctx.user.email = 'markus@jigx.com'"
     children:
-      - componentId: '@jigx/ja-go-to'
+      - type: action.go-to
         options:
           title: Grants game cockpit
           linkTo: cockpit
         
 children:
-  - componentId: chart
-  - componentId: leaderboard
+  - jigId: chart
+  - jigId: leaderboard
 
 datasources:
-  
   gamestatus:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -43,7 +41,7 @@ datasources:
         FROM [default/gamestatus]
         
   points:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -64,21 +62,24 @@ datasources:
         GROUP BY player   
         ORDER BY points DESC
         Limit 10
-        
-        
-views:
+
+
+widgets:
   4x2:
-    componentId: '@jigx/jw-group'
+    type: widget.group
     options:
       children:
-        - componentId: '@jigx/jw-value'
+        - type: widget.value
           options:
             value: =@ctx.data.points[player = @ctx.user.email].points
-            title: My Points
-        - componentId: '@jigx/jw-chart'
+            top: 
+              type: component.titles
+              options:
+                title: My Points
+        - type: widget.chart
           options:
             chart: 
-              componentId: '@jigx/jc-bar-chart'
+              type: component.bar-chart
               options:
                 yAxis:
                   min: 0
@@ -87,4 +88,3 @@ views:
                   - data: "=[{'x': '#1', 'y': $exists(@ctx.data.points[0]) ? @ctx.data.points[0].points : 0, 'color': 'color2'},{'x': '#2', 'y': $exists(@ctx.data.points[1]) ? @ctx.data.points[1].points : 0, 'color': 'color3'},{'x': '#3', 'y': $exists(@ctx.data.points[2]) ? @ctx.data.points[2].points : 0, 'color': 'color4'}]"
                     dataLabels:
                       - isEnabled: true
-                    

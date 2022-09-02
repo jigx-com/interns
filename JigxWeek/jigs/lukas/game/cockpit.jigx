@@ -1,77 +1,77 @@
-name: Grants cockpit
-type: '@jigx/jig/list'
+title: Grants cockpit
+type: jig.list
 
 actions:
-  - when: "=@ctx.data.gamestatus.status = 'init'"
+  - when: "=@ctx.datasources.gamestatus.status = 'init'"
     children:
-      - componentId: '@jigx/ja-execute-entity'
+      - type: action.execute-entity
         options:
           title: Start game
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/gamestatus
           method: update
-          goBack: off
+          goBack: stay
           data: 
-            id: =@ctx.data.gamestatus.id
+            id: =@ctx.datasources.gamestatus.id
             status: 'open'
-      - componentId: '@jigx/ja-execute-entity'
+      - type: action.execute-entity
         options:
           title: Reset game
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/gamestatus
           method: update
-          goBack: off
+          goBack: stay
           data: 
-            id: =@ctx.data.gamestatus.id
+            id: =@ctx.datasources.gamestatus.id
             status: 'init'
-  - when: "=@ctx.data.gamestatus.status = 'open'"
+  - when: "=@ctx.datasources.gamestatus.status = 'open'"
     children:
-      - componentId: '@jigx/ja-execute-entity'
+      - type: action.execute-entity
         options:
           title: End game
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/gamestatus
           method: update
           data: 
-            id: =@ctx.data.gamestatus.id
+            id: =@ctx.datasources.gamestatus.id
             status: 'done'
-      - componentId: '@jigx/ja-execute-entity'
+      - type: action.execute-entity
         options:
           title: Reset game
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/gamestatus
           method: update
-          goBack: off
+          goBack: stay
           data: 
-            id: =@ctx.data.gamestatus.id
+            id: =@ctx.datasources.gamestatus.id
             status: 'init'
-  - when: "=@ctx.data.gamestatus.status = 'done'"
+  - when: "=@ctx.datasources.gamestatus.status = 'done'"
     children:
-      - componentId: '@jigx/ja-execute-entity'
+      - type: action.execute-entity
         options:
           title: Start game
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/gamestatus
           method: update
-          goBack: off
+          goBack: stay
           data: 
-            id: =@ctx.data.gamestatus.id
+            id: =@ctx.datasources.gamestatus.id
             status: 'open'
-      - componentId: '@jigx/ja-execute-entity'
+      - type: action.execute-entity
         options:
           title: Reset game
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/gamestatus
           method: update
-          goBack: off
+          goBack: stay
           data: 
-            id: =@ctx.data.gamestatus.id
+            id: =@ctx.datasources.gamestatus.id
             status: 'init'
       
         
 datasources:
   gamestatus:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -84,7 +84,7 @@ datasources:
         FROM [default/gamestatus]
         
   facts:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -100,24 +100,22 @@ datasources:
         ORDER BY id
 
 
-data: "=@ctx.data.gamestatus.status = 'open' ? @ctx.data.facts : []"
+data: "=@ctx.datasources.gamestatus.status = 'open' ? @ctx.datasources.facts : []"
 item: 
-  componentId: '@jigx/jc-list-item'
+  type: component.list-item
   options:
-    title: =@ctx.parents.list-data.item.fact
-    subtitle: =@ctx.parents.list-data.item.user
+    title: =@ctx.current.item.fact
+    subtitle: =@ctx.current.item.user
     style:
-      isDisabled: =@ctx.parents.list-data.item.completed
+      isDisabled: =@ctx.current.item.completed
     rightElement: 
-      type: button
+      element: button
       title: Activate
       onPress: 
-        componentId: '@jigx/ja-execute-entities'
+        type: action.execute-entities
         options:
-          
-          title: doit
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/facts
           method: update
-          goBack: off
-          data: "=@ctx.data.facts[].{ 'id': id, 'active': id = @ctx.parents.list-data.item.id ? 'true' : 'false', 'completed': id = @ctx.parents.list-data.item.id or completed = 'true' ? 'true' : 'false' }[]"
+          goBack: stay
+          data: "=@ctx.datasources.facts[].{ 'id': id, 'active': id = @ctx.current.item.id ? 'true' : 'false', 'completed': id = @ctx.current.item.id or completed = 'true' ? 'true' : 'false' }[]"

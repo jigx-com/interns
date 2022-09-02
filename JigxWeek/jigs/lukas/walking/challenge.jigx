@@ -1,10 +1,10 @@
-name: Challenge
-referenceId: challenge
-type: '@jigx/jig/default'
+title: Challenge
+jigId: challenge
+type: jig.default
 
 datasources:
   grup:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -25,12 +25,12 @@ datasources:
 
 
 children:
-  - componentId: '@jigx/jc-entity'
+  - type: component.entity
     options:
       children:
-        - componentId: '@jigx/jc-entity-field'
+        - type: component.entity-field
           options:
             label: Challenge for a day
-            value: =@ctx.data.grup.challange
+            value: =@ctx.datasources.grup.challange
             isMultiline: true
             rightIcon: love-it

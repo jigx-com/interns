@@ -1,28 +1,27 @@
-name: Builder day
-referenceId: teams-composite
-type: '@jigx/jig/composite'
+title: Builder day
+jigId: teams-composite
+type: jig.composite
 description: 'Select a team for which u would like to vote.'
 
 actions:
   - children:
-    - componentId: '@jigx/ja-go-to'
+    - type: action.go-to
       options:
         style:
-          isDisabled: =(@ctx.data.vote.state = "Voted" ? 'True':'False')
-        title: =(@ctx.data.vote.state = "Voted" ? 'You already voted':'Vote for team')
+          isDisabled: =(@ctx.datasources.vote.state = "Voted" ? 'True':'False')
+        title: =(@ctx.datasources.vote.state = "Voted" ? 'You already voted':'Vote for team')
         linkTo: vote-for-team
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title: Builder day teams
-      source:
-        uri: "https://ugc.futurelearn.com/uploads/images/a9/dc/header_a9dce648-8eda-49b1-a620-a548c7251418.jpg"
+  type: component.image
+  options:
+    title: Builder day teams
+    source:
+      uri: "https://ugc.futurelearn.com/uploads/images/a9/dc/header_a9dce648-8eda-49b1-a620-a548c7251418.jpg"
         
 datasources:
   vote:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
@@ -38,7 +37,7 @@ datasources:
         FROM[default/voting] where '$.email' = @email
 
 children:
-  - componentId: points-overview
-  - componentId: first-team
-  - componentId: second-team
-  - componentId: third-team
+  - jigId: points-overview
+  - jigId: first-team
+  - jigId: second-team
+  - jigId: third-team

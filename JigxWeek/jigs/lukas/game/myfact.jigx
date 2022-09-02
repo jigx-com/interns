@@ -1,46 +1,49 @@
-name: My Fun Fact
-type: '@jigx/jig/form'
-referenceId: myfact
+title: My Fun Fact
+type: jig.default
+jigId: myfact
 
 header:
-  children: 
-    componentId: '@jigx/jc-image'
-    options:
-      title: Tell us a secret
-      source:
-        uri: "https://calendarmedia.blob.core.windows.net/assets/b69e9c75-0faa-4802-bb13-a4b399e55776.jpg"
+  type: component.image
+  options:
+    title: Tell us a secret
+    source:
+      uri: "https://calendarmedia.blob.core.windows.net/assets/b69e9c75-0faa-4802-bb13-a4b399e55776.jpg"
 
 actions:
   - children:
-    - instanceId: myfact
-      componentId: '@jigx/ja-submit-form'
-      options:
-        title: Submit
+      - instanceId: myfact
+        type: action.execute-entities
+        options:
+          title: Submit
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts
+          method: create
+          
       
 
-# placeholders:
-#   - when: =$count(@ctx.data.facts[user = @ctx.user.email]) = 0
-#     title: Tell us some fun fact about yourself
-#     icon: missing-data
-#     onPress: 
-#       componentId: '@jigx/ja-go-to'
-#       options:
-#         title: Tell us now
-#         linkTo: create-fact
-#   - when: "=$count(@ctx.data.facts[active = 'true']) = 0"
-#     title: Now, let's wait until Grant starts the game
-#     icon: is-offline
-#   - when: "=@ctx.data.facts[active = 'true'].user = @ctx.user.email"
-#     title: For obvious reasons you must skip this round :)
-#     icon: is-offline
-#   - when: "=$count(@ctx.data.guesses[factid = @ctx.data.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
-#     title: Let's wait for Grant...
-#     icon: is-offline
+placeholders:
+  - when: =$count(@ctx.datasources.facts[user = @ctx.user.email]) = 0
+    title: Tell us some fun fact about yourself
+    icon: missing-data
+    onPress: 
+      type: action.go-to
+      options:
+        title: Tell us now
+        linkTo: myfact
+  - when: "=$count(@ctx.datasources.facts[active = 'true']) = 0"
+    title: Now, let's wait until Grant starts the game
+    icon: is-offline
+  - when: "=@ctx.datasources.facts[active = 'true'].user = @ctx.user.email"
+    title: For obvious reasons you must skip this round :)
+    icon: is-offline
+  - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
+    title: Let's wait for Grant...
+    icon: is-offline
 
 
 datasources:
   facts:
-    componentId: '@jigx/jd-sqlite'
+    type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
@@ -53,39 +56,41 @@ datasources:
           '$.active'
         FROM [default/facts] 
           
-provider: DATA_PROVIDER_DYNAMIC
-entity: default/facts
-method: create
+
 
 children:
-  - componentId: '@jigx/jc-text-field'
+  - type: component.form
+    instanceId: myfact
     options:
-      property: id
-      label: id
-      isHidden: true
-  
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: user
-      label: user
-      initialValue: =@ctx.user.email
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: active
-      label: active
-      initialValue: 'false'
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: completed
-      label: completed
-      initialValue: 'false'
-      isHidden: true
-  - componentId: '@jigx/jc-text-field'
-    options:
-      property: fact
-      label: My Fun Fact
-      isMultiline: true
-      textArea: medium
-      isHidden: false
+      children:
+        - type: component.text-field
+          instanceId: id
+          options:            
+            label: id
+            isHidden: true
+        
+        - type: component.text-field
+          instanceId: user
+          options:            
+            label: user
+            initialValue: =@ctx.user.email
+            isHidden: true
+        - type: component.text-field
+          instanceId: active
+          options:            
+            label: active
+            initialValue: 'false'
+            isHidden: true
+        - type: component.text-field
+          instanceId: completed
+          options:            
+            label: completed
+            initialValue: 'false'
+            isHidden: true
+        - type: component.text-field
+          instanceId: fact
+          options:
+            label: My Fun Fact
+            isMultiline: true
+            textArea: medium
+            isHidden: false
