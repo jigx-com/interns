@@ -14,21 +14,7 @@ inputTransform: |
     },
     "location": {
         "displayName": location
-    },
-    "attendees": [
-      {
-        "emailAddress": {
-          "address": speakerOneEmail,
-          "name": speakerOne
-        }
-      },
-      {
-        "emailAddress": {
-          "address": speakerTwoEmail,
-          "name": speakerTwo
-        }
-      }
-    ]
+    }
   }
 parameters:
   accessToken: 
@@ -51,15 +37,5 @@ parameters:
   location:
     type: string
     location: body
-  speakerOneEmail:
-    type: string
-    location: body
-  speakerOne:
-    type: string
-    location: body
-  speakerTwoEmail:
-    type: string
-    location: body
-  speakerTwo:
-    type: string
-    location: body
+    required: true
+  

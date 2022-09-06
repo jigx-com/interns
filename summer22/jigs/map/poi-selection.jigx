@@ -23,6 +23,11 @@ children:
                 options:
                   label: Hours
                   value: =@ctx.jig.inputs.hours             
+        - type: component.entity-field
+          options:
+            label: About
+            value: =@ctx.jig.inputs.about
+            isMultiline: true
         - type: component.field-row
           options:
             children:
@@ -30,27 +35,12 @@ children:
                 options:
                   label: Address
                   value: =@ctx.jig.inputs.address
-        - type: component.field-row
-          options:
-            children:
-              - type: component.entity-field
-                options:
-                  label: About
-                  value: =@ctx.jig.inputs.about
-                  isMultiline: true
-                  contentType: default
-  - type: component.form
-    instanceId: test
+
+  - type: component.location
     options:
-      children:
-        - type: component.text-field
-          instanceId: test
-          options:
-            label: About
-            initialValue: =@ctx.jig.inputs.about
-            isMultiline: true
-            textArea: dynamic
-            style:
-              isDisabled: true
+      address: =@ctx.jig.inputs.address
+      
+            
+            
               
             

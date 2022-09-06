@@ -44,13 +44,11 @@ actions:
           method: functionCall
           provider: DATA_PROVIDER_REST
           function: myfirstfunction
-          entity: ''
+          entity: default/testCal
           functionParameters:
             accessToken: outlook
             subject: =@ctx.jig.inputs.subject
             startDateTime: =@ctx.jig.inputs.startDateTime
             endDateTime: =@ctx.jig.inputs.endDateTime
             location: =@ctx.jig.inputs.location
-            speakerOne: =@ctx.jig.inputs.speakerOne
-            speakerTwo: =@ctx.jig.inputs.speakerTwo
             

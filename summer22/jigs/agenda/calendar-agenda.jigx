@@ -6,7 +6,7 @@ datasources:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-  
+
       entities:
         - default/testCal
   
@@ -18,14 +18,10 @@ datasources:
           '$.endDateTime',
           '$.location',
           '$.speakerOne',
-          '$.speakerTwo',
-          '$.speakerOneEmail',
-          '$.speakerTwoEmail'
+          '$.speakerTwo'
         FROM
           [default/testCal]
-      #   WHERE id = @myParam
-      # queryParameters:
-      #   myParam: value
+
 
 data: =@ctx.datasources.agendaCal
 item:
@@ -47,5 +43,3 @@ item:
           location: =@ctx.current.item.location
           speakerOne: =@ctx.current.item.speakerOne
           speakerTwo: =@ctx.current.item.speakerTwo
-          speakerOneEmail: =@ctx.current.item.speakerOneEmail
-          speakerTwoEmail: =@ctx.current.item.speakerTwoEmail

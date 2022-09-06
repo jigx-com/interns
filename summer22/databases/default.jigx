@@ -4,7 +4,8 @@ tables:
   Photos: null 
   Location: null
   testMembers:
-  testpoi:
+  # testpoi:
   testList:
   testComment:
   testCal:
+  poi: 

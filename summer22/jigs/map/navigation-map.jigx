@@ -9,7 +9,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testpoi
+        - default/poi
   
       query: |
         SELECT 
@@ -21,7 +21,7 @@ datasources:
           '$.rating' AS rating,  
           '$.hours' AS hours,
           '$.about' AS about
-        FROM [default/testpoi] ORDER BY name ASC
+        FROM [default/poi] ORDER BY name ASC
 
 data: =@ctx.datasources.poiNice
 item:
