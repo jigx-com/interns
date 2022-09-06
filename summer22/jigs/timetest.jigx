@@ -1,5 +1,6 @@
 title: time tester
 type: jig.default
+icon: navigation-menu-vertical
 
 datasources:
   photoStory: 
@@ -14,22 +15,34 @@ datasources:
 
 
 children:
-  - type: component.list
-    options:
-      isHorizontal: true
-      data: =@ctx.datasources.photoStory
-      maximumItemsToRender: 8
-      item: 
-        type: component.list-item
-        options:
-          title: Test
-          leftElement: 
-            element: image
-            text: ''
-            uri: =@ctx.current.item.uploadPhoto
+  # - type: component.list
+  #   options:
+  #     isHorizontal: true
+  #     data: =@ctx.datasources.photoStory
+  #     maximumItemsToRender: 8
+  #     item: 
+  #       type: component.list-item
+  #       options:
+  #         title: Test
+  #         leftElement: 
+  #           element: image
+  #           text: ''
+  #           uri: =@ctx.current.item.uploadPhoto
   - type: component.entity
     options:
       children:
+        #Current Day
+        - type: component.entity-field
+          options:
+            label: current time
+            value: =$substring($fromMillis($toMillis($now()), '[M01]/[D01]/[Y0001] [h#1]:[m01][P]'), 3, 2)
+            
+        - type: component.entity-field
+          options:
+            label: current time
+            value: =$fromMillis($toMillis($now()), '[M01]/[D01]/[Y0001] [h#1]:[m01][P]')
+            
+        # Current hour info
         - type: component.entity-field
           options:
             label: current time

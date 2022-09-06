@@ -1,4 +1,4 @@
-title: Point of Interests
+title: =(@ctx.jig.inputs.title & 'Point of Interests')
 description: Swipe to navigate
 type: jig.list
 
@@ -33,6 +33,11 @@ item:
       element: image
       text: =@ctx.current.item.name
       uri: =@ctx.current.item.avatar
+    # label:
+    #   title: ←
+    rightElement: 
+      element: value
+      text: ← # "<--"
     swipeable:
       left:
         - label: location

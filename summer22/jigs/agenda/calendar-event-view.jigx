@@ -35,7 +35,7 @@ children:
                 options:
                   label: Speaker
                   value: =@ctx.jig.inputs.speakerTwo
-                  
+
 actions:
   - children:
       - type: action.execute-entity
