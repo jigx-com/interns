@@ -1,0 +1,21 @@
+title: crash
+description: Description of your Jig
+type: jig.default
+
+children:
+  - type: component.location
+    options:
+      zoomLevel: 15
+      pathsData: 
+        - "lat": 41.91154221095057
+          "lng": 12.472126735516312
+        - "lat": 41.912239702495235
+          "lng": 12.47181036965913
+        - "lat": 41.912577963399656 
+          "lng": 12.47182420786128
+        - "lat": 41.912807760974495
+          "lng": 12.471761904559768
+        - "lat": 41.91295508244455
+          "lng": 12.471972247464196
+        - "lat": 41.91286607576371
+          "lng": 12.472183965158848

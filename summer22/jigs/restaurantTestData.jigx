@@ -1,0 +1,78 @@
+title: RestTest
+type: jig.list
+icon: contact
+
+datasources:
+  restTest: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testRestau
+      query: |
+        SELECT 
+          id, 
+          '$.address' AS address, 
+          '$.cuisine-type' AS cuisineType,
+          '$.hours' AS hours,
+          '$.day' AS day,
+          '$.icon' AS icon,
+          '$.pathsData' AS pathsData,
+          '$.rating' AS rating,
+          '$.price' AS price,
+          '$.title' AS title,
+          '$.sit-down' AS sitDown,
+          '$.walking-distance-workshop' AS walkingDistanceWorkshop,
+          '$.walking-time-workshop' AS walkingTimeWorkshop
+        FROM [default/testRestau]
+        WHERE day LIKE strftime('%d', 'now')
+
+# $substring($fromMillis($toMillis($now()), '[M01]/[D01]/[Y0001] [h#1]:[m01][P]'), 3, 2)
+data: =@ctx.datasources.restTest
+item:
+  type: component.expander
+  options:
+    header:
+      centerElement: 
+        type: component.titles
+        options:
+          align: left
+          icon: =@ctx.current.item.icon
+          title: =@ctx.current.item.title
+          subtitle: =(@ctx.current.item.price & ' - ' & @ctx.current.item.rating)
+
+    children:
+      - type: component.entity
+        options:
+          children:
+            - type: component.entity-field
+              options:
+                label: address
+                value: =@ctx.current.item.address
+            - type: component.field-row
+              options:
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Hours
+                      value: =@ctx.current.item.hours
+                  - type: component.entity-field
+                    options:
+                      label: Cuisine Type
+                      value: =@ctx.current.item.cuisineType
+            - type: component.field-row
+              options:
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Walking Distance
+                      value: =@ctx.current.item.walkingDistanceWorkshop
+                  - type: component.entity-field
+                    options:
+                      label: Est. Walking Time
+                      value: =@ctx.current.item.walkingTimeWorkshop
+      - type: component.location
+        options:
+          zoomLevel: 14
+          pathsData: =$eval(@ctx.current.item.pathsData)
