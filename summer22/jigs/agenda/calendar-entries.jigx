@@ -29,10 +29,12 @@ children:
           instanceId: day
           options:
             label: day
+            isRequired: false
         - type: component.text-field
           instanceId: icon
           options:
             label: icon
+            isRequired: false
         - type: component.text-field
           instanceId: location
           options:
@@ -58,5 +60,5 @@ actions:
         options:
           formId: newEntry
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/testCal
+          entity: default/calendar
           title: Submit Entry

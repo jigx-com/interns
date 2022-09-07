@@ -8,7 +8,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
 
       entities:
-        - default/testCal
+        - default/calendar
   
       query: |
         SELECT
@@ -20,7 +20,7 @@ datasources:
           '$.speakerOne',
           '$.speakerTwo'
         FROM
-          [default/testCal]
+          [default/calendar]
 
 
 data: =@ctx.datasources.agendaCal
