@@ -3,6 +3,30 @@ description: TBD
 type: jig.list
 icon: search-1
 
+# onFocus: 
+#   type: action.sync-entities
+#   options:
+#     provider: DATA_PROVIDER_DYNAMIC
+#     entities:
+#       - entity: default/Location
+#       - entity: default/testMembers
+
+# onRefresh: 
+#   type: action.sync-entities
+#   options:
+#     provider: DATA_PROVIDER_DYNAMIC
+#     entities:
+#       - entity: default/Location
+#       - entity: default/testMembers
+        
+# onLoad: 
+#   type: action.sync-entities
+#   options:
+#     provider: DATA_PROVIDER_DYNAMIC
+#     entities:
+#       - entity: default/Location
+#       - entity: default/testMembers
+
 filter: 
   - title: Activities 
     value: 'Activity'

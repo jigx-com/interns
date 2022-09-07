@@ -1,7 +1,7 @@
 title: =('Day ' & @ctx.datasources.days.numeral & ' Agenda')
 description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day of Jigx Week 2022! Below is your group for today and daily itinerary')
 type: jig.list
-icon: suitcase
+icon: check-circle-1
 
 datasources:
   agendaList:
@@ -28,7 +28,7 @@ datasources:
         FROM
           [default/calendar]
         WHERE
-          day LIKE strftime('%d', 'now')
+          day LIKE strftime('%d', 'now', '-07:00')
         ORDER BY
           '$.startDateTime'
     
@@ -46,7 +46,7 @@ datasources:
         '$.numeral' AS numeral,
         '$.ordinal' AS ordinal
         FROM [default/days] 
-        WHERE day LIKE strftime('%d', 'now')
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
 
 
 data: =@ctx.datasources.agendaList
@@ -58,31 +58,9 @@ item:
       element: icon
       name: =@ctx.current.item.icon
     label:
-      title: =@ctx.current.item.timefram
+      title: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
     style:
       isDisabled: "=(
                       $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                      ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timefram, '-')) ? true: false
+                      ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
                     )" 
-
-# item:
-#   type: component.list-item
-#   options:
-#     title: =@ctx.current.item.title
-#     leftElement: 
-#       element: icon
-#       name: =@ctx.current.item.icon
-#     label:
-#       title: =@ctx.current.item.timeframe
-#     style:
-      # isDisabled: "=(
-      #                 $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-      #                 ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
-      #               )" 
-#     onPress: 
-#       type: action.go-to
-#       options:
-#         linkTo: timetest
-#         parameters:
-#           timeframe: =$substringAfter(@ctx.current.item.timeframe, '-')
-#           hours: =$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')

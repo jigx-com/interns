@@ -2,22 +2,28 @@ title: Welcome
 type: jig.default
 
 datasources:
-  story-example:
-    type: datasource.static
+  welcome:
+    type: datasource.sqlite
     options:
-      data:
-        - id: 1
-          uri: https://images.unsplash.com/photo-1622227614434-a7a26021879f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80
-          title: Welcome to Jigx Week 2022
-          subtitle: Enjoy your day in Barcelona!
-          linkTo: day0-welcome-story
-
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/welcomeStory
+  
+      query: |
+        SELECT id, 
+        '$.day' AS day,
+        '$.photo' AS photo,
+        '$.title' AS title, 
+        '$.subtitle' AS subtitle
+        FROM [default/welcomeStory] 
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
 
 stories:
   type: component.story-group
   options:
     actionButtonTitle: Barcelona Itinerary
-    data: =@ctx.datasources.story-example
+    data: =@ctx.datasources.welcome
     groupName: Welcome!
     item: 
       type: component.image
@@ -25,12 +31,12 @@ stories:
         title: =@ctx.current.item.title
         subtitle: =@ctx.current.item.subtitle 
         source:
-          uri: =@ctx.current.item.uri
+          uri: =@ctx.current.item.photo
         onPress: 
           type: action.go-to
           options:
-            title: Barcelona Itinerary
-            linkTo: =@ctx.current.item.linkTo
+            title: Points of Interests
+            linkTo: map-composite-poi
 
 children:
   - type: component.entity

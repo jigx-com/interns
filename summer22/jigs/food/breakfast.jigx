@@ -1,0 +1,32 @@
+title: Breakfast
+description: Good Morning!
+type: jig.default
+
+datasources:
+  breakfastTime: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/calendar
+  
+      query: |
+        SELECT id, 
+        '$.startTime' AS startTime, 
+        '$.endTime' AS endTime, 
+        '$.day' AS Day
+        FROM [default/calendar] 
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: Time
+                  value: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)

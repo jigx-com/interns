@@ -4,8 +4,26 @@ type: jig.composite
 header: 
   type: component.location
   options:
-    address: France (Nice)
+    address: =@ctx.datasources.location.location
     zoomLevel: 7
+
+datasources:
+  location: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/poi
+  
+      query: |
+        SELECT id, 
+        '$.location' AS location, 
+        '$.day' AS day
+        FROM [default/poi] 
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
+      queryParameters:
+        myParam: value
 
 widgets:
   "4x2": 
