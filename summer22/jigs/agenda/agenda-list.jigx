@@ -1,64 +1,88 @@
-title: Day {Day#} Agenda
-description: Hello, welcome to the {day} day of Jigx Week 2022! Below is your walking buddy and daily itinerary
+title: =('Day ' & @ctx.datasources.days.numeral & ' Agenda')
+description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day of Jigx Week 2022! Below is your group for today and daily itinerary')
 type: jig.list
 icon: suitcase
+
+datasources:
+  agendaList:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
   
-# datasources:
-#   agendaStatic: 
-#     type: datasource.static
-#     options:
-#       data:
-#         - id: 1
-#           icon: apple
-#           title: Breakfast
-#           timeframe: "7:00-9:00"
-#         - id: 2
-#           icon: taxi-driver
-#           title: Uber Pickup
-#           timeframe: "9:15"
-#         - id: 3
-#           icon: suitcase
-#           title: Workshop
-#           timeframe: "9:30-12:30"
-#         - id: 4
-#           icon: restaurant-food-truck
-#           title: Lunch
-#           timeframe: "12:30-13:30"
-#         - id: 5
-#           icon: suitcase
-#           title: Workshop
-#           timeframe: "13:30-16:30"
-#         - id: 6
-#           icon: time-clock-circle
-#           title: Cruise Ship Departs
-#           timeframe: "18:00"
-#         - id: 7
-#           icon: champagne-cheers
-#           title: Dinner
-#           timeframe: "18:00-21:00"
+      entities:
+        - default/calendar
+
+      query: |
+        SELECT
+          id,
+          '$.day' AS day,
+          '$.endDateTime' AS endDateTime,
+          '$.icon' AS icon,
+          '$.location' AS location,
+          '$.speakerOne' AS speakerOne,
+          '$.speakerTwo' AS speakerTwo,
+          '$.startDateTime' AS startDateTime,
+          '$.subject' AS subject,
+          '$.endTime' AS endTime,
+          '$.startTime' AS startTime 
+        FROM
+          [default/calendar]
+        WHERE
+          day LIKE strftime('%d', 'now')
+        ORDER BY
+          '$.startDateTime'
+    
+  days:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/days
+  
+      query: |
+        SELECT id, 
+        '$.day' AS day,
+        '$.numeral' AS numeral,
+        '$.ordinal' AS ordinal
+        FROM [default/days] 
+        WHERE day LIKE strftime('%d', 'now')
 
 
-
-
-data: =@ctx.datasources.statis-data-agenda-list
-item:
+data: =@ctx.datasources.agendaList
+item: 
   type: component.list-item
   options:
-    title: =@ctx.current.item.title
+    title: =@ctx.current.item.subject
     leftElement: 
       element: icon
       name: =@ctx.current.item.icon
     label:
-      title: =@ctx.current.item.timeframe
+      title: =@ctx.current.item.timefram
     style:
       isDisabled: "=(
                       $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                      ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
+                      ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timefram, '-')) ? true: false
                     )" 
-    onPress: 
-      type: action.go-to
-      options:
-        linkTo: timetest
-        parameters:
-          timeframe: =$substringAfter(@ctx.current.item.timeframe, '-')
-          hours: =$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')
+
+# item:
+#   type: component.list-item
+#   options:
+#     title: =@ctx.current.item.title
+#     leftElement: 
+#       element: icon
+#       name: =@ctx.current.item.icon
+#     label:
+#       title: =@ctx.current.item.timeframe
+#     style:
+      # isDisabled: "=(
+      #                 $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+      #                 ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
+      #               )" 
+#     onPress: 
+#       type: action.go-to
+#       options:
+#         linkTo: timetest
+#         parameters:
+#           timeframe: =$substringAfter(@ctx.current.item.timeframe, '-')
+#           hours: =$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')

@@ -75,5 +75,7 @@ widgets:
     jigId: link-up-filter-location
   - size: 1x1
     jigId: timetest
-  - size: 1x1
-    jigId: calendar-entries
+  # - size: 1x1
+  #   jigId: calendar-entries
+  - size: "1x1"
+    jigId: agenda-list

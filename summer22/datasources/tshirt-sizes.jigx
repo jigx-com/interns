@@ -3,16 +3,16 @@ options:
   data:
     - id: 1
       size: XS
-    - id: 1
+    - id: 2
       size: S
-    - id: 1
+    - id: 3
       size: M
-    - id: 1
+    - id: 4
       size: L
-    - id: 1
+    - id: 5
       size: XL
-    - id: 1
+    - id: 6
       size: XXL
-    - id: 1
+    - id: 7
       size: XXXL
     

@@ -10,3 +10,4 @@ tables:
   # testCal:
   poi: 
   calendar:
+  days: 

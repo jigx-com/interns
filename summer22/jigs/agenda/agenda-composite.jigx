@@ -1,52 +1,117 @@
 title: Composite Agenda 
-description: Hello, welcome to the {day} day of Jigx Week 2022! Below is your walking buddy and daily itinerary
+description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day of Jigx Week 2022! Below is your group for today and daily itinerary')
 type: jig.composite
 
 
 datasources:
-  testList:
+  calList:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testList
+        - default/calendar
   
       query: |
         SELECT 
-          id, 
-          '$.title', 
-          '$.icon', 
-          '$.timeframe' 
-        FROM [default/testList] 
-        WHERE '$.time' > @currentTime
-        ORDER BY '$.time'
-      queryParameters:
-        currentTime: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' '))
+          id,
+          '$.day' AS day,
+          '$.endDateTime' AS endDateTime,
+          '$.icon' AS icon,
+          '$.location' AS location,
+          '$.speakerOne' AS speakerOne,
+          '$.speakerTwo' AS speakerTwo,
+          '$.startDateTime' AS startDateTime,
+          '$.subject' AS subject,
+          '$.endTime' AS endTime,
+          '$.startTime' AS startTime 
+        FROM [default/calendar] 
+        WHERE day LIKE strftime('%d', 'now')
+        ORDER BY '$.startDateTime'
+        
+  days:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/days
+  
+      query: |
+        SELECT id, 
+        '$.day' AS day,
+        '$.numeral' AS numeral,
+        '$.ordinal' AS ordinal
+        FROM [default/days] 
+        WHERE day LIKE strftime('%d', 'now') 
 
-
-# Widget displays title and timeframe <= 3 upcoming/current events
 widgets:
   4x2: 
     type: widget.list
     options:
       footerAlign: center
-      data: =@ctx.datasources.testList
+      data: =@ctx.datasources.calList
       item: 
         type: component.list-item
         options:
           divider: solid
-          title: =@ctx.current.item.title
+          title: =@ctx.current.item.subject
           leftElement: 
             element: icon
             name: =@ctx.current.item.icon
           label:
-            title: =@ctx.current.item.timeframe
+            title: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
           style:
             isDisabled: "=(
                           $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                          ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
+                          ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.endTime, '-')) ? true: false
                         )" 
+       
+# datasources:
+#   testList:
+#     type: datasource.sqlite
+#     options:
+#       provider: DATA_PROVIDER_DYNAMIC
+  
+#       entities:
+#         - default/testList
+  
+#       query: |
+#         SELECT 
+#           id, 
+#           '$.title', 
+#           '$.icon', 
+#           '$.timeframe' 
+#         FROM [default/testList] 
+#         WHERE '$.time' > @currentTime
+#         ORDER BY '$.time'
+#       queryParameters:
+#         currentTime: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' '))
+
+
+
+# Widget displays title and timeframe <= 3 upcoming/current events
+# widgets:
+#   4x2: 
+#     type: widget.list
+#     options:
+#       footerAlign: center
+#       data: =@ctx.datasources.testList
+#       item: 
+#         type: component.list-item
+#         options:
+#           divider: solid
+#           title: =@ctx.current.item.title
+#           leftElement: 
+#             element: icon
+#             name: =@ctx.current.item.icon
+#           label:
+#             title: =@ctx.current.item.timeframe
+#           style:
+#             isDisabled: "=(
+#                           $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+#                           ($substring($hours, 0, 5) > $substringAfter(@ctx.current.item.timeframe, '-')) ? true: false
+#                         )" 
 
 
 header: 
