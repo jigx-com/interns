@@ -1,4 +1,4 @@
-title: =(@ctx.jig.inputs.title & 'Point of Interests')
+title: =(@ctx.datasources.poiNice.location & ' Point of Interests')
 description: Swipe to navigate
 type: jig.list
 
@@ -20,8 +20,12 @@ datasources:
           '$.address' AS address,
           '$.rating' AS rating,  
           '$.hours' AS hours,
-          '$.about' AS about
-        FROM [default/poi] ORDER BY name ASC
+          '$.about' AS about,
+          '$.day' AS day,
+          '$.location' AS location
+        FROM [default/poi] 
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
+        ORDER BY name ASC
 
 data: =@ctx.datasources.poiNice
 item:

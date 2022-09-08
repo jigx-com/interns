@@ -1,0 +1,52 @@
+title: Dinner
+description: Good Evening!
+type: jig.default
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__480.jpg
+
+# datasources:
+#   mydata: 
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://cdn.pixabay.com/photo/2016/11/23/13/45/celebration-1852926__480.jpg
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: 'Dinner is at:'
+            value: '8:30 PM - 10:00PM'  
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: 'Loction of Dinner:'
+            value: Main Dinning Hall
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: 'Deck Number'
+            value: Four and Five
+  - type: component.image
+    options:
+      source:
+        uri: https://www.dropbox.com/s/986q4lvp5ku27pn/Deck%204%20-%20front.jpg?raw=1
+      height: 500
+      resizeMode: contain
+      
+        
+
+
+        

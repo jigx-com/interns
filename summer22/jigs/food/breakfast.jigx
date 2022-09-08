@@ -1,0 +1,129 @@
+title: Breakfast
+description: Good Morning! The following places serve breakfast.
+type: jig.default
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://images.unsplash.com/photo-1513442542250-854d436a73f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGJyZWFrZmFzdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1296&q=60
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YnJlYWtmYXN0fGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=1296&q=60
+
+datasources:
+  breakfastTime: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/calendar
+  
+      query: |
+        SELECT 
+          id, 
+          '$.startTime' AS startTime, 
+          '$.endTime' AS endTime, 
+          '$.day' AS Day,
+          '$.subject' AS subject
+        FROM [default/calendar] 
+        WHERE 
+          day LIKE strftime('%d', 'now', '-07:00') 
+          AND subject LIKE @brkfst
+      queryParameters:
+        brkfst: 'breakfast'
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: 'Time of Breakfast:'
+            # this is not pulling the data for all the days - only three of them 
+            value: =(@ctx.datasources.breakfastTime.startTime & ' - ' & @ctx.datasources.breakfastTime.endTime)
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: 'Name:'
+                  value: Main Dining Hall
+              - type: component.entity-field
+                options:
+                  label: Deck Level
+                  value: Four and Five
+  - type: component.image
+    options:
+      source:
+        uri: https://wetu.com/ImageHandler/1344x756/37831/maindiningroom2.jpg
+      resizeMode: cover
+      height: 200
+
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: 'Name:'
+                  value: Windjammer Café
+              - type: component.entity-field
+                options:
+                  label: Deck Level
+                  value: Nine
+  
+  - type: component.image
+    options:
+      source:
+        uri: https://www.royalcaribbeanblog.com/sites/default/files/blog-images/symphony-of-the-seas-windjammer-breakfast-eggs-toast-avocado.jpg?itok=beMLRhNN
+      height: 200
+      resizeMode: cover
+          
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: 'Name:'
+                  value: Café Latte-Tudes
+              - type: component.entity-field
+                options:
+                  label: Deck Level
+                  value: Six
+  - type: component.image
+    options:
+      source:
+        uri: https://rccl-h.assetsadobe.com/is/image/content/dam/royal/data/dining/cafe-promenade/cafe-promenade-croissant-coffee-food-drink-dining.jpg?$750x420$
+      height: 200
+
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: 'Name:'
+                  value: Park Café
+              - type: component.entity-field
+                options:
+                  label: Deck Level
+                  value: Nine
+  - type: component.image
+    options:
+      source:
+        uri: https://images.unsplash.com/photo-1550594645-25c5bd703258?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3359&q=80
+      height: 200
+  
+        

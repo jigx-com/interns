@@ -35,7 +35,7 @@ children:
         - type: component.entity-field
           options:
             label: current time
-            value: =$uppercase('"' & 'What' & '"')
+            value: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0800'), ' '))
             
         - type: component.entity-field
           options:

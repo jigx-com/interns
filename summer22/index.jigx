@@ -22,11 +22,11 @@ widgets:
       #     (($hours > 'x') and ($hours < 'y')) ? false: true
       #   )" 
   - size: "2x2"
-    jigId: breakfast-composite
-    isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                  (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
-                )" 
+    jigId: breakfast
+    # isHidden: "=(
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #               (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
+    #             )" 
   - size: "2x2"
     jigId: lunch-composite
     isHidden: "=(
@@ -34,7 +34,7 @@ widgets:
                   (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
                 )" 
   - size: "2x2"
-    jigId: dinner-composite
+    jigId: dinner
     isHidden: "=(
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                   (($hours > '17:00:01') and ($hours < '23:59:59')) ? false: true
