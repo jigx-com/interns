@@ -79,3 +79,5 @@ widgets:
   #   jigId: calendar-entries
   - size: "1x1"
     jigId: agenda-list
+  - size: 1x1
+    jigId: restaurantTestData

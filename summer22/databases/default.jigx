@@ -4,10 +4,12 @@ tables:
   Photos: null 
   Location: null
   testMembers:
+  testQuote:
   # testpoi:
   testList:
   testComment:
   # testCal:
+  testRestau:
   poi: 
   calendar:
   days: 

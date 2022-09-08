@@ -1,0 +1,82 @@
+title: Submit a Quote
+type: jig.default
+
+datasources:
+  people:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testMembers
+  
+      query: |
+        SELECT 
+          id, 
+          '$.firstName' AS firstName, 
+          '$.lastName' AS lastName,
+          '$.avatar' AS avatar
+        FROM [default/testMembers]
+
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: submitQuote
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Submit Quote
+          entity: default/testQuote
+          method: create
+          goBack: stay
+          onSuccess:
+            actions:
+              - type: action.confirm
+                options:
+                  title: Submitted
+                  isConfirmedAutomatically: true
+                  onConfirmed: 
+                    type: action.go-back
+                  modal:
+                    title: ""
+
+children:
+  - type: component.form
+    instanceId: submitQuote
+    options:
+      children:
+        - type: component.text-field
+          instanceId: quote
+          options:
+            label: Quote
+            textArea: small
+            isMultiline: true
+            isRequired: true
+        - type: component.dropdown
+          instanceId: quotedPerson
+          options:
+            label: Who Said That?!
+            data: =@ctx.datasources.people
+            item:
+              type: component.dropdown-item
+              options:
+                title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+                value: =@ctx.current.item.id
+                leftElement: 
+                  element: avatar
+                  text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
+                  uri: =@ctx.current.item.avatar
+            isRequired: true
+        - type: component.text-field
+          instanceId: time-of-quote
+          options:
+            label: ""
+            value: =$now()
+            isHidden: true
+            isRequired: false
+        - type: component.text-field
+          instanceId: quoteSubmitterEmail
+          options:
+            label: ""
+            value: =@ctx.user.email
+            isHidden: true
+            isRequired: false

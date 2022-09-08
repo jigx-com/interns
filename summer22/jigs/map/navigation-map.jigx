@@ -33,11 +33,9 @@ item:
       element: image
       text: =@ctx.current.item.name
       uri: =@ctx.current.item.avatar
-    # label:
-    #   title: ←
     rightElement: 
       element: value
-      text: ← # "<--"
+      text: ← 
     swipeable:
       left:
         - label: location

@@ -185,8 +185,8 @@ options:
       walking-distance-workshop: 800 meters
       walking-time-workshop: 11 minutes
       pathsData:
-        - lat: 43.69590808288666
-          lng: 7.263338215482022
+      # day LIKE strftime('%d', 'now')
+      
     - day: "03"
       culinary-region-icon: it
       title: Cacio e Pepe
@@ -198,8 +198,7 @@ options:
       walking-distance-workshop: 800 meters
       walking-time-workshop: 11 minutes
       pathsData:
-        - lat: 43.69590808288666
-          lng: 7.263338215482022
+      #
 
 
 

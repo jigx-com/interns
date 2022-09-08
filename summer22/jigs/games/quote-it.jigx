@@ -1,0 +1,14 @@
+title: Quote Your Friends!
+description: Vote for the funniest quote of the day!
+type: jig.composite
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1618544976420-1f213fcf2052?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y293b3JrZXJzJTIwbGF1Z2hpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
+
+children:
+  - jigId: submit-quote
+    
+  - jigId: quote-list

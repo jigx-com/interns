@@ -21,6 +21,7 @@ datasources:
           [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
         ON json_extract(tC.data, '$.commenterEmail') = json_extract(tM.data, '$.email')
         WHERE json_extract(tC.data, '$.photoId') = @sort
+        ORDER BY reactions DESC
       queryParameters:
         sort: =@ctx.jig.inputs.photoId
   
@@ -38,7 +39,7 @@ datasources:
       queryParameters:
         myParam: =@ctx.user.email
 
-# Is action supposed to have submit form (create/update/delete)?
+
 actions:
   - children:
       - type: action.submit-form
@@ -157,5 +158,11 @@ children:
                     method: update
                     goBack: stay
                     data:
-                      id: =@ctx.datasources.commentData.testCommentID
-                      reactions: =($number(@ctx.datasources.commentData.reactions) + $number(1))
+                      id: =@ctx.current.item.testCommentID
+                      reactions: =($number(@ctx.current.item.reactions) + $number(1))
+                    onSuccess: 
+                      type: action.sync-entities
+                      options:
+                        provider: DATA_PROVIDER_DYNAMIC
+                        entities:
+                          - entity: default/testComment
