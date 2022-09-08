@@ -18,31 +18,33 @@ datasources:
           '$.avatar' AS avatar
         FROM [default/testMembers]
 
-actions:
-  - children:
-      - type: action.submit-form
-        options:
-          formId: submitQuote
-          provider: DATA_PROVIDER_DYNAMIC
-          title: Submit Quote
-          entity: default/testQuote
-          method: create
-          goBack: stay
-          onSuccess:
-            actions:
-              - type: action.confirm
-                options:
-                  title: Submitted
-                  isConfirmedAutomatically: true
-                  onConfirmed: 
-                    type: action.go-back
-                  modal:
-                    title: ""
-
+# actions:
+#   - children:
+#       - type: action.submit-form
+#         options:
+#           formId: submitQuote
+#           provider: DATA_PROVIDER_DYNAMIC
+#           title: Submit Quote
+#           entity: default/testQuote
+#           method: create
+#           goBack: stay
+#           onSuccess:
+#             actions:
+#               - type: action.confirm
+#                 options:
+#                   title: Submitted
+#                   isConfirmedAutomatically: true
+#                   onConfirmed: 
+#                     type: action.go-back
+#                   modal:
+#                     title: ""
+      
+                   
 children:
   - type: component.form
     instanceId: submitQuote
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         - type: component.text-field
           instanceId: quote
@@ -54,7 +56,7 @@ children:
         - type: component.dropdown
           instanceId: quotedPerson
           options:
-            label: Who Said That?!
+            label: =@ctx.components.submitQuote.state.isValid #=@ctx.components.quotedPerson.state.value  #Who Said That?!
             data: =@ctx.datasources.people
             item:
               type: component.dropdown-item

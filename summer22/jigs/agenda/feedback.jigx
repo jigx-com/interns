@@ -1,0 +1,41 @@
+title: Feedback
+description: Provide some feedback on this session
+type: jig.default
+
+# datasources:
+#   mydata: 
+
+# header: 
+#   type: component.image
+#   options:
+#     source:
+#       uri: 
+
+children:
+  - type: component.form
+    instanceId: rateSession
+    options:
+      children:
+        - type: component.number-field
+          instanceId: rating
+          options:
+            label: Rate the Session out of 5
+            stepper:
+              isEnabled: true
+              value: 1
+            minimum: 1
+            maximum: 5
+            style:
+              isDisabled: true
+            isRequired: true
+        - type: component.text-field
+          instanceId: feedback
+          options:
+            label: What feedback do you have?
+            textArea: large
+            isRequired: true
+            
+            
+            
+              
+              

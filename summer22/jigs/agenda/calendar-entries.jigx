@@ -1,5 +1,6 @@
 title: Calendar Entries
 type: jig.default
+icon: question-circle
 
 # datasources:
 #   mydata: 

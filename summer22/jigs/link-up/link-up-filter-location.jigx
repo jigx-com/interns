@@ -49,6 +49,7 @@ datasources:
   
       entities:
         - default/Location
+        - default/testMembers
   
       query: |
         SELECT

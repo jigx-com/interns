@@ -26,40 +26,51 @@ children:
               - type: component.text-field
                 instanceId: firstName
                 options:
-                  label: First Name 
+                  label: First Name*
+                  isRequired: true
               - type: component.text-field
                 instanceId: lastName
                 options:
-                  label: Last Name 
+                  label: Last Name*
+                  isRequired: true
         - type: component.field-row
           options:
             children:
               - type: component.email-field
                 instanceId: email
                 options:
-                  label: Email
+                  label: Email*
                   style:
-                    flex: 2
+                    flex: 6
+                  isRequired: true
               - type: component.date-picker
                 instanceId: DOB
                 options:
-                  label: DOB
+                  label: Date of Birth
                   format: L
                   isRequired: false
-        - type: component.dropdown
-          instanceId: shirtSize
+                  style:
+                    flex: 4
+        - type: component.field-row
           options:
-            label: Choose a shirt size
-            data: =@ctx.datasources.tshirt-sizes
-            item:
-              type: component.dropdown-item
-              options:
-                title: =@ctx.current.item.size
-                value: =@ctx.current.item.id
+            children:
+              - type: component.text-field
+                instanceId: emergencyConNum
+                options:
+                  label: Emergency Contact Number*
+                  style:
+                    flex: 2
+                  isRequired: true
+              - type: component.text-field
+                instanceId: emergencyConRelat
+                options:
+                  label: Relation*
+                  isRequired: true
         - type: component.text-field
           instanceId: dietReq
           options:
             label: Dietary Requirement
+            isRequired: false
         - type: component.checkbox
           instanceId: isSpouse 
           options:

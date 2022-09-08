@@ -8,7 +8,24 @@ header:
     source:
       uri: https://images.unsplash.com/photo-1618544976420-1f213fcf2052?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y293b3JrZXJzJTIwbGF1Z2hpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
 
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Create Record
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/testQuote
+          method: create
+          goBack: stay
+          data:
+            column1: =@ctx.jigs.submit-quote.components.quote.state.value
+            column2: =@ctx.jigs.submit-quote.components.quotedPerson.state.value
+          style:
+            isDisabled: =@ctx.jigs.submit-quote.components.submitQuote.state.isValid
+          onSuccess: 
+
 children:
   - jigId: submit-quote
+    instanceId: submit-quote
     
   - jigId: quote-list

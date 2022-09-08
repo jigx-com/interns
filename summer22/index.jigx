@@ -23,10 +23,10 @@ widgets:
       #   )" 
   - size: "2x2"
     jigId: breakfast
-    # isHidden: "=(
-    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-    #               (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
-    #             )" 
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
+                )" 
   - size: "2x2"
     jigId: lunch-composite
     isHidden: "=(
@@ -73,11 +73,9 @@ widgets:
   # Placeholder Widget
   - size: "1x1"
     jigId: link-up-filter-location
-  - size: 1x1
-    jigId: timetest
   # - size: 1x1
-  #   jigId: calendar-entries
-  - size: "1x1"
-    jigId: agenda-list
+  #   jigId: timetest
+  - size: 1x1
+    jigId: calendar-entries
   - size: 1x1
     jigId: restaurantTestData
