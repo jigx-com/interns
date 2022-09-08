@@ -1,38 +1,38 @@
-title: Dinner
-type: jig.composite
-widgets:
-  "2x2": 
-    type: widget.image
-    options:
-      source:
-        uri: https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__480.jpg
+# title: Dinner
+# type: jig.composite
+# widgets:
+#   "2x2": 
+#     type: widget.image
+#     options:
+#       source:
+#         uri: https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__480.jpg
 
-header:
-  type: component.image
-  options:
-    source:
-      uri: https://cdn.pixabay.com/photo/2016/11/23/13/45/celebration-1852926__480.jpg
+# header:
+#   type: component.image
+#   options:
+#     source:
+#       uri: https://cdn.pixabay.com/photo/2016/11/23/13/45/celebration-1852926__480.jp
 
-actions:
-  - children:
-      - type: action.confirm
-        options:
-          title: View Menu
-          isConfirmedAutomatically: false
-          onConfirmed: 
-            type: action.go-to
-            options:
-              linkTo: dinner-menu
-          modal:
-            title: WHAT HAPPENED
-            cancel: NOO!!
-            confirm: SURE
-            description: Why am I here?
+# actions:
+#   - children:
+#       - type: action.confirm
+#         options:
+#           title: View Menu
+#           isConfirmedAutomatically: false
+#           onConfirmed: 
+#             type: action.go-to
+#             options:
+#               linkTo: dinner-menu
+#           modal:
+#             title: WHAT HAPPENED
+#             cancel: NOO!!
+#             confirm: SURE
+#             description: Why am I here?
 
-children:
-  - jigId: mygroup
+# children:
+#   - jigId: mygroup
     
-  - jigId: dinner-menu
+#   - jigId: dinner-menu
     
-  - jigId: timeAndLocation
+#   - jigId: timeAndLocation
     
