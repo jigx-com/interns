@@ -1,5 +1,5 @@
 title: =@ctx.jig.inputs.photoTitle
-description: Vote for the image by tapping on it!
+description: =@ctx.jig.inputs.description
 type: jig.default
 
 datasources:

@@ -30,7 +30,7 @@ datasources:
   
       entities:
         - default/Photos
-  
+      # Winning Photo Details
       query: |
         SELECT 
           id, 

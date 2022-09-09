@@ -1,18 +1,22 @@
 
 tables:
-  Members: null 
-  Photos: null 
-  Location: null
-  testMembers:
-  testQuote:
-  # testpoi:
-  testList:
-  testComment:
-  # testCal:
-  testRestau:
-  testbuilderTeams:
+  # FINAL TABLES
+  Members:  
+  Photos:  
+  Location: 
   poi: 
   calendar:
   days: 
-  welcomeStory:
   sessionFeedback:
+  #welcomeStory:
+
+  # TEST TABLES
+  testHighlight:
+  testMembers:
+  testQuote:
+  testList:
+  testComment:
+  testbuilderTeams:
+  #testRestau:
+  # testCal:
+  # testpoi:

@@ -1,0 +1,14 @@
+title: Up & Coming
+description: What your daily schedule looks like
+type: jig.composite
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1556702776-758acec1b68f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGdvb2QlMjBtb3JuaW5nJTIwJTJCb2NlYW58ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+
+children:
+  - jigId: agenda-list
+    
+  - jigId: navigation-map

@@ -28,7 +28,8 @@ datasources:
           id, 
           '$.uploadPhoto' AS uploadPhoto, 
           '$.title' AS title,
-          '$.expireDate'AS expire
+          '$.expireDate'AS expire,
+          '$.description' AS description
         FROM [default/Photos]
         WHERE expire > @currentMillis
       queryParameters:
@@ -57,6 +58,7 @@ stories:
               avatar: =@ctx.current.item.uploadPhoto
               photoId: =@ctx.current.item.id
               photoTitle: =@ctx.current.item.title
+              description: =@ctx.current.item.description
 
 children:
   - type: component.entity

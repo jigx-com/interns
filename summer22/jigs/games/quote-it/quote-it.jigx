@@ -22,7 +22,6 @@ actions:
             column2: =@ctx.jigs.submit-quote.components.quotedPerson.state.value
           style:
             isDisabled: =@ctx.jigs.submit-quote.components.submitQuote.state.isValid
-          onSuccess: 
 
 children:
   - jigId: submit-quote

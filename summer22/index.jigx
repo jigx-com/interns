@@ -3,10 +3,10 @@ title: Summer 22
 category: miscellaneous
 
 stories:
-  - welcome-story
-  - agenda-story
+  - highlight-story
   - photo-story
   - games-story
+
 
 widgets:
   # Agenda Widget
@@ -16,7 +16,7 @@ widgets:
 
   # Food Widget - Breakfast, Lunch, Dinner
       # Boolean function that stores `hours` as current time in "HH:MM:SS" format; verifies it's in range of x & y time 
-      #           --> (Currently at GMT-0700 [PST])
+      #           --> (Currently at GMT-0700 [PST]) => (should be at GMT+0200)
       #  "=(
       #     $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
       #     (($hours > 'x') and ($hours < 'y')) ? false: true
@@ -44,7 +44,7 @@ widgets:
   # Tool Widgets
   - size: "1x1"
     jigId: day1-checkIn-form
-      # After day 1
+# After day 1: replace day1-check... w/ link-up-...
   - size: "1x1"
     jigId: link-up-filter-location
   - size: "1x1"
@@ -62,21 +62,22 @@ widgets:
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                   (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
                 )"
-  - size: "4x2"
-    jigId: map-composite-cruise
+  - size: "2x2"
+    jigId: hotspot-composite
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
+                )"
+                
+  - size: "2x2"
+    jigId: cruise-ship-map-list
     isHidden: "=(
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                   (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
                 )"
 
 
-  # Placeholder Widget
-  - size: "2x2"
-    jigId: hotspot-composite
-    
-  - size: "2x2"
-    jigId: cruise-ship-map-list
-
+  # Placeholder Widgets
   # - size: 1x1
   #   jigId: timetest
   # - size: 1x1
