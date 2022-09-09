@@ -1,0 +1,8 @@
+title: Name
+description: Description of your Jig
+type: jig.composite
+
+children:
+  - jigId: navigation-map
+    
+  - jigId: agenda-list

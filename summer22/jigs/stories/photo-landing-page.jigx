@@ -9,6 +9,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
         - default/testComment
+        - default/testMembers
       query: |
         SELECT
           tC.id AS testCommentID,
