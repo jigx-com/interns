@@ -45,8 +45,8 @@ widgets:
   - size: "1x1"
     jigId: day1-checkIn-form
       # After day 1
-      # - size: "1x1"
-      #   jigId: link-up composite 
+  - size: "1x1"
+    jigId: link-up-filter-location
   - size: "1x1"
     jigId: find-my-peers-list
   - size: "1x1"
@@ -71,11 +71,15 @@ widgets:
 
 
   # Placeholder Widget
-  - size: "1x1"
-    jigId: link-up-filter-location
+  - size: "2x2"
+    jigId: hotspot-composite
+    
+  - size: "2x2"
+    jigId: cruise-ship-map-list
+
   # - size: 1x1
   #   jigId: timetest
-  - size: 1x1
-    jigId: calendar-entries
-  - size: 1x1
-    jigId: restaurantTestData
+  # - size: 1x1
+  #   jigId: calendar-entries
+  # - size: 1x1
+  #   jigId: restaurantTestData

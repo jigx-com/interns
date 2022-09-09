@@ -1,6 +1,12 @@
 title: Cruise Ship Decks
 type: jig.list
 icon: contact
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://images.unsplash.com/photo-1603491543570-f7df3c9a12c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80
 
 datasources:
   location:

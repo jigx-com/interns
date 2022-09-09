@@ -1,0 +1,67 @@
+title: =('Jigxies currently at ' & @ctx.datasources.hotspotLoc.name)
+description: TBD
+type: jig.list
+icon: contact
+# widgets:
+#   "2x2": 
+#     type: widget.value
+#     options:
+#       value: =@ctx.datasources.hotspotLoc.count
+
+datasources:
+  hotspotLoc: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+        - default/testMembers
+  
+      query: |
+        SELECT
+          L.id,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(L.data, '$.type') AS type,
+          json_extract(L.data, '$.avatar') AS avatar,
+          json_extract(L.data, '$.decknumber') AS decknumber,
+          json_extract(tM.data, '$.location') AS tmLocation,
+          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
+        FROM
+          [default/Location] AS L
+          LEFT JOIN [default/testMembers] AS tM ON L.id = tmLocation
+        GROUP BY
+          L.id
+        ORDER BY 
+          count DESC
+        LIMIT
+          1
+
+  hotspotMembers:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testMembers
+  
+      query: |
+        SELECT id, 
+        '$.firstName' AS firstName, 
+        '$.lastName' AS lastName,
+        '$.avatar' AS avatar,
+        '$.location' AS location
+        FROM [default/testMembers] 
+        WHERE location = @myParam
+      queryParameters:
+        myParam: =@ctx.datasources.hotspotLoc.tmLocation
+  
+data: =@ctx.datasources.hotspotMembers
+item: 
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.firstName & " " & @ctx.current.item.lastName
+    leftElement: 
+      element: avatar
+      text: =($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) )
+      uri: =@ctx.current.item.avatar

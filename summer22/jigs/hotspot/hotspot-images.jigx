@@ -1,0 +1,67 @@
+title: =('Photos taken at ' & @ctx.datasources.hotspotLoc.name)
+description: TBD
+type: jig.default
+
+datasources:
+  hotspotLoc: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+        - default/testMembers
+  
+      query: |
+        SELECT
+          L.id,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(L.data, '$.type') AS type,
+          json_extract(L.data, '$.avatar') AS avatar,
+          json_extract(L.data, '$.decknumber') AS decknumber,
+          json_extract(tM.data, '$.location') AS tmLocation,
+          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
+        FROM
+          [default/Location] AS L
+          LEFT JOIN [default/testMembers] AS tM ON L.id = tmLocation
+        GROUP BY
+          L.id
+        ORDER BY 
+          count DESC
+        LIMIT
+          1
+  
+  photos: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Photos
+  
+      query: |
+        SELECT id, 
+        '$.location' AS location, 
+        '$.uploadPhoto' AS uploadPhoto 
+        FROM [default/Photos] 
+        WHERE location LIKE @myParam
+      queryParameters:
+        myParam: =@ctx.datasources.hotspotLoc.tmLocation
+
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: false
+      data: =@ctx.datasources.photos
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: TBD
+          divider: solid
+          horizontalItemSize: large
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.datasources.photos.uploadPhoto

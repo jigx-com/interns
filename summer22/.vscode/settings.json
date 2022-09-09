@@ -1,16 +1,10 @@
 {
     "jigx.isJigxUser": false,
     "workbench.iconTheme": "jigx",
-    "jigx.attachedDevice": "OnePlus 7T",
+    "jigx.attachedDevice": "Juanette’s iPhone",
     "jigx.attachedDeviceToken": {
-<<<<<<< HEAD
         "deviceName": "Juanette’s iPhone",
         "deviceAddress": "device/CFDC4366-8165-44F6-9C64-59FC368D96A2",
-        "sessionKey": "5b64927f-7afc-40c0-a444-0e403e47fc33"
-=======
-        "deviceName": "OnePlus 7T",
-        "deviceAddress": "device/4543b4b2b183fc09",
-        "sessionKey": "d1068a6c-bb7a-44fa-9485-4d6660cd9e43"
->>>>>>> b3a8dce9cee28c19850f33b48c1e0ea9d243ba04
+        "sessionKey": "dca50dd2-534b-4569-8468-623cb1d15867"
     }
 }

@@ -1,0 +1,52 @@
+title: =@ctx.datasources.hotspotLoc.name
+type: jig.composite
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: =@ctx.datasources.hotspotLoc.avatar
+      resizeMode: contain
+      top: 
+        type: component.titles
+        options:
+          title: Hotspot
+          subtitle: =@ctx.datasources.hotspotLoc.name
+          align: center
+badge: =@ctx.datasources.hotspotLoc.COUNT
+
+datasources:
+  hotspotLoc: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/Location
+        - default/testMembers
+  
+      query: |
+        SELECT
+          L.id,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(L.data, '$.type') AS type,
+          json_extract(L.data, '$.avatar') AS avatar,
+          json_extract(L.data, '$.decknumber') AS decknumber,
+          json_extract(tM.data, '$.location') AS tmLocation,
+          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
+        FROM
+          [default/Location] AS L
+          LEFT JOIN [default/testMembers] AS tM ON L.id = tmLocation
+        GROUP BY
+          L.id
+        ORDER BY 
+          count DESC
+        LIMIT
+          1
+
+children:
+  - jigId: hotspot-members
+
+  - jigId: hotspot-images
+    
+  - jigId: hotspot-location
