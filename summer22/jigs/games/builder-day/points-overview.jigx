@@ -1,0 +1,179 @@
+title: Leaderboard
+type: jig.default
+
+datasources:
+  team1: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+          SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 1'
+        )
+        SELECT
+          'Team 1' as x,
+          COUNT(points) as y,
+          'color2' as color
+        FROM cte
+  team2: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+          SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 2'
+        )
+        SELECT
+          'Team 2' as x,
+          COUNT(points) as y,
+          'color11' as color
+        FROM cte
+  team3: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+          SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 3'
+        )
+        SELECT
+          'Team 3' as x,
+          COUNT(points) as y,
+          'color3' as color
+        FROM cte
+  team4: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+          SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 4'
+        )
+        SELECT
+          'Team 4' as x,
+          COUNT(points) as y,
+          'color9' as color
+        FROM cte
+  team5: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+          SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 5'
+        )
+        SELECT
+          'Team 5' as x,
+          COUNT(points) as y,
+          'color4' as color
+        FROM cte
+  team6: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+          SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 6'
+        )
+        SELECT
+          'Team 6' as x,
+          COUNT(points) as y,
+          'color14' as color
+        FROM cte
+  team7: 
+    type: datasource.sqlite
+    options:
+      isDocument: false
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        WITH cte AS (
+        SELECT
+          '$.team' AS team,
+          '$.points' AS points
+        FROM [default/testvoting]
+        WHERE team = 'Team 7'
+        )
+        SELECT
+          'Team 7' as x,
+          COUNT(points) as y,
+          'color5' as color
+        FROM cte
+
+children:
+  - type: component.bar-chart
+    options:
+      yAxis:
+        labels:
+          format:
+            numberStyle: decimal
+        max: 15
+        min: 0
+      series:
+        - data: |
+            =[
+              @ctx.datasources.team1,
+              @ctx.datasources.team2,
+              @ctx.datasources.team3,
+              @ctx.datasources.team4,
+              @ctx.datasources.team5,
+              @ctx.datasources.team6,
+              @ctx.datasources.team7
+            ]

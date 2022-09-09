@@ -1,0 +1,128 @@
+title: Voting
+description: Choose a team you would like to vote for.
+type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/flagged/photo-1578928534298-9747fc52ec97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80
+
+datasources:
+  vote: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testvoting
+  
+      query: |
+        SELECT 
+        id, 
+        '$.email' AS email, 
+        '$.state' AS state
+        FROM [default/testVoting] 
+        WHERE email = @useremail
+      queryParameters:
+        useremail: =@ctx.user.email
+  
+  teams:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          title: Team 1
+          value: Team 1
+          instanceId: team
+        - id: 2
+          title: Team 2
+          value: Team 2
+          instanceId: team
+        - id: 3
+          title: Team 3
+          value: Team 3
+          instanceId: team
+        - id: 4
+          title: Team 4
+          value: Team 4
+          instanceId: team
+        - id: 5
+          title: Team 5
+          value: Team 5
+          instanceId: team
+        - id: 6
+          title: Team 6
+          value: Team 6
+          instanceId: team
+        - id: 7
+          title: Team 7
+          value: Team 7
+          instanceId: team
+
+children:
+  - type: component.form
+    instanceId: voting
+    options:
+      children:
+        - type: component.dropdown
+          instanceId: team
+          options:
+            label: Team Name
+            data: =@ctx.datasources.teams
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.title
+                value: =@ctx.current.item.value
+        - type: component.text-field
+          instanceId: member
+          options:
+            label: Member
+            value: =@ctx.user.displayName
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: email
+          options:
+            label: Email
+            value: =@ctx.user.email
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: points
+          options:
+            label: Points
+            value: =$number(1)
+            style:
+              isDisabled: true
+            isHidden: true
+        - type: component.text-field
+          instanceId: state
+          options:
+            label: Stte
+            value: Voted
+            style:
+              isDisabled: true
+            isHidden: true
+            
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          style:
+            isDisabled: =(@ctx.datasources.vote.state = "Voted" ? 'True':'False')
+          formId: voting
+          provider: DATA_PROVIDER_DYNAMIC
+          title: =(@ctx.datasources.vote.state = "Voted" ? 'You have already voted':'Vote for this team')
+          entity: default/testvoting
+          method: create
+          goBack: previous
+          onSuccess:
+            title: You have successfully voted!
+            actions:
+              - type: action.go-back
+                options:
+                  title: ''

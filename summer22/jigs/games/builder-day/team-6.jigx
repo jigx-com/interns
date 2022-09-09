@@ -26,6 +26,7 @@ datasources:
           LEFT JOIN [default/testMembers] AS tM ON tbfirstName LIKE tmfirstName
         WHERE
           team = @team
+        ORDER BY tbfirstName
       queryParameters:
         team: '6'
 
