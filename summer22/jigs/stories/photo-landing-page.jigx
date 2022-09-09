@@ -35,13 +35,14 @@ datasources:
           SELECT 
             id
           FROM [default/testMembers] 
-          WHERE '$.email' LIKE @myParam
+          WHERE '$.email' LIKE @currentUser
       queryParameters:
-        myParam: =@ctx.user.email
+        currentUser: =@ctx.user.email
 
 
 actions:
   - children:
+      # Submitting Comment
       - type: action.submit-form
         options:
           formId: photoComment
@@ -60,7 +61,26 @@ actions:
                     type: action.go-back
                   modal:
                     title: ""
-            
+      # Voting for Photo
+      - type: action.execute-entity
+        options:
+          title: Vote for this image!
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/testMembers
+          method: update
+          goBack: stay
+          icon: checklist #vote [ballot/ballot-box]
+          data:
+            id: =@ctx.datasources.currentUser.id
+            dailyVote: =@ctx.jig.inputs.photoId
+          onSuccess: 
+            type: action.confirm
+            options:
+              isConfirmedAutomatically: true
+              onConfirmed: 
+                type: action.go-back
+              modal:
+                title: ""  
 children:
   # Image
   - type: component.image
@@ -69,25 +89,7 @@ children:
         uri: =@ctx.jig.inputs.avatar
       height: 300
       resizeMode: center
-      onPress: 
-        type: action.confirm
-        options:
-          isConfirmedAutomatically: false
-          onConfirmed: 
-            type: action.execute-entity
-            options:
-              provider: DATA_PROVIDER_DYNAMIC
-              entity: default/testMembers
-              method: update
-              goBack: stay
-              data:
-                id: =@ctx.datasources.currentUser.id
-                dailyVote: =@ctx.jig.inputs.photoId
-          modal:
-            title: Submit your vote
-            description: Do you want to use your daily vote on this photo?
-            confirm: "Yes"
-            cancel: "No"
+
   # Commenting
   - type: component.form
     instanceId: photoComment

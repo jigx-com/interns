@@ -1,4 +1,4 @@
-title: =(@ctx.datasources.poiNice.location & ' Point of Interests')
+title: Point of Interests # =(@ctx.datasources.poiNice.location & ' Point of Interests')
 description: Swipe to navigate
 type: jig.list
 

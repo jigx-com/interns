@@ -23,7 +23,16 @@ datasources:
       entities:
         - default/Photos
   
-      query: SELECT id, '$.uploadPhoto', '$.title' FROM [default/Photos]
+      query: |
+        SELECT 
+          id, 
+          '$.uploadPhoto' AS uploadPhoto, 
+          '$.title' AS title,
+          '$.expireDate'AS expire
+        FROM [default/Photos]
+        WHERE expire > @currentMillis
+      queryParameters:
+        currentMillis: =$millis()
 
 
 stories:

@@ -39,7 +39,6 @@ datasources:
 #                   modal:
 #                     title: ""
       
-                   
 children:
   - type: component.form
     instanceId: submitQuote

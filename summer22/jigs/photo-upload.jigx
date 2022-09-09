@@ -40,6 +40,11 @@ children:
             label: Photo Title
             isMultiline: false
             isRequired: true
+        - type: component.text-field
+          instanceId: description
+          options:
+            label: Description
+            isRequired: false
         # Filter Boolean
         - type: component.checkbox
           instanceId: cruiseFilter
@@ -59,6 +64,13 @@ children:
                 value: =@ctx.current.item.id
             isRequired: false
             isSearchable: true
+        - type: component.text-field
+          instanceId: expireDate
+          options:
+            label: ""
+            value: =($millis() + 86400000)
+            isRequired: false
+
 
 
 actions:
