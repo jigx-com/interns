@@ -5,11 +5,11 @@ type: jig.default
 # datasources:
 #   mydata: 
 
-# header: 
-#   type: component.image
-#   options:
-#     source:
-#       uri: 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1417733403748-83bbc7c05140?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80
 
 children:
   - type: component.form
@@ -34,6 +34,17 @@ children:
             label: What feedback do you have?
             textArea: large
             isRequired: true
+            
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: rateSession
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Submit Feedback
+          entity: default/sessionFeedback
+          method: create
+          goBack: previous
             
             
             
