@@ -40,6 +40,7 @@ children:
             label: Photo Title
             isMultiline: false
             isRequired: true
+        # Photo Description
         - type: component.text-field
           instanceId: description
           options:
@@ -64,11 +65,20 @@ children:
                 value: =@ctx.current.item.id
             isRequired: false
             isSearchable: true
+        # 24 Hour Timer
         - type: component.text-field
           instanceId: expireDate
           options:
             label: ""
             value: =($millis() + 86400000)
+            isRequired: false
+        # Uploader details
+        - type: component.text-field
+          instanceId: uploadedBy
+          options:
+            label: ""
+            value: =@ctx.user.displayName
+            isHidden: true
             isRequired: false
 
 

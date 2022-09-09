@@ -2,6 +2,13 @@ title: What you missed!
 description: Check out yesterdays top reactions
 type: jig.default
 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1655880095392-eebe6c878073?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8d2F0Y2hpbmclMjBvdXQlMjB0aGUlMjB3aW5kb3d8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
+        # https://images.unsplash.com/photo-1492052722242-2554d0e99e3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fHJlYWRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60
+
 datasources:
   topVotedPhoto: 
     type: datasource.sqlite
@@ -37,13 +44,25 @@ datasources:
           '$.uploadPhoto' AS uploadPhoto, 
           '$.title' AS title,
           '$.location' AS location,
-          '$.description' AS description 
+          '$.description' AS description,
+          '$.uploadedBy' AS uploadedBy
         FROM [default/Photos] 
         WHERE id = @topVote
       queryParameters:
         topVote: =@ctx.datasources.topVotedPhoto.photoId
 
 children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.section
+          options:
+            title: Winning Photo
+            children:
+              - type: component.entity-field
+                options:
+                  label: "Taken By:"
+                  value: =@ctx.datasources.photo.uploadedBy
   - type: component.image
     options:
       source:
