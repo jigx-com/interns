@@ -1,0 +1,53 @@
+title: Highlight
+type: jig.default
+
+datasources:
+  # First Slide Data
+  welcome:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/welcomeStory
+  
+      query: |
+        SELECT id, 
+        '$.day' AS day,
+        '$.photo' AS photo,
+        '$.title' AS title, 
+        '$.subtitle' AS subtitle,
+        '$.linkTo' AS linkTo
+        FROM [default/welcomeStory] 
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
+
+stories:
+  type: component.story-group
+  options:
+    data: =@ctx.datasources.welcome
+    groupName: =("Good Morning, " & @ctx.user.displayName & "!")
+    item: 
+      type: component.image
+      options:
+        title: =@ctx.current.item.title
+        subtitle: =@ctx.current.item.subtitle 
+        source:
+          uri: =@ctx.current.item.photo
+        onPress: 
+          type: action.go-to
+          options:
+            title: Points of Interests
+            linkTo: =@ctx.current.item.linkTo
+
+# Placeholder Code
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: tbd
+                  value: tbd
