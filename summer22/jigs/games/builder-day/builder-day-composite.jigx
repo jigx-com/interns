@@ -42,5 +42,5 @@ actions:
       options:
         style:
           isDisabled: =(@ctx.datasources.vote.state = "Voted" ? 'True':'False')
-        title: =(@ctx.datasources.vote.state = "Voted" ? 'You already voted':'Vote for team')
+        title: =(@ctx.datasources.vote.state = "Voted" ? 'You Already Voted':'Vote for a Team')
         linkTo: vote-for-team

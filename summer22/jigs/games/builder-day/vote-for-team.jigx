@@ -1,5 +1,5 @@
-title: Voting
-description: Choose a team you would like to vote for.
+title: Vote for favorite app
+description: Remember, you only get one vote!
 type: jig.default
 
 header: 
@@ -68,7 +68,7 @@ children:
         - type: component.dropdown
           instanceId: team
           options:
-            label: Team Name
+            label: Choose the team you want to vote for.
             data: =@ctx.datasources.teams
             item:
               type: component.dropdown-item
