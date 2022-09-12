@@ -1,0 +1,18 @@
+title: Name
+description: Description of your Jig
+type: jig.default
+
+widgets:
+  "2x4": 
+    type: widget.value
+    options:
+      value: MY DAY
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: tbd
+            value: tbd

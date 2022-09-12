@@ -1,6 +1,13 @@
 name: uc-demo
 title: UC-demo
 category: business
+
 widgets:
   - size: "4x4"
     jigId: myfirstjig
+
+  - size: 4x2
+    jigId: my-day
+
+  - size: 2x4
+    jigId: helping-hands
