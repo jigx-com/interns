@@ -13,3 +13,5 @@ widgets:
 #Temporary use
   # - size: "1x1"
   #   jigId: bookings
+  - size: 1x1
+    jigId: my-courses

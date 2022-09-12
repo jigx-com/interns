@@ -1,0 +1,26 @@
+title: Class Progress
+type: jig.list
+
+datasources:
+  test:
+    type: datasource.static
+    options:
+      data:
+        - id: "ECO101"
+          name: Eco
+        - id: "ACC101"
+          name: Acc
+        - id: "MGT101"
+          name: Mgt
+        - id: "LAW101"
+          name: Law
+          
+# GRADE
+# PROGRESS THROUGH THE YEAR (DAY OF SEMESTER / TOTAL DAYS IN SEMESTER)
+
+data: =@ctx.datasources.test[id = @ctx.jig.inputs.selected-class]
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.id
+    subtitle: =@ctx.current.item.name
