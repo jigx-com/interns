@@ -47,24 +47,59 @@ datasources:
         FROM [default/days] 
         WHERE day LIKE strftime('%d', 'now', '-07:00') 
 
+# widgets:
+#   4x2: 
+#     type: widget.list
+#     options:
+#       top:
+#         type: component.trend
+#         options:
+#           title: 'Up Next:'
+#           style:
+#             isValueHidden: true
+            
+                  
+#       footerAlign: center
+#       data: =@ctx.datasources.calList
+#       item: 
+#         type: component.list-item
+#         options:
+#           divider: solid
+#           title: =@ctx.current.item.subject
+#           leftElement: 
+#             element: icon
+#             name: =@ctx.current.item.icon
+#           label:
+#             title: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
+#           style:
+#             isDisabled: "=(
+#                           $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+#                           ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
+#                         )" 
+
 widgets:
-  4x2: 
-    type: widget.list
+  "2x4": 
+    type: widget.group
     options:
-      footerAlign: center
-      data: =@ctx.datasources.calList
-      item: 
-        type: component.list-item
-        options:
-          divider: solid
-          title: =@ctx.current.item.subject
-          leftElement: 
-            element: icon
-            name: =@ctx.current.item.icon
-          label:
-            title: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
-          style:
-            isDisabled: "=(
+      children:
+        - type: widget.image
+          options:
+            source:
+              uri: https://nextup.cccco.edu/wp-content/uploads/2019/07/NextUp_green_red-1000x705.png
+            resizeMode: contain
+        - type: widget.list
+          options:
+            data: =@ctx.datasources.calList
+            item: 
+              type: component.list-item
+              options:
+                divider: solid
+                title: =@ctx.current.item.subject
+                leftElement: 
+                  element: icon
+                  name: =@ctx.current.item.icon
+                style:
+                  isDisabled: "=(
                           $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                           ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
                         )" 

@@ -31,7 +31,7 @@ children:
         - type: component.text-field
           instanceId: feedback
           options:
-            label: What feedback do you have?
+            label: Please provide some feedback. 
             textArea: large
             isRequired: true
             
