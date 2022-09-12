@@ -1,0 +1,6 @@
+name: uc-demo
+title: UC-demo
+category: business
+widgets:
+  - size: "4x4"
+    jigId: myfirstjig
