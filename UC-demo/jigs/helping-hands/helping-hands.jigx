@@ -1,12 +1,74 @@
-title: Name
-description: Description of your Jig
+title: Helping Hands
 type: jig.default
+
+datasources:
+  current-user:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          firstName: Kia
+          middleName: ora
+          lastName: Kelly
+          current-helps: 62
+          last-week-helps: 54
+
+
+  top-reactions: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          firstName: Kia
+          middleName: ora
+          lastName: Kelly
+          helps: 86
+
 
 widgets:
   "2x4": 
-    type: widget.value
+    type: widget.group
     options:
-      value: "IVE HELPED"
+      children:
+        - type: widget.value
+          options:
+            top: 
+              type: component.titles
+              options:
+                align: center
+                title: Manaakitanga
+                
+            align: center
+            value: =@ctx.datasources.current-user.current-helps
+            format:
+              unit: claps
+            
+            bottom: 
+              type: component.trend
+              options:
+                title: "7 days"
+                value: =((@ctx.datasources.current-user.current-helps) - (@ctx.datasources.current-user.last-week-helps))
+
+        - type: widget.avatar
+          options:
+            
+            top:
+              type: component.titles
+              options:
+                align: center
+                subtitle: Helper of the Week
+            
+            uri: https://images.unsplash.com/photo-1566856528802-9ab6cbed4ee8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG1hb3JpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+            
+            text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
+            
+            bottom:
+              type: component.titles
+              options:
+                align: left
+                subtitle: claps
+                title: =@ctx.datasources.top-reactions.helps
+
 
 children:
   - type: component.entity
