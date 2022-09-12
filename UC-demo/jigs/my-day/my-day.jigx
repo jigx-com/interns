@@ -3,10 +3,11 @@ description: Description of your Jig
 type: jig.default
 
 widgets:
-  "2x4": 
+  "4x2": 
     type: widget.value
     options:
-      value: MY DAY
+      value: "MY DAY"
+      
 
 children:
   - type: component.entity

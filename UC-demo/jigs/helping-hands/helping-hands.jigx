@@ -6,7 +6,7 @@ widgets:
   "2x4": 
     type: widget.value
     options:
-      value: IVE HELPED
+      value: "IVE HELPED"
 
 children:
   - type: component.entity
