@@ -1,0 +1,40 @@
+title: Bookings
+description: TBD
+type: jig.list
+icon: contact
+
+datasources:
+  cal: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/calendar
+  
+      query: 
+        SELECT id, 
+          '$.subject' AS subject, 
+          '$.startDateTime' AS startDateTime,
+          '$.endDateTime' AS endDateTime,
+          '$.description' AS description,
+          '$.location' AS location,
+          '$.startTime' AS startTime,
+          '$.endTime' AS endTime,
+          '$.distance' AS distance,
+          '$.icon' AS icon,
+          '$.type' AS type
+        FROM [default/calendar]
+        WHERE type LIKE @type
+      queryParameters:
+        type: booking
+
+isHorizontal: true
+isHorizontalScrollIndicatorHidden: false
+data: =@ctx.datasources.cal
+item:
+  type: component.list-item
+  options:
+    horizontalItemSize: regular
+    title: =@ctx.current.item.subject
+    subtitle: =@ctx.current.item.startTime

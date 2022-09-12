@@ -1,14 +1,29 @@
-# title: Calendar
-# type: jig.calendar
+title: Calendar
+type: jig.calendar
 
-# datasources:
-#   mydata: 
+datasources:
+  cal: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/table-name
+  
+      query: |
+        SELECT id, 
+          '$.subject' AS subject, 
+          '$.startDateTime' AS startDateTime,
+          '$.endDateTime' AS endDateTime,
+          '$.description' AS description,
+          '$.location' AS location
+        FROM [default/calendar]
 
-# data: =@ctx.datasources.mydata
-# item:
-#   type: component.event
-#   options:
-#     from: =@ctx.current.item.
-#     to: =@ctx.current.item.
-#     title: =@ctx.current.item.
-#     description: =@ctx.current.item.
+data: =@ctx.datasources.cal
+item:
+  type: component.event
+  options:
+    from: =@ctx.current.item.startDateTime
+    to: =@ctx.current.item.endDateTime
+    title: =@ctx.current.item.subject
+    description: =@ctx.current.item.description

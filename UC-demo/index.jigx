@@ -4,12 +4,12 @@ category: business
 
 widgets:
   - size: 4x2
-    jigId: my-day
+    jigId: next-up
 
   - size: 2x4
     jigId: helping-hands
     
     
 #Temporary use
-  # - size: "1x1"
-  #   jigId: calendar-entries
+  - size: "1x1"
+    jigId: bookings
