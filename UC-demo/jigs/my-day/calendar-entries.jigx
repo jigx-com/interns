@@ -1,0 +1,67 @@
+title: Cal Entries
+type: jig.default
+
+# datasources:
+#   mydata: 
+
+children:
+  - type: component.form
+    instanceId: newEntry
+    options:
+      children:
+        - type: component.text-field
+          instanceId: subject
+          options:
+            label: Subject
+        - type: component.date-picker
+          instanceId: startDateTime
+          options:
+            label: start date time 
+            format: lll
+            mode: datetime
+            isRequired: false
+        - type: component.date-picker
+          instanceId: endDateTime
+          options:
+            label: end date time 
+            format: lll
+            mode: datetime
+            isRequired: false
+        - type: component.text-field
+          instanceId: description
+          options:
+            label: Description
+            isRequired: false
+        - type: component.text-field
+          instanceId: icon
+          options:
+            label: icon
+            isRequired: false
+        - type: component.text-field
+          instanceId: location
+          options:
+            label: Location
+            isRequired: false
+        - type: component.date-picker
+          instanceId: startDate
+          options:
+            label: start date time 
+            format: l
+            mode: datetime
+            isRequired: false
+        - type: component.date-picker
+          instanceId: endDate
+          options:
+            label: end date time 
+            format: l
+            mode: datetime
+            isRequired: false
+            
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: newEntry
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/calendar
+          title: Submit Entry
