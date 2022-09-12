@@ -1,0 +1,36 @@
+title: Your Involvement
+type: jig.default
+
+datasources:
+  current-user-static:
+    type: datasource.static
+    options:
+      data:
+        - student-id: 6
+          current-total: 64
+          weekly-increase: 10
+          uc-total: 302
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.section
+          options:
+            title: Helping Hands
+            children:
+              - type: component.field-row
+                options:
+                  children:
+                    - type: component.entity-field
+                      options:
+                        label: Semester Total
+                        value: =@ctx.datasources.current-user-static.current-total
+                    - type: component.entity-field
+                      options:
+                        label: This Weeks Help
+                        value: =@ctx.datasources.current-user-static.weekly-increase
+                    - type: component.entity-field
+                      options:
+                        label: University of Canterbury Total
+                        value: =@ctx.datasources.current-user-static.uc-total

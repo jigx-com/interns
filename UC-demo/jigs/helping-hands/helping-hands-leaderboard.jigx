@@ -1,0 +1,79 @@
+title: Weekly Leaderboard
+type: jig.default
+
+datasources:
+  leaderboard-static: 
+    type: datasource.static
+    options:
+      data:
+        - student-id: 1
+          Name: Student 1
+          weekly-helps: 107
+          
+        - student-id: 2
+          Name: Student 2
+          weekly-helps: 65
+          
+        - student-id: 3
+          Name: Student 3
+          weekly-helps: 28
+          
+        - student-id: 4
+          Name: Student 4
+          weekly-helps: 114
+          
+        - student-id: 5
+          Name: Student 5
+          weekly-helps: 70
+          
+        - student-id: 6
+          Name: Student 6
+          weekly-helps: 64
+          
+        - student-id: 7
+          Name: Student 7
+          weekly-helps: 52
+          
+        - student-id: 8
+          Name: Student 8
+          weekly-helps: 27
+          
+        - student-id: 9
+          Name: Student 9
+          weekly-helps: 73
+          
+        - student-id: 10
+          Name: Student 10
+          weekly-helps: 141
+
+children:
+  - type: component.bar-chart
+    options:
+      
+      plotOptions:
+        series:
+          marker:
+            isHidden: false
+      yAxis:
+        max: 150
+        min: 0
+      xAxis: 
+        categories:
+          - 1st
+          - 2nd
+          - 3rd
+          - 4th
+          - 5th
+          - 6th
+          - 7th
+          - 8th
+          - 9th
+          - 10th
+      series:
+        - data: =$reverse($sort(@ctx.datasources.leaderboard-static.weekly-helps))
+          color: color3
+      chart:
+        isAnimated: true
+        height: 275
+        subtitle: Positions anonymous to keep student privacy
+      

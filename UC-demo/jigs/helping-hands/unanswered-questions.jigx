@@ -1,0 +1,11 @@
+title: Unanswered Questions
+type: jig.list
+icon: contact
+
+
+data: =@ctx.datasources.mydata
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.datasourcefield
+    subtitle: =@ctx.current.item.datasourcefield
