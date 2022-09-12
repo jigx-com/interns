@@ -1,0 +1,13 @@
+title: My Courses
+type: jig.default
+
+
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: tbd
+            value: tbd
