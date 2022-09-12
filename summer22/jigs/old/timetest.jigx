@@ -11,23 +11,26 @@ datasources:
       entities:
         - default/Photos
 
-      query: SELECT id, '$.uploadPhoto' FROM [default/Photos]
-
+      query: |
+        SELECT
+          id,
+          '$.uploadPhoto' AS uploadPhoto,
+          '$.title' AS title,
+          '$.expireDate' AS expire,
+          '$.description' AS description
+        FROM
+          [default/Photos]
 
 children:
-  # - type: component.list
-  #   options:
-  #     isHorizontal: true
-  #     data: =@ctx.datasources.photoStory
-  #     maximumItemsToRender: 8
-  #     item: 
-  #       type: component.list-item
-  #       options:
-  #         title: Test
-  #         leftElement: 
-  #           element: image
-  #           text: ''
-  #           uri: =@ctx.current.item.uploadPhoto
+  - type: component.list
+    options:
+      data: =@ctx.datasources.photoStory
+      item: 
+        type: component.list-item
+        options:
+          title: =(@ctx.current.item.expire > $millis() ? "bruhYEAH" :"bruhNO") 
+          subtitle: =@ctx.current.item.expire
+
   - type: component.entity
     options:
       children:
@@ -35,7 +38,7 @@ children:
         - type: component.entity-field
           options:
             label: current time
-            value: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0800'), ' '))
+            value: =$millis()
             
         - type: component.entity-field
           options:

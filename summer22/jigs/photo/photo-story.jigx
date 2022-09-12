@@ -33,7 +33,7 @@ datasources:
         FROM [default/Photos]
         WHERE expire > @currentMillis
       queryParameters:
-        currentMillis: =$millis()
+        currentMillis: =$string($millis())
 
 
 stories:

@@ -21,33 +21,43 @@ datasources:
         FROM [default/testQuote] 
         ORDER BY timeOfQuote DESC
   
-  # quotes2:
-  #   type: datasource.sqlite
-  #   options:
-  #     provider: DATA_PROVIDER_DYNAMIC
   
-  #     entities:
-  #       - default/testQuotes
-  #       - default/testMembers
+
+  quotes2:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
   
-  #     query: |
-  #       SELECT 
-  #         Q.id,
-  #         M.id, 
-  #         json_extract(Q.data, '$.quote') AS quote,
-  #         json_extract(Q.data, '$.time-of-quote') AS timeOfQuote, 
-  #         json_extract(Q.data, '$.firstName') AS quotedFirstName,
-  #         json_extract(Q.data, '$.lastName') AS quotedLastName,
-  #       FROM [default/testQuotes] AS Q LEFT JOIN [default/testMembers] AS M
+      entities:
+        - default/testQuote
+        - default/testMembers
+  
+      query: |
+        SELECT 
+          Q.id,
+          M.id, 
+          json_extract(Q.data, '$.quote') AS quote,
+          json_extract(Q.data, '$.time-of-quote') AS timeOfQuote, 
+          json_extract(Q.data, '$.quoteSubmitterEmail') AS quoteSubmitterEmail,
+          json_extract(M.data, '$.firstName') AS quotedFirstName,
+          json_extract(M.data, '$.lastName') AS quotedLastName,
+          json_extract(M.data, '$.avatar') AS quotedAvatar,
+          json_extract(M.data, '$.email') AS email
+        FROM [default/testQuote] AS Q LEFT JOIN [default/testMembers] AS M
+        ON json_extract(Q.data, '$.quotedPerson') = M.id
         
 
-data: =@ctx.datasources.quotes
+data: =@ctx.datasources.quotes2
 item:
   type: component.list-item
   options:
     title: =('"' & @ctx.current.item.quote & '"')
     subtitle: =('- ' & @ctx.current.item.quotedFirstName & ' ' & @ctx.current.item.quotedLastName)
-    avatars:
-      - text: =$uppercase($substring(@ctx.current.item.quotedFirstName, 0, 1) & $substring(@ctx.current.item.quotedLastName, 0, 1))
-        uri: =@ctx.current.item.avatar
-    description: =@ctx.current.item.quotee
+    leftElement: 
+      element: avatar
+      text: =$uppercase($substring(@ctx.current.item.quotedFirstName, 0, 1) & $substring(@ctx.current.item.quotedLastName, 0, 1))
+      uri: =@ctx.current.item.quotedAvatar
+    
+    # avatars:
+    #   - text: =$uppercase($substring(@ctx.current.item.quotedFirstName, 0, 1) & $substring(@ctx.current.item.quotedLastName, 0, 1))
+    #     uri: =@ctx.current.item.avatar
