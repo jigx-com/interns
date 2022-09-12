@@ -1,0 +1,22 @@
+title: My Day
+description: Description of your Jig
+type: jig.composite
+
+# widgets:
+#   "2x4": 
+#     type: widget.group
+#     options:
+#       children:
+#         -
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://www.canterbury.ac.nz/campus-maps/data/buildings/Haere-roa-carousel-image-1_6840229554612283579.jpg
+    resizeMode: contain
+
+children:
+  - jigId: next-up
+
+  - jigId: bookings

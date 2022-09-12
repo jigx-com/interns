@@ -1,0 +1,60 @@
+title: Add a new booking
+description: TBD
+type: jig.default
+
+# datasources:
+#   mydata: 
+
+children:
+  - type: component.form
+    instanceId: newBooking
+    options:
+      children:
+        - type: component.text-field
+          instanceId: subject
+          options:
+            label: Subject
+            isRequired: true
+        - type: component.text-field
+          instanceId: description
+          options:
+            label: Description
+            isRequired: false
+        - type: component.field-row
+          options:
+            children:
+              - type: component.date-picker
+                instanceId: startDateTime
+                options:
+                  label: Start Time
+                  format: lll
+                  isRequired: true
+                  mode: datetime
+              - type: component.date-picker
+                instanceId: startEndTime
+                options:
+                  label: End Time
+                  isRequired: true
+                  format: lll
+                  mode: datetime
+        - type: component.text-field
+          instanceId: type
+          options:
+            label: Type
+            initialValue: booking
+            isHidden: true
+            
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: newBooking
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Create Record
+          entity: default/calendar
+          method: create
+          goBack: previous
+
+          
+          
+        

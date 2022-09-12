@@ -23,9 +23,11 @@ datasources:
           '$.endTime' AS endTime,
           '$.distance' AS distance,
           '$.icon' AS icon,
-          '$.type' AS type
+          '$.type' AS type,
+          '$.linkTo' AS linkTo
         FROM [default/calendar]
         WHERE type LIKE @type
+        ORDER BY subject
       queryParameters:
         type: booking
 
@@ -37,4 +39,14 @@ item:
   options:
     horizontalItemSize: regular
     title: =@ctx.current.item.subject
-    subtitle: =@ctx.current.item.startTime
+    subtitle: "=(
+              $fromMillis($toMillis(@ctx.current.item.startDateTime), '[M01]/[D01]')
+              )"
+    description: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
+    divider: solid
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: =@ctx.current.item.linkTo
+    
+    
