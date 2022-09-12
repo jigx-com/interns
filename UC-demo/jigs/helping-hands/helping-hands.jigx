@@ -56,7 +56,7 @@ widgets:
               type: component.titles
               options:
                 align: center
-                subtitle: Helper of the Week
+                title: Helper of the Week
             
             uri: https://images.unsplash.com/photo-1566856528802-9ab6cbed4ee8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG1hb3JpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
             
@@ -66,8 +66,8 @@ widgets:
               type: component.titles
               options:
                 align: left
-                subtitle: claps
                 title: =@ctx.datasources.top-reactions.helps
+                subtitle: claps
 
 
 children:
