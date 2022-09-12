@@ -17,10 +17,45 @@ datasources:
       entities:
         - default/Location
   
-      query: SELECT DISTINCT id, '$.name', '$.decknumber', '$.deckMap', '$.deckNUM' FROM [default/Location] GROUP BY decknumber ORDER BY deckNUM 
+      query: |
+        SELECT id, 
+        '$.name', 
+        '$.decknumber', 
+        '$.deckMap', 
+        '$.deckNUM',
+        '$.x-axis',
+        '$.y-axis',
+        '$.icon'
+        FROM 
+          [default/Location] 
+        GROUP BY 
+          decknumber ORDER BY deckNUM
+          
+  # imgloc:
+  #   type: datasource.sqlite
+  #   options:
+  #     provider: DATA_PROVIDER_DYNAMIC
+  
+  #     entities:
+  #       - default/Location
+  
+  #     query: |
+  #       SELECT DISTINCT id, 
+  #         '$.name', 
+  #         '$.decknumber', 
+  #         '$.deckMap', 
+  #         '$.deckNUM',
+  #         '$.x-axis',
+  #         '$.y-axis'
+  #       FROM 
+  #         [default/Location] 
+  #       WHERE id = @deckNum
+  #     queryParameters:
+  #       deckNum: =@ctx.datasources.location.deckNUM
 
 data: =@ctx.datasources.location
 item:
+  instanceId: =@ctx.current.item.id
   type: component.expander
   options:
     header:
@@ -34,4 +69,29 @@ item:
           source:
             uri: =@ctx.current.item.deckMap
           imageHeight: 500
-          
+        
+          data: =@ctx.datasources.location
+          pointColor: color10
+          # groups:
+          #   - title: View Details
+          #     id: details
+          #     color: color14
+              
+          item:
+            type: component.interactive-image-item
+            instanceId: =@ctx.current.item.id #interactive_image_item_dd
+            options:
+              id: =@ctx.current.item.id
+              title: =@ctx.current.item.deckNUM
+              icon: =@ctx.current.item.icon
+              
+              percentageCoordinates:
+                x: =@ctx.current.item.x-axis
+                y: =@ctx.current.item.y-axis
+              onPress: 
+                type: action.go-to
+                options:
+                  linkTo: link-up-composite
+                  parameters:
+                    LOC: =@ctx.current.item.id
+                    LOCname: =@ctx.current.item.name
