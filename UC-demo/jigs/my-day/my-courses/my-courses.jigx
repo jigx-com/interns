@@ -1,16 +1,59 @@
+# MY COURSES MAIN JIG
+# Jig Info
 title: My Courses
 type: jig.composite
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.datasources.header-image.headerImage
+
+# Caching Header Images
+onFocus: 
+  type: action.sync-entities
+  options:
+    provider: DATA_PROVIDER_DYNAMIC
+    entities:
+      - entity: default/my-course-header
+
+# DATA
+datasources:
+  header-image:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/my-course-header
+  
+      query: |
+        SELECT 
+          id, 
+          '$.header-image' as headerImage, 
+          '$.classcode' AS classcode
+        FROM [default/my-course-header] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jigs.my-course-filter.outputs.selected-class
 
 
 children:
   - jigId: my-course-filter
     instanceId: my-course-filter
     # OUTPUT: selected-class
-      
-  - jigId: output-class-progress
+    
+  - jigId: about-course
     inputs:
       selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
       
-  - jigId: recent-lectures
+  - jigId: course-lessons
     inputs:
-      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class
+      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+  # OLD LAYOUT
+  # - jigId: output-class-progress
+  #   inputs:
+  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+      
+  # - jigId: recent-lectures
+  #   inputs:
+  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class

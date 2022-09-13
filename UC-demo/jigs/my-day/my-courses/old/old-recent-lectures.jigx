@@ -15,9 +15,11 @@ datasources:
           id, 
           '$.day' AS day, 
           '$.week' AS week,
-          '$.classcode' AS classcode          
+          '$.classcode' AS classcode,
+          '$.order' AS orderList          
         FROM [default/recent-lecture] 
         WHERE classcode = @filter
+        ORDER BY week DESC, orderLIST DESC
       queryParameters:
         filter: =@ctx.jig.inputs.selected-class
 

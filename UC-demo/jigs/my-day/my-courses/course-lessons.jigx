@@ -1,0 +1,53 @@
+title: Lessons
+type: jig.list
+
+# DATA
+datasources:
+  course-lessons: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+    
+      entities:
+        - default/course-lessons
+    
+      query: |
+        SELECT 
+          id, 
+          '$.classcode' AS classcode, 
+          '$.title' AS title,
+          '$.subtitle' AS subtitle,
+          '$.complete' AS complete,
+          '$.icon-type' AS iconType,
+          '$.abcOrder' AS abcOrder
+        FROM [default/course-lessons] 
+        WHERE classcode = @filter
+        ORDER BY abcOrder
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class 
+        
+
+
+
+data: =@ctx.datasources.course-lessons
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.title
+    subtitle: =@ctx.current.item.subtitle
+    # Side Elements
+    leftElement: 
+      element: icon
+      name: =@ctx.current.item.iconType
+      isContained: true
+      isDuotone: true
+    rightElement: 
+      element: checkbox
+      initialValue: =(@ctx.current.item.complete = "TRUE" || "true" ? true :false)
+    # Styling
+    color:
+      - when: true
+        color: color2
+    style:
+      isDisabled: =@ctx.current.item.complete
+      isStrikeThrough: =@ctx.current.item.complete

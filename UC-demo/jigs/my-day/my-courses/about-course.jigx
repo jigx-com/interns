@@ -1,0 +1,65 @@
+title: About
+type: jig.default
+
+datasources:
+  about-class: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/about-course
+  
+      query: |
+        SELECT 
+          id, 
+          '$.course-name' AS courseName,
+          '$.course-description' AS courseDescription, 
+          
+          '$.prof-title' AS profTitle,
+          '$.avatar' AS avatar,
+          '$.firstName' AS firstName,
+          '$.lastName' AS lastName,
+          
+          '$.classcode' AS classcode
+        FROM [default/about-course] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: ""
+            value: =@ctx.datasources.about-class.courseDescription
+            isMultiline: true
+  - type: component.list
+    options:
+      data: =@ctx.datasources.about-class
+      item: 
+        type: component.list-item
+        options:
+          title: =(@ctx.current.item.profTitle & ' ' & @ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+          subtitle: Lecturer
+          leftElement: 
+            element: avatar
+            text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
+            uri: =@ctx.current.item.avatar
+          rightElement: 
+            element: button
+            title: Contact
+            onPress: 
+              type: action.go-to
+              options:
+                linkTo: contact-prof
+
+# DISABLES "SHOW MORE" BUTTON
+onFocus: 
+  type: action.go-to
+  options:
+    linkTo: my-courses
