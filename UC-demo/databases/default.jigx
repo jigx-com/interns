@@ -1,6 +1,11 @@
 tables:
+  # Final
   calendar:
-  testFilter:
-  testClassResult:
   resources:
   discussion:
+  recent-lecture:
+    
+  # Test
+  testFilter:
+  testClassResult:
+  

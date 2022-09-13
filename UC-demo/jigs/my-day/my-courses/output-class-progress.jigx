@@ -14,8 +14,7 @@ datasources:
       query: |
         SELECT 
           id, 
-          json_extract(data, '$.seriesx') as x, 
-          json_extract(data, '$.seriesy') as y, 
+          json_extract(data, '$.seriesy') AS data, 
           '$.color' AS color, 
           '$.classcode' AS classcode, 
           '$.subtitle' AS subtitle, 
@@ -27,10 +26,13 @@ datasources:
 
 
 
-# GRADE
-# PROGRESS THROUGH THE YEAR (DAY OF SEMESTER / TOTAL DAYS IN SEMESTER)
 isHorizontal: true
 data: =@ctx.datasources.pie-chart
+# item: 
+#   type: component.list-item
+#   options:
+#     title: =@ctx.datasources.data
+
 item: 
   type: component.pie-chart
   options:
@@ -46,5 +48,5 @@ item:
     legend:
       isHidden: true
     series:
-      - data: =@ctx.datasources.pie-chart
+      - data: =@ctx.current.item.data
         layout: pie 

@@ -2,39 +2,15 @@ title: My Courses
 type: jig.composite
 
 
-datasources:
-  next-up: 
-    type: datasource.sqlite
-    options:
-      provider: DATA_PROVIDER_DYNAMIC
-  
-      entities:
-        - default/calendar
-  
-      query: |
-        SELECT id, 
-          '$.subject' AS subject, 
-          '$.startDateTime' AS startDateTime,
-          '$.endDateTime' AS endDateTime,
-          '$.description' AS description,
-          '$.location' AS location,
-          '$.startTime',
-          '$.endTime',
-          '$.distance',
-          '$.icon',
-          '$.linkTo' AS linkTo
-        FROM [default/calendar]
-        WHERE linkTo != @linkTo
-        ORDER BY startDateTime
-          Limit 1
-      queryParameters:
-        linkTo: new-booking-form
-
-
 children:
   - jigId: my-course-filter
     instanceId: my-course-filter
-  
+    # OUTPUT: selected-class
+      
   - jigId: output-class-progress
     inputs:
       selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+      
+  - jigId: recent-lectures
+    inputs:
+      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class

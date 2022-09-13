@@ -1,0 +1,43 @@
+title: Recent Lectures
+type: jig.list
+
+datasources:
+  recent-lecture: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/recent-lecture
+  
+      query: |
+        SELECT 
+          id, 
+          '$.day' AS day, 
+          '$.week' AS week,
+          '$.classcode' AS classcode          
+        FROM [default/recent-lecture] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+isHorizontal: true
+isHorizontalScrollIndicatorHidden: true
+data: =@ctx.datasources.recent-lecture
+item:
+  type: component.list-item
+  options:
+    # Item Details
+    horizontalItemSize: regular
+    divider: solid
+    color:
+      - when: true
+        color: color14
+    progress: 1
+    # Item Content
+    title: =@ctx.current.item.day
+    subtitle: =@ctx.current.item.week
+    leftElement: 
+      isContained: false
+      element: icon
+      name: button-play
