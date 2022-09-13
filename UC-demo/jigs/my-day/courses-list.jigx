@@ -19,19 +19,37 @@ datasources:
             '$.startTime' AS startTime,
             '$.endTime' AS endTime,
             '$.location' AS location,
-            '$.classcode' AS classcode
+            '$.classcode' AS classcode,
+            '$.grade' AS grade,
+            '$.color' AS color,
+            '$.progress' AS progress
           FROM [default/testFilter]
 
 data: =@ctx.datasources.classes
 isHorizontal: true
 isHorizontalScrollIndicatorHidden: true
+
+
 item:
   type: component.list-item
   options:
     title: =@ctx.current.item.classcode
     subtitle: =@ctx.current.item.name
     description: =@ctx.current.item.location
+    
     divider: solid
+    label:
+      title: =(@ctx.current.item.grade & '%')
+      color:
+        - when: true
+          color: =@ctx.current.item.color
+    progress: =@ctx.current.item.progress
+    
+    color:
+      - when: true
+        color: =@ctx.current.item.color
+    
+    
     onPress: 
       type: action.go-to
       options:

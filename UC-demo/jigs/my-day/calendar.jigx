@@ -16,7 +16,8 @@ datasources:
           '$.startDateTime' AS startDateTime,
           '$.endDateTime' AS endDateTime,
           '$.description' AS description,
-          '$.location' AS location
+          '$.location' AS location,
+          '$.address' AS address
         FROM [default/calendar]
 
 data: =@ctx.datasources.cal
@@ -27,3 +28,12 @@ item:
     to: =@ctx.current.item.endDateTime
     title: =@ctx.current.item.subject
     description: =@ctx.current.item.description
+    location: =@ctx.current.item.location #=@ctx.current.item.address
+    onButtonPress: 
+      type: action.go-to
+      options:
+        title: Discussion Board
+        linkTo: discussion-board
+        parameters:
+          sub: =@ctx.current.item.subject
+          

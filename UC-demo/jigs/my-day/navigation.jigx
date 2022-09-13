@@ -1,0 +1,25 @@
+title: Navigation
+description: Description of your Jig
+type: jig.default
+
+# datasources:
+#   nav: 
+#     type: datasource.sqlite
+#     options:
+#       provider: DATA_PROVIDER_DYNAMIC
+  
+#       entities:
+#         - default/calendar
+  
+#       query: |
+#         SELECT id, 
+#         '$.address'
+#         FROM [default/calendar] 
+#       #   WHERE id = @myParam
+#       # queryParameters:
+#       #   myParam: value
+
+children:
+  - type: component.location
+    options:
+      address: =@ctx.jig.inputs.LOC

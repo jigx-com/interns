@@ -1,0 +1,45 @@
+title: Discussions
+# description: Description of your Jig
+type: jig.list
+icon: contact
+
+datasources:
+  discussion: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/discussion
+  
+      query: |
+        SELECT id, 
+        '$.comment', 
+        '$.image',
+        '$.userEmail',
+        '$.userName'
+        FROM [default/discussion] 
+      #   WHERE id = @myParam
+      # queryParameters:
+      #   myParam: value
+
+data: =@ctx.datasources.discussion
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.userName
+    subtitle: =@ctx.current.item.comment
+    swipeable:
+      left:
+        - label: Delete
+          icon: pencil-2
+          color: primary
+          onPress: 
+            type: action.execute-entity
+            options:
+              provider: DATA_PROVIDER_DYNAMIC
+              entity: default/discussion
+              method: delete
+              goBack: previous
+              data:
+                id: =@ctx.current.item.id

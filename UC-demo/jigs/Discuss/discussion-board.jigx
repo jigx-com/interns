@@ -1,0 +1,9 @@
+title: Discussion Board
+description: Description of your Jig
+type: jig.composite
+
+children:
+  - jigId: submit-discussion
+    instanceId: submitDiscussion
+
+  - jigId: discussion-list

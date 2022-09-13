@@ -17,6 +17,7 @@ datasources:
         '$.linkTo' AS linkTo,
         '$.image' AS image 
         FROM [default/resources] 
+        ORDER BY name
 
 children:
   - type: component.list
@@ -25,6 +26,7 @@ children:
       isHorizontalScrollIndicatorHidden: true
       data: =@ctx.datasources.resources
       maximumItemsToRender: 8
+      
       item: 
         type: component.list-item
         options:
@@ -33,7 +35,10 @@ children:
             element: image
             text: ''
             uri: =@ctx.current.item.image
-          # onPress: 
-          #   type: action.go-to
-          #   options:
-          #     linkTo: =@ctx.current.item.linkTo
+          horizontalItemSize: large
+          onPress: 
+            type: action.go-to
+            options:
+              linkTo: web-links
+              parameters:
+                linkTo: =@ctx.current.item.linkTo

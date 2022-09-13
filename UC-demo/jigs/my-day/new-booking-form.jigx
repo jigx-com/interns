@@ -33,7 +33,7 @@ children:
                   isRequired: true
                   mode: datetime
               - type: component.date-picker
-                instanceId: startEndTime
+                instanceId: endDateTime
                 options:
                   label: End Time
                   isRequired: true
