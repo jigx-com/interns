@@ -49,6 +49,12 @@ children:
   - jigId: course-lessons
     inputs:
       selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+
+  - jigId: discussion-list
+    inputs:
+      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+
+
   # OLD LAYOUT
   # - jigId: output-class-progress
   #   inputs:

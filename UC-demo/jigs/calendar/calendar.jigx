@@ -8,7 +8,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/table-name
+        - default/calendar
   
       query: |
         SELECT id, 
@@ -35,5 +35,4 @@ item:
         title: Discussion Board
         linkTo: discussion-list
         parameters:
-          sub: =@ctx.current.item.subject
-          
+          subject: =@ctx.current.item.subject

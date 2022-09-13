@@ -5,6 +5,8 @@ tables:
   discussion:
   recent-lecture:
   my-course-header:
+  subject:
+  course-lessons:
     
   # Test
   testFilter:

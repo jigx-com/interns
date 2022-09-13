@@ -43,7 +43,7 @@ item:
       isDuotone: true
     rightElement: 
       element: checkbox
-      initialValue: =(@ctx.current.item.complete = "TRUE" || "true" ? true :false)
+      initialValue: =(@ctx.current.item.complete = "TRUE" ? true :false)
     # Styling
     color:
       - when: true
