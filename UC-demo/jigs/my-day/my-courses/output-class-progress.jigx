@@ -1,27 +1,50 @@
-title: =@ctx.jig.inputs.selected-class
+title: Class Progress
 type: jig.list
 
-datasources:
-  test:
-    type: datasource.static
+datasources:          
+  pie-chart:
+    type: datasource.sqlite
+    
     options:
-      data:
-        - id: ECO101
-          name: Eco
-        - id: "ACC101"
-          name: Acc
-        - id: "MGT101"
-          name: Mgt
-        - id: "LAW101"
-          name: Law
-          
+      provider: DATA_PROVIDER_DYNAMIC
+
+      entities:
+        - entity: default/testClassResult
+
+      query: |
+        SELECT 
+          id, 
+          json_extract(data, '$.seriesx') as x, 
+          json_extract(data, '$.seriesy') as y, 
+          '$.color' AS color, 
+          '$.classcode' AS classcode, 
+          '$.subtitle' AS subtitle, 
+          '$.title' AS title
+        FROM [default/testClassResult] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+
+
 # GRADE
 # PROGRESS THROUGH THE YEAR (DAY OF SEMESTER / TOTAL DAYS IN SEMESTER)
-
-#data: =@ctx.datasources.test[id = @ctx.jig.inputs.selected-class]
-data: =@ctx.datasources.test[id = "ECO101"]
-item:
-  type: component.list-item
+isHorizontal: true
+data: =@ctx.datasources.pie-chart
+item: 
+  type: component.pie-chart
   options:
-    title: =@ctx.current.item.id
-    subtitle: =@ctx.current.item.name
+    chart:
+      title:
+        text: =@ctx.current.item.title
+        verticalAlign: center
+      subtitle:
+        text: =@ctx.current.item.subtitle
+        verticalAlign: center
+      width: 160
+      height: 160
+    legend:
+      isHidden: true
+    series:
+      - data: =@ctx.datasources.pie-chart
+        layout: pie 
