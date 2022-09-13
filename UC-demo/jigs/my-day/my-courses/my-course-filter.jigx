@@ -1,4 +1,4 @@
-title: Class Filter
+title: =@ctx.jig.state.filter
 type: jig.list
 
 filter: 

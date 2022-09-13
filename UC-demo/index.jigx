@@ -3,7 +3,7 @@ title: UC-demo
 category: business
 
 widgets:
-  - size: 4x2
+  - size: "4x2"
     jigId: my-day-composite
 
   - size: 2x4
@@ -13,5 +13,5 @@ widgets:
 #Temporary use
   # - size: "1x1"
   #   jigId: bookings
-  - size: 1x1
-    jigId: my-courses
+  # - size: 1x1
+  #   jigId: resources

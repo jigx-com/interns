@@ -1,0 +1,38 @@
+title: My Courses
+description: Description of your Jig
+type: jig.list
+icon: contact
+
+datasources:
+  classes: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testFilter
+  
+      query: |
+        SELECT 
+            id, 
+            '$.name' AS name, 
+            '$.startTime' AS startTime,
+            '$.endTime' AS endTime,
+            '$.location' AS location,
+            '$.classcode' AS classcode
+          FROM [default/testFilter]
+
+data: =@ctx.datasources.classes
+isHorizontal: true
+isHorizontalScrollIndicatorHidden: true
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.classcode
+    subtitle: =@ctx.current.item.name
+    description: =@ctx.current.item.location
+    divider: solid
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: my-courses

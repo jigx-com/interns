@@ -1,7 +1,6 @@
-title: Bookings
-description: TBD
-type: jig.list
-icon: contact
+title: My Bookings
+# description: Description of your Jig
+type: jig.default
 
 datasources:
   cal: 
@@ -31,22 +30,34 @@ datasources:
       queryParameters:
         type: booking
 
-isHorizontal: true
-isHorizontalScrollIndicatorHidden: false
-data: =@ctx.datasources.cal
-item:
-  type: component.list-item
-  options:
-    horizontalItemSize: regular
-    title: =@ctx.current.item.subject
-    subtitle: "=(
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: true
+      data: =@ctx.datasources.cal
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          horizontalItemSize: regular
+          title: =@ctx.current.item.subject
+          subtitle: "=(
               $fromMillis($toMillis(@ctx.current.item.startDateTime), '[M01]/[D01]')
               )"
-    description: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
-    divider: solid
-    onPress: 
-      type: action.go-to
-      options:
-        linkTo: =@ctx.current.item.linkTo
+          description: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
+          divider: solid
+          onPress: 
+            type: action.go-to
+            options:
+              linkTo: =@ctx.current.item.linkTo
+        
+actions:
+  - children:
+      - type: action.go-to
+        instanceId: new-entry-form
+        options:
+          title: Add New Booking
+          linkTo: new-booking-form
     
     

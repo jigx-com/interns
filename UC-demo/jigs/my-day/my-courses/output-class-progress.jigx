@@ -1,4 +1,4 @@
-title: Class Progress
+title: =@ctx.jig.inputs.selected-class
 type: jig.list
 
 datasources:
@@ -6,7 +6,7 @@ datasources:
     type: datasource.static
     options:
       data:
-        - id: "ECO101"
+        - id: ECO101
           name: Eco
         - id: "ACC101"
           name: Acc
@@ -18,7 +18,8 @@ datasources:
 # GRADE
 # PROGRESS THROUGH THE YEAR (DAY OF SEMESTER / TOTAL DAYS IN SEMESTER)
 
-data: =@ctx.datasources.test[id = @ctx.jig.inputs.selected-class]
+#data: =@ctx.datasources.test[id = @ctx.jig.inputs.selected-class]
+data: =@ctx.datasources.test[id = "ECO101"]
 item:
   type: component.list-item
   options:

@@ -1,0 +1,39 @@
+title: Resources
+description: TBD
+type: jig.default
+
+datasources:
+  resources: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/resources
+  
+      query: |
+        SELECT id, 
+        '$.name' AS name, 
+        '$.linkTo' AS linkTo,
+        '$.image' AS image 
+        FROM [default/resources] 
+
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: true
+      data: =@ctx.datasources.resources
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: =@ctx.current.item.name
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.image
+          # onPress: 
+          #   type: action.go-to
+          #   options:
+          #     linkTo: =@ctx.current.item.linkTo
