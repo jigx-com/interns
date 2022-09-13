@@ -1,26 +1,38 @@
-title: Submit Discussion #=@ctx.jig.inputs.sub & ' discussion board'
+title: Start a New Discussion
 # description: Description of your Jig
 type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1565689157206-0fddef7589a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
 
 # datasources:
 #   mydata: 
 
 children:
   - type: component.form
-    instanceId: submitDiscussion
+    instanceId: newTopic
     options:
       children:
         - type: component.text-field
-          instanceId: comment
+          instanceId: topic
           options:
-            label: Question/Comment
+            label: Discussion Topic
             isRequired: true
             isMultiline: true
-            textArea: medium
+            textArea: dynamic
+        - type: component.text-field
+          instanceId: initialQ
+          options:
+            label: Question/Comment
+            isMultiline: true
+            textArea: dynamic
         - type: component.media-field
           instanceId: image
           options:
-            label: Upload and image
+            label: Upload an image
             mediaType: image
             isRequired: false
         - type: component.text-field
@@ -37,14 +49,28 @@ children:
             value: =@ctx.user.displayName
             isRequired: false
             isHidden: true
+        - type: component.text-field
+          instanceId: userAvatar
+          options:
+            label: ''
+            value: =@ctx.user.avatarUrl
+            isRequired: false
+            isHidden: true
+        - type: component.text-field
+          instanceId: class
+          options:
+            label: ''
+            value: =@ctx.jig.inputs.sub
+            isRequired: true
+            isHidden: true
             
 actions:
   - children:
       - type: action.submit-form
         options:
-          formId: submitDiscussion
+          formId: newTopic
           provider: DATA_PROVIDER_DYNAMIC
-          title: Create Record
+          title: Submit Discussion
           entity: default/discussion
           method: create
           goBack: stay

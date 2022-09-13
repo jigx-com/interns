@@ -33,7 +33,7 @@ item:
       type: action.go-to
       options:
         title: Discussion Board
-        linkTo: discussion-board
+        linkTo: discussion-list
         parameters:
           sub: =@ctx.current.item.subject
           

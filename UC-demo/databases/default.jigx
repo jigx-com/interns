@@ -4,8 +4,10 @@ tables:
   resources:
   discussion:
   recent-lecture:
+  my-course-header:
     
   # Test
   testFilter:
   testClassResult:
+  testResponses:
   

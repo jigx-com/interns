@@ -1,10 +1,16 @@
-title: Discussions
+title: Discussed Topics
 # description: Description of your Jig
 type: jig.list
 icon: contact
 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+
 datasources:
-  discussion: 
+  topics: 
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
@@ -13,33 +19,91 @@ datasources:
         - default/discussion
   
       query: |
-        SELECT id, 
-        '$.comment', 
-        '$.image',
-        '$.userEmail',
-        '$.userName'
-        FROM [default/discussion] 
-      #   WHERE id = @myParam
-      # queryParameters:
-      #   myParam: value
+        SELECT 
+          id, 
+          '$.class' AS class, 
+          '$.initialQ' AS initialQ,
+          '$.topic' AS topic,
+          '$.userName' AS userName,
+          '$.userAvatar' AS userAvatar,
+          '$.days' AS days
+        FROM 
+          [default/discussion] 
+        WHERE 
+          class = @sub
+      queryParameters:
+        sub: =@ctx.jig.inputs.sub
+      
+  # topics: 
+  #   type: datasource.static
+  #   options:
+  #     data:
+  #       - id: 1
+  #         class: Macro
+  #         topic: Difference between opportunity cost and sunk cost
+  #         days: 3 days ago
+  #       - id: 2
+  #         class: Macro
+  #         topic: Available textbooks and study material
+  #         days: 1 week ago
 
-data: =@ctx.datasources.discussion
-item:
+# data: =@ctx.datasources.discussion
+# item:
+#   type: component.list-item
+#   options:
+#     title: =@ctx.current.item.userName
+#     subtitle: =@ctx.current.item.comment
+    
+    
+#     leftElement: 
+#       element: avatar
+#       text: ' '
+#       uri: =@ctx.current.item.userAvatar
+    
+#     swipeable:
+#       left:
+#         - label: Delete
+#           icon: pencil-2
+#           color: primary
+#           onPress: 
+#             type: action.execute-entity
+#             options:
+#               provider: DATA_PROVIDER_DYNAMIC
+#               entity: default/discussion
+#               method: delete
+#               goBack: previous
+#               data:
+#                 id: =@ctx.current.item.id
+
+data: =@ctx.datasources.topics
+item: 
   type: component.list-item
   options:
-    title: =@ctx.current.item.userName
-    subtitle: =@ctx.current.item.comment
-    swipeable:
-      left:
-        - label: Delete
-          icon: pencil-2
-          color: primary
-          onPress: 
-            type: action.execute-entity
-            options:
-              provider: DATA_PROVIDER_DYNAMIC
-              entity: default/discussion
-              method: delete
-              goBack: previous
-              data:
-                id: =@ctx.current.item.id
+    title: =@ctx.current.item.topic
+    subtitle: =@ctx.current.item.days
+    
+    leftElement: 
+      element: avatar
+      text: ' '
+      uri: =@ctx.current.item.userAvatar
+      
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: discussion-board
+        parameters:
+          sub: =@ctx.current.item.class
+          topic: =@ctx.current.item.topic
+          iQ: =@ctx.current.item.initialQ
+          avatar: =@ctx.current.item.userAvatar
+    
+actions:
+  - children:
+      - type: action.go-to
+        options:
+          title: New Discussion Topic
+          linkTo: submit-discussion
+          parameters:
+            sub: =@ctx.current.item.class
+            
+            

@@ -1,9 +1,187 @@
 title: Discussion Board
-description: Description of your Jig
-type: jig.composite
+type: jig.default
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+
+datasources:
+  mydata: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/discussion
+  
+      query: |
+        SELECT 
+          id, 
+          '$.class' AS class, 
+          '$.initialQ' AS initialQ,
+          '$.topic' AS topic,
+          '$.userName' AS userName,
+          '$.userAvatar' AS userAvatar,
+          '$.days' AS days
+        FROM 
+          [default/discussion] 
+        WHERE 
+          class = @sub
+      queryParameters:
+        sub: =@ctx.jig.inputs.sub
+
+  responses:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testResponses
+  
+      query: |
+        SELECT 
+          id, 
+          '$.respond' AS respond, 
+          '$.reactions' AS reactions,
+          '$.responder' AS responder,
+          '$.avatar' AS avatar,
+          '$.topic' AS topic
+        FROM [default/testResponses] 
+        WHERE 
+          topic = @topic
+      queryParameters:
+        topic: =@ctx.jig.inputs.topic
 
 children:
-  - jigId: submit-discussion
-    instanceId: submitDiscussion
-
-  - jigId: discussion-list
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: Topic
+            value: =@ctx.jig.inputs.topic
+        - type: component.entity-field
+          options:
+            label: Question
+            value: =@ctx.jig.inputs.iQ
+            isMultiline: true
+  
+  
+# Commenting
+  - type: component.form
+    instanceId: responses
+    options:
+      children:
+        - type: component.text-field
+          instanceId: respond
+          options:
+            label: Respond to Question
+            isMultiline: true
+            textArea: dynamic
+        - type: component.text-field
+          instanceId: reactions
+          options:
+            label: ""
+            value: "0"
+            isHidden: true
+            isRequired: false
+        # - type: component.text-field
+        #   instanceId: photoId
+        #   options:
+        #     label: ""
+        #     value: =@ctx.jig.inputs.photoId
+        #     isHidden: true
+        #     isRequired: false
+        - type: component.text-field
+          instanceId: responder
+          options:
+            label: ""
+            value: =@ctx.user.displayName
+            isHidden: true
+        - type: component.text-field
+          instanceId: responderEmail
+          options:
+            label: ""
+            value: =@ctx.user.email
+            isHidden: true
+        - type: component.text-field
+          instanceId: topic
+          options:
+            label: ''
+            value: =@ctx.jig.inputs.topic
+            isHidden: true
+            isRequired: true
+        - type: component.text-field
+          instanceId: avatar
+          options:
+            label: ' '
+            value: =@ctx.jig.inputs.avatar
+            isHidden: true
+  # Comments & Reactions
+  - type: component.list
+    options:  
+      data: =@ctx.datasources.responses
+      maximumItemsToRender: 10
+      item: 
+        type: component.list-item
+        options:
+          title: =@ctx.current.item.responder
+          subtitle: =@ctx.current.item.respond
+          leftElement: 
+            element: avatar
+            text: ''
+            uri: =@ctx.current.item.avatar
+          label: 
+            title: =(@ctx.current.item.reactions & ($number(@ctx.current.item.reactions) = 1 ? ' reaction' :' reactions'))
+            color:
+              - when: true
+                color: color8
+          # Swipe to like comment
+          swipeable:
+            left:
+              - label: R E A C T
+                #should be clapping hands
+                icon: love-it
+                color: primary
+                onPress: 
+                  type: action.execute-entity
+                  options:
+                    provider: DATA_PROVIDER_DYNAMIC
+                    entity: default/testResponses
+                    method: update
+                    goBack: stay
+                    data:
+                      id: =@ctx.current.item.id
+                      reactions: =($number(@ctx.current.item.reactions) + $number(1))
+                    onSuccess: 
+                      type: action.sync-entities
+                      options:
+                        provider: DATA_PROVIDER_DYNAMIC
+                        entities:
+                          - entity: default/testResponses
+  
+actions:
+  - children:
+      #Submitting respons
+      - type: action.submit-form
+        options:
+          formId: responses
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Create Record
+          entity: default/testResponses
+          method: create
+          goBack: stay
+          onSuccess:
+            actions:
+              - type: action.confirm
+                options:
+                  title: Submitted
+                  isConfirmedAutomatically: true
+                  onConfirmed: 
+                    type: action.go-back
+                  modal:
+                    title: ''
+            
+              
