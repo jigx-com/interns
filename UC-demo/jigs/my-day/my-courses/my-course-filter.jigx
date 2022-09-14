@@ -60,6 +60,8 @@ item:
         linkTo: my-course-info
         parameters:
           selected-class: =@ctx.jig.state.filter
+          hasOnlineMeeting: =@ctx.current.item.hasOnlineMeeting
+          meetingId: =@ctx.current.item.meetingId
     # Styling
     color:
       - when: =(@ctx.jig.state.filter = "ECO101")

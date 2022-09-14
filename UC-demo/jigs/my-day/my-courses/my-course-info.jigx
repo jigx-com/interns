@@ -52,3 +52,12 @@ children:
   - jigId: students-course
     inputs:
       selected-class: =@ctx.jig.inputs.selected-class 
+      
+actions:
+  - children:
+      - type: action.start-meeting
+        options:
+          title: "Join Online"
+          style:
+            isDisabled: "=@ctx.jig.inputs.hasOnlineMeeting = 'true' ? 'false' : 'true'"
+          meetingId: =@ctx.jig.inputs.meetingId
