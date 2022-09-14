@@ -26,7 +26,7 @@ datasources:
         - id: 4
           claps: 85,102
           name: University Total
-          color: color8
+          color: color9
           motivation: "Campus Record: 109,288"
 
 
