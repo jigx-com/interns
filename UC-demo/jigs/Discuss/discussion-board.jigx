@@ -212,6 +212,10 @@ actions:
                   responderEmail: =@ctx.user.email
                   topic: =@ctx.jig.inputs.topic
                   avatar: =@ctx.jig.inputs.avatar
+            - type: action.set-state
+              options:
+                state: =@ctx.solution.state.tMeetingId
+                value: =$uuid_v4()
             - type: action.execute-entity
               options:
                 provider: DATA_PROVIDER_DYNAMIC
@@ -220,11 +224,16 @@ actions:
                 data: 
                   id: =@ctx.jig.inputs.discussionId
                   hasMeeting: "true"
-                  meetingId: =$uuid_v4()
+                  meetingId: =@ctx.solution.state.tMeetingId
                 onSuccess: 
-                  type: action.start-meeting
-                  options:
-                    meetingId: =@ctx.datasources.mydata.meetingId
+                  description: Meeting Scheduled, press below to join.
+                  title: Meeting Scheduled
+                  actions:
+                    - type: action.start-meeting                      
+                      options:
+                        title: Join Meeting
+                        meetingId: =@ctx.solution.state.tMeetingId
+
             - type: action.reset-state
               options:
                 state: =@ctx.jig.components.respond.state.value
