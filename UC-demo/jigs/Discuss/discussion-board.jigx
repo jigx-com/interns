@@ -1,4 +1,4 @@
-title: Discussion Board
+title: "=@ctx.jig.inputs.hasMeeting = 'true' ? 'Discussion Board - Meeting Available' : 'Discussion Board - No Meeting'"
 type: jig.default
 
 header: 
@@ -84,6 +84,7 @@ children:
             label: Respond to Question
             isMultiline: true
             textArea: dynamic
+            initialValue: ""
         - type: component.text-field
           instanceId: reactions
           options:
@@ -172,6 +173,8 @@ actions:
       - type: action.action-list
         options:
           title: Comment
+          style:
+            isDisabled: "=$trim(@ctx.jig.components.respond.state.value) = '' ? true : false"
           actions:
             - type: action.execute-entity
               options:
@@ -193,7 +196,7 @@ actions:
       - type: action.action-list
         options:
           style:
-            isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? true : false"
+            isDisabled: "=(@ctx.jig.inputs.hasMeeting = 'true' or $trim(@ctx.jig.components.respond.state.value) = '') ? true : false"
           title: Comment and Start Meeting
           actions:
             - type: action.execute-entity

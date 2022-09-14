@@ -36,6 +36,7 @@ datasources:
         filter: =@ctx.jig.inputs.selected-class
 
 children:
+  
   - jigId: about-course
     inputs:
       selected-class: =@ctx.jig.inputs.selected-class 

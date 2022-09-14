@@ -68,7 +68,6 @@ item:
     label:
       title: "Meeting"
       isHidden: "=@ctx.current.item.hasMeeting = 'true' ? false : true" 
-      
     onPress: 
       type: action.go-to
       options:
