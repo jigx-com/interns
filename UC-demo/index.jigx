@@ -8,13 +8,16 @@ widgets:
 
   - size: 2x4
     jigId: helping-hands
-    
-  - size: "1x1"
+  
+  - size: "2x2"
     jigId: my-courses
     
   - size: "1x1"
     jigId: calendar
-    
+
+
+
+
 #Temporary use
   # - size: "1x1"
   #   jigId: bookings

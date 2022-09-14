@@ -7,6 +7,12 @@ header:
   options:
     source:
       uri: =@ctx.datasources.header-image.headerImage
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://cdn.pixabay.com/photo/2016/06/01/06/26/open-book-1428428__480.jpg
 
 # Caching Header Images
 onFocus: 
@@ -36,30 +42,45 @@ datasources:
       queryParameters:
         filter: =@ctx.jigs.my-course-filter.outputs.selected-class
 
+# Directions to class
+actions:
+  - children:
+      - type: action.go-to
+        options:
+          title: =(@ctx.jigs.my-course-filter.outputs.selected-class = "LAW101" ? "Navigation - 9 mins" :"Navigation - 10 mins")
+          linkTo: navigation
+          icon: pin
+          parameters:
+            classcode: =@ctx.jigs.my-course-filter.outputs.selected-class
+
 
 children:
   - jigId: my-course-filter
     instanceId: my-course-filter
     # OUTPUT: selected-class
-    
-  - jigId: about-course
-    inputs:
-      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
-      
-  - jigId: course-lessons
-    inputs:
-      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
-
-  - jigId: discussion-list
-    inputs:
-      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
-
-
-  # OLD LAYOUT
+  
   # - jigId: output-class-progress
   #   inputs:
   #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
       
-  # - jigId: recent-lectures
+  - jigId: recent-lectures
+    inputs:
+      selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class
+      
+      
+  # OLD LAYOUT
+  # - jigId: about-course
   #   inputs:
-  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class
+  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+      
+  # - jigId: course-lessons
+  #   inputs:
+  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+
+  # - jigId: discussion-list
+  #   inputs:
+  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
+      
+  # - jigId: students-course
+  #   inputs:
+  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 

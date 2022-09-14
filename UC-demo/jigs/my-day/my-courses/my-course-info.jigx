@@ -1,0 +1,53 @@
+title: =(@ctx.datasources.classname.classcode & ' - ' & @ctx.datasources.classname.subject)
+type: jig.composite
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.datasources.header-image.headerImage
+
+datasources:
+  classname: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/subject
+      query: SELECT id, '$.subject' AS subject, '$.classcode' AS classcode FROM [default/subject] WHERE classcode LIKE '%'||@filter||'%'
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+  header-image:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/my-course-header
+  
+      query: |
+        SELECT 
+          id, 
+          '$.header-image' as headerImage, 
+          '$.classcode' AS classcode
+        FROM [default/my-course-header] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+children:
+  - jigId: about-course
+    inputs:
+      selected-class: =@ctx.jig.inputs.selected-class 
+      
+  - jigId: course-lessons
+    inputs:
+      selected-class: =@ctx.jig.inputs.selected-class 
+
+  - jigId: discussion-list
+    inputs:
+      selected-class: =@ctx.jig.inputs.selected-class 
+      
+  - jigId: students-course
+    inputs:
+      selected-class: =@ctx.jig.inputs.selected-class 

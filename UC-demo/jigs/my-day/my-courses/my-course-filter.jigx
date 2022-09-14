@@ -36,11 +36,6 @@ datasources:
 outputs:
   selected-class: =@ctx.jig.state.filter
 
-onFocus: 
-  type: action.go-to
-  options:
-    linkTo: my-courses
-    
 data: =@ctx.datasources.class-filter
 item:
   type: component.list-item
@@ -56,6 +51,12 @@ item:
         type: action.go-to
         options:
           linkTo: group-video
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: my-course-info
+        parameters:
+          selected-class: =@ctx.jig.state.filter
     # Styling
     color:
       - when: =(@ctx.jig.state.filter = "ECO101")

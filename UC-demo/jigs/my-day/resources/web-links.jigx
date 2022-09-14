@@ -1,21 +1,6 @@
 title: Web links
 type: jig.document
 
-# datasources:
-#   resources: 
-#     type: datasource.sqlite
-#     options:
-#       provider: DATA_PROVIDER_DYNAMIC
-  
-#       entities:
-#         - default/resources
-  
-#       query: |
-#         SELECT id, 
-#         '$.name' AS name, 
-#         '$.linkTo' AS linkTo,
-#         '$.image' AS image 
-#         FROM [default/resources]
 
 source:
   documentType: HTML

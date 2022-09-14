@@ -82,4 +82,4 @@ actions:
           title: New Discussion Topic
           linkTo: submit-discussion
           parameters:
-            subject: =@ctx.jig.inputs.subject
+            subject: =($exists(@ctx.jig.inputs.subject) ? @ctx.datasources.translate-topic.classcode :@ctx.jig.inputs.selected-class)

@@ -8,8 +8,10 @@ tables:
   subject:
   course-lessons:
   navigation:
+  students:
     
   # Test
   testFilter:
   testClassResult:
   testResponses:
+  

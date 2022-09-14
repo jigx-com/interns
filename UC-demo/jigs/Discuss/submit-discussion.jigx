@@ -83,7 +83,7 @@ children:
           instanceId: classcode
           options:
             label: ""
-            value: =@ctx.datasources.translate-topic.classcode
+            value: =@ctx.jig.inputs.subject
             isHidden: true
             
 actions:

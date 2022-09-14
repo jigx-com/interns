@@ -58,8 +58,8 @@ children:
               options:
                 linkTo: contact-prof
 
-# DISABLES "SHOW MORE" BUTTON
-onFocus: 
-  type: action.go-to
-  options:
-    linkTo: my-courses
+# # DISABLES "SHOW MORE" BUTTON
+# onFocus: 
+#   type: action.go-to
+#   options:
+#     linkTo: my-courses

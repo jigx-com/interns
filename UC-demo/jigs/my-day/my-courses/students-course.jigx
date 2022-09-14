@@ -1,0 +1,57 @@
+title: =(@ctx.datasources.countStudents.count & ' Students')
+type: jig.list
+icon: contact
+
+datasources:
+  countStudents:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/students
+      query: SELECT id, COUNT('$.employee-id') AS count FROM [default/students] WHERE '$.classcode' LIKE '%'||@filter||'%'
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+  students:  
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/students
+  
+      query: |
+        SELECT 
+          id, 
+          '$.classcode' AS classcode,
+          '$.first-name' AS firstName, 
+          '$.last-name' AS lastName,
+          '$.headshot' AS avatar,
+          '$.phone' AS phone,
+          '$.email' AS email,
+          '$.employee-id' AS studentID,
+          '$.isOnline' AS isOnline
+        FROM [default/students] 
+        WHERE classcode LIKE '%'||@filter||'%'
+        ORDER BY firstName, lastName
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+isHorizontal: true
+isHorizontalScrollIndicatorHidden: true
+data: =@ctx.datasources.students
+item:
+  type: component.list-item
+  options:
+    horizontalItemSize: regular
+    divider: solid
+    title: =@ctx.current.item.firstName
+    subtitle: =@ctx.current.item.lastName
+    leftElement: 
+      element: image
+      text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
+      uri: =@ctx.current.item.avatar
+    rightElement: 
+      element: badge
+      isHidden: =(@ctx.current.item.isOnline = "TRUE" ? false :true)
