@@ -1,6 +1,7 @@
-title: Weekly Leaderboard
+title: Leaderboard
 type: jig.default
 
+# DATA
 datasources:
   leaderboard-static: 
     type: datasource.static
@@ -8,54 +9,100 @@ datasources:
       data:
         - student-id: 1
           Name: Student 1
-          weekly-helps: 107
-          
+          weekly-helps: 13
         - student-id: 2
           Name: Student 2
-          weekly-helps: 65
-          
+          weekly-helps: 15
         - student-id: 3
           Name: Student 3
-          weekly-helps: 28
-          
+          weekly-helps: 15
         - student-id: 4
           Name: Student 4
-          weekly-helps: 114
-          
+          weekly-helps: 16
         - student-id: 5
           Name: Student 5
-          weekly-helps: 70
-          
+          weekly-helps: 18
         - student-id: 6
           Name: Student 6
-          weekly-helps: 64
-          
+          weekly-helps: 19
         - student-id: 7
           Name: Student 7
-          weekly-helps: 52
-          
+          weekly-helps: 22
         - student-id: 8
           Name: Student 8
-          weekly-helps: 27
-          
+          weekly-helps: 25
         - student-id: 9
           Name: Student 9
-          weekly-helps: 73
-          
+          weekly-helps: 26
         - student-id: 10
           Name: Student 10
-          weekly-helps: 141
+          weekly-helps: 29
+
+  current-user-static:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          claps: 10
+          name: Weekly Total
+          color: color6
+          motivation: Fantastic Work!
+        - id: 2
+          claps: 64
+          name: Semester Total
+          color: color7
+          motivation: Keep it up!
+        - id: 3
+          claps: 302
+          name: University Total
+          color: color8
+          motivation: "Campus Record: 188"
 
 children:
+  # Motivational Image
+  - type: component.image
+    options:
+      source:
+        uri: https://www.dropbox.com/s/ow84m5oapzrl90a/For%20Jo%205.jpeg?raw=1
+      height: 200
+  
+  # Perstonal Standing List Title
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: " "
+            value: "Your Standing"
+  
+  # Personal Standing List
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: true
+      data: =@ctx.datasources.current-user-static
+      item: 
+        type: component.list-item
+        options:
+          horizontalItemSize: regular
+          title: =@ctx.current.item.name
+          rightElement: 
+            element: value
+            text: =@ctx.current.item.claps
+          color:
+            - when: true
+              color: =@ctx.current.item.color
+          progress: 1
+
+  # top 10 chart
   - type: component.bar-chart
     options:
-      
       plotOptions:
         series:
           marker:
             isHidden: false
       yAxis:
-        max: 150
+        max: 30
         min: 0
       xAxis: 
         categories:
@@ -75,5 +122,4 @@ children:
       chart:
         isAnimated: true
         height: 275
-        subtitle: Positions anonymous to keep student privacy
-      
+        title: Top Students of the Week

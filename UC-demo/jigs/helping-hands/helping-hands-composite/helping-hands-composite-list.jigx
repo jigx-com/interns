@@ -1,0 +1,140 @@
+title: What Are People Clapping For?
+type: jig.default
+
+datasources:
+  event-items:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Final Project Showcase
+          date: 16/19/2022
+          time: 4:00 - 6:00 PM
+          location: Rata | Engineering Core
+          details: Free Admission
+          claps: 378
+          photo: https://www.canterbury.ac.nz/events/active/uc-events/1661390326383_FYP-2022-showcase-low.jpg
+          
+        - id: 2
+          name: Men's Rugby
+          date: 17/09/2022
+          time: 5:00 - 7:00PM
+          location: Ilam Fields
+          details: Burnside
+          claps: 184
+          photo: https://images.unsplash.com/photo-1613331831892-355027b28c7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cnVnYnklMjBnYW1lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+
+        - id: 3
+          name: Arts Centre Chamber
+          date: 13/11/2022
+          time: 2:00 - 4:00 PM
+          location: The Great Hall
+          details: $20
+          claps: 93
+          photo: https://www.canterbury.ac.nz/events/active/uc-events/1662601203620_AC-Chamber-Series-2-low.jpg
+          
+        - id: 4
+          name: School of Music
+          date: 16/10/2022
+          time: 7:00 - 9:00 PM
+          location: Darkroom
+          details: Free Admission
+          claps: 58
+          photo: https://www.canterbury.ac.nz/events/active/uc-events/1662949151213_music-event-header-guitar-darkroom-orig.jpg
+
+
+
+children:
+  - type: component.list
+    options:
+      data: =@ctx.datasources.event-items
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: true
+      item: 
+        type: component.list-item
+        options:
+          horizontalItemSize: large
+          title: =@ctx.current.item.name
+          subtitle: =(@ctx.current.item.date & ' @ ' & @ctx.current.item.time)
+          description: =("📍 " & @ctx.current.item.location) 
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.photo
+          rightElement: 
+            element: value
+            text: =(@ctx.current.item.claps & ' claps')
+          label:
+            title: =(@ctx.current.item.details)
+            color:
+              - when: true
+                color: color4
+          
+          
+            
+            
+
+
+  # LEADERBOARD CHART INFORMATION  
+  # leaderboard-static: 
+  #   type: datasource.static
+  #   options:
+  #     data:
+  #       - student-id: 1
+  #         Name: Student 1
+  #         weekly-helps: 13
+  #       - student-id: 2
+  #         Name: Student 2
+  #         weekly-helps: 15
+  #       - student-id: 3
+  #         Name: Student 3
+  #         weekly-helps: 15
+  #       - student-id: 4
+  #         Name: Student 4
+  #         weekly-helps: 16
+  #       - student-id: 5
+  #         Name: Student 5
+  #         weekly-helps: 18
+  #       - student-id: 6
+  #         Name: Student 6
+  #         weekly-helps: 19
+  #       - student-id: 7
+  #         Name: Student 7
+  #         weekly-helps: 22
+  #       - student-id: 8
+  #         Name: Student 8
+  #         weekly-helps: 25
+  #       - student-id: 9
+  #         Name: Student 9
+  #         weekly-helps: 26
+  #       - student-id: 10
+  #         Name: Student 10
+  #         weekly-helps: 29
+  # - type: component.bar-chart
+  #   options:
+  #     plotOptions:
+  #       series:
+  #         marker:
+  #           isHidden: false
+  #     yAxis:
+  #       max: 30
+  #       min: 0
+  #     xAxis: 
+  #       categories:
+  #         - 1st
+  #         - 2nd
+  #         - 3rd
+  #         - 4th
+  #         - 5th
+  #         - 6th
+  #         - 7th
+  #         - 8th
+  #         - 9th
+  #         - 10th
+  #     series:
+  #       - data: =$reverse($sort(@ctx.datasources.leaderboard-static.weekly-helps))
+  #         color: color3
+  #     chart:
+  #       isAnimated: true
+  #       height: 275
+  #       title: Top Students of the Week

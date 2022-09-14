@@ -1,6 +1,5 @@
 title: Manaakitanga
 type: jig.composite
-
 header: 
   type: component.image
   options:
@@ -22,17 +21,6 @@ datasources:
         - id: 3
           fullName: Hani Rara
           avatar: https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIwemVhbGFuZCUyMGhlYWRzaG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
-  
-  leaderboard:
-    type: datasource.static
-    options:
-      data:
-        - x: 1st
-          y: 141
-        - x: 2nd
-          y: 114
-        - x: 3rd
-          y: 107
 
 
 widgets:
@@ -40,6 +28,7 @@ widgets:
     type: widget.group
     options:
       children: 
+        # Recent Claps
         - type: widget.list
           options:
             data: =@ctx.datasources.recent-reactions
@@ -55,19 +44,18 @@ widgets:
               type: component.trend
               options:
                 title: Recent Claps
+                value: 8
                 style:
-                  isValueHidden: true
+                  isValueHidden: false
             bottom:
               type: component.trend
               options:
                 title: "46"
                 subtitle: Your Total Reactions
-                value: 8
                 style:
                   isAlignRight: true
                   isValueHidden: true
-
-              
+        # Helper of the Week
         - type: widget.image
           options:
             top:
@@ -75,11 +63,9 @@ widgets:
               options:
                 align: center
                 title: Helper of the Week
-                
             resizeMode: cover
             source: 
               uri: https://imageresizer.static9.net.au/fxbXP4K5dAeD58mBvMaM1HVk3x4=/0x103:1080x710/1200x900/https%3A%2F%2Fprod.static9.net.au%2Ffs%2F90cbb875-1957-4b39-8408-b6457ef8c478
-
             bottom:
               type: component.titles
               options:
@@ -89,8 +75,10 @@ widgets:
 
 
 children:
-  - jigId: helping-hands-leaderboard
+  # Single Default Jig Layout
+  # - jigId: helping-hands-leaderboard
   
-  - jigId: helping-hands-user-score
-    
-  - jigId: unanswered-questions
+  # Composite Layout
+  - jigId: helping-hands-composite-image
+  - jigId: helping-hands-composite-per
+  - jigId: helping-hands-composite-list

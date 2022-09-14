@@ -1,0 +1,42 @@
+title: Your Claps
+type: jig.list
+icon: contact
+
+
+datasources:
+  current-user-static:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          claps: 10
+          name: Weekly Total
+          color: color6
+          motivation: Fantastic Work!
+        - id: 2
+          claps: 64
+          name: Semester Total
+          color: color7
+          motivation: Keep it up!
+        - id: 3
+          claps:  302
+          name: Your Total
+          color: color8
+          motivation: "Campus Record: 188"
+
+
+isHorizontal: true
+isHorizontalScrollIndicatorHidden: true
+data: =@ctx.datasources.current-user-static
+item: 
+  type: component.list-item
+  options:
+    horizontalItemSize: regular
+    title: =@ctx.current.item.name
+    rightElement: 
+      element: value
+      text: =@ctx.current.item.claps
+    color:
+      - when: true
+        color: =@ctx.current.item.color
+    progress: 1
