@@ -48,7 +48,7 @@ actions:
       - type: action.go-to
         options:
           title: =(@ctx.jigs.my-course-filter.outputs.selected-class = "LAW101" ? "Navigation - 9 mins" :"Navigation - 10 mins")
-          linkTo: navigation
+          linkTo: nav-composite
           icon: pin
           parameters:
             classcode: =@ctx.jigs.my-course-filter.outputs.selected-class
