@@ -26,7 +26,9 @@ datasources:
           '$.startTime' AS startTime,
           '$.endTime' AS endTime,
           '$.location' AS location,
-          '$.classcode' AS classcode
+          '$.classcode' AS classcode,
+          '$.meetingId' AS meetingId,
+          '$.hasOnlineMeeting'AS hasOnlineMeeting
         FROM [default/testFilter] 
         WHERE classcode LIKE @filter
       queryParameters:
@@ -46,17 +48,20 @@ item:
     description: =("📍 " & @ctx.current.item.location)
     rightElement: 
       element: button
-      title: Watch Lecture
+      title: "=@ctx.current.item.hasOnlineMeeting = 'true' ? 'Join Lecture' : 'No Lecture'"
       onPress: 
-        type: action.go-to
+        type: action.start-meeting
         options:
-          linkTo: group-video
+          title:  "Join Lecture"
+          meetingId: "=@ctx.current.item.hasOnlineMeeting = 'true' ? @ctx.current.item.meetingId: null"
     onPress: 
       type: action.go-to
       options:
         linkTo: my-course-info
         parameters:
           selected-class: =@ctx.jig.state.filter
+          hasOnlineMeeting: =@ctx.current.item.hasOnlineMeeting
+          meetingId: =@ctx.current.item.meetingId
     # Styling
     color:
       - when: =(@ctx.jig.state.filter = "ECO101")
