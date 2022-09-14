@@ -23,6 +23,11 @@ datasources:
           name: Your Total
           color: color8
           motivation: "Campus Record: 188"
+        - id: 4
+          claps: 85,102
+          name: University Total
+          color: color8
+          motivation: "Campus Record: 109,288"
 
 
 isHorizontal: true

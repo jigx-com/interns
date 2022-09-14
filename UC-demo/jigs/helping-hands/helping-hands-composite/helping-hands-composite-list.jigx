@@ -7,7 +7,7 @@ datasources:
     options:
       data:
         - id: 1
-          name: Final Project Showcase
+          name: Project Showcase
           date: 16/19/2022
           time: 4:00 - 6:00 PM
           location: Rata | Engineering Core
@@ -25,7 +25,7 @@ datasources:
           photo: https://images.unsplash.com/photo-1613331831892-355027b28c7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cnVnYnklMjBnYW1lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
 
         - id: 3
-          name: Arts Centre Chamber
+          name: Arts Chamber
           date: 13/11/2022
           time: 2:00 - 4:00 PM
           location: The Great Hall
