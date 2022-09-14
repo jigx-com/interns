@@ -18,7 +18,8 @@ widgets:
   - size: "1x1"
     jigId: calendar
 
-
+  - size: "1x1"
+    jigId: localization
 
 
 #Temporary use

@@ -22,7 +22,9 @@ children:
               - type: component.entity-field
                 options:
                   label: From
-                  value: =@ctx.datasources.mydata.From
+                  value: 
+                    id: navigateFrom
+                    defaultMessage: University Hall
               - type: component.entity-field
                 options:
                   label: To
@@ -37,7 +39,9 @@ children:
               - type: component.entity-field
                 options:
                   label: Time to Walk
-                  value: =@ctx.datasources.mydata.time
+                  value: 
+                    id: timeToWalk
+                    defaultMessage: 16 Minutes
 
 isCollapsible: true
 isInitiallyCollapsed: false

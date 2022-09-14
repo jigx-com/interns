@@ -1,4 +1,6 @@
-title: Navigation to Next Booking
+title: 
+  id: travelJigTitle
+  defaultMessage: Navigation to Next Meeting
 type: jig.composite
 
 widgets:
