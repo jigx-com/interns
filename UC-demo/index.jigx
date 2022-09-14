@@ -12,14 +12,17 @@ widgets:
   - size: "2x2"
     jigId: my-courses
     
+  - size: 2x2
+    jigId: static-nav-composite
+    
   - size: "1x1"
     jigId: calendar
 
-
+  
 
 
 #Temporary use
   # - size: "1x1"
   #   jigId: bookings
   # - size: 1x1
-  #   jigId: resources
+  #   jigId: resources                                   

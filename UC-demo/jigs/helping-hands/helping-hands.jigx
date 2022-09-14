@@ -5,7 +5,7 @@ header:
   type: component.image
   options:
     source:
-      uri: https://res.cloudinary.com/soar-communications-group-ltd/image/upload/c_fill,g_auto,w_702,h_459,dpr_1.5/f_auto,q_auto/v1653637623/stoppress.co.nz/shutterstock_414838831_4134027817.jpg?_i=AA
+      uri: https://images.squarespace-cdn.com/content/v1/5cc4b5b0d745629b0df57a4c/1623696517812-K1M56LILMLQ7G1H7NQ2E/Screen+Shot+2021-05-26+at+9.23.30+AM.png?format=2500w
 
 
 datasources:

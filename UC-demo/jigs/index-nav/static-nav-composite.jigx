@@ -1,0 +1,62 @@
+title: Navigation to Next Booking
+type: jig.composite
+
+widgets:
+  "2x2": 
+    type: widget.location
+    options:
+      pathsData: =@ctx.datasources.nav.pathsData
+      zoomLevel: 14
+        
+datasources:
+  nav: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          pathsData: 
+            - "lat": -43.525326455751674
+              "lng": 172.58432583234776
+            - "lat": -43.52533941086212
+              "lng": 172.58476358350543
+            - "lat": -43.525647093918025
+              "lng": 172.58574926808976
+            - "lat": -43.525841419259116
+              "lng": 172.58559590629145
+            - "lat": -43.52606489261649
+              "lng": 172.5855735720487
+            - "lat": -43.52631751367981
+              "lng": 172.58566439797215
+            - "lat": -43.526181487087065
+              "lng": 172.58641185062916
+            - "lat": -43.5261933624363
+              "lng": 172.58671708528433
+            - "lat": -43.52632507070331
+              "lng": 172.5872531071101
+            - "lat": -43.526437346384085
+              "lng": 172.5872114165281
+            - "lat": -43.527997308891244
+              "lng": 172.58702083099018
+            - "lat": -43.52799407025895
+              "lng": 172.58701785308557
+            - "lat": -43.52819763512633
+              "lng": 172.58449214743172
+            - "lat": -43.52778416940273
+              "lng": 172.58433431878123
+            - "lat": -43.52776905571489
+              "lng": 172.58414075534134
+            - "lat": -43.527109447695906
+              "lng": 172.58416160063476
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1599202889720-cd3c0833efa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80
+
+children:
+  - jigId: static-nav
+
+  - jigId: static-nav-info
+  
+  - jigId: near-by-stops

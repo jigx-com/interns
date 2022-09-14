@@ -28,11 +28,11 @@ item:
     to: =@ctx.current.item.endDateTime
     title: =@ctx.current.item.subject
     description: =@ctx.current.item.description
-    location: =@ctx.current.item.location #=@ctx.current.item.address
+    location: =@ctx.current.item.location 
     onButtonPress: 
       type: action.go-to
       options:
-        title: Discussion Board
-        linkTo: discussion-list
+        title: View Class Info
+        linkTo: my-course-info
         parameters:
-          subject: =@ctx.current.item.subject
+          selected-class: =@ctx.current.item.description

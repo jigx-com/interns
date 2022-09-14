@@ -49,7 +49,9 @@ item:
       - when: true
         color: =@ctx.current.item.color
     
-    # onPress: 
-    #   type: action.go-to
-    #   options:
-    #     linkTo: my-course-info
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: my-course-info
+        parameters:
+          selected-class: =@ctx.current.item.classcode
