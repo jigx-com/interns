@@ -44,6 +44,7 @@ datasources:
           '$.topic' AS topic,
           '$.userName' AS userName,
           '$.userAvatar' AS userAvatar,
+          '$.hasMeeting',
           '$.days' AS days
         FROM 
           [default/discussion] 
@@ -64,7 +65,10 @@ item:
       element: avatar
       text: ' '
       uri: =@ctx.current.item.userAvatar
-    # Item Actions
+    label:
+      title: "Meeting"
+      isHidden: "=@ctx.current.item.hasMeeting = 'true' ? false : true" 
+      
     onPress: 
       type: action.go-to
       options:
@@ -74,6 +78,8 @@ item:
           topic: =@ctx.current.item.topic
           iQ: =@ctx.current.item.initialQ
           avatar: =@ctx.current.item.userAvatar
+          discussionId: =@ctx.current.item.id
+          hasMeeting: =@ctx.current.item.hasMeeting
 
 actions:
   - children:

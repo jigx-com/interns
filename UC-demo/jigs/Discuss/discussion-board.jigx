@@ -24,13 +24,16 @@ datasources:
           '$.topic' AS topic,
           '$.userName' AS userName,
           '$.userAvatar' AS userAvatar,
-          '$.days' AS days
+          '$.days' AS days,
+          '$.hasMeeting',
+          '$.meetingId'
         FROM 
           [default/discussion] 
         WHERE 
           class = @sub
       queryParameters:
         sub: =@ctx.jig.inputs.sub
+      isDocument: true
 
   responses:
     type: datasource.sqlite
@@ -73,6 +76,7 @@ children:
   - type: component.form
     instanceId: responses
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         - type: component.text-field
           instanceId: respond
@@ -165,23 +169,70 @@ children:
 actions:
   - children:
       #Submitting respons
-      - type: action.submit-form
+      - type: action.action-list
         options:
-          formId: responses
-          provider: DATA_PROVIDER_DYNAMIC
-          title: Create Record
-          entity: default/testResponses
-          method: create
-          goBack: stay
-          onSuccess:
-            actions:
-              - type: action.confirm
-                options:
-                  title: Submitted
-                  isConfirmedAutomatically: true
-                  onConfirmed: 
-                    type: action.go-back
-                  modal:
-                    title: ''
+          title: Comment
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/testResponses
+                method: create
+                goBack: stay
+                data:
+                  respond: =@ctx.jig.components.respond.state.value
+                  reactions: "0"
+                  responder: =@ctx.user.displayName
+                  responderEmail: =@ctx.user.email
+                  topic: =@ctx.jig.inputs.topic
+                  avatar: =@ctx.jig.inputs.avatar
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.respond.state.value
+
+      - type: action.action-list
+        options:
+          style:
+            isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? true : false"
+          title: Comment and Start Meeting
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/testResponses
+                method: create
+                goBack: stay
+                data:
+                  respond: =@ctx.jig.components.respond.state.value
+                  reactions: "0"
+                  responder: =@ctx.user.displayName
+                  responderEmail: =@ctx.user.email
+                  topic: =@ctx.jig.inputs.topic
+                  avatar: =@ctx.jig.inputs.avatar
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/discussion
+                method: update
+                data: 
+                  id: =@ctx.jig.inputs.discussionId
+                  hasMeeting: "true"
+                  meetingId: =$uuid_v4()
+                onSuccess: 
+                  type: action.start-meeting
+                  options:
+                    meetingId: =@ctx.datasources.mydata.meetingId
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.respond.state.value
+      - type: action.start-meeting
+        options:
+          style:
+            isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? false : true"
+          title: Join Existing Meeting
+          meetingId: =@ctx.datasources.mydata.meetingId
+      
+                  
+                  
             
               
