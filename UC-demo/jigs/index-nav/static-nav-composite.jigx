@@ -60,3 +60,10 @@ children:
   - jigId: static-nav-info
   
   - jigId: near-by-stops
+    
+actions:
+  - children:
+      - type: action.go-to
+        options:
+          title: View Indoor Navigation
+          linkTo: indoornavigation

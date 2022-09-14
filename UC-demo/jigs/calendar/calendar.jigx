@@ -35,4 +35,4 @@ item:
         title: View Class Info
         linkTo: my-course-info
         parameters:
-          selected-class: =@ctx.current.item.description
+          selected-class: "LAW101" #=@ctx.current.item.descriptions

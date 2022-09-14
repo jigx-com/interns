@@ -26,6 +26,7 @@ children:
                       options:
                         label: Semester Total
                         value: =@ctx.datasources.current-user-static.current-total
+                        
                     - type: component.entity-field
                       options:
                         label: This Weeks Help
