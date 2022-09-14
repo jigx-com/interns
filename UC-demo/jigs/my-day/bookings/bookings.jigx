@@ -51,7 +51,7 @@ children:
           onPress: 
             type: action.go-to
             options:
-              linkTo: =@ctx.current.item.linkTo
+              linkTo: calendar
               
           style:
             isHighlighted: true
