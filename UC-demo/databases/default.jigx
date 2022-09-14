@@ -1,5 +1,6 @@
 tables:
   # Final
+  about-course:
   calendar:
   resources:
   discussion:

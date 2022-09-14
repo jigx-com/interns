@@ -50,10 +50,14 @@ item:
       element: button
       title: "=@ctx.current.item.hasOnlineMeeting = 'true' ? 'Join Lecture' : 'No Lecture'"
       onPress: 
-        type: action.start-meeting
+        type: action.go-to
         options:
-          title:  "Join Lecture"
-          meetingId: "=@ctx.current.item.hasOnlineMeeting = 'true' ? @ctx.current.item.meetingId: null"
+          linkTo: group-video
+      # onPress: 
+      #   type: action.start-meeting
+      #   options:
+      #     title:  "Join Lecture"
+      #     meetingId: "=@ctx.current.item.hasOnlineMeeting = 'true' ? @ctx.current.item.meetingId: null"
     onPress: 
       type: action.go-to
       options:

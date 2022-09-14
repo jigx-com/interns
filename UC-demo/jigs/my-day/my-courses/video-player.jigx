@@ -1,0 +1,87 @@
+title: =(@ctx.jig.inputs.day & ', ' & @ctx.jig.inputs.week & ' Lecture - ' & @ctx.jig.inputs.selected-class)
+description: Lecture & Slides
+type: jig.default
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.datasources.header-image.headerImage
+      
+datasources:
+  header-image:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/my-course-header
+      query: |
+        SELECT 
+          id, 
+          '$.header-image' as headerImage, 
+          '$.classcode' AS classcode
+        FROM [default/my-course-header] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+  content:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/course-lessons
+      query: |
+        SELECT 
+          id, 
+          '$.title' AS title,
+          '$.subtitle' AS subtitle, 
+          '$.classcode' AS classcode 
+        FROM [default/course-lessons] 
+        WHERE classcode = @filter
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.section
+          options:
+            title: Welcome to UC - orientation
+            children:
+              - type: component.field-row
+                options:
+                  children:
+                    - type: component.entity-field
+                      options:
+                        label: Assignment
+                        value: "Read over the Syllabus"
+                        style:
+                          flex: 5
+                    - type: component.entity-field
+                      options:
+                        label: Due
+                        value: "18/09/2022"
+                        contentType: date
+                        style:
+                          flex: 3
+
+  - type: component.video-player
+    options:
+      url: https://www.youtube.com/watch?v=JwtnJle0NFU
+      
+
+actions:
+  - children:
+      - type: action.go-to
+        options:
+          title: Open PDF Syllabus
+          linkTo: syllabus-pdf
+
+      - type: action.go-to
+        options:
+          title: Open Web Syllabus
+          icon: document
+          linkTo: syllabus-website 
+          parameters:
+            selected-class: =@ctx.jig.inputs.selected-class

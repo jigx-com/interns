@@ -43,3 +43,12 @@ item:
       isContained: false
       element: icon
       name: button-play
+    # Item Navigation
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: video-player
+        parameters:
+          selected-class: =@ctx.jig.inputs.selected-class
+          week: =@ctx.current.item.week
+          day: =@ctx.current.item.day

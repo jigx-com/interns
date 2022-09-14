@@ -50,10 +50,13 @@ datasources:
           '$.reactions' AS reactions,
           '$.responder' AS responder,
           '$.avatar' AS avatar,
-          '$.topic' AS topic
+          '$.topic' AS topic,
+          '$.time-of-response' AS timeOfResponse
         FROM [default/testResponses] 
         WHERE 
           topic = @topic
+        ORDER BY 
+          timeOfResponse DESC
       queryParameters:
         topic: =@ctx.jig.inputs.topic
 
@@ -124,6 +127,13 @@ children:
             label: ' '
             value: =@ctx.jig.inputs.avatar
             isHidden: true
+        - type: component.text-field
+          instanceId: time-of-response
+          options:
+            label: ""
+            value: =$millis()
+            isHidden: true
+
   # Comments & Reactions
   - type: component.list
     options:  
@@ -228,21 +238,21 @@ actions:
                 onSuccess: 
                   description: Meeting Scheduled, press below to join.
                   title: Meeting Scheduled
-                  actions:
-                    - type: action.start-meeting                      
-                      options:
-                        title: Join Meeting
-                        meetingId: =@ctx.solution.state.tMeetingId
+                  # actions:
+                  #   - type: action.start-meeting                      
+                  #     options:
+                  #       title: Join Meeting
+                  #       meetingId: =@ctx.solution.state.tMeetingId
 
             - type: action.reset-state
               options:
                 state: =@ctx.jig.components.respond.state.value
-      - type: action.start-meeting
-        options:
-          style:
-            isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? false : true"
-          title: Join Existing Meeting
-          meetingId: =@ctx.datasources.mydata.meetingId
+      # - type: action.start-meeting
+      #   options:
+      #     style:
+      #       isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? false : true"
+      #     title: Join Existing Meeting
+      #     meetingId: =@ctx.datasources.mydata.meetingId
       
                   
                   

@@ -5,95 +5,87 @@ header:
   type: component.image
   options:
     source:
-      uri: https://images.squarespace-cdn.com/content/v1/5cc4b5b0d745629b0df57a4c/1623696517812-K1M56LILMLQ7G1H7NQ2E/Screen+Shot+2021-05-26+at+9.23.30+AM.png?format=2500w
+      uri: https://res.cloudinary.com/soar-communications-group-ltd/image/upload/c_fill,g_auto,w_702,h_459,dpr_1.5/f_auto,q_auto/v1653637623/stoppress.co.nz/shutterstock_414838831_4134027817.jpg?_i=AA
 
 
 datasources:
-  current-user:
-    type: datasource.static
-    options:
-      data:
-        - id: 6
-          firstName: Kia
-          middleName: ora
-          lastName: Kelly
-          current-helps: 64
-          last-week-helps: 54
-
-  top-reactions: 
+  recent-reactions:
     type: datasource.static
     options:
       data:
         - id: 1
-          firstName: Ari  
-          middleName: Utu
-          lastName: Thompson
-          helps: 141
+          fullName: Ari Utu
+          avatar: https://st3.depositphotos.com/1017187/15681/i/450/depositphotos_156819898-stock-photo-north-island-new-zealand-may.jpg
+        - id: 2
+          fullName: Kia ora Kelly
+          avatar: https://images.unsplash.com/photo-1543949806-2c9935e6aa78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGZlbWFsZSUyMGhlYWRzaG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+        - id: 3
+          fullName: Hani Rara
+          avatar: https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIwemVhbGFuZCUyMGhlYWRzaG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
+  
+  leaderboard:
+    type: datasource.static
+    options:
+      data:
+        - x: 1st
+          y: 141
+        - x: 2nd
+          y: 114
+        - x: 3rd
+          y: 107
 
 
 widgets:
   "2x4": 
     type: widget.group
     options:
-      children:
-        - type: widget.value
+      children: 
+        - type: widget.list
           options:
-            top: 
-              type: component.titles
+            data: =@ctx.datasources.recent-reactions
+            item: 
+              type: component.list-item
               options:
-                align: center
-                title: Manaakitanga
-                
-            align: center
-            value: =@ctx.datasources.current-user.current-helps
-            format:
-              unit: claps
-            
-            bottom: 
+                title: =@ctx.current.item.fullName
+                leftElement: 
+                  element: avatar
+                  text: NA
+                  uri: =@ctx.current.item.avatar
+            top:
               type: component.trend
               options:
-                title: "7 days"
-                value: =((@ctx.datasources.current-user.current-helps) - (@ctx.datasources.current-user.last-week-helps))
+                title: Recent Claps
+                style:
+                  isValueHidden: true
+            bottom:
+              type: component.trend
+              options:
+                title: "46"
+                subtitle: Your Total Reactions
+                value: 8
+                style:
+                  isAlignRight: true
+                  isValueHidden: true
 
-        # - type: widget.image
-        #   options:
-        #     top: 
-        #       type: component.titles
-        #       options:
-        #         align: center
-        #         title: =(@ctx.datasources.top-reactions.firstName & ' ' & @ctx.datasources.top-reactions.middleName  & ' ' & @ctx.datasources.top-reactions.lastName)
-        #         subtitle: Helper of the Week
-                
-        #     source: 
-        #       uri: https://images.unsplash.com/photo-1566856528802-9ab6cbed4ee8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG1hb3JpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
-            
-        #     bottom: 
-        #       type: component.titles
-        #       options:
-        #         align: left
-        #         title: =@ctx.datasources.top-reactions.helps
-        #         subtitle: claps
               
-        - type: widget.avatar
+        - type: widget.image
           options:
-            
             top:
               type: component.titles
               options:
                 align: center
-                title: =(@ctx.datasources.top-reactions.firstName & ' ' & @ctx.datasources.top-reactions.middleName  & ' ' & @ctx.datasources.top-reactions.lastName)
-                subtitle: Helper of the Week
-            
-            uri: https://images.unsplash.com/photo-1566856528802-9ab6cbed4ee8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fG1hb3JpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
-            
-            text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
-            
+                title: Helper of the Week
+                
+            resizeMode: cover
+            source: 
+              uri: https://imageresizer.static9.net.au/fxbXP4K5dAeD58mBvMaM1HVk3x4=/0x103:1080x710/1200x900/https%3A%2F%2Fprod.static9.net.au%2Ffs%2F90cbb875-1957-4b39-8408-b6457ef8c478
+
             bottom:
               type: component.titles
               options:
                 align: left
-                title: =@ctx.datasources.top-reactions.helps
-                subtitle: claps
+                title: "Oriini Kaipara"
+                subtitle: 141 claps
 
 
 children:

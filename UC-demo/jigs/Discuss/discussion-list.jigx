@@ -45,11 +45,14 @@ datasources:
           '$.userName' AS userName,
           '$.userAvatar' AS userAvatar,
           '$.hasMeeting',
-          '$.days' AS days
+          '$.days' AS days,
+          '$.time-of-post' AS timeOfPost
         FROM 
           [default/discussion] 
         WHERE 
           classcode LIKE @filter
+        ORDER BY 
+          timeOfPost DESC
       queryParameters:
         filter: =($exists(@ctx.jig.inputs.subject) ? @ctx.datasources.translate-topic.classcode :@ctx.jig.inputs.selected-class)
 

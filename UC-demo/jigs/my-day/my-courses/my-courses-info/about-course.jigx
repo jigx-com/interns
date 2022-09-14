@@ -44,8 +44,8 @@ children:
       item: 
         type: component.list-item
         options:
-          title: =(@ctx.current.item.profTitle & ' ' & @ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
-          subtitle: Lecturer
+          title: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+          subtitle: =@ctx.current.item.profTitle
           leftElement: 
             element: avatar
             text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))

@@ -2,9 +2,8 @@ title: Class Progress
 type: jig.list
 
 datasources:          
-  pie-chart:
+  pie-chart-list-dynamic:
     type: datasource.sqlite
-    
     options:
       provider: DATA_PROVIDER_DYNAMIC
 
@@ -14,26 +13,24 @@ datasources:
       query: |
         SELECT 
           id, 
-          json_extract(data, '$.seriesy') AS data, 
+          json_extract(data, '$.seriesx') as x,
+          json_extract(data, '$.seriesy') as y, 
           '$.color' AS color, 
-          '$.classcode' AS classcode, 
+          '$.title' AS title, 
           '$.subtitle' AS subtitle, 
-          '$.title' AS title
+          '$.classcode' AS classcode,
+          '$.abcOrder' AS abcOrder
         FROM [default/testClassResult] 
         WHERE classcode = @filter
+        ORDER BY abcOrder 
       queryParameters:
         filter: =@ctx.jig.inputs.selected-class
 
 
 
 isHorizontal: true
-data: =@ctx.datasources.pie-chart
-# item: 
-#   type: component.list-item
-#   options:
-#     title: =@ctx.datasources.data
-
-item: 
+data: =@ctx.datasources.pie-chart-list-dynamic
+item:
   type: component.pie-chart
   options:
     chart:
@@ -43,10 +40,11 @@ item:
       subtitle:
         text: =@ctx.current.item.subtitle
         verticalAlign: center
-      width: 160
-      height: 160
+      width: 155
+      height: 155
     legend:
       isHidden: true
     series:
       - data: =@ctx.current.item.data
-        layout: pie 
+        layout: arch
+        color: =@ctx.current.item.color

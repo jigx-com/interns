@@ -85,7 +85,14 @@ children:
             label: ""
             value: =@ctx.jig.inputs.subject
             isHidden: true
-            
+        - type: component.text-field
+          instanceId: time-of-post
+          options:
+            label: ""
+            value: =$millis()
+            isHidden: true
+
+
 actions:
   - children:
       - type: action.submit-form

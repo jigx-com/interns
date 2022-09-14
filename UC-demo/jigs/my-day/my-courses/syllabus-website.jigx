@@ -1,0 +1,24 @@
+title: =('UC - ' & @ctx.jig.inputs.selected-class & ' Syllabus')
+type: jig.document
+
+datasources:
+  webSyl:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/recent-lecture
+      query: |
+        SELECT 
+          id, 
+          '$.classcode' AS classcode, 
+          '$.syllabus' AS syllabus 
+        FROM [default/recent-lecture] 
+        WHERE classcode = @filter
+        LIMIT 1
+      queryParameters:
+        filter: =@ctx.jig.inputs.selected-class
+
+source:
+  documentType: HTML
+  uri: =@ctx.datasources.webSyl.syllabus
