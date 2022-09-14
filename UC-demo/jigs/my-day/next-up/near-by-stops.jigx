@@ -1,0 +1,36 @@
+title: Near by Stops
+type: jig.default
+
+datasources:
+  stops: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Reboot Café
+          img: https://images.unsplash.com/photo-1555465683-459c6e696f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80
+        - id: 2
+          name: Nuts and Bolts Café
+          img: https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1778&q=80
+        - id: 3
+          name: The Greek
+          img: https://images.unsplash.com/photo-1620131810504-79cc8cb61a70?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80
+        - id: 4
+          name: The Wok
+          img: https://images.unsplash.com/photo-1464500650248-1a4b45debb9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHRoZSUyMHdva3xlbnwwfDB8MHx8&auto=format&fit=crop&w=800&q=60
+
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      isHorizontalScrollIndicatorHidden: true
+      data: =@ctx.datasources.stops
+      maximumItemsToRender: 8
+      item: 
+        type: component.list-item
+        options:
+          title: =@ctx.current.item.name
+          leftElement: 
+            element: image
+            text: ''
+            uri: =@ctx.current.item.img

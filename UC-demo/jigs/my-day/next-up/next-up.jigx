@@ -22,12 +22,31 @@ datasources:
           '$.endTime',
           '$.distance',
           '$.icon',
-          '$.color' AS color,
+          '$.image' AS images,
           '$.address' AS address
         FROM [default/calendar]
         ORDER BY startDateTime
           Limit 1
-
+      # queryParameters:
+      #   limitNum: "=($exists(@ctx.jig.inputs.limit) ? 1: 10)"
+  
+  translate-topic:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/subject
+  
+      query: |
+        SELECT 
+          id, 
+          '$.subject' AS subject, 
+          '$.classcode' AS classcode 
+        FROM [default/subject] 
+        WHERE subject LIKE @inputSubject
+      queryParameters:
+        inputSubject: =@ctx.datasources.cal.subject
 
 children:
   - type: component.list
@@ -47,9 +66,9 @@ children:
             onPress: 
               type: action.go-to
               options:
-                linkTo: navigation
+                linkTo: nav-composite
                 parameters:
-                  LOC: =@ctx.current.item.address
+                  classcode: =@ctx.datasources.translate-topic.classcode
           
           # label:
           #   title: =@ctx.current.item.distance
@@ -69,8 +88,11 @@ children:
           leftElement: 
             element: image
             text: ''
-            uri: https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80
+            uri: https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+              #=@ctx.current.item.image
             
-            
-
+onFocus: 
+  type: action.go-to
+  options:
+    linkTo: my-day-composite
       

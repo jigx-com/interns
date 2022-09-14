@@ -7,9 +7,9 @@ tables:
   my-course-header:
   subject:
   course-lessons:
+  navigation:
     
   # Test
   testFilter:
   testClassResult:
   testResponses:
-  

@@ -1,0 +1,17 @@
+title: Navigation
+type: jig.composite
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1599202889720-cd3c0833efa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80
+
+children:
+  - jigId: navigation
+    inputs:
+      classcode: =@ctx.jig.inputs.classcode
+  - jigId: nav-info
+    inputs:
+      classcode: =@ctx.jig.inputs.classcode
+  - jigId: near-by-stops

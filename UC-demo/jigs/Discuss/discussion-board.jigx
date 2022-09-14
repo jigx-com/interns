@@ -128,7 +128,7 @@ children:
         type: component.list-item
         options:
           title: =@ctx.current.item.responder
-          subtitle: =@ctx.current.item.respond
+          description: =@ctx.current.item.respond
           leftElement: 
             element: avatar
             text: ''

@@ -1,25 +1,36 @@
-title: Navigation
+title: Directions
 description: Description of your Jig
 type: jig.default
 
-# datasources:
-#   nav: 
-#     type: datasource.sqlite
-#     options:
-#       provider: DATA_PROVIDER_DYNAMIC
+datasources:
+  nav: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
   
-#       entities:
-#         - default/calendar
+      entities:
+        - default/navigation
   
-#       query: |
-#         SELECT id, 
-#         '$.address'
-#         FROM [default/calendar] 
-#       #   WHERE id = @myParam
-#       # queryParameters:
-#       #   myParam: value
-
+      query: |
+        SELECT
+          id, 
+          '$.pathsData' AS pathsData,
+          '$.zoomLevel' AS zoomLevel, 
+          '$.classcode' AS classcode,
+          '$.distance' AS distance,
+          '$.from' AS fromPlace,
+          '$.to' AS toPlace,
+          '$.time' AS time
+        FROM [default/navigation] 
+        WHERE classcode LIKE @code
+      queryParameters:
+        code: =@ctx.jig.inputs.classcode
+        
 children:
   - type: component.location
     options:
-      address: =@ctx.jig.inputs.LOC
+      pathsData: =$eval(@ctx.datasources.nav.pathsData)
+      zoomLevel: =@ctx.datasources.nav.zoomLevel
+
+isCollapsible: true
+isInitiallyCollapsed: false

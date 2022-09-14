@@ -99,6 +99,8 @@ datasources:
 
 children:
   - jigId: next-up
+    # inputs:
+    #   limit: 100
 
   - jigId: bookings
     instanceId: new-entry-form
