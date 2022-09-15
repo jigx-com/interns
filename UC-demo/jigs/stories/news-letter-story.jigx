@@ -1,0 +1,61 @@
+title: News
+type: jig.default
+
+datasources:
+  mydata: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          url: https://www.canterbury.ac.nz/international/why-choose-uc-hero-large.jpg
+          title: Latest News
+          subtitle: Click below to view the latest news at UC!
+          link-to: https://www.canterbury.ac.nz/news/
+        - id: 2
+          url: https://www.canterbury.ac.nz/news/2022/1663196585770_Professor-Jen-Hay-low.jpg
+          title: Exposure to te reo Māori primes the brain for language learning
+          subtitle: Listening to te reo Māori can kickstart language-learning.
+          link-to: https://www.canterbury.ac.nz/news/2022/exposure-to-te-reo-maori-primes-the-brain-for-language-learning.html
+        - id: 3
+          url: https://www.canterbury.ac.nz/news/2022/1662689035187_Open-Day-2022-Haere-roa-orig.jpg
+          title: "Huge turnout for UC’s first Rā Tōmene Open Day in three years"
+          subtitle: Over 4000 aspiring students and their whānau from across Aotearoa New Zealand
+          link-to: https://www.canterbury.ac.nz/news/2022/huge-turnout-for-ucs-first-r-tmene-open-day-in-three-years.html
+        - id: 4
+          url: https://www.canterbury.ac.nz/news/2022/1652221933573_Senior-Lecturer-Dr-David-Dempsey-and-Professor-Andy-Nicol-orig.jpg
+          title: Canterbury researchers funded $17m to solve global problems
+          subtitle: UC researchers are committed to solving current and future challenges
+          link-to: https://www.canterbury.ac.nz/news/2022/canterbury-researchers-funded-17m-to-solve-global-problems.html
+
+stories:
+  type: component.story-group
+  options:
+    data: =@ctx.datasources.mydata
+    groupName: News
+    item: 
+      type: component.image
+      options:
+        title: =@ctx.current.item.title
+        subtitle: =@ctx.current.item.subtitle
+        source:
+          uri: =@ctx.current.item.url
+        onPress: 
+          type: action.go-to
+          options:
+            title: Read More
+            linkTo: linkTo-stories
+            parameters:
+              linkTo: =@ctx.current.item.link-to
+              title: =@ctx.current.item.title
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: tbd
+                  value: tbd

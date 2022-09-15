@@ -41,3 +41,4 @@ children:
               linkTo: web-links
               parameters:
                 linkTo: =@ctx.current.item.linkTo
+                linkName: =@ctx.current.item.name

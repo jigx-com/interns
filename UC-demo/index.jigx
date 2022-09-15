@@ -2,6 +2,9 @@ name: uc-demo
 title: UC-demo
 category: business
 
+stories:
+  - news-letter-story
+
 widgets:
   - size: "4x2"
     jigId: my-day-composite
