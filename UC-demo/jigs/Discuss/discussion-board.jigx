@@ -156,9 +156,9 @@ children:
           # Swipe to like comment
           swipeable:
             left:
-              - label: 👏🏼 #R E A C T
+              - label: C L A P
                 #should be clapping hands
-                #icon: love-it
+                icon: love-it
                 color: positive
                 onPress: 
                   type: action.execute-entity
@@ -252,4 +252,4 @@ actions:
           style:
             isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? false : true"
           title: Join Existing Meeting
-          meetingId: =@ctx.datasources.mydata.meetingId
+          meetingId: "233f67cf-0e53-4f89-8c8a-ea70a3611267" #=@ctx.datasources.mydata.meetingId
