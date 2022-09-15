@@ -1,0 +1,28 @@
+title: =@ctx.jig.inputs.subject
+type: jig.default
+
+children: 
+  - type: component.entity
+    options:
+      children:
+        # - type: component.entity-field
+        #   options:
+        #     label: Subject
+        #     value: =@ctx.jig.inputs.subject
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: From
+                  value: =@ctx.jig.inputs.fromMail
+                  style:
+                    flex: 6
+              - type: component.entity-field
+                options:
+                  label: Recieved
+                  value: =$fromMillis($toMillis(@ctx.jig.inputs.dateRecieved), '[h#1]:[m01][P]')
+
+        
+            
+                    

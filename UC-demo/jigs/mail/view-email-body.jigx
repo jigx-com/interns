@@ -1,0 +1,7 @@
+title: "Message"
+type: jig.document
+
+source:
+  documentType: HTML
+  content: =@ctx.jig.inputs.content
+  isTrackingTransparencyRequired: false

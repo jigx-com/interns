@@ -156,10 +156,10 @@ children:
           # Swipe to like comment
           swipeable:
             left:
-              - label: R E A C T
+              - label: 👏🏼 #R E A C T
                 #should be clapping hands
-                icon: love-it
-                color: primary
+                #icon: love-it
+                color: positive
                 onPress: 
                   type: action.execute-entity
                   options:

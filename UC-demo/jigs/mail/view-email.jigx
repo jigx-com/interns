@@ -1,0 +1,43 @@
+title: View Email
+type: jig.composite
+
+datasources:
+  email: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_LOCAL
+  
+      entities:
+        - entity: email
+  
+      query: |
+        SELECT id, 
+        '$.receivedDateTime', 
+        '$.hasAttachments', 
+        '$.subject',
+        '$.bodyPreview',
+        '$.importance',
+        '$.conversationId',
+        '$.isRead',
+        json_extract(Data, '$.body.content') as body,
+        '$.parentFolderId',
+        json_extract(Data, '$.from.emailAddress.name') as fromEmailName,
+        json_extract(Data, '$.from.emailAddress.address') as fromEmailAddress,
+        json_extract(Data, '$.toRecipients.emailAddress.name') as toEmailName,
+        json_extract(Data, '$.toRecipients.emailAddress.address') as toEmailName,
+        json_extract(Data, '$.flag.flagStatus') as flag
+        FROM [email] 
+        where id = @mailId
+      queryParameters:
+        mailId: =@ctx.jig.inputs.mailId
+
+children:
+  - jigId: view-email-header
+    inputs:
+      fromMail: =@ctx.datasources.email.fromEmailAddress
+      fromName: =@ctx.datasources.email.fromEmailName
+      dateRecieved: =@ctx.datasources.email.receivedDateTime
+      subject: =@ctx.datasources.email.subject
+  - jigId: view-email-body
+    inputs:
+      content: =@ctx.datasources.email.body 
