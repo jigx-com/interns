@@ -179,7 +179,7 @@ children:
   
 actions:
   - children:
-      #Submitting respons
+      #Submitting response
       - type: action.action-list
         options:
           title: Comment

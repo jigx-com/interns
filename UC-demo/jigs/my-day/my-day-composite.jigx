@@ -33,16 +33,7 @@ widgets:
                 title: =@ctx.current.item.subject
                 subtitle: =@ctx.current.item.startTime & '-' & @ctx.current.item.endTime
                 description: =@ctx.current.item.location
-                # label:
-                #   title: =@ctx.current.item.distance
-                #   color:
-                #     - when: true
-                #       color: color6
-                # leftElement: 
-                #   element: image
-                #   text: ''
-                #   uri: https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80
-                
+
 header: 
   type: component.image
   options:
@@ -79,8 +70,6 @@ datasources:
 
 children:
   - jigId: next-up
-    # inputs:
-    #   limit: 100
 
   - jigId: bookings
     instanceId: new-entry-form

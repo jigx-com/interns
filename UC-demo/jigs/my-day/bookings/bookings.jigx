@@ -1,5 +1,4 @@
 title: My Bookings
-# description: Description of your Jig
 type: jig.default
 
 datasources:

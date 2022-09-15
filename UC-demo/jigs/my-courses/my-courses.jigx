@@ -60,13 +60,7 @@ children:
   - jigId: my-course-filter
     instanceId: my-course-filter
     # OUTPUT: selected-class
-  
-  # - jigId: output-class-progress
-  #   inputs:
-  #     selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class 
       
   - jigId: recent-lectures
     inputs:
       selected-class: =@ctx.jigs.my-course-filter.outputs.selected-class
-      
-      

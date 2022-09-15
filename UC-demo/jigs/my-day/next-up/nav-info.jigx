@@ -1,5 +1,4 @@
 title: Details
-# description: Description of your Jig
 type: jig.default
 
 datasources:

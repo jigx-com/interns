@@ -1,5 +1,4 @@
 title: Start a New Discussion
-# description: Description of your Jig
 type: jig.default
 
 header: 
@@ -26,7 +25,7 @@ datasources:
         WHERE subject = @inputSubject
       queryParameters:
         inputSubject: =@ctx.jig.inputs.subject
-#   mydata: 
+
 
 children:
   - type: component.form

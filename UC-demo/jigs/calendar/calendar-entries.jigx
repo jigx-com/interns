@@ -1,9 +1,6 @@
 title: Cal Entries
 type: jig.default
 
-# datasources:
-#   mydata: 
-
 children:
   - type: component.form
     instanceId: newEntry

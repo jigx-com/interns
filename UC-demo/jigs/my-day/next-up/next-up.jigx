@@ -1,5 +1,4 @@
 title: Next Up
-# description: Description of your Jig
 type: jig.default
 
 datasources:
@@ -27,9 +26,7 @@ datasources:
         FROM [default/calendar]
         ORDER BY startDateTime
           Limit 1
-      # queryParameters:
-      #   limitNum: "=($exists(@ctx.jig.inputs.limit) ? 1: 10)"
-  
+
   translate-topic:
     type: datasource.sqlite
     options:
@@ -69,12 +66,6 @@ children:
                 linkTo: nav-composite
                 parameters:
                   classcode: =@ctx.datasources.translate-topic.classcode
-          
-          # label:
-          #   title: =@ctx.current.item.distance
-          #   color:
-          #     - when: true
-          #       color: color13
                 
           onPress: 
             type: action.go-to
@@ -89,7 +80,6 @@ children:
             element: image
             text: ''
             uri: https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
-              #=@ctx.current.item.image
             
 onFocus: 
   type: action.go-to
