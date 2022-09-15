@@ -10,26 +10,6 @@ datasources:
   
       entities:
         - default/testQuote
-  
-      query: |
-        SELECT 
-          id, 
-          '$.quote' AS quote, 
-          '$.time-of-quote' AS timeOfQuote,
-          '$.firstName' AS firstName,
-          '$.lastName' AS lastName
-        FROM [default/testQuote] 
-        ORDER BY timeOfQuote DESC
-  
-  
-
-  quotes2:
-    type: datasource.sqlite
-    options:
-      provider: DATA_PROVIDER_DYNAMIC
-  
-      entities:
-        - default/testQuote
         - default/testMembers
   
       query: |
@@ -45,9 +25,10 @@ datasources:
           json_extract(M.data, '$.email') AS email
         FROM [default/testQuote] AS Q LEFT JOIN [default/testMembers] AS M
         ON json_extract(Q.data, '$.quotedPerson') = M.id
-        
+        ORDER BY timeOfQuote DESC
 
-data: =@ctx.datasources.quotes2
+
+data: =@ctx.datasources.quotes
 item:
   type: component.list-item
   options:
@@ -57,7 +38,16 @@ item:
       element: avatar
       text: =$uppercase($substring(@ctx.current.item.quotedFirstName, 0, 1) & $substring(@ctx.current.item.quotedLastName, 0, 1))
       uri: =@ctx.current.item.quotedAvatar
-    
+    rightElement: 
+      element: value
+      text: ←
+    swipeable:
+      left: 
+        - label: C H E E R S
+          icon: champagne-cheers
+          color: warning
+          onPress: 
+            type: action.go-back
     # avatars:
     #   - text: =$uppercase($substring(@ctx.current.item.quotedFirstName, 0, 1) & $substring(@ctx.current.item.quotedLastName, 0, 1))
     #     uri: =@ctx.current.item.avatar

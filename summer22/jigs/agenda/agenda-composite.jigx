@@ -112,7 +112,7 @@ header:
 
 
 children:
-  - jigId: mygroup
-    inputs:
-      recordid: =@ctx.jig.inputs.parameter
+  # - jigId: mygroup
+  #   inputs:
+  #     recordid: =@ctx.jig.inputs.parameter
   - jigId: agenda-list

@@ -1,0 +1,19 @@
+type: datasource.sqlite
+options:
+  provider: DATA_PROVIDER_DYNAMIC
+
+  entities:
+    - default/Photos
+
+  query: |
+    SELECT 
+      id, 
+      '$.uploadPhoto' AS uploadPhoto, 
+      '$.title' AS title,
+      '$.expireDate'AS expire,
+      '$.description' AS description
+    FROM [default/Photos]
+    WHERE expire > @currentMillis
+    ORDER BY expire DESC
+  queryParameters:
+    currentMillis: =$string($millis())

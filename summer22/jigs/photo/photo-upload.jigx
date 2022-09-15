@@ -8,13 +8,12 @@ datasources:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-  
       entities:
         - default/Location
-  
       query: SELECT id, '$.name' FROM [default/Location] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL ORDER BY '$.name'
       queryParameters:
         search: =@ctx.components.location.state.searchText  
+
 header: 
   type: component.image
   options:
@@ -25,6 +24,7 @@ children:
   - type: component.form
     instanceId: sharePhotos
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         # Image Upload
         - type: component.media-field
@@ -70,8 +70,9 @@ children:
           instanceId: expireDate
           options:
             label: ""
-            value: =($millis() + 86400000)
+            value: =($millis() + 86400000) #cached data execution;moved to execute entities
             isRequired: false
+            isHidden: true
         # Uploader details
         - type: component.text-field
           instanceId: uploadedBy
@@ -82,12 +83,95 @@ children:
             isRequired: false
 
 
-
 actions:
   - children:
-      - type: action.submit-form
+      - type: action.execute-entity
         options:
-          formId: sharePhotos
+          title: Upload Photo
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/Photos
-          title: Upload Photo
+          method: create
+          goBack: home
+          onSuccess: 
+            type: action.action-list
+            options:
+              actions:
+                - type: action.confirm
+                  options:
+                    isConfirmedAutomatically: true
+                    onConfirmed: 
+                      type: action.go-back
+                    modal:
+                      title: ""
+                - type: action.sync-entities
+                  options:
+                    provider: DATA_PROVIDER_DYNAMIC
+                    force: true
+                    entities:
+                      - entity: default/Photos
+                - type: action.reset-state
+                  options:
+                    state: =@ctx.solution.state.photostories.
+          data:
+            uploadPhoto: =@ctx.components.uploadPhoto.state.value
+            title: =@ctx.components.title.state.value
+            description: =@ctx.components.description.state.value
+            cruiseFilter: =@ctx.components.cruiseFilter.state.value
+            location: =@ctx.components.location.state.value
+            expireDate: =($millis() + 86400000)
+            uploadedBy: =@ctx.components.uploadedBy.state.value
+
+
+
+# actions:
+#   - children:
+#       - type: action.action-list
+#         options:
+#           title: Upload Photo
+#           actions:
+#             - type: action.execute-entity
+#               options:
+#                 provider: DATA_PROVIDER_DYNAMIC
+#                 entity: default/Photos
+#                 method: create
+#                 goBack: home
+#                 onSuccess: 
+#                   type: action.action-list
+#                   options:
+#                     actions:
+#                       - type: action.confirm
+#                         options:
+#                           isConfirmedAutomatically: true
+#                           onConfirmed: 
+#                             type: action.go-back
+#                           modal:
+#                             title: ""
+#                       - type: action.sync-entities
+#                         options:
+#                           provider: DATA_PROVIDER_DYNAMIC
+#                           entities:
+#                             - entity: default/Photos
+#                 data:
+#                   uploadPhoto: =@ctx.components.uploadPhoto.state.value
+#                   title: =@ctx.components.title.state.value
+#                   description: =@ctx.components.description.state.value
+#                   cruiseFilter: =@ctx.components.cruiseFilter.state.value
+#                   location: =@ctx.components.location.state.value
+#                   expireDate: =($millis() + 86400000)
+#                   uploadedBy: =@ctx.components.uploadedBy.state.value
+#             - type: action.confirm
+#               options:
+#                 isConfirmedAutomatically: true
+#                 onConfirmed: 
+#                   type: action.go-back
+#                 modal:
+#                   title: ""
+
+
+  # - children:
+  #     - type: action.submit-form
+  #       options:
+  #         formId: sharePhotos
+  #         provider: DATA_PROVIDER_DYNAMIC
+  #         entity: default/Photos
+  #         title: Upload Photo

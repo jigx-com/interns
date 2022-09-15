@@ -15,7 +15,7 @@ header:
       
 
 children:
-  - jigId: mygroup
+  # - jigId: mygroup
     
   - jigId: sit-down-restaurants
     

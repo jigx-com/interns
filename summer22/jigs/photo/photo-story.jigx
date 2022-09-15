@@ -1,12 +1,6 @@
 title: Welcome
 type: jig.default
 
-onLoad: 
-  type: action.sync-entities
-  options:
-    provider: DATA_PROVIDER_DYNAMIC
-    entities:
-      - entity: default/Photos
 onFocus: 
   type: action.sync-entities
   options:
@@ -14,29 +8,8 @@ onFocus:
     entities:
       - entity: default/Photos
 
-datasources:
-  photoStory: 
-    type: datasource.sqlite
-    options:
-      provider: DATA_PROVIDER_DYNAMIC
-  
-      entities:
-        - default/Photos
-  
-      query: |
-        SELECT 
-          id, 
-          '$.uploadPhoto' AS uploadPhoto, 
-          '$.title' AS title,
-          '$.expireDate'AS expire,
-          '$.description' AS description
-        FROM [default/Photos]
-        WHERE expire > @currentMillis
-      queryParameters:
-        currentMillis: =$string($millis())
-
-
 stories:
+  instanceId: photostories
   type: component.story-group
   options:
     actionButtonTitle: Upload Photo
