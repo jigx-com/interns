@@ -11,34 +11,41 @@ header:
 
 actions:
   - children:
-      - instanceId: myfact
-        type: action.execute-entities
+      - type: action.submit-form
         options:
-          title: Submit
+          formId: myfact
           provider: DATA_PROVIDER_DYNAMIC
+          title: Submit
           entity: default/facts
           method: create
+          goBack: previous
+      # - instanceId: myfact
+      #   type: action.execute-entities
+      #   options:
+      #     title: Submit
+      #     provider: DATA_PROVIDER_DYNAMIC
+      #     entity: default/facts
+      #     method: create
           
-      
 
-placeholders:
-  - when: =$count(@ctx.datasources.facts[user = @ctx.user.email]) = 0
-    title: Tell us some fun fact about yourself
-    icon: missing-data
-    onPress: 
-      type: action.go-to
-      options:
-        title: Tell us now
-        linkTo: myfact
-  - when: "=$count(@ctx.datasources.facts[active = 'true']) = 0"
-    title: Now, let's wait until Grant starts the game
-    icon: is-offline
-  - when: "=@ctx.datasources.facts[active = 'true'].user = @ctx.user.email"
-    title: For obvious reasons you must skip this round :)
-    icon: is-offline
-  - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
-    title: Let's wait for Grant...
-    icon: is-offline
+# placeholders:
+#   - when: =$count(@ctx.datasources.facts[user = @ctx.user.email]) = 0
+#     title: Tell us some fun fact about yourself
+#     icon: missing-data
+#     onPress: 
+#       type: action.go-to
+#       options:
+#         title: Tell us now
+#         linkTo: myfact
+#   - when: "=$count(@ctx.datasources.facts[active = 'true']) = 0"
+#     title: Now, let's wait until Grant starts the game
+#     icon: is-offline
+#   - when: "=@ctx.datasources.facts[active = 'true'].user = @ctx.user.email"
+#     title: For obvious reasons you must skip this round :)
+#     icon: is-offline
+#   - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
+#     title: Let's wait for Grant...
+#     icon: is-offline
 
 
 datasources:
@@ -62,6 +69,7 @@ children:
   - type: component.form
     instanceId: myfact
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         - type: component.text-field
           instanceId: id

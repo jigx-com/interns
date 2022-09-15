@@ -126,6 +126,7 @@ children:
   - type: component.form
     instanceId: fact
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         - type: component.text-field
           instanceId: id
