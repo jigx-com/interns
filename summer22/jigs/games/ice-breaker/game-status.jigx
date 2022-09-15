@@ -1,0 +1,19 @@
+title: Current Status
+type: jig.list
+icon: contact
+
+datasources:
+  game-status: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          field1: value
+          field2: value
+
+data: =@ctx.datasources.mydata
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.datasourcefield
+    subtitle: =@ctx.current.item.datasourcefield

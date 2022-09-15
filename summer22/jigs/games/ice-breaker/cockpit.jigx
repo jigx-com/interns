@@ -1,0 +1,7 @@
+title: Game Control
+type: jig.composite
+
+children:
+  - jigId: game-status
+    
+  - jigId: fun-fact-list
