@@ -1,9 +1,9 @@
 name: uc-demo
-title: UC-demo
-category: business
+title: UC Students
+category: communications
 
-stories:
-  - news-letter-story
+# stories:
+#   - news-letter-story
 
 widgets:
   - size: "4x2"
@@ -14,9 +14,18 @@ widgets:
   
   - size: "2x2"
     jigId: my-courses
+
+  - size: "2x2"
+    jigId: running
+    
+  - size: "2x2"
+    jigId: chess
     
   - size: 2x2
     jigId: static-nav-composite
     
   - size: "1x1"
     jigId: calendar
+
+  - size: "1x1"
+    jigId: list-email

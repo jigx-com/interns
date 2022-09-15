@@ -1,0 +1,15 @@
+provider: DATA_PROVIDER_REST
+method: GET
+url: https://graph.microsoft.com/v1.0/me/mailFolders/AAMkADgyMmYwNWIxLWNjYzEtNGRkZS1hODc3LTBkZjFmNzRjMGRhNQAuAAAAAAAv4GmiE3nUS7tCBWVZ4beeAQDbrb2NVpLyS4c1N2O4PTGjAAAAAAEMAAA=/messages?$top=25
+outputTransform: $.value
+parameters:
+  accessToken:
+    location: header
+    required: true
+    type: 365.oauth
+    value: 365.oauth
+  # $top:
+  #   type: string
+  #   location: query
+  #   value: 25
+  #   required: true

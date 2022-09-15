@@ -1,0 +1,76 @@
+title: 
+  id: universityEmail
+  defaultMessage: University Email
+type: jig.list
+icon: email
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://assets.entrepreneur.com/content/3x2/2000/20190422140127-GettyImages-980480582.jpeg?auto=webp&quality=95&crop=16:9&width=675
+
+datasources:
+  mydata: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_REST
+  
+      entities:
+        - entity: email
+          function: get-mail
+          functionParameters:
+            # $top: "20"
+            accessToken: 365.oauth
+  
+      query: |
+        SELECT id, 
+        '$.receivedDateTime', 
+        '$.hasAttachments', 
+        '$.subject',
+        '$.bodyPreview',
+        '$.importance',
+        '$.conversationId',
+        '$.isRead',
+        json_extract(Data, '$.body.content') as body,
+        '$.parentFolderId',
+        json_extract(Data, '$.from.emailAddress.name') as fromEmailName,
+        json_extract(Data, '$.from.emailAddress.address') as fromEmailAddress,
+        json_extract(Data, '$.toRecipients.emailAddress.name') as toEmailName,
+        json_extract(Data, '$.toRecipients.emailAddress.address') as toEmailName,
+        json_extract(Data, '$.flag.flagStatus') as flag
+        FROM [email] 
+        where json_extract(Data, '$.from.emailAddress.address') != 'adriaan@jigx.com'
+          and '$.parentFolderId' = "AAMkADgyMmYwNWIxLWNjYzEtNGRkZS1hODc3LTBkZjFmNzRjMGRhNQAuAAAAAAAv4GmiE3nUS7tCBWVZ4beeAQDbrb2NVpLyS4c1N2O4PTGjAAAAAAEMAAA="
+        order by '$.receivedDateTime' desc
+      queryParameters:
+        myParam: value
+
+data: =@ctx.datasources.mydata
+item:
+  type: component.list-item
+  options:
+    style:
+      isHighlighted: | 
+        =@ctx.current.item.isRead = 1 ? false : true
+    title: =@ctx.current.item.subject 
+    subtitle: | 
+      ="from: " & @ctx.current.item.fromEmailAddress
+    description: =@ctx.current.item.bodyPreview
+    leftElement: 
+      element: icon
+      name: email
+      isContained: true
+      isDuotone: true
+    rightElement: 
+      element: value
+      text: =$fromMillis($toMillis(@ctx.current.item.receivedDateTime), '[h#1]:[m01][P]') #=$fromMillis($toMillis(@ctx.current.item.receivedDateTime), [h#1]:[m01][P])
+    divider: solid
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: view-email
+        parameters:
+          mailId: =@ctx.current.item.id
+          subject: =@ctx.current.item.subject
+          content: =@ctx.current.item.body

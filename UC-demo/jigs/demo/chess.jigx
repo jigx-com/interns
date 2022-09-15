@@ -1,0 +1,23 @@
+title:
+  id: myClubs
+  defaultMessage: My Clubs
+description: Description of your Jig
+type: jig.default
+
+children:
+  - type: component.image
+    options:
+      source:
+        uri: https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2NoZXNzLTQuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo4Mjh9fX0=
+
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2NoZXNzLTQuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo4Mjh9fX0=
+      bottom: 
+        type: component.titles
+        options:
+          title: 4D Chess Club
+          subtitle: Next event in 3 days 🎉

@@ -1,0 +1,23 @@
+title:
+  id: mySports
+  defaultMessage: My Sports
+description: Description of your Jig
+type: jig.default
+
+children:
+  - type: component.image
+    options:
+      source:
+        uri: https://www.canterbury.ac.nz/sport/content-blocks/1511487406313_Sport-clubs-low.jpg
+
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://www.canterbury.ac.nz/sport/content-blocks/1511487406313_Sport-clubs-low.jpg
+      bottom: 
+        type: component.titles
+        options:
+          title: Cross Country
+          subtitle: Practice on Friday
