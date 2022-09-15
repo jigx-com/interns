@@ -16,7 +16,7 @@ datasources:
           fullName: Ari Utu
           avatar: https://st3.depositphotos.com/1017187/15681/i/450/depositphotos_156819898-stock-photo-north-island-new-zealand-may.jpg
         - id: 2
-          fullName: Kia ora Kelly
+          fullName: Maia Kelly
           avatar: https://images.unsplash.com/photo-1543949806-2c9935e6aa78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGZlbWFsZSUyMGhlYWRzaG90fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60
         - id: 3
           fullName: Hani Rara
