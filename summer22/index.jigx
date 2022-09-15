@@ -27,12 +27,12 @@ widgets:
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                   (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
                 )" 
-  # - size: "2x2"
-  #   jigId: lunch-composite
-  #   isHidden: "=(
-  #                 $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-  #                 (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
-  #               )" 
+  - size: "2x2"
+    jigId: lunch-composite
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
+                )" 
   - size: "2x2"
     jigId: dinner
     isHidden: "=(
@@ -51,13 +51,21 @@ widgets:
   # Tool Widgets
   - size: "1x1"
     jigId: day1-checkIn-form
-    # isHidden: "=(
-    #               (@ctx.datasources.testMembers.email = @ctx.user.email) ? true: false
-    #             )"
+    # isHidden: =@ctx.jigs.day1-checkIn-form.checkUserEmail
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours < '0216:00:00')) ? false: true
+                )"
+
     
 # After day 1: replace day1-check... w/ link-up-...
   - size: "1x1"
     jigId: link-up-filter-location
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '0216:00:00')) ? false: true
+                )" 
+      
   - size: "1x1"
     jigId: find-my-peers-list
   - size: "1x1"
@@ -89,8 +97,8 @@ widgets:
 
 
   # Placeholder Widgets
-  # - size: 1x1
-  #   jigId: timetest
+  - size: 1x1
+    jigId: timetest
   # - size: 1x1
   #   jigId: calendar-entries
   # - size: 1x1

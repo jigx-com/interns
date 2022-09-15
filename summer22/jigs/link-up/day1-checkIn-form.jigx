@@ -1,9 +1,28 @@
 title: Check-In
 type: jig.default
-icon: check-circle-1    
+icon: check-circle-1   
         
-# datasources:
-#   mydata: 
+datasources:
+  checkUserEmail: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testMembers
+  
+      query: |
+        SELECT 
+          id, 
+          '$.email' AS userEmail
+        FROM 
+          [default/testMembers]
+        WHERE email = @myParam
+      queryParameters:
+        myParam: =@ctx.user.email
+
+# outputs:
+#   checkUserEmail: "=($exists(@ctx.datasources.checkUserEmail.userEmail) ? true: false)"
 
 header: 
   type: component.image
@@ -40,6 +59,7 @@ children:
                 instanceId: email
                 options:
                   label: Email*
+                  initialValue: =@ctx.user.email
                   style:
                     flex: 6
                   isRequired: true
@@ -82,14 +102,14 @@ children:
             label: Location 
             isHidden: true
             
-# actions:
-#   - children:
-#       - type: action.submit-form
-#         options:
-#           formId: check-in-form
-#           provider: DATA_PROVIDER_DYNAMIC
-#           entity: default/testMembers
-#           title: Check-In
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: check-in-form
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/testMembers
+          title: Check-In
 
 # actions:
 #   - children:

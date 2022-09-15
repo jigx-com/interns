@@ -17,7 +17,7 @@ datasources:
           '$.lastName' AS lastName,
           '$.avatar' AS avatar
         FROM [default/testMembers]
-
+      
 actions:
   - children:
       - type: action.submit-form

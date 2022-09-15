@@ -21,3 +21,4 @@ children:
         uri: =@ctx.datasources.location.deckMap
       height: 500
       resizeMode: contain
+      

@@ -73,7 +73,11 @@ children:
         - type: component.entity-field
           options:
             label: time
-            value: "=$substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')"
+            value: "=(
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')
+                    )"
+                    
+              # and ($hours < '10:00:00')
             
 # Past Time Table Expressions      
 #$expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
