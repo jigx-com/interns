@@ -43,7 +43,9 @@ widgets:
             top:
               type: component.trend
               options:
-                title: Recent Claps
+                title: 
+                  id: recentClapsTitle
+                  defaultMessage: Recent Claps
                 value: 8
                 style:
                   isValueHidden: false
@@ -51,7 +53,9 @@ widgets:
               type: component.trend
               options:
                 title: "46"
-                subtitle: Your Total Reactions
+                subtitle: 
+                  id: recentClapsSubtitle
+                  defaultMessage: Your Total Reactions
                 style:
                   isAlignRight: true
                   isValueHidden: true
@@ -62,7 +66,9 @@ widgets:
               type: component.titles
               options:
                 align: center
-                title: Helper of the Week
+                title: 
+                  id: helperWeekTitle
+                  defaultMessage: Helper of the Week
             resizeMode: cover
             source: 
               uri: https://imageresizer.static9.net.au/fxbXP4K5dAeD58mBvMaM1HVk3x4=/0x103:1080x710/1200x900/https%3A%2F%2Fprod.static9.net.au%2Ffs%2F90cbb875-1957-4b39-8408-b6457ef8c478
@@ -71,7 +77,9 @@ widgets:
               options:
                 align: left
                 title: "Oriini Kaipara"
-                subtitle: 141 claps
+                subtitle: 
+                  id: helperWeekSubtitle
+                  defaultMessage: 141 claps
 
 
 children:

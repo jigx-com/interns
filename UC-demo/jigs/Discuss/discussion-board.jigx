@@ -253,8 +253,3 @@ actions:
             isDisabled: "=@ctx.jig.inputs.hasMeeting = 'true' ? false : true"
           title: Join Existing Meeting
           meetingId: =@ctx.datasources.mydata.meetingId
-      
-                  
-                  
-            
-              

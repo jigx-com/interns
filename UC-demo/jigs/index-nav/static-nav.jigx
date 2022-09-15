@@ -1,4 +1,6 @@
-title: Directions
+title: 
+  id: staticNavTitle
+  defaultMessage: Instructions
 type: jig.default
 
 datasources:

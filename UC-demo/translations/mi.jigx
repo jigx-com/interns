@@ -1,5 +1,41 @@
-hellofield: Kia ora
-otherfield: blah blah
 travelJigTitle: Whakaterenga ki te Hui Panuku
+indoorNavButtonTitle: Tirohia nga Tohutohu Whare
+
+indoorNavigationTitle: Nga Tohutohu Whare
+
+nearByStopsTitle: Ko nga Tuanga Tata
+
+staticNavTitle: Nga tohutohu
+
+
+staticNavInfoTitle: Nga korero taipitopito
+navInfoFrom: Mai
 navigateFrom: University Hall
-timeToWalk: 16 meneti
+
+navInfoTo: Ki
+navigateTo: Rec Center
+  
+navInfoDistance: Tawhiti
+navigateDistance: 1.3 kiromita
+  
+navInfoTime: Te wa ki te hikoi
+navigateTime: 16 meneti
+
+
+recentClapsTitle: Te pakipaki tata nei
+recentClapsSubtitle: Ō Tauhohenga Katoa
+
+helperWeekTitle: Kaiwhina o te Wiki 
+helperWeekSubtitle: 141 pakipaki
+
+
+
+myCoursesTitle: Aku Akoranga
+
+
+
+myDayTitle: Taku Ra
+myDayBreak: 20 meneti te okioki
+
+
+calendarTitle: Maramataka

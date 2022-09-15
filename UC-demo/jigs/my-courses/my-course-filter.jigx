@@ -73,4 +73,3 @@ item:
       - when: =(@ctx.jig.state.filter = "LAW101")
         color: color7
     progress: 1
-    

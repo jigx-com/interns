@@ -1,7 +1,8 @@
-title: Indoor Navigation
+title: 
+  id: indoorNavigationTitle
+  defaultMessage: Indoor Navigation
 type: jig.document
 
 source:
   documentType: HTML
   uri: indoornavigation
-  

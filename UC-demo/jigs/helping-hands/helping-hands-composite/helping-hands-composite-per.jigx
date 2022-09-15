@@ -12,17 +12,14 @@ datasources:
           claps: 10
           name: Weekly Total
           color: color6
-          motivation: Fantastic Work!
         - id: 2
           claps: 64
           name: Semester Total
           color: color7
-          motivation: Keep it up!
         - id: 3
           claps:  302
           name: Your Total
           color: color8
-          motivation: "Campus Record: 188"
         - id: 4
           claps: 85,102
           name: University Total

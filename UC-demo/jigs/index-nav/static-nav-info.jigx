@@ -1,4 +1,6 @@
-title: Details
+title: 
+  id: staticNavInfoTitle 
+  defaultMessage: Details
 type: jig.default
 
 datasources:
@@ -21,26 +23,41 @@ children:
             children:
               - type: component.entity-field
                 options:
-                  label: From
+                  label: 
+                    id: navInfoFrom
+                    defaultMessage: From
                   value: 
                     id: navigateFrom
                     defaultMessage: University Hall
+
               - type: component.entity-field
                 options:
-                  label: To
-                  value: =@ctx.datasources.mydata.To
+                  label: 
+                    id: navInfoTo
+                    defaultMessage: To
+                  value: 
+                    id: navigateTo
+                    defaultMessage: Rec Center
+
         - type: component.field-row
           options:
             children:
               - type: component.entity-field
                 options:
-                  label: Distance
-                  value: =@ctx.datasources.mydata.Distance
+                  label: 
+                    id: navInfoDistance
+                    defaultMessage: Distance
+                  value:
+                    id: navigateDistance
+                    defaultMessage: 1.3 kilometers
+
               - type: component.entity-field
                 options:
-                  label: Time to Walk
+                  label: 
+                    id: navInfoTime
+                    defaultMessage: Time to Walk
                   value: 
-                    id: timeToWalk
+                    id: navigateTime
                     defaultMessage: 16 Minutes
 
 isCollapsible: true

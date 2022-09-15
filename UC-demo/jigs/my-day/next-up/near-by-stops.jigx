@@ -1,4 +1,6 @@
-title: Near by Stops
+title: 
+  id: nearByStopsTitle
+  defaultMessage: Nearby Locations
 type: jig.default
 
 datasources:

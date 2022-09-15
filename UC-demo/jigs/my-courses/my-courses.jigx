@@ -1,6 +1,8 @@
 # MY COURSES MAIN JIG
 # Jig Info
-title: My Courses
+title: 
+  id: myCoursesTitle
+  defaultMessage: My Courses
 type: jig.composite
 header: 
   type: component.image

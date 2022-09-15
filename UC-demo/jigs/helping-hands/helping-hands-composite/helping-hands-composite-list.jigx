@@ -14,7 +14,7 @@ datasources:
           details: Free Admission
           claps: 378
           photo: https://www.canterbury.ac.nz/events/active/uc-events/1661390326383_FYP-2022-showcase-low.jpg
-          
+
         - id: 2
           name: Men's Rugby
           date: 17/09/2022
@@ -32,7 +32,7 @@ datasources:
           details: $20
           claps: 93
           photo: https://www.canterbury.ac.nz/events/active/uc-events/1662601203620_AC-Chamber-Series-2-low.jpg
-          
+
         - id: 4
           name: School of Music
           date: 16/10/2022

@@ -1,4 +1,6 @@
-title: Calendar
+title: 
+  id: calendarTitle
+  defaultMessage: Calendar
 type: jig.calendar
 
 datasources:
