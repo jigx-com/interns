@@ -1,19 +1,60 @@
-title: Current Status
+title: =('Current Status - ' @ctx.datasources.game-status.status)
 type: jig.list
 icon: contact
 
 datasources:
   game-status: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/game-status
+      query: |
+        SELECT 
+          id, 
+          '$.status' AS status 
+        FROM [default/game-status] 
+        
+  static-game-status: 
     type: datasource.static
     options:
       data:
         - id: 1
-          field1: value
-          field2: value
+          status: init
+        - id: 2
+          status: open
+        - id: 3
+          status: done
 
-data: =@ctx.datasources.mydata
+isHorizontal: true
+data: =@ctx.datasources.static-game-status
 item:
   type: component.list-item
   options:
-    title: =@ctx.current.item.datasourcefield
-    subtitle: =@ctx.current.item.datasourcefield
+    title: =@ctx.current.item.status
+    
+    # Update Game Status
+    rightElement: 
+      element: button
+      title: Change Status
+      onPress: 
+        type: action.action-list
+        options:
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/game-status
+                method: update
+                goBack: stay
+                data:
+                  id: =@ctx.datasources.game-status.id
+                  status: "=@ctx.current.item.status"
+            - type: action.set-state
+              options:
+                state: =@ctx.solution.state.activeItemId
+                value: =@ctx.current.item.id
+    progress: =(@ctx.current.item.id = @ctx.solution.state.activeItemId ? 1 :0)
+    color:
+      - when: =(@ctx.current.item.id = @ctx.solution.state.activeItemId ? true :false)
+        color: color2

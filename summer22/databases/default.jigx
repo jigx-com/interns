@@ -8,6 +8,7 @@ tables:
   calendar:
   days: 
   sessionFeedback:
+  game-status:
   #welcomeStory:
 
   # TEST TABLES
