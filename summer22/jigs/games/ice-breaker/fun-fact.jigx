@@ -1,7 +1,7 @@
 title: Fun Fact
 type: jig.default
 widgets:
-  4x2: 
+  2x2: 
     type: widget.list
     options:
       top:

@@ -96,12 +96,12 @@ widgets:
                 )"
 
 #Fun Fact
-  - size: "4x2"
+  - size: "2x2"
     jigId: fun-fact
-    isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
-                  ($hours > '15') ? true: false
-                )"
+    # isHidden: "=(
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
+    #               ($hours > '15') ? true: false
+    #             )"
   - size: 1x1
     jigId: cockpit
     
