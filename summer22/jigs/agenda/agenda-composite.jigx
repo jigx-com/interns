@@ -78,14 +78,14 @@ datasources:
 #                         )" 
 
 widgets:
-  "2x4": 
+  "4x2": 
     type: widget.group
     options:
       children:
         - type: widget.image
           options:
             source:
-              uri: https://nextup.cccco.edu/wp-content/uploads/2019/07/NextUp_green_red-1000x705.png
+              uri: https://appcmsprod.viewlift.com/60333573-228c-4678-9ce8-05c713847241/images/1240pxNextUpLogoTurquoise.png
             resizeMode: contain
         - type: widget.list
           options:

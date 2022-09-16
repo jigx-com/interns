@@ -28,7 +28,7 @@ datasources:
         myParam: value
 
 widgets:
-  "2x2": 
+  "4x2": 
     type: widget.location
     options:
       zoomLevel: 3.65
