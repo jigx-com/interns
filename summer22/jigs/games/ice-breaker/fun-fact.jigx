@@ -1,0 +1,143 @@
+title: Fun Fact
+type: jig.default
+widgets:
+  4x2: 
+    type: widget.list
+    options:
+      top:
+        type: component.trend
+        options:
+          title: "🧐 Guess, who it is:"
+          style:
+            isValueHidden: true
+      data: "=[ @ctx.datasources.facts[active = 'true'] ]"
+      item:         
+        type: component.list-item
+        options:
+          title: ='"' & @ctx.current.item.fact & '"'
+          rightElement: 
+            element: button
+            title: ⁉️
+            onPress: 
+              type: action.go-to
+              options:
+                linkTo: fun-fact
+      
+
+header: 
+  type: component.image
+  options:
+    title: 🧐 Guess who it is
+    source:
+      uri: https://images.unsplash.com/photo-1466921583968-f07aa80c526e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
+
+datasources:
+  gameStatus: 
+    type: datasource.sqlite
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/game-status
+  
+      query: |
+        SELECT 
+          id, 
+          '$.status' AS status
+        FROM [default/game-status] 
+
+  facts:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/facts
+  
+      query: |
+        SELECT 
+          id, 
+          '$.user', 
+          '$.fact',
+          '$.active'
+        FROM [default/facts] 
+
+  teammates:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+    
+      entities:
+        - default/testbuilderTeams
+    
+      query: |
+        SELECT
+          tb.id,
+          json_extract(tb.data, '$.firstName') AS tbfirstName,
+          json_extract(tb.data, '$.lastName') AS lastName,
+          json_extract(tb.data, '$.team') AS team,
+          json_extract(tb.data, '$.voted') AS voted,
+          json_extract(tb.data, '$.email') AS tbEmail,
+          json_extract(tM.data, '$.avatar') AS avatar,
+          json_extract(tM.data, '$.email') AS tmEmail
+        FROM
+          [default/testbuilderTeams] AS tb
+          LEFT JOIN [default/testMembers] AS tM ON tbEmail LIKE tmEmail
+
+children:
+  - type: component.form
+    instanceId: fact
+    options:
+      children:
+        - type: component.text-field
+          instanceId: id
+          options:
+            label: id
+            isHidden: true
+        - type: component.text-field
+          instanceId: factid
+          options:
+            label: factid
+            isHidden: true
+            initialValue: =@ctx.datasources.facts[active = 'true'].id
+        - type: component.text-field
+          instanceId: player
+          options:
+            label: player
+            initialValue: =@ctx.user.email
+            isHidden: true
+        - type: component.text-field
+          instanceId: fact
+          options:
+            isIgnored: true
+            label: Fun Fact
+            initialValue: =@ctx.datasources.facts[active = 'true'].fact
+            style:
+              isDisabled: true
+            isMultiline: true
+            textArea: dynamic
+        - type: component.dropdown
+          instanceId: teammates
+          options:
+            label: Guess which teammate
+            data: =@ctx.datasources.teammates
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.tbfirstName & ' ' & @ctx.current.item.lastName
+                value: =@ctx.current.item.tbId
+                leftElement: 
+                  element: avatar
+                  text: =($substring($substringBefore(@ctx.current.item.tbfirstName, " "), 0, 1) & $substring($substringAfter(@ctx.current.item.lastName, " ") , 0, 1) )
+                  uri: =@ctx.current.item.avatar
+            isSearchable: true
+            
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Submit my Guess
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts-guesses
+          method: create

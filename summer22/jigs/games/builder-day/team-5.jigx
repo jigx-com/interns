@@ -19,11 +19,12 @@ datasources:
           json_extract(tb.data, '$.lastName') AS lastName,
           json_extract(tb.data, '$.team') AS team,
           json_extract(tb.data, '$.voted') AS voted,
+          json_extract(tb.data, '$.email') AS tbEmail,
           json_extract(tM.data, '$.avatar') AS avatar,
-          json_extract(tM.data, '$.firstName') AS tmfirstName
+          json_extract(tM.data, '$.email') AS tmEmail
         FROM
           [default/testbuilderTeams] AS tb
-          LEFT JOIN [default/testMembers] AS tM ON tbfirstName LIKE tmfirstName
+          LEFT JOIN [default/testMembers] AS tM ON tbEmail LIKE tmEmail
         WHERE
           team = @team
         ORDER BY tbfirstName

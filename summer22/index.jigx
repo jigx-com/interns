@@ -95,10 +95,13 @@ widgets:
                   (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
                 )"
 
-
+  - size: "4x2"
+    jigId: fun-fact
+    
+    
   # Placeholder Widgets
-  - size: 1x1
-    jigId: timetest
+  # - size: 1x1
+  #   jigId: fun-fact
   # - size: 1x1
   #   jigId: calendar-entries
   # - size: 1x1

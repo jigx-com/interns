@@ -1,0 +1,81 @@
+title: My Fun Fact
+description: Submit a fun fact about yourself!
+type: jig.default
+
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1496843916299-590492c751f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80
+  
+datasources:
+  facts: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/facts
+  
+      query: 
+        SELECT
+          id,
+          '$.userEmail',
+          '$.fact',
+          '$.active'
+        FROM [default/facts]
+
+children:
+  - type: component.form
+    instanceId: myFact
+    options:
+      children:
+        - type: component.text-field
+          instanceId: id
+          options:
+            label: id
+            isHidden: true
+        - type: component.text-field
+          instanceId: userEmail
+          options:
+            label: ' '
+            initialValue: =@ctx.user.email
+            isHidden: true
+        - type: component.text-field
+          instanceId: active
+          options:
+            label: active
+            initialValue: 'false'
+            isHidden: true
+        - type: component.text-field
+          instanceId: completed
+          options:
+            label: completed
+            initialValue: 'false'
+            isHidden: true
+        - type: component.text-field
+          instanceId: fact
+          options:
+            label: My Fun Fact
+            isMultiline: true
+            textArea: medium
+        - type: component.text-field
+          instanceId: completed
+          options:
+            label: completed
+            initialValue: 'false'
+            isHidden: true
+            
+actions:
+  - children:
+      - type: action.submit-form
+        options:
+          formId: myFact
+          provider: DATA_PROVIDER_DYNAMIC
+          title: Submit Fun Fact
+          entity: default/facts
+          method: create
+          goBack: previous
+
+            

@@ -9,6 +9,8 @@ tables:
   days: 
   sessionFeedback:
   game-status:
+  facts:
+  facts-guesses:
   #welcomeStory:
 
   # TEST TABLES
