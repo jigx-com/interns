@@ -48,7 +48,7 @@ item:
     # Update Game Status
     rightElement: 
       element: button
-      title: Change
+      title: Set
       onPress: 
         type: action.action-list
         options:

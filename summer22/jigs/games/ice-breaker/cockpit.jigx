@@ -46,7 +46,11 @@ actions:
             cancel: "NO"
             confirm: "YES" 
 
+
+
 children:
+  - jigId: dropdown-control
+      
   - jigId: game-status
     instanceId: game-status
     

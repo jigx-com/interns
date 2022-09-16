@@ -102,13 +102,9 @@ widgets:
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
                   ($hours > '15') ? true: false
                 )"
-  # - size: 1x1
-  #   jigId: cockpit
+  - size: 1x1
+    jigId: cockpit
     
   # Placeholder Widgets
-  # - size: 1x1
-  #   jigId: my-fact
-  # - size: 1x1
-  #   jigId: calendar-entries
-  # - size: 1x1
-  #   jigId: restaurantTestData
+  - size: 1x1
+    jigId: my-fact

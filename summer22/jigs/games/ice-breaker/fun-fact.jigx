@@ -10,11 +10,11 @@ widgets:
           title: "🧐 Guess, who it is:"
           style:
             isValueHidden: true
-      data: "=[ @ctx.datasources.facts[active = 'true'] ]"
+      data: =@ctx.datasources.facts
       item:         
         type: component.list-item
         options:
-          title: ='"' & @ctx.current.item.fact & '"'
+          title: =('"' & @ctx.current.item.fact & '"')
           rightElement: 
             element: button
             title: ⁉️
@@ -22,8 +22,6 @@ widgets:
               type: action.go-to
               options:
                 linkTo: fun-fact
-      
-
 header: 
   type: component.image
   options:
@@ -31,16 +29,25 @@ header:
     source:
       uri: https://images.unsplash.com/photo-1466921583968-f07aa80c526e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80
 
+
+onRefresh: 
+  type: action.sync-entities
+  options:
+    provider: DATA_PROVIDER_DYNAMIC
+    entities:
+      - entity: default/game-status
+      - entity: default/facts
+      - entity: default/testbuilderTeams
+      - entity: default/testMembers
+
 datasources:
   gameStatus: 
     type: datasource.sqlite
     options:
       isDocument: true
       provider: DATA_PROVIDER_DYNAMIC
-  
       entities:
         - default/game-status
-  
       query: |
         SELECT 
           id, 
@@ -51,29 +58,29 @@ datasources:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-  
       entities:
         - default/facts
-  
       query: |
         SELECT 
           id, 
-          '$.user', 
-          '$.fact',
-          '$.active'
+          '$.user' AS user, 
+          '$.fact' AS fact,
+          '$.active' AS active
         FROM [default/facts] 
+        WHERE active LIKE @param
+      queryParameters:
+        param: "true"
 
   teammates:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
-    
       entities:
         - default/testbuilderTeams
-    
+        - default/testMembers
       query: |
         SELECT
-          tb.id,
+          tb.id AS tbID,
           json_extract(tb.data, '$.firstName') AS tbfirstName,
           json_extract(tb.data, '$.lastName') AS lastName,
           json_extract(tb.data, '$.team') AS team,
@@ -84,41 +91,63 @@ datasources:
         FROM
           [default/testbuilderTeams] AS tb
           LEFT JOIN [default/testMembers] AS tM ON tbEmail LIKE tmEmail
+          
+  currentUser:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/testbuilderTeams
+      query: |
+        SELECT 
+          id, 
+          '$.email' AS email
+        FROM [default/table-name] 
+        WHERE eamil = @filter
+      queryParameters:
+        filter: =@ctx.user.email
+
 
 children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: Fun Fact
+            value: "=(@ctx.datasources.facts.fact)"
+            isMultiline: true
   - type: component.form
     instanceId: fact
     options:
+      isDiscardChangesAlertEnabled: false
       children:
-        - type: component.text-field
-          instanceId: id
-          options:
-            label: id
-            isHidden: true
-        - type: component.text-field
-          instanceId: factid
-          options:
-            label: factid
-            isHidden: true
-            initialValue: =@ctx.datasources.facts[active = 'true'].id
-        - type: component.text-field
-          instanceId: player
-          options:
-            label: player
-            initialValue: =@ctx.user.email
-            isHidden: true
-        - type: component.text-field
-          instanceId: fact
-          options:
-            isIgnored: true
-            label: Fun Fact
-            initialValue: =@ctx.datasources.facts[active = 'true'].fact
-            style:
-              isDisabled: true
-            isMultiline: true
-            textArea: dynamic
+        # - type: component.text-field
+        #   instanceId: id
+        #   options:
+        #     label: id
+        #     isHidden: true    
+        # - type: component.text-field
+        #   instanceId: factid
+        #   options:
+        #     label: factid
+        #     isHidden: true
+        #     initialValue: =@ctx.datasources.facts.id
+
+        
+        # Current Fun Fact
+        # - type: component.text-field
+        #   instanceId: fact
+        #   options:
+        #     isIgnored: true
+        #     label: "=(@ctx.datasources.facts.fact)"
+        #     initialValue: TEST
+        #     # value: "=(@ctx.datasources.facts.fact)"
+        #     isMultiline: true
+        #     textArea: dynamic
+        # Jigxies List
         - type: component.dropdown
-          instanceId: teammates
+          instanceId: teammatesList
           options:
             label: Guess which teammate
             data: =@ctx.datasources.teammates
@@ -126,18 +155,38 @@ children:
               type: component.dropdown-item
               options:
                 title: =@ctx.current.item.tbfirstName & ' ' & @ctx.current.item.lastName
-                value: =@ctx.current.item.tbId
+                value: =@ctx.current.item.tbID
                 leftElement: 
                   element: avatar
                   text: =($substring($substringBefore(@ctx.current.item.tbfirstName, " "), 0, 1) & $substring($substringAfter(@ctx.current.item.lastName, " ") , 0, 1) )
                   uri: =@ctx.current.item.avatar
             isSearchable: true
-            
+        # Current User
+        - type: component.text-field
+          instanceId: player
+          options:
+            label: player
+            initialValue: =@ctx.user.email
+            isHidden: true
+
+
 actions:
   - children:
       - type: action.execute-entity
         options:
-          title: Submit my Guess
+          title: Update Record
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/facts-guesses
-          method: create
+          entity: default/testbuilderTeams
+          method: update
+          goBack: stay
+          data:
+            id: =@ctx.datasources.currentUser.id
+            guesses: =@ctx.components.teammatesList.state.value
+          onSuccess: 
+            type: action.confirm
+            options:
+              isConfirmedAutomatically: true
+              onConfirmed: 
+                type: action.go-back
+              modal:
+                title: ""

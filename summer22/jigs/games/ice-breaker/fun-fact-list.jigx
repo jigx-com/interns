@@ -1,4 +1,4 @@
-title: =@ctx.jig.inputs.game-status
+title: Jigxies Fun Fact
 type: jig.list
 
 
@@ -12,7 +12,7 @@ datasources:
         - default/testMembers
       query: |
         SELECT 
-          F.id, 
+          F.id AS factId, 
           json_extract(F.data, '$.userEmail') AS userEmail,
           json_extract(F.data, '$.fact') AS fact,
           json_extract(F.data, '$.active') AS active, 
@@ -23,6 +23,9 @@ datasources:
         FROM [default/facts] AS F LEFT JOIN [default/testMembers] AS M
         ON json_extract(F.data, '$.userEmail') LIKE json_extract(M.data, '$.email')
         ORDER BY firstName ASC, lastName ASC
+
+
+
 
 data: =@ctx.datasources.fact-list
 item:
@@ -41,12 +44,15 @@ item:
       element: button
       title: Activate
       onPress: 
-        type: action.execute-entities
+        type: action.execute-entity
         options:
           provider: DATA_PROVIDER_DYNAMIC
           entity: default/facts
           method: update
           goBack: stay
-          data: "=@ctx.datasources.fact-list[].{ 'F.id': id, 'active': id = @ctx.current.item.id ? 'true' : 'false', 'completed': id = @ctx.current.item.id or completed = 'true' ? 'true' : 'false' }[]"
+          data: 
+            id: =@ctx.current.item.factId
+            active: "true"
+            completed: "true"
     style:
-      isDisabled: =@ctx.current.item.completed
+      isDisabled: =(@ctx.current.item.completed = "true" ? true :false)
