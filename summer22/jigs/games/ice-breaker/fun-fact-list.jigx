@@ -1,0 +1,52 @@
+title: =@ctx.jig.inputs.game-status
+type: jig.list
+
+
+datasources:
+  fact-list:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/facts
+        - default/testMembers
+      query: |
+        SELECT 
+          F.id, 
+          json_extract(F.data, '$.userEmail') AS userEmail,
+          json_extract(F.data, '$.fact') AS fact,
+          json_extract(F.data, '$.active') AS active, 
+          json_extract(F.data, '$.completed') AS completed, 
+          json_extract(M.data, '$.firstName') AS firstName,
+          json_extract(M.data, '$.lastName') AS lastName,
+          json_extract(M.data, '$.avatar') AS avatar
+        FROM [default/facts] AS F LEFT JOIN [default/testMembers] AS M
+        ON json_extract(F.data, '$.userEmail') LIKE json_extract(M.data, '$.email')
+        ORDER BY firstName ASC, lastName ASC
+
+data: =@ctx.datasources.fact-list
+item:
+  type: component.list-item
+  options:
+    title: =@ctx.current.item.fact
+    subtitle: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+    description: =@ctx.current.item.userEmail
+    
+    leftElement: 
+      element: avatar
+      uri: =@ctx.current.item.avatar
+      text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
+    
+    rightElement: 
+      element: button
+      title: Activate
+      onPress: 
+        type: action.execute-entities
+        options:
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts
+          method: update
+          goBack: stay
+          data: "=@ctx.datasources.fact-list[].{ 'F.id': id, 'active': id = @ctx.current.item.id ? 'true' : 'false', 'completed': id = @ctx.current.item.id or completed = 'true' ? 'true' : 'false' }[]"
+    style:
+      isDisabled: =@ctx.current.item.completed

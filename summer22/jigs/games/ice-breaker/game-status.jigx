@@ -1,6 +1,6 @@
-title: =('Current Status - ' @ctx.datasources.game-status.status)
+title: =('Current Status - ' & $uppercase(@ctx.datasources.game-status.status))
 type: jig.list
-icon: contact
+
 
 datasources:
   game-status: 
@@ -20,23 +20,35 @@ datasources:
     options:
       data:
         - id: 1
+          name: Initalize
           status: init
         - id: 2
+          name: Open Game
           status: open
         - id: 3
+          name: Complete
           status: done
+
+
+outputs:
+  current-status: =@ctx.datasources.game-status.status
+
 
 isHorizontal: true
 data: =@ctx.datasources.static-game-status
 item:
   type: component.list-item
   options:
-    title: =@ctx.current.item.status
+    horizontalItemSize: regular
+    title: =@ctx.current.item.name
+    description: =$uppercase(@ctx.current.item.status)
     
+    divider: solid
+  
     # Update Game Status
     rightElement: 
       element: button
-      title: Change Status
+      title: Change
       onPress: 
         type: action.action-list
         options:
@@ -54,7 +66,9 @@ item:
               options:
                 state: =@ctx.solution.state.activeItemId
                 value: =@ctx.current.item.id
-    progress: =(@ctx.current.item.id = @ctx.solution.state.activeItemId ? 1 :0)
+    progress: 1
     color:
       - when: =(@ctx.current.item.id = @ctx.solution.state.activeItemId ? true :false)
         color: color2
+      - when: =(@ctx.current.item.id != @ctx.solution.state.activeItemId)
+        color: color14

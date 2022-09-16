@@ -11,6 +11,7 @@ tables:
   game-status:
   facts:
   facts-guesses:
+  game-status:
   #welcomeStory:
 
   # TEST TABLES

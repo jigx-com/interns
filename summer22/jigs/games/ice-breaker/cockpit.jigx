@@ -1,7 +1,55 @@
 title: Game Control
 type: jig.composite
+icon: gauge-dashboard
+
+
+datasources:
+  game-status: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/game-status
+      query: |
+        SELECT 
+          id, 
+          '$.status' AS status 
+        FROM [default/game-status] 
+
+
+actions:
+  - children:
+      - type: action.confirm
+        options:
+          title: Reset Game
+          isConfirmedAutomatically: false
+          onConfirmed: 
+            type: action.action-list
+            options:
+              actions:
+                - type: action.execute-entity
+                  options:
+                    provider: DATA_PROVIDER_DYNAMIC
+                    entity: default/game-status
+                    method: update
+                    goBack: stay
+                    data:
+                      id: =@ctx.datasources.game-status.id
+                      status: "init"
+                - type: action.set-state
+                  options:
+                    state: =@ctx.solution.state.activeItemId
+                    value: 1
+          modal:
+            title: Reset the Game
+            description: Are you sure?
+            cancel: "NO"
+            confirm: "YES" 
 
 children:
   - jigId: game-status
+    instanceId: game-status
     
   - jigId: fun-fact-list
+    inputs: 
+      game-status: =@ctx.jigs.game-status.outputs.current-status
