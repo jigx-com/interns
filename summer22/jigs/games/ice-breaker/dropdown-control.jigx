@@ -1,4 +1,4 @@
-title: Navigation
+title: Control Options
 type: jig.default
 
 datasources:
@@ -7,24 +7,25 @@ datasources:
     options:
       data:
         - id: 1
-          name: None
-        - id: 2
           name: Fun-Fact
-        - id: 3
+        - id: 2
           name: Notifications
 
-# Output based on dropdown selection
-  # Input Jigs change based on output selection
-  
+
+outputs:
+  selected-option: =@ctx.components.dropdownList.state.value
+
 
 children:
   - type: component.form
     instanceId: dropdownForm
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         - type: component.dropdown
           instanceId: dropdownList
           options:
+            initialValue: =@ctx.datasources.control-options[0].name
             label: Cockpit Options
             data: =@ctx.datasources.control-options
             item:

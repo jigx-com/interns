@@ -1,4 +1,7 @@
-title: =('Current Status - ' & $uppercase(@ctx.datasources.game-status.status))
+title: "=(
+          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          ($controlOption = 'Fun-Fact' ? ('Current Status - ' & $uppercase(@ctx.datasources.game-status.status)) :'Notifications')
+        )"
 type: jig.list
 
 
@@ -28,6 +31,15 @@ datasources:
         - id: 3
           name: Complete
           status: done
+          
+  static-notification:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          field1: value
+          field2: value
+    
 
 
 outputs:
@@ -35,7 +47,10 @@ outputs:
 
 
 isHorizontal: true
-data: =@ctx.datasources.static-game-status
+data: "=(
+          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          ($controlOption = 'Fun-Fact' ? @ctx.datasources.static-game-status :'')
+        )"
 item:
   type: component.list-item
   options:

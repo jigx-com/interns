@@ -50,10 +50,14 @@ actions:
 
 children:
   - jigId: dropdown-control
-      
+    instanceId: dropdown-control
+        
   - jigId: game-status
     instanceId: game-status
+    inputs: 
+      selected-option: =@ctx.jigs.dropdown-control.outputs.selected-option
     
   - jigId: fun-fact-list
     inputs: 
       game-status: =@ctx.jigs.game-status.outputs.current-status
+      selected-option: =@ctx.jigs.dropdown-control.outputs.selected-option
