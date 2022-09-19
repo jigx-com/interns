@@ -17,7 +17,7 @@ datasources:
           '$.mapID' AS mapID,
           '$.setOrder' AS setOrder
         FROM [default/decks] 
-        ORDER BY setOrder DESC
+        ORDER BY setOrder ASC
 
 children:
   - type: component.form
@@ -40,6 +40,7 @@ children:
               options:
                 title: =@ctx.current.item.deckNumber
                 value: =@ctx.current.item.id
+                
                 
 # outputs:
 #   selected-option: =@ctx.components.dropdown.state.selected.deckNumber

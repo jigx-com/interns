@@ -1,11 +1,12 @@
 title: Cruise Decklevel Maps
+# title: =@ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id != null ? 'NOT NULL' :'NULL'
 type: jig.composite
 
 onFocus: 
   type: action.set-state
   options:
     state: =@ctx.solution.state.selectedDeck
-    value: 'Deck '
+    value: =@ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id != null ? @ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id' :''
 
 widgets:
   "2x2": 
@@ -19,5 +20,6 @@ children:
     instanceId: cruise-map-dropdown
       
   - jigId: cruise-map
-    inputs:
-      selected-option: =@ctx.jigs.cruise-map-dropdown.outputs.selected-option
+    
+    
+

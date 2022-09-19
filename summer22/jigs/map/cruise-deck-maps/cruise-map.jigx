@@ -8,13 +8,15 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/table-name
+        - default/decks
+        - default/maps
   
       query: |
         SELECT
           D.id AS DID,
           json_extract(D.data, '$.deckNumber') AS deckNumber,
           json_extract(D.data, '$.mapID') AS mapID,
+          json_extract(D.data, '$.imageHeight') AS imageHeight,
           M.id AS MID,
           json_extract(M.data, '$.mapImage') AS mapImage
         FROM
@@ -63,7 +65,7 @@ children:
     options:
       source:
         uri: =@ctx.datasources.mapImages.mapImage
-      imageHeight: 1500
+      imageHeight: =@ctx.datasources.mapImages.imageHeight
       
       data: =@ctx.datasources.coordinates
       pointColor: color1
