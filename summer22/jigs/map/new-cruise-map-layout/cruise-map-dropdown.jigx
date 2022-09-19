@@ -1,0 +1,45 @@
+title: Deck Level
+type: jig.default
+
+datasources:
+  dropdown: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/testDeckMap
+  
+      query: |
+        SELECT 
+          id, 
+          '$.deckNumber' AS deckNumber, 
+          '$.img' AS image,
+          '$.order' AS setOrder
+        FROM [default/testDeckMap] 
+        ORDER BY setOrder DESC
+
+children:
+  - type: component.form
+    instanceId: cruiseMapDropdown
+    options:
+      isDiscardChangesAlertEnabled: false
+      children:
+        - type: component.dropdown
+          instanceId: dropdown
+          options:
+            onChange: 
+              type: action.set-state
+              options:
+                state: =@ctx.solution.state.selectedDeck
+                value: =@ctx.components.dropdown.state.selected.id
+            label: Select Deck Number
+            data: =@ctx.datasources.dropdown
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.deckNumber
+                value: =@ctx.current.item.id
+                
+# outputs:
+#   selected-option: =@ctx.components.dropdown.state.selected.deckNumber

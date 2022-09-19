@@ -24,3 +24,5 @@ tables:
   # testCal:
   # testpoi:
   testvoting:
+  testDeckMap:
+  testCord:

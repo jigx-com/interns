@@ -29,7 +29,7 @@ datasources:
   
       query: |
         SELECT
-          L.id,
+          L.id AS Lid,
           json_extract(L.data, '$.name') AS name,
           json_extract(L.data, '$.type') AS type,
           json_extract(L.data, '$.avatar') AS avatar,
@@ -65,7 +65,7 @@ item:
       options:
         linkTo: link-up-composite
         parameters:
-          LOC: =@ctx.current.item.id
+          LOC: =@ctx.current.item.Lid
           LOCname: =@ctx.current.item.name
   
        

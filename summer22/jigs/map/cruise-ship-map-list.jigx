@@ -18,40 +18,15 @@ datasources:
         - default/Location
   
       query: |
-        SELECT id, 
-        '$.name', 
-        '$.decknumber', 
-        '$.deckMap', 
-        '$.deckNUM',
-        '$.x-axis',
-        '$.y-axis',
-        '$.icon'
+        SELECT DISTINCT id, 
+          '$.name', 
+          '$.decknumber', 
+          '$.deckMap', 
+          '$.deckNUM',
+          '$.x-axis',
+          '$.y-axis'
         FROM 
           [default/Location] 
-        GROUP BY 
-          decknumber ORDER BY deckNUM
-          
-  # imgloc:
-  #   type: datasource.sqlite
-  #   options:
-  #     provider: DATA_PROVIDER_DYNAMIC
-  
-  #     entities:
-  #       - default/Location
-  
-  #     query: |
-  #       SELECT DISTINCT id, 
-  #         '$.name', 
-  #         '$.decknumber', 
-  #         '$.deckMap', 
-  #         '$.deckNUM',
-  #         '$.x-axis',
-  #         '$.y-axis'
-  #       FROM 
-  #         [default/Location] 
-  #       WHERE id = @deckNum
-  #     queryParameters:
-  #       deckNum: =@ctx.datasources.location.deckNUM
 
 data: =@ctx.datasources.location
 item:
