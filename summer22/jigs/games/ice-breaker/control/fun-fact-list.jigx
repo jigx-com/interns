@@ -1,0 +1,111 @@
+# Jigxies Quote List; Manual Notification Control
+title: "=(
+          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          ($controlOption = 'Fun-Fact' ? 'Jigxies Fun Fact' :'Manually Send Push Notifications')
+        )"
+type: jig.list
+
+# DATA
+datasources:
+  fact-list:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/facts
+        - default/testMembers
+      query: |
+        SELECT 
+          F.id AS factId, 
+          json_extract(F.data, '$.userEmail') AS userEmail,
+          json_extract(F.data, '$.fact') AS fact,
+          json_extract(F.data, '$.active') AS active, 
+          json_extract(F.data, '$.completed') AS completed, 
+          json_extract(M.data, '$.firstName') AS firstName,
+          json_extract(M.data, '$.lastName') AS lastName,
+          json_extract(M.data, '$.avatar') AS avatar
+        FROM [default/facts] AS F LEFT JOIN [default/testMembers] AS M
+        ON json_extract(F.data, '$.userEmail') LIKE json_extract(M.data, '$.email')
+        ORDER BY firstName ASC, lastName ASC
+
+  static-notifications:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Good Morning!
+          description: View your Agenda for the day. Find what you missed yesterday!
+          photo: https://images.unsplash.com/photo-1602160934574-2c6ab4e84d53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3VucmlzZXxlbnwwfDJ8MHx8&auto=format&fit=crop&w=700&q=60
+          function: # Insert function jig here
+        - id: 2
+          name: Departing Soon!
+          description: You only have 1 hour to get to the ship; GSD - Get Sprinting Dude!
+          photo: https://images.unsplash.com/photo-1558395872-85709c6d3639?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGltZXxlbnwwfDJ8MHx8&auto=format&fit=crop&w=700&q=60
+          function: # Insert function jig here
+
+data: "=(
+        $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+        ($controlOption = 'Fun-Fact' ? @ctx.datasources.fact-list :@ctx.datasources.static-notifications)
+      )"
+item:
+  type: component.list-item
+  options:
+    # List Content
+    title: "=(
+              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+              $funFactOption := @ctx.current.item.fact;
+              $notificationOption := @ctx.current.item.name;
+              ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
+            )"
+    subtitle: "=(
+                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $funFactOption := (@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName);
+                  $notificationOption := '';
+                  ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
+                )" 
+    description: "=(
+                    $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                    $funFactOption := @ctx.current.item.userEmail;
+                    $notificationOption := '';
+                    ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
+                  )" 
+    leftElement: 
+      element: avatar
+      uri: "=(
+              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+              $funFactOption := @ctx.current.item.avatar;
+              $notificationOption := @ctx.current.item.photo;
+              ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
+            )"
+      text: "=(
+              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+              $funFactOption := $uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1));
+              $notificationOption := 'NA';
+              ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
+            )"
+    # List Action
+    rightElement: 
+      element: button
+      title: "=(
+                $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                ($controlOption = 'Fun-Fact' ? 'Activate' :'Send')
+              )"
+      onPress: 
+        type: action.execute-entity
+        options:
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts
+          method: update
+          goBack: stay
+          data: 
+            id: =@ctx.current.item.factId
+            active: "true"
+            completed: "true"
+          function: "=(
+                      $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                      $EXECUTEFUNC := @ctx.current.item.function
+                      ($controlOption = 'Notifications' ?  $EXECUTEFUNC :'')
+                    )"
+    # List Styling
+    style:
+      isDisabled: =(@ctx.current.item.completed = "true" ? true :false)
