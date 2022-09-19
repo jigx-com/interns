@@ -40,14 +40,6 @@ widgets:
                   (($hours > '17:00:01') and ($hours < '23:59:59')) ? false: true
                 )" 
 
-
-  - size: "4x2"
-    jigId: map-composite-poi
-    isHidden: "=(
-                    $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                    (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
-                  )"
-
   # Tool Widgets
   - size: "1x1"
     jigId: day1-checkIn-form
@@ -76,11 +68,12 @@ widgets:
 
   # Navigation Widget
   - size: "2x2"
-    jigId: map-composite-poi
-    isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                  (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
-                )"
+    jigId: poi
+    # isHidden: "=(
+    #                 $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #                 (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
+    #               )"
+
   - size: "2x2"
     jigId: hotspot-composite
     isHidden: "=(
@@ -96,7 +89,7 @@ widgets:
     #             )"
 
 #Fun Fact
-  - size: "2x2"
+  - size: "1x1"
     jigId: fun-fact
     # isHidden: "=(
     #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
@@ -108,3 +101,4 @@ widgets:
   # Placeholder Widgets
   - size: 1x1
     jigId: my-fact
+

@@ -1,0 +1,90 @@
+title: Deck Map
+type: jig.default
+
+datasources:
+  mapImages:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/table-name
+  
+      query: |
+        SELECT
+          D.id AS DID,
+          json_extract(D.data, '$.deckNumber') AS deckNumber,
+          json_extract(D.data, '$.mapID') AS mapID,
+          M.id AS MID,
+          json_extract(M.data, '$.mapImage') AS mapImage
+        FROM
+          [default/decks] AS D
+          JOIN [default/maps] AS M ON mapID LIKE MID
+        WHERE DID LIKE @deck
+      queryParameters:
+        deck: =@ctx.solution.state.selectedDeck
+        
+        
+  coordinates:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/decks
+        - default/maps
+        - default/deckMapLocations
+        - default/locations
+  
+      query: |
+        SELECT
+          D.id AS DID,
+          json_extract(D.data, '$.deckNumber') AS deckNumber,
+          json_extract(D.data, '$.mapID') AS mapID,
+          M.id AS MID,
+          json_extract(M.data, '$.mapImage') AS mapImage,
+          json_extract(deckMapLocations.data, '$.mapID') AS deckMapLocMapId,
+          json_extract(deckMapLocations.data, '$.locationID') AS deckMapLocLid,
+          L.id AS LID,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(L.data, '$.x-axis') AS x,
+          json_extract(L.data, '$.y-axis') AS y
+        FROM
+          [default/decks] AS D
+          JOIN [default/maps] AS M ON mapID LIKE MID
+          JOIN [default/deckMapLocations] AS deckMapLocations ON mapID LIKE deckMapLocMapId
+          JOIN [default/locations] AS L ON LID LIKE deckMapLocLid
+        WHERE DID LIKE @deck
+      queryParameters:
+        deck: =@ctx.solution.state.selectedDeck
+
+children:
+  - type: component.interactive-image
+    options:
+      source:
+        uri: =@ctx.datasources.mapImages.mapImage
+      imageHeight: 1500
+      
+      data: =@ctx.datasources.coordinates
+      pointColor: color1
+      
+      item:
+        type: component.interactive-image-item
+        options:
+          id: =@ctx.current.item.LID
+          title: ''
+          icon: search
+          
+          percentageCoordinates:
+            x: =@ctx.current.item.x
+            y: =@ctx.current.item.y
+        
+          onPress: 
+            type: action.go-to
+            options:
+              linkTo: link-up-composite
+              parameters:
+                LOC: =@ctx.current.item.LID
+                LOCname: =@ctx.current.item.name
+      
+      

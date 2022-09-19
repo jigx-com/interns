@@ -33,7 +33,6 @@ datasources:
           json_extract(L.data, '$.name') AS name,
           json_extract(L.data, '$.type') AS type,
           json_extract(L.data, '$.avatar') AS avatar,
-          json_extract(L.data, '$.decknumber') AS decknumber,
           json_extract(tM.data, '$.location') AS tmLocation,
         COUNT(json_extract(tM.data, '$.firstName')) AS count
         FROM

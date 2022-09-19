@@ -12,8 +12,9 @@ datasources:
         - default/locations
   
       query: |
-        SELECT Location.id, 
-         JSON_extract(Location.data, '$.name') as name
+        SELECT 
+          id, 
+          '$.name' AS name
         FROM [default/locations] 
         
   photos: 
@@ -26,10 +27,10 @@ datasources:
   
       query: |
         SELECT id, 
-        '$.location', 
+        '$.location' AS location, 
         '$.uploadPhoto' 
         FROM [default/photos] 
-        WHERE '$.location' LIKE @myParam
+        WHERE location LIKE @myParam
       queryParameters:
         myParam: =@ctx.jig.inputs.LOC
 

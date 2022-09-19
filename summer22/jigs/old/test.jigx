@@ -2,6 +2,17 @@ title: crash
 description: Description of your Jig
 type: jig.default
 
+datasources:
+  test: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/deckMapLocations
+  
+      query: SELECT id FROM [default/deckMapLocations]
+
 children:
   - type: component.location
     options:

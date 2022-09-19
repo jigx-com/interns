@@ -1,5 +1,4 @@
-title: Cruise Maps
-description: Description of your Jig
+title: Cruise Decklevel Maps
 type: jig.composite
 
 onFocus: 

@@ -8,15 +8,15 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testDeckMap
+        - default/decks
   
       query: |
         SELECT 
           id, 
           '$.deckNumber' AS deckNumber, 
-          '$.img' AS image,
-          '$.order' AS setOrder
-        FROM [default/testDeckMap] 
+          '$.mapID' AS mapID,
+          '$.setOrder' AS setOrder
+        FROM [default/decks] 
         ORDER BY setOrder DESC
 
 children:

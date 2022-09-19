@@ -1,4 +1,4 @@
-title: =@ctx.datasources.location.decknumber
+title: =@ctx.datasources.location.deckNumber 
 type: jig.default
 
 datasources:
@@ -9,16 +9,31 @@ datasources:
   
       entities:
         - default/locations
+        - default/linkupLocationMaps
+        - default/maps
   
-      query: SELECT id, '$.name', '$.decknumber', '$.deckMap' FROM [default/locations] WHERE id = @LOC
+      query: 
+        SELECT
+          L.id AS LID,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(linkup.data, '$.locationID') AS linkupLocID,
+          json_extract(linkup.data, '$.mapID') AS linkupMapID,
+          json_extract(linkup.data, '$.description') AS deckNumber,
+          M.id AS MID,
+          json_extract(M.data, '$.mapImage') AS mapImage
+        FROM
+          [default/locations] AS L
+          LEFT JOIN [default/linkupLocationMaps] AS linkup ON L.id LIKE linkupLocID
+          LEFT JOIN [default/maps] AS M ON linkupMapID LIKE MID
+        WHERE LID = @locId
       queryParameters:
-        LOC: =@ctx.jig.inputs.LOC
+        locId: =@ctx.jig.inputs.LOC
 
 children:
   - type: component.image
     options:
       source:
-        uri: =@ctx.datasources.location.deckMap
+        uri: =@ctx.datasources.location.mapImage
       height: 500
       resizeMode: contain
       

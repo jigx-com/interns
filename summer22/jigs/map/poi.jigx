@@ -2,8 +2,58 @@ title: Point of Interests # =(@ctx.datasources.poiNice.location & ' Point of Int
 description: Swipe to navigate
 type: jig.list
 
+header: 
+  type: component.location
+  options:
+    address: =@ctx.datasources.location.location
+    zoomLevel: 7
+
+widgets:
+  "2x2": 
+    type: widget.location
+    options:
+      zoomLevel: 3.65
+      pathsData:
+        #Barcelona
+        - lat: 41.357270
+          lng: 2.182192
+        #Nice
+        - lat: 43.692922
+          lng: 7.285131
+        #Rome
+        - lat: 42.103291
+          lng: 11.773650 
+        #Mariana Di Carrara
+        - lat: 44.029387
+          lng: 10.041082 
+        #Marseille
+        - lat: 43.299193
+          lng: 5.362296 
+        #Barcelona
+        - lat: 41.357270
+          lng: 2.182192
+
 datasources:
-  poiNice:
+  location: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/days
+  
+      query: |
+        SELECT 
+        '$.location' AS location, 
+        id, 
+        '$.day' AS day
+        FROM [default/days] 
+        WHERE day LIKE strftime('%d', 'now', '-07:00')
+     # DISTINCT location
+      queryParameters:
+        myParam: value
+  
+  poi:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
@@ -27,7 +77,7 @@ datasources:
         WHERE day LIKE strftime('%d', 'now', '-07:00')
         ORDER BY name ASC
 
-data: =@ctx.datasources.poiNice
+data: =@ctx.datasources.poi
 item:
   type: component.list-item
   options:
