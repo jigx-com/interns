@@ -8,7 +8,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
       isDocument: true
       entities:
-        - default/testMembers
+        - default/members
   
       query: |
           SELECT 
@@ -17,7 +17,7 @@ datasources:
             '$.firstName',
             '$.lastName',
             '$.location'
-          FROM [default/testMembers] 
+          FROM [default/members] 
           WHERE '$.email' LIKE @myParam
       queryParameters:
         myParam: =@ctx.user.email
@@ -42,7 +42,7 @@ actions:
         options:
           title: Join Party
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/testMembers
+          entity: default/members
           method: update
           goBack: previous
           data:

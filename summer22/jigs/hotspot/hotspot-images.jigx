@@ -9,9 +9,8 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Location
-        - default/testMembers
-  
+        - default/locations
+        - default/members
       query: |
         SELECT
           L.id,
@@ -22,8 +21,8 @@ datasources:
           json_extract(tM.data, '$.location') AS tmLocation,
           COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
         FROM
-          [default/Location] AS L
-          LEFT JOIN [default/testMembers] AS tM ON L.id = tmLocation
+          [default/locations] AS L
+          LEFT JOIN [default/members] AS tM ON L.id = tmLocation
         GROUP BY
           L.id
         ORDER BY 
@@ -37,13 +36,13 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Photos
+        - default/photos
   
       query: |
         SELECT id, 
         '$.location' AS location, 
         '$.uploadPhoto' AS uploadPhoto 
-        FROM [default/Photos] 
+        FROM [default/photos] 
         WHERE location LIKE @myParam
       queryParameters:
         myParam: =@ctx.datasources.hotspotLoc.tmLocation

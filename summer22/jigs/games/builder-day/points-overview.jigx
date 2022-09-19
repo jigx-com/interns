@@ -9,14 +9,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
           SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 1'
         )
         SELECT
@@ -31,14 +31,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
           SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 2'
         )
         SELECT
@@ -53,14 +53,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
           SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 3'
         )
         SELECT
@@ -75,14 +75,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
           SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 4'
         )
         SELECT
@@ -97,14 +97,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
           SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 5'
         )
         SELECT
@@ -119,14 +119,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
           SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 6'
         )
         SELECT
@@ -141,14 +141,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         WITH cte AS (
         SELECT
           '$.team' AS team,
           '$.points' AS points
-        FROM [default/testvoting]
+        FROM [default/voting]
         WHERE team = 'Team 7'
         )
         SELECT

@@ -6,7 +6,7 @@ onFocus:
   options:
     provider: DATA_PROVIDER_DYNAMIC
     entities:
-      - entity: default/Photos
+      - entity: default/photos
 
 stories:
   instanceId: photostories

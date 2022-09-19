@@ -1,28 +1,25 @@
 
 tables:
-  # FINAL TABLES
-  Members:  
-  Photos:  
-  Location: 
+
+#NEW TABELS
+  locations: 
+  members: 
+  photos:
   poi: 
-  calendar:
+  calendar: 
   days: 
   sessionFeedback:
-  game-status:
+  game-status: 
   facts:
   facts-guesses:
-  #welcomeStory:
+  highlight:
+  quote:
+  teammates: 
+  voting:
+  linkupLocationMaps:
+  maps:
+  deckMapLocations:
+  decks:
+  comment:
 
-  # TEST TABLES
-  testHighlight:
-  testMembers:
-  testQuote:
-  testList:
-  testComment:
-  testbuilderTeams:
-  #testRestau:
-  # testCal:
-  # testpoi:
-  testvoting:
-  testDeckMap:
-  testCord:
+  

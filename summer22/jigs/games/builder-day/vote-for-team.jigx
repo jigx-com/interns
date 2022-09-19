@@ -15,14 +15,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         SELECT 
         id, 
         '$.email' AS email, 
         '$.state' AS state
-        FROM [default/testVoting] 
+        FROM [default/Voting] 
         WHERE email = @useremail
       queryParameters:
         useremail: =@ctx.user.email
@@ -117,7 +117,7 @@ actions:
           formId: voting
           provider: DATA_PROVIDER_DYNAMIC
           title: =(@ctx.datasources.vote.state = "Voted" ? 'You have already voted':'Vote for this team')
-          entity: default/testvoting
+          entity: default/voting
           method: create
           goBack: previous
           onSuccess:

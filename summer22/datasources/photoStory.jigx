@@ -3,7 +3,7 @@ options:
   provider: DATA_PROVIDER_DYNAMIC
 
   entities:
-    - default/Photos
+    - default/photos
 
   query: |
     SELECT 
@@ -12,7 +12,7 @@ options:
       '$.title' AS title,
       '$.expireDate'AS expire,
       '$.description' AS description
-    FROM [default/Photos]
+    FROM [default/photos]
     WHERE expire > @currentMillis
     ORDER BY expire DESC
   queryParameters:

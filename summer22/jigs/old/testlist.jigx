@@ -10,7 +10,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testComment
+        - default/comment
   
       query: |
         SELECT
@@ -19,7 +19,7 @@ datasources:
           json_extract(tM.data, '$.lastName') AS lastName,
           json_extract(tC.data, '$.comment') AS comment,
           json_extract(tC.data, '$.reactions') AS reactions
-        FROM [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
+        FROM [default/comment] AS tC LEFT JOIN [default/members] AS tM
         ON json_extract(tC.data, '$.commenterEmail') = json_extract(tM.data, '$.email')
         WHERE json_extract(tC.data, '$.photoId') = @sort 
       queryParameters:

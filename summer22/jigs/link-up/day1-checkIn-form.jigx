@@ -9,14 +9,14 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testMembers
+        - default/members
   
       query: |
         SELECT 
           id, 
           '$.email' AS userEmail
         FROM 
-          [default/testMembers]
+          [default/members]
         WHERE email = @myParam
       queryParameters:
         myParam: =@ctx.user.email
@@ -108,7 +108,7 @@ actions:
         options:
           formId: check-in-form
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/testMembers
+          entity: default/members
           title: Check-In
 
 # actions:

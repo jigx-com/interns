@@ -37,8 +37,8 @@ onRefresh:
     entities:
       - entity: default/game-status
       - entity: default/facts
-      - entity: default/testbuilderTeams
-      - entity: default/testMembers
+      - entity: default/teammates
+      - entity: default/members
 
 datasources:
   gameStatus: 
@@ -76,8 +76,8 @@ datasources:
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
-        - default/testbuilderTeams
-        - default/testMembers
+        - default/teammates
+        - default/members
       query: |
         SELECT
           tb.id AS tbID,
@@ -89,15 +89,15 @@ datasources:
           json_extract(tM.data, '$.avatar') AS avatar,
           json_extract(tM.data, '$.email') AS tmEmail
         FROM
-          [default/testbuilderTeams] AS tb
-          LEFT JOIN [default/testMembers] AS tM ON tbEmail LIKE tmEmail
+          [default/teammates] AS tb
+          LEFT JOIN [default/members] AS tM ON tbEmail LIKE tmEmail
           
   currentUser:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
-        - default/testbuilderTeams
+        - default/teammates
       query: |
         SELECT 
           id, 
@@ -176,7 +176,7 @@ actions:
         options:
           title: Update Record
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/testbuilderTeams
+          entity: default/teammates
           method: update
           goBack: stay
           data:

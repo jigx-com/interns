@@ -9,7 +9,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testHighlight
+        - default/highlight
   
       query: |
         SELECT id, 
@@ -18,7 +18,7 @@ datasources:
         '$.title' AS title, 
         '$.subtitle' AS subtitle,
         '$.linkTo' AS linkTo
-        FROM [default/testHighlight] 
+        FROM [default/highlight] 
         WHERE day LIKE strftime('%d', 'now', '-07:00')
         ORDER BY '$.slide'
 

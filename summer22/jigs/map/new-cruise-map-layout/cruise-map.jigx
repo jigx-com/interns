@@ -37,7 +37,7 @@ datasources:
           json_extract(C.data, '$.name') AS nameC,
           json_extract(L.data, '$.name') AS nameL
         FROM
-          [default/Location] AS L
+          [default/locations] AS L
           JOIN [default/testCord] AS C ON nameC LIKE nameL
         WHERE deckNum LIKE @deck
       queryParameters:
@@ -49,7 +49,7 @@ datasources:
   #     provider: DATA_PROVIDER_DYNAMIC
   
   #     entities:
-  #       - default/Location
+  #       - default/locations
   
   #     query: |
   #       SELECT 
@@ -61,7 +61,7 @@ datasources:
   #         '$.x-axis' as x,
   #         '$.y-axis' AS y
   #       FROM 
-  #         [default/Location] 
+  #         [default/locations] 
   #       WHERE deckNumber LIKE @deckNumber
   #     queryParameters:
   #       deckNumber: =@ctx.jigs.cruise-map-dropdown.outputs.selected-option

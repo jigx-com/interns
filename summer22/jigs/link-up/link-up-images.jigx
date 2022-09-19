@@ -9,12 +9,12 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Location
+        - default/locations
   
       query: |
         SELECT Location.id, 
          JSON_extract(Location.data, '$.name') as name
-        FROM [default/Location] 
+        FROM [default/locations] 
         
   photos: 
     type: datasource.sqlite
@@ -22,13 +22,13 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Photos
+        - default/photos
   
       query: |
         SELECT id, 
         '$.location', 
         '$.uploadPhoto' 
-        FROM [default/Photos] 
+        FROM [default/photos] 
         WHERE '$.location' LIKE @myParam
       queryParameters:
         myParam: =@ctx.jig.inputs.LOC

@@ -15,7 +15,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testMembers
+        - default/members
   
       query: 
         SELECT  
@@ -26,7 +26,7 @@ datasources:
           json_extract(tM.data, '$.time-of-location') AS timeOfLocation,
           json_extract(tM.data, '$.email') AS email,
           json_extract(L.data, '$.name') AS locname
-        FROM [default/testMembers] AS tM LEFT JOIN [default/Location] AS L
+        FROM [default/members] AS tM LEFT JOIN [default/locations] AS L
         ON json_extract(tM.data, '$.location') = L.id
         WHERE firstName || ' ' || lastName LIKE '%'||@search||'%' OR @search IS NULL
       queryParameters:

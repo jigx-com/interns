@@ -8,18 +8,18 @@ datasources:
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
-        - default/testComment
-        - default/testMembers
+        - default/comment
+        - default/members
       query: |
         SELECT
-          tC.id AS testCommentID,
+          tC.id AS commentID,
           json_extract(tM.data, '$.avatar') AS avatar,
           json_extract(tM.data, '$.firstName') AS firstName,
           json_extract(tM.data, '$.lastName') AS lastName,
           json_extract(tC.data, '$.comment') AS comment,
           json_extract(tC.data, '$.reactions') AS reactions
         FROM 
-          [default/testComment] AS tC LEFT JOIN [default/testMembers] AS tM
+          [default/comment] AS tC LEFT JOIN [default/members] AS tM
         ON json_extract(tC.data, '$.commenterEmail') = json_extract(tM.data, '$.email')
         WHERE json_extract(tC.data, '$.photoId') = @sort
         ORDER BY reactions DESC
@@ -35,7 +35,7 @@ datasources:
       query: |
           SELECT 
             id
-          FROM [default/testMembers] 
+          FROM [default/members] 
           WHERE '$.email' LIKE @currentUser
       queryParameters:
         currentUser: =@ctx.user.email
@@ -49,7 +49,7 @@ actions:
           formId: photoComment
           provider: DATA_PROVIDER_DYNAMIC
           title: Comment
-          entity: default/testComment
+          entity: default/comment
           method: create
           goBack: stay
           onSuccess:
@@ -67,7 +67,7 @@ actions:
         options:
           title: Vote for this image!
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/testMembers
+          entity: default/members
           method: update
           goBack: stay
           icon: checklist #vote [ballot/ballot-box]
@@ -157,15 +157,15 @@ children:
                   type: action.execute-entity
                   options:
                     provider: DATA_PROVIDER_DYNAMIC
-                    entity: default/testComment
+                    entity: default/comment
                     method: update
                     goBack: stay
                     data:
-                      id: =@ctx.current.item.testCommentID
+                      id: =@ctx.current.item.commentID
                       reactions: =($number(@ctx.current.item.reactions) + $number(1))
                     onSuccess: 
                       type: action.sync-entities
                       options:
                         provider: DATA_PROVIDER_DYNAMIC
                         entities:
-                          - entity: default/testComment
+                          - entity: default/comment

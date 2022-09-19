@@ -9,9 +9,9 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
 
       entities:
-        - default/Location
+        - default/locations
   
-      query: SELECT id, '$.name' FROM [default/Location]
+      query: SELECT id, '$.name' FROM [default/locations]
         
   currentMembers:
     type: datasource.sqlite
@@ -19,7 +19,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testMembers
+        - default/members
   
       query: |
         SELECT 
@@ -29,7 +29,7 @@ datasources:
           '$.firstName', 
           '$.lastName', 
           '$.location' 
-        FROM [default/testMembers] 
+        FROM [default/members] 
         WHERE '$.location' = @locID
       queryParameters:
         locID: =@ctx.jig.inputs.LOC

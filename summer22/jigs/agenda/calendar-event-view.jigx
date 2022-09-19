@@ -44,7 +44,7 @@ actions:
           method: functionCall
           provider: DATA_PROVIDER_REST
           function: myfirstfunction
-          entity: default/testCal
+          entity: default/calendar
           functionParameters:
             accessToken: outlook
             subject: =@ctx.jig.inputs.subject

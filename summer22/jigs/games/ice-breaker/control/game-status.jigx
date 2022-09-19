@@ -1,0 +1,145 @@
+# Game Controls; Notification Information
+title: "=(
+          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          $gameTitle := ('Current Status - ' & $uppercase(@ctx.datasources.game-status.status));
+          ($controlOption = 'Fun-Fact' ?  $gameTitle :'Notification Descriptions')
+        )"
+type: jig.list
+
+# DATA
+outputs:
+  current-status: =@ctx.datasources.game-status.status
+
+datasources:
+  game-status: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/game-status
+      query: |
+        SELECT 
+          id, 
+          '$.status' AS status 
+        FROM [default/game-status] 
+
+  static-game-status: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Initalize
+          status: init
+        - id: 2
+          name: Open Game
+          status: open
+        - id: 3
+          name: Complete
+          status: done
+
+  static-notification:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Good Morning!
+          description: View your Agenda for the day. Find what you missed yesterday!
+          time: 6:00 AM
+        - id: 2
+          name: Departing Soon!
+          description: You only have 1 hour to get to the ship; GSD - Get Sprinting Dude!
+          time: 2 Hours Prior
+
+
+# Horizontal List 
+isHorizontal: true
+data: "=(
+          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          ($controlOption = 'Fun-Fact' ? @ctx.datasources.static-game-status :@ctx.datasources.static-notification)
+        )"
+item:
+  type: component.list-item
+  options:
+    # List Settings
+    horizontalItemSize: large
+    divider: solid
+    # List Content
+    title: =@ctx.current.item.name
+    description: "=( 
+                    $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                    ($controlOption = 'Fun-Fact' ? $uppercase(@ctx.current.item.status) :@ctx.current.item.description)
+                  )"
+    label:
+      title: =@ctx.current.item.time
+      isHidden: "=( 
+                    $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                    ($controlOption = 'Fun-Fact' ? true: false)
+                  )"
+      color:
+        - when: true
+          color: color4
+    # List Actions -> Update Game Status
+    rightElement: 
+      element: icon
+      name: "=(
+                $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                $activeItem := @ctx.solution.state.activeItemId;
+                $currentItem := @ctx.current.item.id;
+                ($controlOption = 'Fun-Fact' ? ($currentItem = $activeItem? 'select' :'add'): 'notification')
+              )"
+      isContained: true
+      isDuotone: false
+      # Update Game Status & activeItem
+      onPress: 
+        type: action.action-list
+        options:
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/game-status
+                method: update
+                goBack: stay
+                data:
+                  id: "=(
+                          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                          $gamestatusID := @ctx.datasources.game-status.id;
+                          ($controlOption = 'Fun-Fact' ? $gamestatusID: '')
+                        )"
+                  status: "=(
+                              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                              $gamestatus := @ctx.current.item.status;
+                              ($controlOption = 'Fun-Fact' ? $gamestatus: '')
+                            )" 
+            - type: action.set-state
+              options:
+                state: =@ctx.solution.state.activeItemId
+                value: "=(
+                          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                          $currentItem := @ctx.current.item.id;
+                          ($controlOption = 'Fun-Fact' ? $currentItem: '')
+                        )" 
+    # List Styling
+    progress: 1
+    color:
+      # COLOR FOR FUN-FACT
+      - when: "=( 
+                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $activeItem := @ctx.solution.state.activeItemId;
+                  $currentItem := @ctx.current.item.id;
+                  ($controlOption = 'Fun-Fact' ? ($currentItem = $activeItem ? true :false) :false)
+                )"
+        color: color2
+      - when: "=( 
+                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $activeItem := @ctx.solution.state.activeItemId;
+                  $currentItem := @ctx.current.item.id;
+                  ($controlOption = 'Fun-Fact' ? ($currentItem != $activeItem ? true :false) :false)
+                )"
+        color: color14
+      # COLOR FOR NOTIFICATIONS
+      - when: "=( 
+                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  ($controlOption = 'Fun-Fact' ? false: true)
+                )"
+        color: color4

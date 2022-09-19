@@ -24,8 +24,8 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Location
-        - default/testMembers
+        - default/locations
+        - default/members
   
       query: |
         SELECT
@@ -37,8 +37,8 @@ datasources:
           json_extract(tM.data, '$.location') AS tmLocation,
         COUNT(json_extract(tM.data, '$.firstName')) AS count
         FROM
-          [default/Location] AS L
-          LEFT JOIN [default/testMembers] AS tM ON L.id = tmLocation
+          [default/locations] AS L
+          LEFT JOIN [default/members] AS tM ON L.id = tmLocation
         WHERE type LIKE @filter or @filter is NULL 
         GROUP BY L.id
         ORDER BY

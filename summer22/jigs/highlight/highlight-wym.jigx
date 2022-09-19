@@ -16,13 +16,13 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testMembers
+        - default/members
       # Get top voted photo id
       query: |
         SELECT
           '$.dailyVote' AS photoId
         FROM
-          [default/testMembers]
+          [default/members]
         GROUP BY
           '$.dailyVote'
         ORDER BY
@@ -36,7 +36,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Photos
+        - default/photos
       # Winning Photo Details
       query: |
         SELECT 
@@ -46,7 +46,7 @@ datasources:
           '$.location' AS location,
           '$.description' AS description,
           '$.uploadedBy' AS uploadedBy
-        FROM [default/Photos] 
+        FROM [default/photos] 
         WHERE id = @topVote
       queryParameters:
         topVote: =@ctx.datasources.topVotedPhoto.photoId

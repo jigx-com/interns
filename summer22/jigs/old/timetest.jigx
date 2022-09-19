@@ -9,7 +9,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
 
       entities:
-        - default/Photos
+        - default/photos
 
       query: |
         SELECT
@@ -19,7 +19,7 @@ datasources:
           '$.expireDate' AS expire,
           '$.description' AS description
         FROM
-          [default/Photos]
+          [default/photos]
 
 children:
   - type: component.list

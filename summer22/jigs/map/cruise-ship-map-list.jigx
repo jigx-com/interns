@@ -15,7 +15,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Location
+        - default/locations
   
       query: |
         SELECT DISTINCT id, 
@@ -26,7 +26,7 @@ datasources:
           '$.x-axis',
           '$.y-axis'
         FROM 
-          [default/Location] 
+          [default/locations] 
 
 data: =@ctx.datasources.location
 item:

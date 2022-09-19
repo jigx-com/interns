@@ -15,13 +15,13 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testvoting
+        - default/voting
   
       query: |
         SELECT id, 
         '$.email' AS email, 
         '$.state' AS state
-        FROM [default/testvoting] 
+        FROM [default/voting] 
         WHERE email = @useremail
       queryParameters:
         useremail: =@ctx.user.email

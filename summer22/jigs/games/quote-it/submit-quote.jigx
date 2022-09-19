@@ -8,7 +8,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testMembers
+        - default/members
   
       query: |
         SELECT 
@@ -16,7 +16,7 @@ datasources:
           '$.firstName' AS firstName, 
           '$.lastName' AS lastName,
           '$.avatar' AS avatar
-        FROM [default/testMembers]
+        FROM [default/members]
       
 actions:
   - children:
@@ -25,7 +25,7 @@ actions:
           formId: submitQuote
           provider: DATA_PROVIDER_DYNAMIC
           title: Create Record
-          entity: default/testQuote
+          entity: default/quote
           method: create
           goBack: stay
           onSuccess:

@@ -10,7 +10,7 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testbuilderTeams
+        - default/teammates
   
       query: |
         SELECT
@@ -23,8 +23,8 @@ datasources:
           json_extract(tM.data, '$.avatar') AS avatar,
           json_extract(tM.data, '$.email') AS tmEmail
         FROM
-          [default/testbuilderTeams] AS tb
-          LEFT JOIN [default/testMembers] AS tM ON tbEmail LIKE tmEmail
+          [default/teammates] AS tb
+          LEFT JOIN [default/members] AS tM ON tbEmail LIKE tmEmail
         WHERE
           team = @team
         ORDER BY tbfirstName

@@ -9,8 +9,8 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/testQuote
-        - default/testMembers
+        - default/quote
+        - default/members
   
       query: |
         SELECT 
@@ -23,7 +23,7 @@ datasources:
           json_extract(M.data, '$.lastName') AS quotedLastName,
           json_extract(M.data, '$.avatar') AS quotedAvatar,
           json_extract(M.data, '$.email') AS email
-        FROM [default/testQuote] AS Q LEFT JOIN [default/testMembers] AS M
+        FROM [default/quote] AS Q LEFT JOIN [default/members] AS M
         ON json_extract(Q.data, '$.quotedPerson') = M.id
         ORDER BY timeOfQuote DESC
 

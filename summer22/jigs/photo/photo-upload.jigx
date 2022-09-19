@@ -9,8 +9,8 @@ datasources:
     options:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
-        - default/Location
-      query: SELECT id, '$.name' FROM [default/Location] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL ORDER BY '$.name'
+        - default/locations
+      query: SELECT id, '$.name' FROM [default/locations] WHERE '$.name' LIKE '%'||@search||'%' OR @search IS NULL ORDER BY '$.name'
       queryParameters:
         search: =@ctx.components.location.state.searchText  
 
@@ -89,7 +89,7 @@ actions:
         options:
           title: Upload Photo
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/Photos
+          entity: default/photos
           method: create
           goBack: home
           onSuccess: 
@@ -108,7 +108,7 @@ actions:
                     provider: DATA_PROVIDER_DYNAMIC
                     force: true
                     entities:
-                      - entity: default/Photos
+                      - entity: default/photos
                 - type: action.reset-state
                   options:
                     state: =@ctx.solution.state.photostories.
@@ -132,7 +132,7 @@ actions:
 #             - type: action.execute-entity
 #               options:
 #                 provider: DATA_PROVIDER_DYNAMIC
-#                 entity: default/Photos
+#                 entity: default/photos
 #                 method: create
 #                 goBack: home
 #                 onSuccess: 
@@ -150,7 +150,7 @@ actions:
 #                         options:
 #                           provider: DATA_PROVIDER_DYNAMIC
 #                           entities:
-#                             - entity: default/Photos
+#                             - entity: default/photos
 #                 data:
 #                   uploadPhoto: =@ctx.components.uploadPhoto.state.value
 #                   title: =@ctx.components.title.state.value
@@ -173,5 +173,5 @@ actions:
   #       options:
   #         formId: sharePhotos
   #         provider: DATA_PROVIDER_DYNAMIC
-  #         entity: default/Photos
+  #         entity: default/photos
   #         title: Upload Photo

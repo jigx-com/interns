@@ -8,9 +8,9 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/Location
+        - default/locations
   
-      query: SELECT id, '$.name', '$.decknumber', '$.deckMap' FROM [default/Location] WHERE id = @LOC
+      query: SELECT id, '$.name', '$.decknumber', '$.deckMap' FROM [default/locations] WHERE id = @LOC
       queryParameters:
         LOC: =@ctx.jig.inputs.LOC
 
