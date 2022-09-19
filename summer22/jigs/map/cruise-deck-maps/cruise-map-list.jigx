@@ -6,7 +6,7 @@ onFocus:
   type: action.set-state
   options:
     state: =@ctx.solution.state.selectedDeck
-    value: =@ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id != null ? @ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id' :''
+    value: =@ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id != null ? @ctx.jigs.cruise-map-dropdown.components.dropdown.state.selected.id :''
 
 widgets:
   "2x2": 
