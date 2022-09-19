@@ -74,7 +74,7 @@ children:
         - type: component.field-row
           options:
             children:
-              - type: component.text-field
+              - type: component.number-field
                 instanceId: emergencyConNum
                 options:
                   label: Emergency Contact Number*

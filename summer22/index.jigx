@@ -99,7 +99,6 @@ widgets:
     jigId: cockpit
     
   # Placeholder Widgets
-  - size: 1x1
-    jigId: my-fact
-  - size: 1x1
-    jigId: cruise-map-dropdown
+  # - size: 1x1
+  #   jigId: my-fact
+

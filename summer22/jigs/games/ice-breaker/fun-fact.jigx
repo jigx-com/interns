@@ -190,3 +190,25 @@ actions:
                 type: action.go-back
               modal:
                 title: ""
+                
+placeholders:
+  - when: "=@ctx.datasources.gamestatus.status = 'done'"
+    title: 🏆 Game over 🏆
+    icon: is-offline
+  - when: =$count(@ctx.datasources.facts[user = @ctx.user.email]) = 0
+    title: Tell us some fun fact about yourself
+    icon: missing-data
+    onPress: 
+      type: action.go-to
+      options:
+        title: Tell us now
+        linkTo: my-fact
+  - when: "=@ctx.datasources.gamestatus.status != 'open' or $count(@ctx.datasources.facts[active = 'true']) = 0"
+    title: Now, let's wait until Grant starts the game
+    icon: is-offline
+  - when: "=@ctx.datasources.facts[active = 'true'].user = @ctx.user.email"
+    title: For obvious reasons you must skip this round :)
+    icon: is-offline
+  - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
+    title: Let's wait for Grant...
+    icon: is-offline

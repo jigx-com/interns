@@ -46,12 +46,6 @@ children:
           options:
             label: Description
             isRequired: false
-        # Filter Boolean
-        - type: component.checkbox
-          instanceId: cruiseFilter
-          options:
-            label: Add JigxCruise22 filter 
-            isRequired: false
         # Location of Image
         - type: component.dropdown
           instanceId: location
