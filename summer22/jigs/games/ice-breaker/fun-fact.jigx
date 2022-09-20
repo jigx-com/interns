@@ -63,13 +63,14 @@ datasources:
       query: |
         SELECT 
           id, 
-          '$.user' AS user, 
+          '$.userEmail' AS userEmail, 
           '$.fact' AS fact,
-          '$.active' AS active
+          '$.active' AS active,
+          '$.completed' AS completed
         FROM [default/facts] 
-        WHERE active LIKE @param
-      queryParameters:
-        param: "true"
+      #   WHERE active LIKE @param
+      # queryParameters:
+      #   param: "true"
 
   teammates:
     type: datasource.sqlite
@@ -106,7 +107,21 @@ datasources:
         WHERE eamil = @filter
       queryParameters:
         filter: =@ctx.user.email
-
+        
+  guesses:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/guesses
+  
+      query: |
+        SELECT 
+          id, 
+          '$.player' AS player, 
+          '$.factid' AS factid 
+        FROM [default/guesses] 
 
 children:
   - type: component.entity
@@ -127,13 +142,12 @@ children:
         #   options:
         #     label: id
         #     isHidden: true    
-        # - type: component.text-field
-        #   instanceId: factid
-        #   options:
-        #     label: factid
-        #     isHidden: true
-        #     initialValue: =@ctx.datasources.facts.id
-
+        - type: component.text-field
+          instanceId: factid
+          options:
+            label: factid
+            isHidden: true
+            initialValue: =@ctx.datasources.facts.id
         
         # Current Fun Fact
         # - type: component.text-field
@@ -172,30 +186,37 @@ children:
 
 actions:
   - children:
-      - type: action.execute-entity
+      - type: action.submit-form
         options:
-          title: Update Record
+          formId:  fact
           provider: DATA_PROVIDER_DYNAMIC
-          entity: default/teammates
-          method: update
+          title: Submit Your Guess
+          entity: default/guesses
+          method: create
           goBack: stay
-          data:
-            id: =@ctx.datasources.currentUser.id
-            guesses: =@ctx.components.teammatesList.state.value
-          onSuccess: 
-            type: action.confirm
-            options:
-              isConfirmedAutomatically: true
-              onConfirmed: 
-                type: action.go-back
-              modal:
-                title: ""
+          onSuccess:
+            description: Guess submitted
+  # - children:
+  #     - type: action.execute-entity
+  #       options:
+  #         title: Submit Your Guess
+  #         provider: DATA_PROVIDER_DYNAMIC
+  #         entity: default/guesses
+  #         method: create
+  #         goBack: stay
+  #         data:
+  #           factid: =@ctx.components.factid
+  #           player: =@ctx.components.player
+  #         onSuccess: 
+  #           type: action.go-back
+
+            
                 
 placeholders:
-  - when: "=@ctx.datasources.gamestatus.status = 'done'"
+  - when: "=@ctx.datasources.gameStatus.status = 'done'"
     title: 🏆 Game over 🏆
     icon: is-offline
-  - when: =$count(@ctx.datasources.facts[user = @ctx.user.email]) = 0
+  - when: "=$count(@ctx.datasources.facts[userEmail = @ctx.user.email]) = 0"
     title: Tell us some fun fact about yourself
     icon: missing-data
     onPress: 
@@ -203,10 +224,10 @@ placeholders:
       options:
         title: Tell us now
         linkTo: my-fact
-  - when: "=@ctx.datasources.gamestatus.status != 'open' or $count(@ctx.datasources.facts[active = 'true']) = 0"
+  - when: "=@ctx.datasources.gameStatus.status != 'open' or $count(@ctx.datasources.facts[active = 'true']) = 0"
     title: Now, let's wait until Grant starts the game
     icon: is-offline
-  - when: "=@ctx.datasources.facts[active = 'true'].user = @ctx.user.email"
+  - when: "=@ctx.datasources.facts[active = 'true'].userEmail = @ctx.user.email"
     title: For obvious reasons you must skip this round :)
     icon: is-offline
   - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
