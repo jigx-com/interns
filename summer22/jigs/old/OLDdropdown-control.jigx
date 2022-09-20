@@ -1,0 +1,36 @@
+# # Dropdown for controlling which info to display
+# title: Control Options
+# type: jig.default
+
+# datasources:
+#   control-options: 
+#     type: datasource.static
+#     options:
+#       data:
+#         - id: 1
+#           name: Fun-Fact
+#         - id: 2
+#           name: Notifications
+
+
+# outputs:
+#   selected-option: =@ctx.components.dropdownList.state.value
+
+
+# children:
+#   - type: component.form
+#     instanceId: dropdownForm
+#     options:
+#       isDiscardChangesAlertEnabled: false
+#       children:
+#         - type: component.dropdown
+#           instanceId: dropdownList
+#           options:
+#             initialValue: =@ctx.datasources.control-options[0].name
+#             label: Cockpit Options
+#             data: =@ctx.datasources.control-options
+#             item:
+#               type: component.dropdown-item
+#               options:
+#                 title: =@ctx.current.item.name
+#                 value: =@ctx.current.item.name

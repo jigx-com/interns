@@ -1,0 +1,82 @@
+# # Cockpit Screen
+# title: Game Control
+# type: jig.composite
+# icon: gauge-dashboard
+
+# # Data
+# datasources:
+#   game-status: 
+#     type: datasource.sqlite
+#     options:
+#       provider: DATA_PROVIDER_DYNAMIC
+#       entities:
+#         - default/game-status
+#       query: |
+#         SELECT 
+#           id, 
+#           '$.status' AS status 
+#         FROM [default/game-status] 
+
+# # Primary Action Control
+# actions:
+#   - when: =(@ctx.jigs.dropdown-control.outputs.selected-option = 'Fun-Fact' ? true :false)
+    # children:
+    #   - type: action.confirm
+    #     options:
+    #       title: Reset Game
+    #       isConfirmedAutomatically: false
+    #       onConfirmed: 
+    #         type: action.action-list
+    #         options:
+    #           actions:
+    #             - type: action.execute-entity
+    #               options:
+    #                 provider: DATA_PROVIDER_DYNAMIC
+    #                 entity: default/game-status
+    #                 method: update
+    #                 goBack: stay
+    #                 data:
+    #                   id: =@ctx.datasources.game-status.id
+    #                   status: "init"
+    #             - type: action.set-state
+    #               options:
+    #                 state: =@ctx.solution.state.activeItemId
+    #                 value: 1
+    #       modal:
+    #         title: Reset the Game
+    #         description: Are you sure?
+    #         cancel: "NO"
+    #         confirm: "YES" 
+#   # Placeholder Action => Above Action doesn't disappear when on notification
+#   - when: =(@ctx.jigs.dropdown-control.outputs.selected-option = 'Fun-Fact' ? false :true)
+#     children: 
+#       - type: action.confirm
+#         options:
+#           title: Do Nothing?
+#           isConfirmedAutomatically: false
+#           onConfirmed: 
+#             type: action.go-to
+#             options:
+#               linkTo: cockpit
+#           modal:
+#             title: Are you sure you want to do nothing?
+#             cancel: Oh, nevermind
+#             confirm: Sure, I'll do nothing
+
+
+
+# children:
+#     # Control Panel: Choose Type, then display descriptions and actions based on the type selected
+#   - jigId: dropdown-control
+#     instanceId: dropdown-control
+
+#   - jigId: game-status
+#     instanceId: gameStatus
+#     inputs: 
+#       selected-option: =@ctx.jigs.dropdown-control.outputs.selected-option
+
+#   - jigId: fun-fact-list
+#     instanceId: funFactList
+#     inputs: 
+#       game-status: =@ctx.jigs.gameStatus.outputs.current-status
+#       selected-option: =@ctx.jigs.dropdown-control.outputs.selected-option
