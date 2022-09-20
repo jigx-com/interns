@@ -1,6 +1,6 @@
 # Jigxies Quote List; Manual Notification Control
 title: "=(
-          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          $controlOption := @ctx.jig.inputs.selected-option;
           ($controlOption = 'Fun-Fact' ? 'Jigxies Fun Fact' :'Manually Send Push Notifications')
         )"
 type: jig.list
@@ -44,7 +44,7 @@ datasources:
           function: # Insert function jig here
 
 data: "=(
-        $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+        $controlOption := @ctx.jig.inputs.selected-option;
         ($controlOption = 'Fun-Fact' ? @ctx.datasources.fact-list :@ctx.datasources.static-notifications)
       )"
 item:
@@ -52,19 +52,19 @@ item:
   options:
     # List Content
     title: "=(
-              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+              $controlOption := @ctx.jig.inputs.selected-option;
               $funFactOption := @ctx.current.item.fact;
               $notificationOption := @ctx.current.item.name;
               ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
             )"
     subtitle: "=(
-                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $controlOption := @ctx.jig.inputs.selected-option;
                   $funFactOption := (@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName);
                   $notificationOption := '';
                   ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
                 )" 
     description: "=(
-                    $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                    $controlOption := @ctx.jig.inputs.selected-option;
                     $funFactOption := @ctx.current.item.userEmail;
                     $notificationOption := '';
                     ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
@@ -72,13 +72,13 @@ item:
     leftElement: 
       element: avatar
       uri: "=(
-              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+              $controlOption := @ctx.jig.inputs.selected-option;
               $funFactOption := @ctx.current.item.avatar;
               $notificationOption := @ctx.current.item.photo;
               ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
             )"
       text: "=(
-              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+              $controlOption := @ctx.jig.inputs.selected-option;
               $funFactOption := $uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1));
               $notificationOption := 'NA';
               ($controlOption = 'Fun-Fact' ?  $funFactOption :$notificationOption)
@@ -87,7 +87,7 @@ item:
     rightElement: 
       element: button
       title: "=(
-                $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                $controlOption := @ctx.jig.inputs.selected-option;
                 ($controlOption = 'Fun-Fact' ? 'Activate' :'Send')
               )"
       onPress: 
@@ -102,7 +102,7 @@ item:
             active: "true"
             completed: "true"
           function: "=(
-                      $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                      $controlOption := @ctx.jig.inputs.selected-option;
                       $EXECUTEFUNC := @ctx.current.item.function
                       ($controlOption = 'Notifications' ?  $EXECUTEFUNC :'')
                     )"

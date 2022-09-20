@@ -3,7 +3,7 @@ title: Game Control
 type: jig.composite
 icon: gauge-dashboard
 
-
+# Data
 datasources:
   game-status: 
     type: datasource.sqlite
@@ -17,7 +17,7 @@ datasources:
           '$.status' AS status 
         FROM [default/game-status] 
 
-
+# Primary Action Control
 actions:
   - when: =(@ctx.jigs.dropdown-control.outputs.selected-option = 'Fun-Fact' ? true :false)
     children:
@@ -66,15 +66,17 @@ actions:
 
 
 children:
+    # Control Panel: Choose Type, then display descriptions and actions based on the type selected
   - jigId: dropdown-control
     instanceId: dropdown-control
 
   - jigId: game-status
-    instanceId: game-status
+    instanceId: gameStatus
     inputs: 
       selected-option: =@ctx.jigs.dropdown-control.outputs.selected-option
 
   - jigId: fun-fact-list
+    instanceId: funFactList
     inputs: 
-      game-status: =@ctx.jigs.game-status.outputs.current-status
+      game-status: =@ctx.jigs.gameStatus.outputs.current-status
       selected-option: =@ctx.jigs.dropdown-control.outputs.selected-option
