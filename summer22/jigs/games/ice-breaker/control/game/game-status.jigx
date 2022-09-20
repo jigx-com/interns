@@ -1,0 +1,92 @@
+# Game Controls; Notification Information
+title: =('Current Status - ' & $uppercase(@ctx.datasources.game-status.status))
+type: jig.list
+
+# DATA
+outputs:
+  current-status: =@ctx.datasources.gameStatus.status
+
+datasources:
+  game-status: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/game-status
+      query: |
+        SELECT 
+          id, 
+          '$.status' AS status 
+        FROM [default/game-status] 
+
+  static-game-status: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Initalize
+          status: init
+        - id: 2
+          name: Open Game
+          status: open
+        - id: 3
+          name: Complete
+          status: done
+
+
+# Horizontal List 
+isHorizontal: true
+data: =@ctx.datasources.static-game-status
+item:
+  type: component.list-item
+  options:
+    # List Settings
+    horizontalItemSize: large
+    divider: solid
+    # List Contentx
+    title: =@ctx.current.item.name
+    description: =$uppercase(@ctx.current.item.status)
+    # List Actions -> Update Game Status
+    rightElement: 
+      element: icon
+      name: "=(
+                $activeItem := @ctx.solution.state.activeItemId;
+                $currentItem := @ctx.current.item.id;
+                $currentItem = $activeItem? 'select' :'add'
+              )"
+      isContained: true
+      isDuotone: false
+      # Update Game Status & activeItem
+      onPress: 
+        type: action.action-list
+        options:
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/game-status
+                method: update
+                goBack: stay
+                data:
+                  id: =@ctx.datasources.gameStatus.id
+                  status: =@ctx.current.item.status
+            - type: action.set-state
+              options:
+                state: =@ctx.solution.state.activeItemId
+                value: =@ctx.current.item.id
+    # List Styling
+    progress: 1
+    color:
+      # COLOR FOR FUN-FACT
+      - when: "=( 
+                  $activeItem := @ctx.solution.state.activeItemId;
+                  $currentItem := @ctx.current.item.id;
+                  $currentItem = $activeItem ? true :false
+                )"
+        color: color2
+      - when: "=( 
+                  $activeItem := @ctx.solution.state.activeItemId;
+                  $currentItem := @ctx.current.item.id;
+                  $currentItem != $activeItem ? true :false
+                )"
+        color: color14
