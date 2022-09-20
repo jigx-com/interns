@@ -7,13 +7,34 @@ onFocus:
     provider: DATA_PROVIDER_DYNAMIC
     entities:
       - entity: default/photos
+        
+datasources:
+  photos:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/photos
+  
+      query: |
+        SELECT 
+          id, 
+          '$.description', 
+          '$.title',
+          '$.uploadPhoto',
+          '$.linkTo' AS linkTo,
+          '$.buttonTitle' AS buttonTitle,
+          '$.setOrder' AS setOrder
+        FROM [default/photos] 
+        ORDER BY setOrder
 
 stories:
   instanceId: photostories
   type: component.story-group
   options:
     actionButtonTitle: Upload Photo
-    data: =@ctx.datasources.photoStory
+    data: =@ctx.datasources.photos
     groupName: Pictures
     item: 
       type: component.image
@@ -25,8 +46,8 @@ stories:
         onPress: 
           type: action.go-to
           options:
-            title: Comment or Vote!
-            linkTo: photo-landing-page
+            title: =@ctx.current.item.buttonTitle
+            linkTo: =@ctx.current.item.linkTo
             parameters:
               avatar: =@ctx.current.item.uploadPhoto
               photoId: =@ctx.current.item.id

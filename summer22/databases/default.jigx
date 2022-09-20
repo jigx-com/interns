@@ -12,7 +12,7 @@ tables:
   game-status: 
   facts:
   facts-guesses:
-  highlight:
+  morning:
   quote:
   teammates: 
   voting:

@@ -3,29 +3,27 @@ type: jig.default
 
 datasources:
   # First Slide Data
-  highlight:
+  morning:
     type: datasource.sqlite
     options:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/highlight
+        - default/morning
   
       query: |
         SELECT id, 
         '$.day' AS day,
         '$.photo' AS photo,
         '$.title' AS title, 
-        '$.subtitle' AS subtitle,
-        '$.linkTo' AS linkTo
-        FROM [default/highlight] 
+        '$.subtitle' AS subtitle
+        FROM [default/morning] 
         WHERE day LIKE strftime('%d', 'now', '-07:00')
-        ORDER BY '$.slide'
 
 stories:
   type: component.story-group
   options:
-    data: =@ctx.datasources.highlight
+    data: =@ctx.datasources.morning
     groupName: =("Good Morning, " & @ctx.user.displayName & "!")
     item: 
       type: component.image
@@ -37,8 +35,8 @@ stories:
         onPress: 
           type: action.go-to
           options:
-            title: View
-            linkTo: =@ctx.current.item.linkTo
+            title: View Agenda
+            linkTo: agenda-composite
 
 # Placeholder Code
 children:

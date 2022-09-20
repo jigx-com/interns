@@ -1,5 +1,5 @@
 title: Agenda 
-description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day of Jigx Week 2022! Below is your group for today and daily itinerary')
+description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day of Jigx Week 2022! Below is your daily itinerary')
 type: jig.composite
 
 

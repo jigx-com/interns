@@ -75,6 +75,25 @@ children:
             value: =@ctx.user.displayName
             isHidden: true
             isRequired: false
+        #buttonTItle and LinkTo for story
+        - type: component.text-field
+          instanceId: buttonTitle
+          options:
+            label: Comment or Vote!
+            initialValue: Comment or Vote!
+            isHidden: true
+        - type: component.text-field
+          instanceId: linkTo
+          options:
+            label: ''
+            initialValue: photo-landing-page
+            isHidden: true
+        - type: component.text-field
+          instanceId: setOrder
+          options:
+            label: ''
+            initialValue: b
+            isHidden: true
 
 
 actions:

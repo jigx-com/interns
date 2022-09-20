@@ -1,0 +1,75 @@
+title: Photo of the day
+type: jig.default
+
+datasources:
+  topVotedPhoto: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/members
+      # Get top voted photo id
+      query: |
+        SELECT
+          '$.dailyVote' AS photoId
+        FROM
+          [default/members]
+        GROUP BY
+          '$.dailyVote'
+        ORDER BY
+          COUNT('$.dailyVote') DESC
+        LIMIT
+          1
+  
+  photo: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/photos
+      # Winning Photo Details
+      query: |
+        SELECT 
+          id, 
+          '$.uploadPhoto' AS uploadPhoto, 
+          '$.title' AS title,
+          '$.location' AS location,
+          '$.description' AS description,
+          '$.uploadedBy' AS uploadedBy
+        FROM [default/photos] 
+        WHERE id = @topVote
+      queryParameters:
+        topVote: =@ctx.datasources.topVotedPhoto.photoId
+
+stories:
+  type: component.story-group
+  options:
+    actionButtonTitle: View Photo Gallary
+    data: =@ctx.datasources.photo
+    item: 
+      type: component.image
+      options:
+        source:
+          uri: =@ctx.current.item.uploadPhoto
+        title: Yesterday's most voted for photo!
+        subtitle: =@ctx.current.item.description
+        onPress: 
+          type: action.go-to
+          options:
+            title: View Photo Gallary
+            linkTo: photo-gallary
+
+# Placeholder Code
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.field-row
+          options:
+            children:
+              - type: component.entity-field
+                options:
+                  label: tbd
+                  value: tbd
