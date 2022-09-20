@@ -22,7 +22,7 @@ children:
       onPress: 
         type: action.go-to
         options:
-          linkTo: upload-notif
+          linkTo: notification
       chart:
         isAnimated: true
         width: 200
@@ -33,24 +33,6 @@ children:
         - data: =@ctx.datasources.color-green
           layout: pie
 
-  # Send Notifications "Button"
-  - type: component.pie-chart
-    options:
-      legend:
-        isHidden: true
-      onPress: 
-        type: action.go-to
-        options:
-          linkTo: send-notification
-      chart:
-        isAnimated: true
-        width: 200
-        title:
-          text: Upload Notifications
-          verticalAlign: center
-      series:
-        - data: =@ctx.datasources.color-red
-          layout: pie
 
   # Game Controls "Button"
   - type: component.pie-chart
@@ -68,7 +50,7 @@ children:
           text: Game Controls
           verticalAlign: center
       series:
-        - data: =@ctx.datasources.color-purple
+        - data: =@ctx.datasources.color-red
           layout: pie
 
 

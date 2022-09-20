@@ -1,11 +1,7 @@
 # Markus Upload Notif Jig
 title: Send out a Push Notification
 type: jig.default
-header: 
-  type: component.image
-  options:
-    source:
-      uri: https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bm90aWZpY2F0aW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1296&q=60
+
 
 # Data
 # datasources:
@@ -79,4 +75,3 @@ actions:
             title: =@ctx.components.title.state.value
           goBack: previous
           method: functionCall
-            

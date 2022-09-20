@@ -1,0 +1,58 @@
+# Jigxies Quote List; Manual Notification Control
+title: 'Jigxies Fun Fact'
+type: jig.list
+
+# DATA
+datasources:
+  fact-list:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/facts
+        - default/members
+      query: |
+        SELECT 
+          F.id AS factId, 
+          json_extract(F.data, '$.userEmail') AS userEmail,
+          json_extract(F.data, '$.fact') AS fact,
+          json_extract(F.data, '$.active') AS active, 
+          json_extract(F.data, '$.completed') AS completed, 
+          json_extract(M.data, '$.firstName') AS firstName,
+          json_extract(M.data, '$.lastName') AS lastName,
+          json_extract(M.data, '$.avatar') AS avatar
+        FROM [default/facts] AS F LEFT JOIN [default/members] AS M
+        ON json_extract(F.data, '$.userEmail') LIKE json_extract(M.data, '$.email')
+        ORDER BY firstName ASC, lastName ASC
+
+
+data: =@ctx.datasources.fact-list
+item:
+  type: component.list-item
+  options:
+    # List Content
+    title: =@ctx.current.item.fact
+    subtitle: =(@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName)
+    description: =@ctx.current.item.userEmail
+    leftElement: 
+      element: avatar
+      uri: =@ctx.current.item.avatar
+      text: =$uppercase($substring(@ctx.current.item.firstName, 0, 1) & $substring(@ctx.current.item.lastName, 0, 1))
+    # List Action
+    rightElement: 
+      element: button
+      title: Activate
+      onPress: 
+        type: action.execute-entity
+        options:
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts
+          method: update
+          goBack: stay
+          data: 
+            id: =@ctx.current.item.factId
+            active: "true"
+            completed: "true"
+    # List Styling
+    style:
+      isDisabled: =(@ctx.current.item.completed = "true" ? true :false)

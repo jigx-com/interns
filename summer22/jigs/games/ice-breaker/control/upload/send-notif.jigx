@@ -1,0 +1,72 @@
+# Jigxies Quote List; Manual Notification Control
+title: "Manually Send Push Notifications"
+type: jig.list
+
+# DATA
+datasources:
+  fact-list:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/facts
+        - default/members
+      query: |
+        SELECT 
+          F.id AS factId, 
+          json_extract(F.data, '$.userEmail') AS userEmail,
+          json_extract(F.data, '$.fact') AS fact,
+          json_extract(F.data, '$.active') AS active, 
+          json_extract(F.data, '$.completed') AS completed, 
+          json_extract(M.data, '$.firstName') AS firstName,
+          json_extract(M.data, '$.lastName') AS lastName,
+          json_extract(M.data, '$.avatar') AS avatar
+        FROM [default/facts] AS F LEFT JOIN [default/members] AS M
+        ON json_extract(F.data, '$.userEmail') LIKE json_extract(M.data, '$.email')
+        ORDER BY firstName ASC, lastName ASC
+
+  static-notifications:
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Good Morning!
+          description: View your Agenda for the day. Find what you missed yesterday!
+          photo: https://images.unsplash.com/photo-1602160934574-2c6ab4e84d53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3VucmlzZXxlbnwwfDJ8MHx8&auto=format&fit=crop&w=700&q=60
+          function: # Insert function jig here
+        - id: 2
+          name: Departing Soon!
+          description: You only have 1 hour to get to the ship; GSD - Get Sprinting Dude!
+          photo: https://images.unsplash.com/photo-1558395872-85709c6d3639?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGltZXxlbnwwfDJ8MHx8&auto=format&fit=crop&w=700&q=60
+          function: # Insert function jig here
+
+
+data: =@ctx.datasources.static-notifications
+item:
+  type: component.list-item
+  options:
+    # List Content
+    title: =@ctx.current.item.name
+    leftElement: 
+      element: avatar
+      uri: =@ctx.current.item.photo
+      text: NA
+    # List Action
+    rightElement: 
+      element: button
+      title: Send
+      onPress: 
+        type: action.execute-entity
+        options:
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/facts
+          method: update
+          goBack: stay
+          data: 
+            id: =@ctx.current.item.factId
+            active: "true"
+            completed: "true"
+          function: =@ctx.current.item.function
+    # List Styling
+    style:
+      isDisabled: =(@ctx.current.item.completed = "true" ? true :false)
