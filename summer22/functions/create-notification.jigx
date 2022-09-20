@@ -1,0 +1,50 @@
+provider: DATA_PROVIDER_REST
+method: POST
+url: https://rnh6evl4a1.execute-api.us-east-1.amazonaws.com/us-east-1-prod-v1//notificationManager
+parameters:
+  accessToken:
+    location: header
+    required: true
+    type: string
+    value: jigx
+  command:
+    location: body
+    required: true
+    type: string
+    value: createNotification
+  deviceId:
+    location: body
+    required: true
+    type: string
+    value: summer22
+  jigReferenceId:
+    location: body
+    required: true
+    type: string
+  organizationId:
+    location: body
+    required: true
+    type: string
+  scope:
+    location: body
+    required: true
+    type: string
+    value: SLN
+  screen:
+    location: body
+    required: true
+    type: string
+    value: jig
+  solutionId:
+    location: body
+    required: true
+    type: string
+  text:
+    location: body
+    required: true
+    type: string
+  title:
+    location: body
+    required: true
+    type: string
+inputTransform: $.{"deviceId":deviceId,"command":command,"organizationId":organizationId,"parameters":{"scope":scope,"solutionId":solutionId,"content":{"title":title,"text":text,"screen":screen,"solutionId":solutionId,"jigReferenceId":jigReferenceId}}}

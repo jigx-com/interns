@@ -101,6 +101,12 @@ children:
           options:
             label: Location 
             isHidden: true
+        - type: component.text-field
+          instanceId: dailyVote
+          options:
+            label: ''
+            initialValue: n/a
+            isHidden: true
             
 actions:
   - children:

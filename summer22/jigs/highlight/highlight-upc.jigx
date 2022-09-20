@@ -11,4 +11,4 @@ header:
 children:
   - jigId: agenda-list
     
-  - jigId: navigation-map
+  - jigId: poi

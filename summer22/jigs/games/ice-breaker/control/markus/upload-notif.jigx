@@ -1,5 +1,5 @@
 # Markus Upload Notif Jig
-title: Upload
+title: Send out a Push Notification
 type: jig.default
 header: 
   type: component.image
@@ -8,36 +8,75 @@ header:
       uri: https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bm90aWZpY2F0aW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1296&q=60
 
 # Data
-datasources:
-  notifuUploadData: 
-    type: datasource.sqlite
-    options:
-      provider: DATA_PROVIDER_DYNAMIC
+# datasources:
+#   notifuUploadData: 
+#     type: datasource.sqlite
+#     options:
+#       provider: DATA_PROVIDER_DYNAMIC
   
-      entities:
-        - default/table-name
+#       entities:
+#         - default/table-name
   
-      query: SELECT id, '$.column1', '$.column2' FROM [default/table-name] WHERE id = @myParam
-      queryParameters:
-        myParam: value
+#       query: SELECT id, '$.column1', '$.column2' FROM [default/table-name] WHERE id = @myParam
+#       queryParameters:
+#         myParam: value
 
 
 children:
   # Form upload
   - type: component.form
-    instanceId: uploadNotif
+    instanceId: create-notification
     options:
       children:
-        - type: component.media-field
-          instanceId: photoField
-          options:
-            label: Upload photo
-            mediaType: image
-
         - type: component.text-field
-          instanceId: notificationMessage
+          instanceId: title
+          options:
+            label: Title
+        - type: component.text-field
+          instanceId: text
           options:
             label: Text
-            isMultiline: true
             textArea: medium
+        - type: component.text-field
+          instanceId: organizationId
+          options:
+            label: Organization Id
+            value: 11111112-2dbe-4687-b98c-09b01c039743
+            isHidden: true
+        - type: component.text-field
+          instanceId: solutionId
+          options:
+            label: Solution Id
+            value: 002d83e6-b9f5-4872-906b-55522eb31b0f
+            isHidden: true
+        - type: component.text-field
+          instanceId: jigxReferenceId
+          options:
+            label: Jig Reference Id
+            initialValue: highlight-story
+            isHidden: true
+      isDiscardChangesAlertEnabled: false
+        
+            
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Create Notification
+          provider: DATA_PROVIDER_REST
+          entity: default/notifications
+          function: create-notification
+          functionParameters:
+            accessToken: jigx
+            command: createNotification
+            deviceId: summer22
+            jigReferenceId: =@ctx.components.jigxReferenceId.state.value
+            organizationId: =@ctx.components.organizationId.state.value
+            scope: SLN
+            screen: jig
+            solutionId: =@ctx.components.solutionId.state.value
+            text: =@ctx.components.text.state.value
+            title: =@ctx.components.title.state.value
+          goBack: previous
+          method: functionCall
             
