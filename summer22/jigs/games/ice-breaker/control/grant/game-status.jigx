@@ -1,6 +1,6 @@
 # Game Controls; Notification Information
 title: "=(
-          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          $controlOption := @ctx.jig.inputs.selected-option; 
           $gameTitle := ('Current Status - ' & $uppercase(@ctx.datasources.game-status.status));
           ($controlOption = 'Fun-Fact' ?  $gameTitle :'Notification Descriptions')
         )"
@@ -8,7 +8,7 @@ type: jig.list
 
 # DATA
 outputs:
-  current-status: =@ctx.datasources.game-status.status
+  current-status: =@ctx.datasources.gameStatus.status
 
 datasources:
   game-status: 
@@ -54,7 +54,7 @@ datasources:
 # Horizontal List 
 isHorizontal: true
 data: "=(
-          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+          $controlOption := @ctx.jig.inputs.selected-option;
           ($controlOption = 'Fun-Fact' ? @ctx.datasources.static-game-status :@ctx.datasources.static-notification)
         )"
 item:
@@ -63,16 +63,16 @@ item:
     # List Settings
     horizontalItemSize: large
     divider: solid
-    # List Content
+    # List Contentx``
     title: =@ctx.current.item.name
     description: "=( 
-                    $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                    $controlOption := @ctx.jig.inputs.selected-option;
                     ($controlOption = 'Fun-Fact' ? $uppercase(@ctx.current.item.status) :@ctx.current.item.description)
                   )"
     label:
       title: =@ctx.current.item.time
       isHidden: "=( 
-                    $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                    $controlOption := @ctx.jig.inputs.selected-option;
                     ($controlOption = 'Fun-Fact' ? true: false)
                   )"
       color:
@@ -82,7 +82,7 @@ item:
     rightElement: 
       element: icon
       name: "=(
-                $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                $controlOption := @ctx.jig.inputs.selected-option;
                 $activeItem := @ctx.solution.state.activeItemId;
                 $currentItem := @ctx.current.item.id;
                 ($controlOption = 'Fun-Fact' ? ($currentItem = $activeItem? 'select' :'add'): 'notification')
@@ -102,12 +102,12 @@ item:
                 goBack: stay
                 data:
                   id: "=(
-                          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
-                          $gamestatusID := @ctx.datasources.game-status.id;
+                          $controlOption := @ctx.jig.inputs.selected-option;
+                          $gamestatusID := @ctx.datasources.gameStatus.id;
                           ($controlOption = 'Fun-Fact' ? $gamestatusID: '')
                         )"
                   status: "=(
-                              $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                              $controlOption := @ctx.jig.inputs.selected-option;
                               $gamestatus := @ctx.current.item.status;
                               ($controlOption = 'Fun-Fact' ? $gamestatus: '')
                             )" 
@@ -115,7 +115,7 @@ item:
               options:
                 state: =@ctx.solution.state.activeItemId
                 value: "=(
-                          $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                          $controlOption := @ctx.jig.inputs.selected-option;
                           $currentItem := @ctx.current.item.id;
                           ($controlOption = 'Fun-Fact' ? $currentItem: '')
                         )" 
@@ -124,14 +124,14 @@ item:
     color:
       # COLOR FOR FUN-FACT
       - when: "=( 
-                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $controlOption := @ctx.jig.inputs.selected-option;
                   $activeItem := @ctx.solution.state.activeItemId;
                   $currentItem := @ctx.current.item.id;
                   ($controlOption = 'Fun-Fact' ? ($currentItem = $activeItem ? true :false) :false)
                 )"
         color: color2
       - when: "=( 
-                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $controlOption := @ctx.jig.inputs.selected-option;
                   $activeItem := @ctx.solution.state.activeItemId;
                   $currentItem := @ctx.current.item.id;
                   ($controlOption = 'Fun-Fact' ? ($currentItem != $activeItem ? true :false) :false)
@@ -139,7 +139,7 @@ item:
         color: color14
       # COLOR FOR NOTIFICATIONS
       - when: "=( 
-                  $controlOption := @ctx.jigs.dropdown-control.outputs.selected-option;
+                  $controlOption := @ctx.jig.inputs.selected-option;
                   ($controlOption = 'Fun-Fact' ? false: true)
                 )"
         color: color4

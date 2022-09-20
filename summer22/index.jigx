@@ -96,7 +96,7 @@ widgets:
     #               ($hours > '15') ? true: false
     #             )"
   - size: 1x1
-    jigId: cockpit
+    jigId: dashboard
     
   # Placeholder Widgets
   # - size: 1x1

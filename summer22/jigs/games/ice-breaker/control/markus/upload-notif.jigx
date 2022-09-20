@@ -1,0 +1,43 @@
+# Markus Upload Notif Jig
+title: Upload
+type: jig.default
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1596526131083-e8c633c948d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bm90aWZpY2F0aW9ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1296&q=60
+
+# Data
+datasources:
+  notifuUploadData: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/table-name
+  
+      query: SELECT id, '$.column1', '$.column2' FROM [default/table-name] WHERE id = @myParam
+      queryParameters:
+        myParam: value
+
+
+children:
+  # Form upload
+  - type: component.form
+    instanceId: uploadNotif
+    options:
+      children:
+        - type: component.media-field
+          instanceId: photoField
+          options:
+            label: Upload photo
+            mediaType: image
+
+        - type: component.text-field
+          instanceId: notificationMessage
+          options:
+            label: Text
+            isMultiline: true
+            textArea: medium
+            
