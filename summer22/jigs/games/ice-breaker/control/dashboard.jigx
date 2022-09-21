@@ -1,0 +1,280 @@
+# Dashboard for manual app control
+title: Controls
+description: Where to go?
+type: jig.default
+icon: cog-double
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/flagged/photo-1579750481098-8b3a62c9b85d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29ja3BpdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60
+
+#############################
+## Data under Jig children ##
+#############################
+
+children:
+  # Upload Notifications "Button"
+  - type: component.pie-chart
+    options:
+      legend:
+        isHidden: true
+      onPress: 
+        type: action.go-to
+        options:
+          linkTo: notification
+      chart:
+        isAnimated: true
+        width: 200
+        title:
+          text: Push Notifications
+          verticalAlign: center
+      series:
+        - data: =@ctx.datasources.color-green
+          layout: pie
+
+
+  # Game Controls "Button"
+  - type: component.pie-chart
+    options:
+      legend:
+        isHidden: true
+      onPress: 
+        type: action.go-to
+        options:
+          linkTo: ff-control
+      chart:
+        isAnimated: true
+        width: 200        
+        title:
+          text: Game Controls
+          verticalAlign: center
+      series:
+        - data: =@ctx.datasources.color-red
+          layout: pie
+
+
+# Data - Lots of redundant info
+datasources:
+  # Name & Nav
+  theirJig: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Markus
+          linkTo: upload-notif
+          icon: attachment
+
+        - id: 2
+          name: Grant
+          linkTo: cockpit
+          icon: gauge-dashboard
+
+  # Color Scheme - 32 datapoints
+  color-green:
+    type: datasource.static
+    options:
+      data:
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+        - color: color2
+          y: 2
+        - color: color6
+          y: 2
+  # Color Scheme - 32 datapoints
+  color-red:
+    type: datasource.static
+    options:
+      data:
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+        - color: color7
+          y: 2
+        - color: color4
+          y: 2
+  # Color Scheme - 32 datapoints
+  color-purple:
+    type: datasource.static
+    options:
+      data:
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2
+        - color: color11
+          y: 2
+        - color: color8
+          y: 2

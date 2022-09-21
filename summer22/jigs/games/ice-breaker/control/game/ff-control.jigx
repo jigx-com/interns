@@ -1,0 +1,57 @@
+title: Fun Fact Control
+type: jig.composite
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1543617080-0db79d35e926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y29udHJvbCUyMHBhbmVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1296&q=60
+
+datasources:
+  game-status: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/game-status
+      query: |
+        SELECT 
+          id, 
+          '$.status' AS status 
+        FROM [default/game-status] 
+
+actions:
+  - children:
+      - type: action.confirm
+        options:
+          title: Reset Game
+          isConfirmedAutomatically: false
+          onConfirmed: 
+            type: action.action-list
+            options:
+              actions:
+                - type: action.execute-entity
+                  options:
+                    provider: DATA_PROVIDER_DYNAMIC
+                    entity: default/game-status
+                    method: update
+                    goBack: stay
+                    data:
+                      id: =@ctx.datasources.game-status.id
+                      status: "init"
+                - type: action.set-state
+                  options:
+                    state: =@ctx.solution.state.activeItemId
+                    value: 1
+          modal:
+            title: Reset the Game
+            description: Are you sure?
+            cancel: "NO"
+            confirm: "YES" 
+
+children:
+  - jigId: game-status
+    instanceId: gameStatus
+
+  - jigId: fun-fact-list
+    inputs: 
+      game-status: =@ctx.jigs.gameStatus.outputs.current-status
