@@ -3,8 +3,6 @@ title: =('Current Status - ' & $uppercase(@ctx.datasources.game-status.status))
 type: jig.list
 
 # DATA
-outputs:
-  current-status: =@ctx.datasources.gameStatus.status
 
 datasources:
   game-status: 
@@ -68,7 +66,7 @@ item:
                 method: update
                 goBack: stay
                 data:
-                  id: =@ctx.datasources.gameStatus.id
+                  id: =@ctx.datasources.game-status.id
                   status: =@ctx.current.item.status
             - type: action.set-state
               options:
