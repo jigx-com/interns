@@ -82,9 +82,9 @@ children:
                     flex: 2
                   isRequired: true
               - type: component.text-field
-                instanceId: emergencyConRelat
+                instanceId: emergencyConName
                 options:
-                  label: Relation*
+                  label: Emergency Contact Name*
                   isRequired: true
         - type: component.text-field
           instanceId: dietReq

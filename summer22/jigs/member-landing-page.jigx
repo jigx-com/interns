@@ -9,13 +9,42 @@ header:
       uri: =@ctx.jig.inputs.avatar
       
 datasources:
-  funfact:
-    type: datasource.static
+  members:
+    type: datasource.sqlite
     options:
-      data:
-        - id: 1
-          fact: "This is a fun fact"
-
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/members
+  
+      query: |
+        SELECT 
+          id, 
+          '$.email' AS email, 
+          '$.emergencyConNum' AS emergencyNum,
+          '$.emergencyConName' AS emergencyName
+        FROM [default/members] 
+        WHERE email = @inputEmail
+      queryParameters:
+        inputEmail: =@ctx.jig.inputs.email
+        
+  photos:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/photos
+  
+      query: |
+        SELECT 
+          id, 
+          '$.uploadedBy' AS uploadedBy, 
+          '$.uploadPhoto' AS uploadPhoto 
+        FROM [default/photos] 
+        WHERE uploadPhoto LIKE @firstName
+      queryParameters:
+        firstName: =@ctx.jig.inputs.firstName
 
 
 children:
@@ -24,16 +53,27 @@ children:
       children:
         - type: component.section
           options:
-            title: Contact Details
+            title: Jigxie Information
             children:
               - type: component.entity-field
                 options:
-                  label: Fun Fact
-                  value: =(@ctx.datasources.funfact.fact)
+                  label: email
+                  value: =@ctx.datasources.members.email
                   isMultiline: false
+              - type: component.field-row
+                options:
+                  children:
+                    - type: component.entity-field
+                      options:
+                        label: Emergency Contact Number
+                        value: =@ctx.datasources.members.emergencyNum
+                        isMultiline: false
+                    - type: component.entity-field
+                      options:
+                        label: Emergency Contact Name
+                        value: =@ctx.datasources.members.emergencyName
+                        isMultiline: false
               - type: component.entity-field
                 options:
-                  label: email
-                  value: =@ctx.jig.inputs.email
-                  contentType: email
-                  isMultiline: false
+                  label: "Last Seen at:"
+                  value: =@ctx.jig.inputs.locName

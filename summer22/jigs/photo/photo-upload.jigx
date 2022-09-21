@@ -75,25 +75,27 @@ children:
             value: =@ctx.user.displayName
             isHidden: true
             isRequired: false
-        #buttonTItle and LinkTo for story
+        #buttonTItle forstory to navigate to voting and comment page 
         - type: component.text-field
           instanceId: buttonTitle
           options:
             label: Comment or Vote!
-            initialValue: Comment or Vote!
-            isHidden: true
+            value: Comment or Vote!
+            isHidden: false
+        #link to needed for stories to vote 
         - type: component.text-field
           instanceId: linkTo
           options:
             label: ''
-            initialValue: photo-landing-page
-            isHidden: true
+            value: photo-landing-page
+            isHidden: false
+        #set order needed to order the photos behind default image
         - type: component.text-field
           instanceId: setOrder
           options:
             label: ''
-            initialValue: b
-            isHidden: true
+            value: b
+            isHidden: false
 
 
 actions:
@@ -133,6 +135,9 @@ actions:
             location: =@ctx.components.location.state.value
             expireDate: =($millis() + 86400000)
             uploadedBy: =@ctx.components.uploadedBy.state.value
+            buttonTitle: =@ctx.components.buttonTitle.state.value
+            linkTo: =@ctx.components.linkTo.state.value
+            setOrder: =@ctx.components.setOrder.state.value
 
 
 
