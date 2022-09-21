@@ -54,3 +54,4 @@ item:
           avatar: =@ctx.current.item.avatar
           email: =@ctx.current.item.email
           locationtime: =('At ' & @ctx.current.item.locname & ' as of ' & $formatNumber(($toMillis($now()) - $toMillis(@ctx.current.item.timeOfLocation))/3600000, "#0.00;(#0.00)") & " hour(s) ago")
+          locName: =@ctx.current.item.locname
