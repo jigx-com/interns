@@ -14,14 +14,9 @@ widgets:
       item:         
         type: component.list-item
         options:
-          title: =('"' & @ctx.current.item.fact & '"')
-          rightElement: 
-            element: button
-            title: ⁉️
-            onPress: 
-              type: action.go-to
-              options:
-                linkTo: fun-fact
+          title: =('"' & @ctx.datasources.facts[active = 'true'].fact & '"')
+          
+
 header: 
   type: component.image
   options:
@@ -130,7 +125,7 @@ children:
         - type: component.entity-field
           options:
             label: Fun Fact
-            value: "=(@ctx.datasources.facts.fact)"
+            value: "=@ctx.datasources.facts[active = 'true'].fact"
             isMultiline: true
   - type: component.form
     instanceId: fact
@@ -148,17 +143,6 @@ children:
             label: factid
             isHidden: true
             initialValue: =@ctx.datasources.facts.id
-        
-        # Current Fun Fact
-        # - type: component.text-field
-        #   instanceId: fact
-        #   options:
-        #     isIgnored: true
-        #     label: "=(@ctx.datasources.facts.fact)"
-        #     initialValue: TEST
-        #     # value: "=(@ctx.datasources.facts.fact)"
-        #     isMultiline: true
-        #     textArea: dynamic
         # Jigxies List
         - type: component.dropdown
           instanceId: teammatesList

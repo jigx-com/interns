@@ -1,0 +1,51 @@
+title: Image of the Day
+type: jig.default
+
+datasources:
+  topVotedPhoto: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/members
+      # Get top voted photo id
+      query: |
+        SELECT
+          '$.dailyVote' AS photoId
+        FROM
+          [default/members]
+        GROUP BY
+          '$.dailyVote'
+        ORDER BY
+          COUNT('$.dailyVote') DESC
+        LIMIT
+          1
+  
+  photo: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/photos
+      # Winning Photo Details
+      query: |
+        SELECT 
+          id, 
+          '$.uploadPhoto' AS uploadPhoto, 
+          '$.title' AS title,
+          '$.location' AS location,
+          '$.description' AS description,
+          '$.uploadedBy' AS uploadedBy
+        FROM [default/photos] 
+        WHERE id = @topVote
+      queryParameters:
+        topVote: =@ctx.datasources.topVotedPhoto.photoId
+
+children:
+  - type: component.image
+    options:
+      source:
+        uri: =@ctx.datasources.photo.uploadPhoto
+      height: 500

@@ -3,6 +3,12 @@ description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day 
 type: jig.list
 icon: check-circle-1
 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://cdn.pixabay.com/photo/2018/04/13/16/49/laptop-3317007_1280.jpg
+
 datasources:
   agendaList:
     type: datasource.sqlite

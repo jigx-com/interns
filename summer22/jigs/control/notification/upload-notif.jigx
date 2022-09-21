@@ -2,22 +2,6 @@
 title: Send out a Push Notification
 type: jig.default
 
-
-# Data
-# datasources:
-#   notifuUploadData: 
-#     type: datasource.sqlite
-#     options:
-#       provider: DATA_PROVIDER_DYNAMIC
-  
-#       entities:
-#         - default/table-name
-  
-#       query: SELECT id, '$.column1', '$.column2' FROM [default/table-name] WHERE id = @myParam
-#       queryParameters:
-#         myParam: value
-
-
 children:
   # Form upload
   - type: component.form
@@ -33,6 +17,7 @@ children:
           options:
             label: Text
             textArea: medium
+            isMultiline: true
         - type: component.text-field
           instanceId: organizationId
           options:
@@ -49,7 +34,7 @@ children:
           instanceId: jigxReferenceId
           options:
             label: Jig Reference Id
-            initialValue: highlight-story
+            initialValue: morning-story #=@ctx.jig.inputs.linkTo
             isHidden: true
       isDiscardChangesAlertEnabled: false
         

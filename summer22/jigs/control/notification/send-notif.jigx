@@ -33,12 +33,12 @@ datasources:
           name: Good Morning!
           description: View your Agenda for the day. Find what you missed yesterday!
           photo: https://images.unsplash.com/photo-1602160934574-2c6ab4e84d53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3VucmlzZXxlbnwwfDJ8MHx8&auto=format&fit=crop&w=700&q=60
-          function: # Insert function jig here
+          linkTo: morning-notification
         - id: 2
           name: Departing Soon!
           description: You only have 1 hour to get to the ship; GSD - Get Sprinting Dude!
           photo: https://images.unsplash.com/photo-1558395872-85709c6d3639?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGltZXxlbnwwfDJ8MHx8&auto=format&fit=crop&w=700&q=60
-          function: # Insert function jig here
+          linkTo: agenda-list
 
 
 data: =@ctx.datasources.static-notifications
@@ -56,17 +56,11 @@ item:
       element: button
       title: Send
       onPress: 
-        type: action.execute-entity
+        type: action.go-to
         options:
-          provider: DATA_PROVIDER_DYNAMIC
-          entity: default/facts
-          method: update
-          goBack: stay
-          data: 
-            id: =@ctx.current.item.factId
-            active: "true"
-            completed: "true"
-          function: =@ctx.current.item.function
+          linkTo: upload-notif
+          parameters:
+            linkTo: =@ctx.current.item.linkTo
     # List Styling
-    style:
-      isDisabled: =(@ctx.current.item.completed = "true" ? true :false)
+    # style:
+    #   isDisabled: =(@ctx.current.item.completed = "true" ? true :false)

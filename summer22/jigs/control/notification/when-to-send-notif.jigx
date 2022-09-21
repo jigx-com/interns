@@ -1,0 +1,49 @@
+title: When to send
+type: jig.default
+
+datasources:
+  whenTo: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          name: Morning Notification
+          linkTo: morning-notification
+          label: Send in Morning
+        - id: 2
+          name: Departure Notification
+          linkTo: calendar-agenda
+          label: Two hrs before boarding
+
+children:
+  - type: component.list
+    options:
+      isHorizontal: true
+      data: =@ctx.datasources.whenTo
+      maximumItemsToRender: 8
+      
+      item: 
+        type: component.list-item
+        options:
+          
+          horizontalItemSize: large
+          divider: solid
+          
+          title: =@ctx.current.item.name
+          
+          label:
+            title: =@ctx.current.item.label
+            color:
+              - when: true
+                color: color4
+                
+          rightElement: 
+            element: icon
+            name: alarm-bell
+            isContained: true
+            isDuotone: false
+          
+          progress: 1
+          color:
+            - when: true
+              color: color4

@@ -1,0 +1,7 @@
+title: =('Morning ' & @ctx.user.displayName)
+type: jig.composite
+
+children:
+  - jigId: morning-image
+
+  - jigId: agenda-list

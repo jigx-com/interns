@@ -73,6 +73,8 @@ widgets:
                           $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                           ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
                         )" 
+            placeholders:
+              - title: To party, or not to party, that is the question.
 
 header: 
   type: component.image

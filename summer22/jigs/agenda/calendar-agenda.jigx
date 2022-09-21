@@ -18,7 +18,10 @@ datasources:
           '$.endDateTime',
           '$.location',
           '$.speakerOne',
-          '$.speakerTwo'
+          '$.speakerTwo',
+          '$.endTime',
+          '$.startTime',
+          '$.agendaDetail'
         FROM
           [default/calendar]
 
@@ -31,6 +34,7 @@ item:
     to: =@ctx.current.item.endDateTime
     title: =@ctx.current.item.subject
     description: =@ctx.current.item.location
+    location: =@ctx.current.item.agendaDetail
     onButtonPress: 
       type: action.go-to
       options:
@@ -43,3 +47,6 @@ item:
           location: =@ctx.current.item.location
           speakerOne: =@ctx.current.item.speakerOne
           speakerTwo: =@ctx.current.item.speakerTwo
+          endTime: =@ctx.current.item.endTime
+          startTime: =@ctx.current.item.startTime
+          agendaDetail: =@ctx.current.item.agendaDetail

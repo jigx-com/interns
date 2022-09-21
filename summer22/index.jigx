@@ -16,12 +16,6 @@ widgets:
 
 
   # Food Widget - Breakfast, Lunch, Dinner
-      # Boolean function that stores `hours` as current time in "HH:MM:SS" format; verifies it's in range of x & y time 
-      #           --> (Currently at GMT-0700 [PST]) => (should be at GMT+0200)
-      #  "=(
-      #     $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-      #     (($hours > 'x') and ($hours < 'y')) ? false: true
-      #   )" 
   - size: "2x2"
     jigId: breakfast
     isHidden: "=(
@@ -44,13 +38,10 @@ widgets:
   # Tool Widgets
   - size: "1x1"
     jigId: day1-checkIn-form
-    # isHidden: =@ctx.jigs.day1-checkIn-form.checkUserEmail
     isHidden: "=(
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
                   (($hours < '0216:00:00')) ? false: true
                 )"
-
-    
 # After day 1: replace day1-check... w/ link-up-...
   - size: "1x1"
     jigId: link-up-filter-location
@@ -90,16 +81,19 @@ widgets:
     #             )"
 
 #Fun Fact
-  - size: "1x1"
+  - size: "2x2"
     jigId: fun-fact
-    # isHidden: "=(
-    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
-    #               ($hours > '15') ? true: false
-    #             )"
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
+                  ($hours > '01') ? true: false
+                )"
   - size: 1x1
     jigId: dashboard
     
+    
+#photo gallary
+  - size: "1x1"
+    jigId: photo-gallary
   # Placeholder Widgets
   # - size: 1x1
   #   jigId: my-fact
-

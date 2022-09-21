@@ -23,7 +23,7 @@ datasources:
           uri: https://images.unsplash.com/photo-1543470388-80a8f5281639?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aWNlJTIwYmVyZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60
           title: Fun Fact
           subtitle: Break the ice!
-          linkTo: index  
+          linkTo: fun-fact
 
 
 stories:

@@ -15,15 +15,11 @@ children:
               - type: component.entity-field
                 options:
                   label: Start Time
-                  value: =@ctx.jig.inputs.startDateTime
+                  value: =@ctx.jig.inputs.startTime
               - type: component.entity-field
                 options:
                   label: End Time
-                  value: =@ctx.jig.inputs.endDateTime
-        - type: component.entity-field
-          options:
-            label: Location
-            value: =@ctx.jig.inputs.location
+                  value: =@ctx.jig.inputs.endTime
         - type: component.field-row
           options:
             children:
@@ -35,6 +31,19 @@ children:
                 options:
                   label: Speaker
                   value: =@ctx.jig.inputs.speakerTwo
+        - type: component.entity-field
+          options:
+            label: Location Name
+            value: =@ctx.jig.inputs.agendaDetail
+        - type: component.entity-field
+          options:
+            label: Location Address
+            value: =@ctx.jig.inputs.location
+  - type: component.location
+    options:
+      address: =@ctx.jig.inputs.location
+      zoomLevel: 14
+      
 
 actions:
   - children:
