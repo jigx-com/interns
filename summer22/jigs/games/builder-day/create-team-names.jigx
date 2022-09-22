@@ -1,0 +1,73 @@
+title: Creat a Team Name
+description: Please have one of your teammates set your Team Name!
+type: jig.default
+widgets:
+  "2x2": 
+    type: widget.image
+    options:
+      source:
+        uri: https://images.unsplash.com/photo-1562577308-c8b2614b9b9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60
+        
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1562577308-c8b2614b9b9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60
+
+datasources:
+  teamNames: 
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/teamNames
+  
+      query: |
+        SELECT 
+          id, 
+          '$.teamNames', 
+          '$.teamNumber',
+          '$.setOrder' AS setOrder
+        FROM [default/teamNames] 
+        ORDER BY setOrder
+      #   WHERE id = @myParam
+      # queryParameters:
+      #   myParam: value
+
+children:
+  - type: component.form
+    instanceId: createTeamName
+    options:
+      isDiscardChangesAlertEnabled: false
+      children:
+        - type: component.dropdown
+          instanceId: teamNumber
+          options:
+            label: Choose a Team Number
+            data: =@ctx.datasources.teamNames
+            item:
+              type: component.dropdown-item
+              options:
+                title: =@ctx.current.item.teamNumber
+                value: =@ctx.current.item.id
+        - type: component.text-field
+          instanceId: teamName
+          options:
+            label: Choose a Team Name
+            maxLength: 6
+
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Set Team Name
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/teamNames
+          method: update
+          goBack: stay
+          data:
+            id: =@ctx.components.teamNumber.state.selected.id
+            teamNames: =@ctx.components.teamName.state.value
+          onSuccess: 
+            type: action.go-back

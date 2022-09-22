@@ -1,7 +1,40 @@
 title: Sit Down Restaurants
 type: jig.list
 
-data: =@ctx.datasources.static-sit-down-restaurant[day = $string($substring($fromMillis($toMillis($now()), '[M01]/[D01]/[Y0001] [h#1]:[m01][P]'), 3, 2))]
+# data: =@ctx.datasources.static-sit-down-restaurant[day = $string($substring($fromMillis($toMillis($now()), '[M01]/[D01]/[Y0001] [h#1]:[m01][P]'), 3, 2))]
+
+datasources:
+  sitDown:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/sit-down-restaurants
+  
+      query: |
+        SELECT 
+          id, 
+          '$.address' AS address, 
+          '$.cuisine-type' AS cuisineType,
+          '$.day' AS day,
+          '$.gluten-free' AS glutenFree,
+          '$.hours' AS hours,
+          '$.icon' AS icon,
+          '$.pathsData' AS pathsData,
+          '$.price' AS price,
+          '$.rating' AS rating,
+          '$.title' AS title,
+          '$.vegan' AS vegan,
+          '$.vegetarian' AS vegetarain,
+          '$.walking-distance-workshop' AS walkingDistance,
+          '$.walking-time-workshop' AS walkingTime
+        FROM [default/sit-down-restaurants] 
+        WHERE day = @dayFilter
+      queryParameters:
+        dayFilter: =($string($substring($fromMillis($toMillis($now()), '[M01]/[D01]/[Y0001] [h#1]:[m01][P]'), 3, 2)))
+
+data: =@ctx.datasources.sitDown
 item:
   type: component.expander
   options:
@@ -10,10 +43,9 @@ item:
         type: component.titles
         options:
           align: left
-          icon: =@ctx.current.item.culinary-region-icon
+          icon: =@ctx.current.item.icon
           title: =@ctx.current.item.title
           subtitle: =(@ctx.current.item.price & ' - ' & @ctx.current.item.rating)
-
     children:
       - type: component.entity
         options:
@@ -32,19 +64,19 @@ item:
                   - type: component.entity-field
                     options:
                       label: Cuisine Type
-                      value: =@ctx.current.item.cuisine-type
+                      value: =@ctx.current.item.cuisineType
             - type: component.field-row
               options:
                 children:
                   - type: component.entity-field
                     options:
                       label: Walking Distance
-                      value: =@ctx.current.item.walking-distance-workshop
+                      value: =@ctx.current.item.walkingDistance
                   - type: component.entity-field
                     options:
                       label: Est. Walking Time
-                      value: =@ctx.current.item.walking-time-workshop
+                      value: =@ctx.current.item.walkingTime
       - type: component.location
         options:
-          zoomLevel: 15
-          pathsData: =@ctx.current.item.pathsData
+          zoomLevel: 13
+          pathsData: =$eval(@ctx.current.item.pathsData)

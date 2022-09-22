@@ -23,6 +23,10 @@ tables:
   comment:
   guesses: 
   notifications:
+  sit-down-restaurants: 
+  quick-bites-restaurants: 
+  teamNames:
+  
 
 
   

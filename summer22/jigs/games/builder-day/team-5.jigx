@@ -1,4 +1,4 @@
-title: Team 5
+title: =(@ctx.datasources.teamName.teamNames)
 description: Description of your Jig
 type: jig.list
 icon: contact
@@ -11,23 +11,44 @@ datasources:
   
       entities:
         - default/teammates
+        - default/members
   
       query: |
         SELECT
-          tb.id,
-          json_extract(tb.data, '$.firstName') AS tbfirstName,
-          json_extract(tb.data, '$.lastName') AS lastName,
-          json_extract(tb.data, '$.team') AS team,
-          json_extract(tb.data, '$.voted') AS voted,
-          json_extract(tb.data, '$.email') AS tbEmail,
-          json_extract(tM.data, '$.avatar') AS avatar,
-          json_extract(tM.data, '$.email') AS tmEmail
+          T.id,
+          json_extract(T.data, '$.teamNum') AS teamNum,
+          json_extract(T.data, '$.email') AS TEmail,
+          json_extract(M.data, '$.avatar') AS avatar,
+          json_extract(M.data, '$.email') AS MEmail,
+          json_extract(M.data, '$.firstName') AS firstName,
+          json_extract(M.data, '$.lastName') AS lastName
         FROM
-          [default/teammates] AS tb
-          LEFT JOIN [default/members] AS tM ON tbEmail LIKE tmEmail
+          [default/teammates] AS T
+          LEFT JOIN [default/members] AS M ON TEmail LIKE MEmail
         WHERE
-          team = @team
-        ORDER BY tbfirstName
+          teamNum = @team
+                ORDER BY firstName
+      queryParameters:
+        team: '5'
+        
+  teamName:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/teammates
+        - default/teamNames
+  
+      query: |
+        SELECT
+          id,
+          '$.setOrder' AS setOrder,
+          '$.teamNames' AS teamNames
+        FROM
+          [default/teamNames]
+        WHERE
+          setOrder = @team
       queryParameters:
         team: '5'
 
@@ -35,11 +56,11 @@ data: =@ctx.datasources.team5
 item:
   type: component.list-item
   options:
-    title: =@ctx.current.item.tbfirstName & " " & @ctx.current.item.lastName
+    title: =@ctx.current.item.firstName & " " & @ctx.current.item.lastName
     # subtitle: =@ctx.current.item.datasourcefield
     leftElement: 
       element: avatar
-      text: =($substring($substringBefore(@ctx.current.item.tbfirstName, " "), 0, 1) & $substring($substringAfter(@ctx.current.item.lastName, " ") , 0, 1) )
+      text: =($substring($substringBefore(@ctx.current.item.firstName, " "), 0, 1) & $substring($substringAfter(@ctx.current.item.lastName, " ") , 0, 1) )
       uri: =@ctx.current.item.avatar
       
 isCollapsible: true

@@ -49,3 +49,5 @@ children:
       source:
         uri: =@ctx.datasources.photo.uploadPhoto
       height: 500
+      title: =@ctx.datasources.photo.title
+      subtitle: =@ctx.datasources.photo.description

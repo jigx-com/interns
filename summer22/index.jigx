@@ -61,10 +61,10 @@ widgets:
   # Navigation Widget
   - size: "2x2"
     jigId: poi
-    # isHidden: "=(
-    #                 $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-    #                 (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
-    #               )"
+    isHidden: "=(
+                    $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                    (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
+                  )"
 
   - size: "2x2"
     jigId: hotspot-composite
@@ -85,7 +85,7 @@ widgets:
     jigId: fun-fact
     isHidden: "=(
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
-                  ($hours > '01') ? true: false
+                  ($hours > '01') and ($hours < '03') ? false: true
                 )"
   - size: 1x1
     jigId: dashboard
@@ -97,3 +97,12 @@ widgets:
   # Placeholder Widgets
   # - size: 1x1
   #   jigId: my-fact
+  
+#builderDay Creat Team Names  
+  - size: "2x2"
+    jigId: create-team-names
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
+                  ($hours > '02') and ($hours < '04')? false: true
+                )"
+  

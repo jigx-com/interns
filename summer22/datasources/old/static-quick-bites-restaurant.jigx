@@ -1,308 +1,308 @@
-type: datasource.static
-options:
-  data:
+# type: datasource.static
+# options:
+#   data:
     
-# Nice, France
-        - day: "02"
-          culinary-region-icon: fr
-          title: ARMAND
-          rating: ⭐⭐⭐⭐(4.4)
-          price: $$
-          address: 19 Rue de France, 06000 Nice, France
-          hours: 7:00 AM – 9:00 PM
-          cuisine-type: Patisserie
-          walking-distance-workshop: 66 meters
-          walking-time-workshop: 1 minute
-          pathsData:
-            - "lat": 43.6958967782869
-              "lng": 7.263335025815267
-            - "lat": 43.69633283595733
-              "lng": 7.26322432823348
-            - "lat": 43.696323176486324
-              "lng": 7.2633751059741885
-        - day: "02"
-          culinary-region-icon: fr
-          title: YUMMY & GUILT FREE
-          rating: ⭐⭐⭐⭐⭐(4.8)
-          price: $
-          address: 37 Rue Massena, 06000 Nice, France
-          hours: 12:00 PM – 11:00 PM
-          cuisine-type: French Fast Food Waffles
-          walking-distance-workshop: 260 meters
-          walking-time-workshop: 3 minutes
-          pathsData:
-          # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.6967448603818, "lng": 7.265057782018579}, {"lat": 43.69697757044755, "lng": 7.265623728120078}]
+# # Nice, France
+#         - day: "02"
+#           culinary-region-icon: fr
+#           title: ARMAND
+#           rating: ⭐⭐⭐⭐(4.4)
+#           price: $$
+#           address: 19 Rue de France, 06000 Nice, France
+#           hours: 7:00 AM – 9:00 PM
+#           cuisine-type: Patisserie
+#           walking-distance-workshop: 66 meters
+#           walking-time-workshop: 1 minute
+#           pathsData:
+#             - "lat": 43.6958967782869
+#               "lng": 7.263335025815267
+#             - "lat": 43.69633283595733
+#               "lng": 7.26322432823348
+#             - "lat": 43.696323176486324
+#               "lng": 7.2633751059741885
+#         - day: "02"
+#           culinary-region-icon: fr
+#           title: YUMMY & GUILT FREE
+#           rating: ⭐⭐⭐⭐⭐(4.8)
+#           price: $
+#           address: 37 Rue Massena, 06000 Nice, France
+#           hours: 12:00 PM – 11:00 PM
+#           cuisine-type: French Fast Food Waffles
+#           walking-distance-workshop: 260 meters
+#           walking-time-workshop: 3 minutes
+#           pathsData:
+#           # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.6967448603818, "lng": 7.265057782018579}, {"lat": 43.69697757044755, "lng": 7.265623728120078}]
 
-        - day: "02"
-          culinary-region-icon: fr
-          title: La Quéquetterie
-          rating: ⭐⭐⭐⭐(4.5)
-          price: $$
-          address: 30 Rue Massena, 06000 Nice, France
-          hours: 2:00 PM – 11:00 PM
-          cuisine-type: French Fast Food Cakes
-          walking-distance-workshop: 270 meters
-          walking-time-workshop: 3 minutes
-          pathsData:
-          # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.6967448603818, "lng": 7.265057782018579}, {"lat": 43.69706122288407, "lng": 7.265604113008404}]
+#         - day: "02"
+#           culinary-region-icon: fr
+#           title: La Quéquetterie
+#           rating: ⭐⭐⭐⭐(4.5)
+#           price: $$
+#           address: 30 Rue Massena, 06000 Nice, France
+#           hours: 2:00 PM – 11:00 PM
+#           cuisine-type: French Fast Food Cakes
+#           walking-distance-workshop: 270 meters
+#           walking-time-workshop: 3 minutes
+#           pathsData:
+#           # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.6967448603818, "lng": 7.265057782018579}, {"lat": 43.69706122288407, "lng": 7.265604113008404}]
 
-        - day: "02"
-          culinary-region-icon: fr
-          title: Creperie Suzette
-          rating: ⭐⭐⭐⭐(4.6)
-          price: $
-          address: 26 Rue Massena, 06000 Nice, France
-          hours: 8:00 AM – 10:00 PM
-          cuisine-type: Crêperie
-          walking-distance-workshop: 300 meters
-          walking-time-workshop: 4 minutes
-          pathsData:
-            # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.6967448603818, "lng": 7.265057782018579}, {"lat": 43.697338286945815, "lng": 7.266209762151777}]
+#         - day: "02"
+#           culinary-region-icon: fr
+#           title: Creperie Suzette
+#           rating: ⭐⭐⭐⭐(4.6)
+#           price: $
+#           address: 26 Rue Massena, 06000 Nice, France
+#           hours: 8:00 AM – 10:00 PM
+#           cuisine-type: Crêperie
+#           walking-distance-workshop: 300 meters
+#           walking-time-workshop: 4 minutes
+#           pathsData:
+#             # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.6967448603818, "lng": 7.265057782018579}, {"lat": 43.697338286945815, "lng": 7.266209762151777}]
             
             
             
             
-        - day: "02"
-          culinary-region-icon: br
-          title: Oakberry Açai
-          rating: ⭐⭐⭐⭐⭐(5.0)
-          price: $
-          address: 7 Rue Halévy, 06000 Nice, France
-          hours: 10:00 AM – 9:00 PM 
-          cuisine-type: Healthy Food & Smoothies
-          walking-distance-workshop: 300 meters
-          walking-time-workshop: 4 minutes
-          pathsData:
-            # [{"lat": 43.69634045248791, "lng": 7.263210178246357}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.69672899657484, "lng": 7.265040623798325}, {"lat": 43.69604152875739, "lng": 7.265168800807663}]
+#         - day: "02"
+#           culinary-region-icon: br
+#           title: Oakberry Açai
+#           rating: ⭐⭐⭐⭐⭐(5.0)
+#           price: $
+#           address: 7 Rue Halévy, 06000 Nice, France
+#           hours: 10:00 AM – 9:00 PM 
+#           cuisine-type: Healthy Food & Smoothies
+#           walking-distance-workshop: 300 meters
+#           walking-time-workshop: 4 minutes
+#           pathsData:
+#             # [{"lat": 43.69634045248791, "lng": 7.263210178246357}, {"lat": 43.69633411681362, "lng": 7.263224905452357}, {"lat": 43.69672899657484, "lng": 7.265040623798325}, {"lat": 43.69604152875739, "lng": 7.265168800807663}]
 
-        - day: "02"
-          culinary-region-icon: it
-          title: Pizza da Francesco
-          rating: ⭐⭐⭐⭐⭐(4.7)
-          price: $
-          address: 1 Rue Dalpozzo, 06000 Nice, France
-          hours: 11:30 AM – 10:30 PM
-          cuisine-type: Italian Fast Pizza
-          walking-distance-workshop: 190 meters
-          walking-time-workshop: 2 minutes
-          pathsData:
-          # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69639478177181, "lng": 7.263225101083945}, {"lat": 43.69615531049493, "lng": 7.262475354442118}, {"lat": 43.6960551676774, "lng": 7.261803894598233}, {"lat": 43.69625730672495, "lng": 7.261747730743327}]
+#         - day: "02"
+#           culinary-region-icon: it
+#           title: Pizza da Francesco
+#           rating: ⭐⭐⭐⭐⭐(4.7)
+#           price: $
+#           address: 1 Rue Dalpozzo, 06000 Nice, France
+#           hours: 11:30 AM – 10:30 PM
+#           cuisine-type: Italian Fast Pizza
+#           walking-distance-workshop: 190 meters
+#           walking-time-workshop: 2 minutes
+#           pathsData:
+#           # [{"lat": 43.6958967782869, "lng": 7.263335025815267}, {"lat": 43.69639478177181, "lng": 7.263225101083945}, {"lat": 43.69615531049493, "lng": 7.262475354442118}, {"lat": 43.6960551676774, "lng": 7.261803894598233}, {"lat": 43.69625730672495, "lng": 7.261747730743327}]
 
-        - day: "02"
-          culinary-region-icon: it
-          title: Les Petits Pains de Méditerranée
-          rating: ⭐⭐⭐⭐(4.5)
-          price: $
-          address: 41 Rue de France, 06000 Nice, France
-          hours: 7:15 AM – 1:00 PM
-          cuisine-type: Bakery
-          walking-distance-workshop: 210 meters
-          walking-time-workshop: 3 minutes
-          pathsData:
-          # [{"lat": 43.69590808288666, "lng": 7.263338215482022}, {"lat": 43.69633347583435, "lng": 7.263247309793157}, {"lat": 43.69609458153998, "lng": 7.262504871238555}, {"lat": 43.695892648154704, "lng": 7.261361648323762}]
+#         - day: "02"
+#           culinary-region-icon: it
+#           title: Les Petits Pains de Méditerranée
+#           rating: ⭐⭐⭐⭐(4.5)
+#           price: $
+#           address: 41 Rue de France, 06000 Nice, France
+#           hours: 7:15 AM – 1:00 PM
+#           cuisine-type: Bakery
+#           walking-distance-workshop: 210 meters
+#           walking-time-workshop: 3 minutes
+#           pathsData:
+#           # [{"lat": 43.69590808288666, "lng": 7.263338215482022}, {"lat": 43.69633347583435, "lng": 7.263247309793157}, {"lat": 43.69609458153998, "lng": 7.262504871238555}, {"lat": 43.695892648154704, "lng": 7.261361648323762}]
             
               
               
-        # Coordinates to the top of the staircase in Rome
-        #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {}] 
+#         # Coordinates to the top of the staircase in Rome
+#         #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {}] 
 
-# Rome, Italy
-        - day: "03"
-          culinary-region-icon: it
-          title: Ristorante Pizzeria Popolo Caffe
-          rating: ⭐⭐⭐⭐(4.3)
-          price: $$
-          address: Via Flaminia, 9, 00196 Roma RM, Italy
-          hours: 12:00 PM - 11:00 PM
-          cuisine-type: Italian
-          walking-distance-workshop: 650 meters
-          walking-time-workshop: 9 minutes
-          pathsData:
-          # [{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91300266467565, "lng": 12.472128529092092}, {"lat": 41.913051032476126, "lng": 12.472217127591419}, {"lat": 41.91312609987614, "lng": 12.47230193441635}, {"lat": 41.91374729327923, "lng": 12.475065765813026}, {"lat": 41.912236237372156, "lng": 12.475623466123016}] 
+# # Rome, Italy
+#         - day: "03"
+#           culinary-region-icon: it
+#           title: Ristorante Pizzeria Popolo Caffe
+#           rating: ⭐⭐⭐⭐(4.3)
+#           price: $$
+#           address: Via Flaminia, 9, 00196 Roma RM, Italy
+#           hours: 12:00 PM - 11:00 PM
+#           cuisine-type: Italian
+#           walking-distance-workshop: 650 meters
+#           walking-time-workshop: 9 minutes
+#           pathsData:
+#           # [{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91300266467565, "lng": 12.472128529092092}, {"lat": 41.913051032476126, "lng": 12.472217127591419}, {"lat": 41.91312609987614, "lng": 12.47230193441635}, {"lat": 41.91374729327923, "lng": 12.475065765813026}, {"lat": 41.912236237372156, "lng": 12.475623466123016}] 
   
-        - day: "03"
-          culinary-region-icon: it
-          title: Mondo arancina Flaminia
-          rating: ⭐⭐⭐⭐(4.3)
-          price: $
-          address: Via Flaminia, 42/44, 00196 Roma RM, Italy
-          hours: 8:00 AM – 10:00 PM
-          cuisine-type: Sicilian 
-          walking-distance-workshop: 650 meters
-          walking-time-workshop: 8 minutes
-          pathsData:
-          #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91300266467565, "lng": 12.472128529092092}, {"lat": 41.913051032476126, "lng": 12.472217127591419}, {"lat": 41.913796631273605, "lng": 12.475182372842731}, {"lat": 41.91297206147481, "lng": 12.475523504517428}]
+#         - day: "03"
+#           culinary-region-icon: it
+#           title: Mondo arancina Flaminia
+#           rating: ⭐⭐⭐⭐(4.3)
+#           price: $
+#           address: Via Flaminia, 42/44, 00196 Roma RM, Italy
+#           hours: 8:00 AM – 10:00 PM
+#           cuisine-type: Sicilian 
+#           walking-distance-workshop: 650 meters
+#           walking-time-workshop: 8 minutes
+#           pathsData:
+#           #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91300266467565, "lng": 12.472128529092092}, {"lat": 41.913051032476126, "lng": 12.472217127591419}, {"lat": 41.913796631273605, "lng": 12.475182372842731}, {"lat": 41.91297206147481, "lng": 12.475523504517428}]
           
-        - day: "03"
-          culinary-region-icon: tr
-          title: Flaminio Istanbul Kebab
-          rating: ⭐⭐⭐⭐(4.3)
-          price: $
-          address: Via Flaminia, 17, 00196 Roma RM, Italy
-          hours: 10:00 AM - 12:00 AM
-          cuisine-type: Turkish 
-          walking-distance-workshop: 600 meters
-          walking-time-workshop: 8 minutes
-          pathsData:
-          #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91300426919931, 12.47211897992345}, {"lat": 41.9130425564829, 12.472216464806271}, {"lat": 41.913124168773976,"lng":  12.472319365515911}, {"lat": 41.913548159193965, "lng": 12.474160192960655}, {"lat": 41.91229986446234, "lng": 12.474651495945974}, {"lat": 41.91251346926711, "lng": 12.475343367848815}] 
+#         - day: "03"
+#           culinary-region-icon: tr
+#           title: Flaminio Istanbul Kebab
+#           rating: ⭐⭐⭐⭐(4.3)
+#           price: $
+#           address: Via Flaminia, 17, 00196 Roma RM, Italy
+#           hours: 10:00 AM - 12:00 AM
+#           cuisine-type: Turkish 
+#           walking-distance-workshop: 600 meters
+#           walking-time-workshop: 8 minutes
+#           pathsData:
+#           #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91300426919931, 12.47211897992345}, {"lat": 41.9130425564829, 12.472216464806271}, {"lat": 41.913124168773976,"lng":  12.472319365515911}, {"lat": 41.913548159193965, "lng": 12.474160192960655}, {"lat": 41.91229986446234, "lng": 12.474651495945974}, {"lat": 41.91251346926711, "lng": 12.475343367848815}] 
           
-        - day: "03"
-          culinary-region-icon: it
-          title: Gelateria La Romana
-          rating: ⭐⭐⭐⭐(4.6)
-          price: $$
-          address: Via Cola di Rienzo, 2, 00193 Roma RM, Italy
-          hours: 11:00 AM – 12:00 AM
-          cuisine-type: Ice Cream Shop
-          walking-distance-workshop: 900 meters
-          walking-time-workshop: 12 minutes
-          pathsData:
-          #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91298931337318, "lng": 12.47212713821393}, {"lat": 41.913023361538414, "lng": 12.472207207409477}, {"lat": 41.91312915393597, "lng": 12.472290544735454}, {"lat": 41.91314009796707, "lng": 12.47238532051794}, {"lat": 41.91243107570528, "lng": 12.472649965664166}, {"lat": 41.91218300778363, "lng": 12.472697353555409}, {"lat": 41.91221097626986, "lng": 12.472538849211293}, {"lat": 41.91187535357114, "lng": 12.47072176861421}, {"lat": 41.911604178869176, "lng": 12.470564898335118}, {"lat": 41.91095603018451, "lng": 12.470857396019603}, {"lat": 41.91020937419612, "lng": 12.471138455246695}, {"lat": 41.909996563479424, "lng": 12.470251157790473}, {"lat": 41.90989319801622, "lng": 12.470375346752514}, {"lat": 41.909187876288776, "lng": 12.470646601584622}] 
+#         - day: "03"
+#           culinary-region-icon: it
+#           title: Gelateria La Romana
+#           rating: ⭐⭐⭐⭐(4.6)
+#           price: $$
+#           address: Via Cola di Rienzo, 2, 00193 Roma RM, Italy
+#           hours: 11:00 AM – 12:00 AM
+#           cuisine-type: Ice Cream Shop
+#           walking-distance-workshop: 900 meters
+#           walking-time-workshop: 12 minutes
+#           pathsData:
+#           #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.91298931337318, "lng": 12.47212713821393}, {"lat": 41.913023361538414, "lng": 12.472207207409477}, {"lat": 41.91312915393597, "lng": 12.472290544735454}, {"lat": 41.91314009796707, "lng": 12.47238532051794}, {"lat": 41.91243107570528, "lng": 12.472649965664166}, {"lat": 41.91218300778363, "lng": 12.472697353555409}, {"lat": 41.91221097626986, "lng": 12.472538849211293}, {"lat": 41.91187535357114, "lng": 12.47072176861421}, {"lat": 41.911604178869176, "lng": 12.470564898335118}, {"lat": 41.91095603018451, "lng": 12.470857396019603}, {"lat": 41.91020937419612, "lng": 12.471138455246695}, {"lat": 41.909996563479424, "lng": 12.470251157790473}, {"lat": 41.90989319801622, "lng": 12.470375346752514}, {"lat": 41.909187876288776, "lng": 12.470646601584622}] 
           
-        - day: "03"
-          culinary-region-icon: us
-          title: GOODY 1976
-          rating: ⭐⭐⭐⭐(4.3)
-          price: $$
-          address: Via Flaminia, 23, 00196 Roma RM, Italy
-          hours: 7:00 AM – 10:00 PM
-          cuisine-type: Italian American Bistro
-          walking-distance-workshop: 550 meters
-          walking-time-workshop: 7 minutes
-          pathsData:
-          # [{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.913004804895735, "lng": 12.472122898494723}, {"lat": 41.91304024554963, "lng": 12.472229139013951}, {"lat": 41.9131383887962, "lng": 12.472340264154752}, {"lat": 41.9137339225986, "lng": 12.474974709664131}, {"lat": 41.91308891337018, "lng": 12.475250432566504}] 
+#         - day: "03"
+#           culinary-region-icon: us
+#           title: GOODY 1976
+#           rating: ⭐⭐⭐⭐(4.3)
+#           price: $$
+#           address: Via Flaminia, 23, 00196 Roma RM, Italy
+#           hours: 7:00 AM – 10:00 PM
+#           cuisine-type: Italian American Bistro
+#           walking-distance-workshop: 550 meters
+#           walking-time-workshop: 7 minutes
+#           pathsData:
+#           # [{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.913004804895735, "lng": 12.472122898494723}, {"lat": 41.91304024554963, "lng": 12.472229139013951}, {"lat": 41.9131383887962, "lng": 12.472340264154752}, {"lat": 41.9137339225986, "lng": 12.474974709664131}, {"lat": 41.91308891337018, "lng": 12.475250432566504}] 
           
-        - day: "03"
-          culinary-region-icon: it
-          title: Pastasciutta
-          rating: ⭐⭐⭐⭐(4.6)
-          price: $
-          address: Piazzale Flaminio, 10, 00196 Roma RM, Italy
-          hours: 11:00 AM - 10:00 PM
-          cuisine-type: Italian
-          walking-distance-workshop: 650 meters
-          walking-time-workshop: 9 minutes
-          pathsData:
-          # [{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.9129995055234, "lng": 12.472121325516772}, {"lat": 41.913037937857425, "lng": 12.472218160396874}, {"lat": 41.91312921455797, "lng": 12.472302083959626}, {"lat": 41.91359909890291, "lng": 12.47432402658262}, {"lat": 41.91188500935031, "lng": 12.474988959455954}, {"lat": 41.9119484237963, "lng": 12.475380172371555}] 
+#         - day: "03"
+#           culinary-region-icon: it
+#           title: Pastasciutta
+#           rating: ⭐⭐⭐⭐(4.6)
+#           price: $
+#           address: Piazzale Flaminio, 10, 00196 Roma RM, Italy
+#           hours: 11:00 AM - 10:00 PM
+#           cuisine-type: Italian
+#           walking-distance-workshop: 650 meters
+#           walking-time-workshop: 9 minutes
+#           pathsData:
+#           # [{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.9129995055234, "lng": 12.472121325516772}, {"lat": 41.913037937857425, "lng": 12.472218160396874}, {"lat": 41.91312921455797, "lng": 12.472302083959626}, {"lat": 41.91359909890291, "lng": 12.47432402658262}, {"lat": 41.91188500935031, "lng": 12.474988959455954}, {"lat": 41.9119484237963, "lng": 12.475380172371555}] 
           
-        - day: "03"
-          culinary-region-icon: it
-          title: Flambar
-          rating: ⭐⭐⭐⭐(4.2)
-          price: $
-          address: Via Flaminia, 67, 00196 Roma RM, Italy
-          hours: 6:00 AM - 9:00 PM
-          cuisine-type: Italian Dessert Bar 
-          walking-distance-workshop: 550 meters
-          walking-time-workshop: 7 minutes
-          pathsData:
-          #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.9130048388222, "lng": 12.47212753718274}, {"lat": 41.9130314289598, "lng": 12.472212743679405}, {"lat": 41.91312960783351, "lng": 12.47232268754607}, {"lat": 41.91374015432941, "lng": 12.474981954982972}, {"lat": 41.91425239450736, "lng": 12.474768770097771}]              
+#         - day: "03"
+#           culinary-region-icon: it
+#           title: Flambar
+#           rating: ⭐⭐⭐⭐(4.2)
+#           price: $
+#           address: Via Flaminia, 67, 00196 Roma RM, Italy
+#           hours: 6:00 AM - 9:00 PM
+#           cuisine-type: Italian Dessert Bar 
+#           walking-distance-workshop: 550 meters
+#           walking-time-workshop: 7 minutes
+#           pathsData:
+#           #[{"lat": 41.91154221095057, "lng": 12.472126735516312}, {"lat": 41.912239702495235, "lng": 12.47181036965913}, {"lat": 41.912577963399656, "lng": 12.47182420786128}, {"lat": 41.912807760974495, "lng": 12.471761904559768}, {"lat": 41.91295508244455, "lng": 12.471972247464196}, {"lat": 41.91286914496305, "lng": 12.472194963480193}, {"lat": 41.9130048388222, "lng": 12.47212753718274}, {"lat": 41.9130314289598, "lng": 12.472212743679405}, {"lat": 41.91312960783351, "lng": 12.47232268754607}, {"lat": 41.91374015432941, "lng": 12.474981954982972}, {"lat": 41.91425239450736, "lng": 12.474768770097771}]              
               
           
-          #Mariana Di Carrara
+#           #Mariana Di Carrara
           
-          # [{"lat": 43.722944454493415, "lng": 10.396348154863395}, {"lat": 43.72244426782706, "lng": 10.396666044687601}, {"lat": 43.72235702553895, "lng": 10.398014058499122}, {"lat": 43.72226978312377, "lng": 10.398142823997535}, {"lat": 43.722170908233, "lng": 10.397965771437216}]
+#           # [{"lat": 43.722944454493415, "lng": 10.396348154863395}, {"lat": 43.72244426782706, "lng": 10.396666044687601}, {"lat": 43.72235702553895, "lng": 10.398014058499122}, {"lat": 43.72226978312377, "lng": 10.398142823997535}, {"lat": 43.722170908233, "lng": 10.397965771437216}]
           
-          # [{"lat": 43.722923576131535, "lng": 10.39634783586173}, {"lat": 43.72317556856314, "lng": 10.396422937709568}, {"lat": 43.7231794453615, "lng": 10.397045210163082}, {"lat": 43.72301322740659, "lng": 10.39782103907334}]
+#           # [{"lat": 43.722923576131535, "lng": 10.39634783586173}, {"lat": 43.72317556856314, "lng": 10.396422937709568}, {"lat": 43.7231794453615, "lng": 10.397045210163082}, {"lat": 43.72301322740659, "lng": 10.39782103907334}]
           
-          # [{"lat": 43.722890166601275, "lng": 10.396337855155107}, {"lat": 43.72267694128928, "lng": 10.396466601179972}, {"lat": 43.72245208468357, "lng": 10.396021354510648}, {"lat": 43.72281650703381, "lng": 10.392883170154555}, {"lat": 43.72282373645242, "lng": 10.39220698166588}, {"lat": 43.72319540954432, "lng": 10.392131762172829}]
+#           # [{"lat": 43.722890166601275, "lng": 10.396337855155107}, {"lat": 43.72267694128928, "lng": 10.396466601179972}, {"lat": 43.72245208468357, "lng": 10.396021354510648}, {"lat": 43.72281650703381, "lng": 10.392883170154555}, {"lat": 43.72282373645242, "lng": 10.39220698166588}, {"lat": 43.72319540954432, "lng": 10.392131762172829}]
           
-          # [{"lat": 43.72290785470377, "lng": 10.396346113039217}, {"lat": 43.722457138644096, "lng": 10.396644950761036}, {"lat": 43.722400798898214, "lng": 10.398074174648002}, {"lat": 43.72198763914284, "lng": 10.398398998258676}, {"lat": 43.721931298955454, "lng": 10.399282518479708}, {"lat": 43.72017533655651, "lng": 10.399087624313303}, {"lat": 43.71830663553655, "lng": 10.401634241493072}, {"lat": 43.71826817117295, "lng": 10.402097547672746}, {"lat": 43.71717602996419, "lng": 10.402305927155957}]
+#           # [{"lat": 43.72290785470377, "lng": 10.396346113039217}, {"lat": 43.722457138644096, "lng": 10.396644950761036}, {"lat": 43.722400798898214, "lng": 10.398074174648002}, {"lat": 43.72198763914284, "lng": 10.398398998258676}, {"lat": 43.721931298955454, "lng": 10.399282518479708}, {"lat": 43.72017533655651, "lng": 10.399087624313303}, {"lat": 43.71830663553655, "lng": 10.401634241493072}, {"lat": 43.71826817117295, "lng": 10.402097547672746}, {"lat": 43.71717602996419, "lng": 10.402305927155957}]
           
-          # [{"lat": 43.72290097569153, "lng": 10.396324729417216}, {"lat": 43.72250965792152, "lng": 10.396568489258161}, {"lat": 43.72242618479375, "lng": 10.39653961366424}, {"lat": 43.72161231570259, "lng": 10.397131563339645}, {"lat": 43.72040888214792, "lng": 10.397078624775144}, {"lat": 43.71987672030596, "lng": 10.397295191729562}]
+#           # [{"lat": 43.72290097569153, "lng": 10.396324729417216}, {"lat": 43.72250965792152, "lng": 10.396568489258161}, {"lat": 43.72242618479375, "lng": 10.39653961366424}, {"lat": 43.72161231570259, "lng": 10.397131563339645}, {"lat": 43.72040888214792, "lng": 10.397078624775144}, {"lat": 43.71987672030596, "lng": 10.397295191729562}]
           
-          # [{"lat": 43.72289619135164, "lng": 10.396347147165644}, {"lat": 43.72254727684469, "lng": 10.39656172387375}, {"lat": 43.722423217863614, "lng": 10.396508079696726}, {"lat": 43.721539144490826, "lng": 10.397136577553846}, {"lat": 43.72041058075969, "lng": 10.397083435364188}, {"lat": 43.71991984536241, "lng": 10.397353775256795}, {"lat": 43.719923689712196, "lng": 10.398731455502263}]
+#           # [{"lat": 43.72289619135164, "lng": 10.396347147165644}, {"lat": 43.72254727684469, "lng": 10.39656172387375}, {"lat": 43.722423217863614, "lng": 10.396508079696726}, {"lat": 43.721539144490826, "lng": 10.397136577553846}, {"lat": 43.72041058075969, "lng": 10.397083435364188}, {"lat": 43.71991984536241, "lng": 10.397353775256795}, {"lat": 43.719923689712196, "lng": 10.398731455502263}]
           
-          # [{"lat": 43.72290899465739, "lng": 10.396352726280451}, {"lat": 43.72252906551045, "lng": 10.39652438764694}, {"lat": 43.722420513883065, "lng": 10.396513658811534}, {"lat": 43.721532760040056, "lng": 10.397127380152236}, {"lat": 43.72052142862931, "lng": 10.397049155450683}, {"lat": 43.71989954555903, "lng": 10.397362054256899}, {"lat": 43.719868137144154, "lng": 10.39884832361399}, {"lat": 43.7197241289418, "lng": 10.399261740196271}]
+#           # [{"lat": 43.72290899465739, "lng": 10.396352726280451}, {"lat": 43.72252906551045, "lng": 10.39652438764694}, {"lat": 43.722420513883065, "lng": 10.396513658811534}, {"lat": 43.721532760040056, "lng": 10.397127380152236}, {"lat": 43.72052142862931, "lng": 10.397049155450683}, {"lat": 43.71989954555903, "lng": 10.397362054256899}, {"lat": 43.719868137144154, "lng": 10.39884832361399}, {"lat": 43.7197241289418, "lng": 10.399261740196271}]
               
-# Marseille, France
-        - day: "05"
-          culinary-region-icon: fr
-          title: Praline
-          rating: ⭐⭐⭐⭐⭐(4.8)
-          price: $$
-          address: 167 Rue de Rome, 13006 Marseille, France
-          hours: "-"
-          cuisine-type: Pastry Shop
-          walking-distance-workshop: 90 meters
-          walking-time-workshop: 1 minute
-          pathsData:
+# # Marseille, France
+#         - day: "05"
+#           culinary-region-icon: fr
+#           title: Praline
+#           rating: ⭐⭐⭐⭐⭐(4.8)
+#           price: $$
+#           address: 167 Rue de Rome, 13006 Marseille, France
+#           hours: "-"
+#           cuisine-type: Pastry Shop
+#           walking-distance-workshop: 90 meters
+#           walking-time-workshop: 1 minute
+#           pathsData:
           
           
-        - day: "05"
-          culinary-region-icon: us
-          title: La Folie du Burger
-          rating: ⭐⭐⭐⭐(4.1)
-          price: $
-          address: 144 Rue de Rome, 13006 Marseille, France
-          hours: 11:30 AM - 2:30 PM
-          cuisine-type: French American 
-          walking-distance-workshop: 57 meters
-          walking-time-workshop: 1 minute
-          pathsData:
+#         - day: "05"
+#           culinary-region-icon: us
+#           title: La Folie du Burger
+#           rating: ⭐⭐⭐⭐(4.1)
+#           price: $
+#           address: 144 Rue de Rome, 13006 Marseille, France
+#           hours: 11:30 AM - 2:30 PM
+#           cuisine-type: French American 
+#           walking-distance-workshop: 57 meters
+#           walking-time-workshop: 1 minute
+#           pathsData:
           
           
-        - day: "05"
-          culinary-region-icon: tr
-          title: Ankara Kebab
-          rating: ⭐⭐⭐⭐(3.9)
-          price: $
-          address: 193 Rue de Rome, 13006 Marseille, France
-          hours: 8:00 AM - 10:00 PM
-          cuisine-type: Turkish 
-          walking-distance-workshop: 200 meters
-          walking-time-workshop: 3 minutes
-          pathsData:
+#         - day: "05"
+#           culinary-region-icon: tr
+#           title: Ankara Kebab
+#           rating: ⭐⭐⭐⭐(3.9)
+#           price: $
+#           address: 193 Rue de Rome, 13006 Marseille, France
+#           hours: 8:00 AM - 10:00 PM
+#           cuisine-type: Turkish 
+#           walking-distance-workshop: 200 meters
+#           walking-time-workshop: 3 minutes
+#           pathsData:
           
           
-        - day: "05"
-          culinary-region-icon: tr
-          title: Shwarma City
-          rating: ⭐⭐⭐⭐⭐(4.7)
-          price: $
-          address: 27 Rue Saint-Suffren, 13006 Marseille, France
-          hours: 9:00 AM – 4:00 PM
-          cuisine-type: Turkish 
-          walking-distance-workshop: 300 meters
-          walking-time-workshop: 4 minutes
-          pathsData:
+#         - day: "05"
+#           culinary-region-icon: tr
+#           title: Shwarma City
+#           rating: ⭐⭐⭐⭐⭐(4.7)
+#           price: $
+#           address: 27 Rue Saint-Suffren, 13006 Marseille, France
+#           hours: 9:00 AM – 4:00 PM
+#           cuisine-type: Turkish 
+#           walking-distance-workshop: 300 meters
+#           walking-time-workshop: 4 minutes
+#           pathsData:
           
           
-        - day: "05"
-          culinary-region-icon: fr
-          title: Pâtisserie Noni Nona
-          rating: ⭐⭐⭐⭐(4.2)
-          price: $
-          address: 116 Rue de Rome, 13006 Marseille, France
-          hours: 7:30 AM - 7:00 PM
-          cuisine-type: Pastry Shop
-          walking-distance-workshop: 180 meters
-          walking-time-workshop: 2 minutes
-          pathsData:
+#         - day: "05"
+#           culinary-region-icon: fr
+#           title: Pâtisserie Noni Nona
+#           rating: ⭐⭐⭐⭐(4.2)
+#           price: $
+#           address: 116 Rue de Rome, 13006 Marseille, France
+#           hours: 7:30 AM - 7:00 PM
+#           cuisine-type: Pastry Shop
+#           walking-distance-workshop: 180 meters
+#           walking-time-workshop: 2 minutes
+#           pathsData:
           
           
-        - day: "05"
-          culinary-region-icon: fr
-          title: Le cercle gourmand
-          rating: ⭐⭐⭐⭐⭐(5.0)
-          price: $
-          address: 18 Rue d'Italie, 13006 Marseille, France
-          hours: 10:00 AM - 6:00 PM
-          cuisine-type: Bagels and Doughnuts
-          walking-distance-workshop: 160 meters
-          walking-time-workshop: 2 minutes
-          pathsData:
+#         - day: "05"
+#           culinary-region-icon: fr
+#           title: Le cercle gourmand
+#           rating: ⭐⭐⭐⭐⭐(5.0)
+#           price: $
+#           address: 18 Rue d'Italie, 13006 Marseille, France
+#           hours: 10:00 AM - 6:00 PM
+#           cuisine-type: Bagels and Doughnuts
+#           walking-distance-workshop: 160 meters
+#           walking-time-workshop: 2 minutes
+#           pathsData:
           
           
-        - day: "05"
-          culinary-region-icon: fr
-          title: The Must
-          rating: ⭐⭐⭐⭐(4.5)
-          price: $
-          address: 118 Cr Lieutaud, 13006 Marseille, France
-          hours: 11:00 AM - 2:00 PM
-          cuisine-type: Hamburgers 
-          walking-distance-workshop: 190 meters
-          walking-time-workshop: 3 minutes
-          pathsData:
+#         - day: "05"
+#           culinary-region-icon: fr
+#           title: The Must
+#           rating: ⭐⭐⭐⭐(4.5)
+#           price: $
+#           address: 118 Cr Lieutaud, 13006 Marseille, France
+#           hours: 11:00 AM - 2:00 PM
+#           cuisine-type: Hamburgers 
+#           walking-distance-workshop: 190 meters
+#           walking-time-workshop: 3 minutes
+#           pathsData:
           
