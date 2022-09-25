@@ -25,6 +25,7 @@ datasources:
           '$.title' AS title,
           '$.vegan' AS vegan,
           '$.vegetarian' AS vegetarain,
+          '$.gluten-free' AS glutenFree,
           '$.walking-distance-workshop' AS walkingDistance,
           '$.walking-time-workshop' AS walkingTime
         FROM [default/quick-bites-restaurants] 
@@ -75,6 +76,21 @@ item:
                     options:
                       label: Est. Walking Time
                       value: =@ctx.current.item.walkingTime
+            - type: component.field-row
+              options:
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Vegetarian Options
+                      value: =@ctx.current.item.vegetarain
+                  - type: component.entity-field
+                    options:
+                      label: Vegan Options
+                      value: =@ctx.current.item.vegan
+                  - type: component.entity-field
+                    options:
+                      label: Gluten Free Options
+                      value: =@ctx.current.item.glutenFree
       - type: component.location
         options:
           zoomLevel: 14

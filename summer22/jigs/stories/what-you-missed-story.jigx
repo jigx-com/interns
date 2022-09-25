@@ -53,7 +53,7 @@ stories:
       options:
         source:
           uri: =@ctx.current.item.uploadPhoto
-        title: Yesterday's most voted for photo!
+        title: Most voted for photo!
         subtitle: =@ctx.current.item.description
         onPress: 
           type: action.go-to

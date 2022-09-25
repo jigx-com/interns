@@ -55,8 +55,8 @@ widgets:
         - type: widget.image
           options:
             source:
-              uri: https://appcmsprod.viewlift.com/60333573-228c-4678-9ce8-05c713847241/images/1240pxNextUpLogoTurquoise.png
-            resizeMode: contain
+              uri: https://www.dropbox.com/s/nz2d5jqceq4hc5u/next-up-gray.png?raw=1
+            resizeMode: cover
         - type: widget.list
           options:
             data: =@ctx.datasources.calList
@@ -73,8 +73,12 @@ widgets:
                           $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
                           ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
                         )" 
-            placeholders:
-              - title: To party, or not to party, that is the question.
+      # placeholders:
+      #   - when: "=(
+      #             $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+      #             (($hours > '22:00:00') and ($hours < '06:00:00')) ? true: false
+      #           )"
+      #   - title: To party, ot not to party. That is the question. 
 
 header: 
   type: component.image

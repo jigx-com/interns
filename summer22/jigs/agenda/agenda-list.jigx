@@ -69,12 +69,12 @@ item:
     progress: =(@ctx.current.item.subject in "Last Call for Boarding" ? 1 :0)
     color:
       - when: =(@ctx.current.item.subject in "Last Call for Boarding")
-        color: color4
+        color: color14
     label:
       title: =(@ctx.current.item.startTime & ' - ' & @ctx.current.item.endTime)
       color:
         - when: =@ctx.current.item.subject in "Last Call for Boarding"
-          color: color4
+          color: color14
     style:
       isDisabled: "=(
                       $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
@@ -84,5 +84,12 @@ item:
       type: action.go-to
       options:
         linkTo: =@ctx.current.item.linkTo
+        
+# placeholders:
+#   - when: "=(
+#               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+#               ($hours > '22:00:00') and ($hours < '06:00:00')) ? true: false
+#             )"
+#   - title: To party, ot not to party. That is the question.
         
                     

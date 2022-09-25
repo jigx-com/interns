@@ -81,21 +81,21 @@ children:
           options:
             label: Comment or Vote!
             value: Comment or Vote!
-            isHidden: false
+            isHidden: true
         #link to needed for stories to vote 
         - type: component.text-field
           instanceId: linkTo
           options:
             label: ''
             value: photo-landing-page
-            isHidden: false
+            isHidden: true
         #set order needed to order the photos behind default image
         - type: component.text-field
           instanceId: setOrder
           options:
             label: ''
             value: b
-            isHidden: false
+            isHidden: true
 
 
 actions:
@@ -124,9 +124,9 @@ actions:
                     force: true
                     entities:
                       - entity: default/photos
-                - type: action.reset-state
-                  options:
-                    state: =@ctx.solution.state.photostories.
+                # - type: action.reset-state
+                #   options:
+                #     state: =@ctx.solution.state.photostories.
           data:
             uploadPhoto: =@ctx.components.uploadPhoto.state.value
             title: =@ctx.components.title.state.value

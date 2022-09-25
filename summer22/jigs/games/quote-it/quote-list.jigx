@@ -48,6 +48,12 @@ item:
           color: warning
           onPress: 
             type: action.go-back
-    # avatars:
-    #   - text: =$uppercase($substring(@ctx.current.item.quotedFirstName, 0, 1) & $substring(@ctx.current.item.quotedLastName, 0, 1))
-    #     uri: =@ctx.current.item.avatar
+    onPress: 
+      type: action.go-to
+      options:
+        linkTo: view-quote
+        parameters:
+          quote: =@ctx.current.item.quote
+          quotedFN: =@ctx.current.item.quotedFirstName
+          quotedLN: =@ctx.current.item.quotedLastName
+

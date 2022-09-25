@@ -10,28 +10,32 @@ header:
 
 widgets:
   "2x2": 
-    type: widget.location
+    type: widget.image
     options:
-      zoomLevel: 3.65
-      pathsData:
-        #Barcelona
-        - lat: 41.357270
-          lng: 2.182192
-        #Nice
-        - lat: 43.692922
-          lng: 7.285131
-        #Rome
-        - lat: 42.103291
-          lng: 11.773650 
-        #Mariana Di Carrara
-        - lat: 44.029387
-          lng: 10.041082 
-        #Marseille
-        - lat: 43.299193
-          lng: 5.362296 
-        #Barcelona
-        - lat: 41.357270
-          lng: 2.182192
+      source:
+        uri: https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9jYXRpb24lMjBwaW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60
+    # type: widget.location
+    # options:
+    #   zoomLevel: 3.65
+    #   pathsData:
+    #     #Barcelona
+    #     - lat: 41.357270
+    #       lng: 2.182192
+    #     #Nice
+    #     - lat: 43.692922
+    #       lng: 7.285131
+    #     #Rome
+    #     - lat: 42.103291
+    #       lng: 11.773650 
+    #     #Mariana Di Carrara
+    #     - lat: 44.029387
+    #       lng: 10.041082 
+    #     #Marseille
+    #     - lat: 43.299193
+    #       lng: 5.362296 
+    #     #Barcelona
+    #     - lat: 41.357270
+    #       lng: 2.182192
 
 datasources:
   location: 
@@ -72,7 +76,8 @@ datasources:
           '$.hours' AS hours,
           '$.about' AS about,
           '$.day' AS day,
-          '$.location' AS location
+          '$.location' AS location,
+          '$.googleURL' AS googleURL
         FROM [default/poi] 
         WHERE day LIKE strftime('%d', 'now', '-07:00')
         ORDER BY name ASC
@@ -107,5 +112,6 @@ item:
                 rating: =@ctx.current.item.rating
                 hours: =@ctx.current.item.hours
                 about: =@ctx.current.item.about
+                url: =@ctx.current.item.googleURL
                 
     

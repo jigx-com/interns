@@ -76,7 +76,26 @@ item:
                     options:
                       label: Est. Walking Time
                       value: =@ctx.current.item.walkingTime
+            - type: component.field-row
+              options:
+                children:
+                  - type: component.entity-field
+                    options:
+                      label: Vegetarian Options
+                      value: =@ctx.current.item.vegetarain
+                  - type: component.entity-field
+                    options:
+                      label: Vegan Options
+                      value: =@ctx.current.item.vegan
+                  - type: component.entity-field
+                    options:
+                      label: Gluten Free Options
+                      value: =@ctx.current.item.glutenFree
       - type: component.location
         options:
           zoomLevel: 13
           pathsData: =$eval(@ctx.current.item.pathsData)
+    # onContentPress: 
+    #   type: action.open-url
+    #   options:
+    #     url: 

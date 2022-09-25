@@ -76,138 +76,138 @@ datasources:
     type: datasource.static
     options:
       data:
-        - color: color2
+        - color: color6
+          y: 2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
+        - color: color10
           y: 2
         - color: color6
           y: 2
-        - color: color2
-          y: 2
-        - color: color6
+        - color: color10
           y: 2
   # Color Scheme - 32 datapoints
   color-red:
     type: datasource.static
     options:
       data:
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
-        - color: color7
+        - color: color5
           y: 2
-        - color: color4
+        - color: color1
           y: 2
   # Color Scheme - 32 datapoints
   color-purple:

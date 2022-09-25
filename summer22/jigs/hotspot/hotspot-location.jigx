@@ -1,4 +1,4 @@
-title: =@ctx.datasources.hotspotLoc.decknumber
+title: =@ctx.datasources.location.deckNumber
 type: jig.default
 
 datasources:
@@ -10,31 +10,62 @@ datasources:
       entities:
         - default/locations
         - default/members
-  
+        - default/photos
       query: |
         SELECT
-          L.id,
+          L.id AS Lid,
           json_extract(L.data, '$.name') AS name,
           json_extract(L.data, '$.type') AS type,
           json_extract(L.data, '$.avatar') AS avatar,
           json_extract(L.data, '$.decknumber') AS decknumber,
-          json_extract(L.data, '$.deckMap') AS deckMap,
           json_extract(tM.data, '$.location') AS tmLocation,
-          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
+          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT,
+          json_extract(P.data, '$.location') AS Plocation,
+          json_extract(P.data, '$.uploadPhoto') AS uploadPhoto,
+          json_extract(P.data, '$.title') AS Ptitle,
+          json_extract(P.data, '$.description') AS Pdescription
         FROM
           [default/locations] AS L
           LEFT JOIN [default/members] AS tM ON L.id = tmLocation
+          JOIN [default/photos] AS P ON L.id = Plocation
         GROUP BY
           L.id
         ORDER BY 
           count DESC
         LIMIT
           1
+  
+  location:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/locations
+        - default/linkupLocationMaps
+        - default/maps
+  
+      query: 
+        SELECT
+          L.id AS LID,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(linkup.data, '$.locationID') AS linkupLocID,
+          json_extract(linkup.data, '$.mapID') AS linkupMapID,
+          json_extract(linkup.data, '$.description') AS deckNumber,
+          M.id AS MID,
+          json_extract(M.data, '$.mapImage') AS mapImage
+        FROM
+          [default/locations] AS L
+          LEFT JOIN [default/linkupLocationMaps] AS linkup ON L.id LIKE linkupLocID
+          LEFT JOIN [default/maps] AS M ON linkupMapID LIKE MID
+        WHERE LID = @locId
+      queryParameters:
+        locId: =@ctx.datasources.hotspotLoc.Lid
 
 children:
   - type: component.image
     options:
       source:
-        uri: =@ctx.datasources.hotspotLoc.deckMap
+        uri: =@ctx.datasources.location.mapImage
       height: 500
       resizeMode: contain

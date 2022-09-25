@@ -146,13 +146,13 @@ children:
             title: =(@ctx.current.item.reactions & ($number(@ctx.current.item.reactions) = 1 ? ' reaction' :' reactions'))
             color:
               - when: true
-                color: color8
+                color: color5
           # Swipe to like comment
           swipeable:
             left:
               - label: R E A C T
                 icon: love-it
-                color: primary
+                color: warning
                 onPress: 
                   type: action.execute-entity
                   options:

@@ -81,10 +81,10 @@ item:
                   $currentItem := @ctx.current.item.id;
                   $currentItem = $activeItem ? true :false
                 )"
-        color: color2
+        color: color6
       - when: "=( 
                   $activeItem := @ctx.solution.state.activeItemId;
                   $currentItem := @ctx.current.item.id;
                   $currentItem != $activeItem ? true :false
                 )"
-        color: color14
+        color: color1

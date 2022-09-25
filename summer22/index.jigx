@@ -36,12 +36,12 @@ widgets:
                 )" 
 
   # Tool Widgets
-  - size: "1x1"
-    jigId: day1-checkIn-form
-    isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                  (($hours < '0216:00:00')) ? false: true
-                )"
+  # - size: "1x1"
+  #   jigId: day1-checkIn-form
+  #   # isHidden: "=(
+  #   #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
+  #   #               (($hours < '0216:00:00')) ? false: true
+  #   #             )"
 # After day 1: replace day1-check... w/ link-up-...
   - size: "1x1"
     jigId: link-up-filter-location
@@ -59,19 +59,19 @@ widgets:
 
 
   # Navigation Widget
-  - size: "2x2"
-    jigId: poi
-    isHidden: "=(
-                    $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                    (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
-                  )"
+  # - size: "2x2"
+  #   jigId: poi
+  #   isHidden: "=(
+  #                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+  #                   (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
+  #                 )"
 
   - size: "2x2"
     jigId: hotspot-composite
-    isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                  (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
-                )"
+    # isHidden: "=(
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #               (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
+    #             )"
                 
   - size: "2x2"
     jigId: cruise-map-list
@@ -105,4 +105,7 @@ widgets:
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
                   ($hours > '02') and ($hours < '04')? false: true
                 )"
+                
+  # - size: "1x1"
+  #   jigId: theme-colors
   

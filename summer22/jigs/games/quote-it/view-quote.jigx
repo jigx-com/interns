@@ -1,0 +1,25 @@
+title: Quote
+type: jig.default
+
+# datasources:
+#   mydata: 
+
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGlzY3Vzc2lvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60
+
+children:
+  - type: component.entity
+    options:
+      children:
+        - type: component.entity-field
+          options:
+            label: Quote
+            value: =@ctx.jig.inputs.quote
+            isMultiline: true
+        - type: component.entity-field
+          options:
+            label: Who said it?
+            value: =('- ' & @ctx.jig.inputs.quotedFN & ' ' & @ctx.jig.inputs.quotedLN)

@@ -1,0 +1,62 @@
+title: Color testing
+description: Description of your Jig
+type: jig.default
+
+datasources:
+  mydata: 
+    type: datasource.static
+    options:
+      data:
+        - id: 1
+          color: color1
+        - id: 2
+          color: color2
+        - id: 3
+          color: color3
+        - id: 4
+          color: color4
+        - id: 5
+          color: color5
+        - id: 6
+          color: color6
+        - id: 7
+          color: color7
+        - id: 8
+          color: color8
+        - id: 9
+          color: color9
+        - id: 10
+          color: color10
+        - id: 11
+          color: color11
+        - id: 12
+          color: color12
+        - id: 13
+          color: color13
+        - id: 14
+          color: color14
+               
+        
+
+children:
+  - type: component.list
+    options:
+      data: =@ctx.datasources.mydata
+      maximumItemsToRender: 20
+      item: 
+        type: component.list-item
+        options:
+          title: =@ctx.current.item.color
+          rightElement: 
+            element: button
+            title: Color
+            onPress: 
+              type: action.go-to
+              options:
+                linkTo: theme-colors
+          color:
+            - when: true
+              color: =@ctx.current.item.color
+          progress: 1
+
+          

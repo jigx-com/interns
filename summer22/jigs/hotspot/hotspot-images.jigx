@@ -11,18 +11,24 @@ datasources:
       entities:
         - default/locations
         - default/members
+        - default/photos
       query: |
         SELECT
-          L.id,
+          L.id AS Lid,
           json_extract(L.data, '$.name') AS name,
           json_extract(L.data, '$.type') AS type,
           json_extract(L.data, '$.avatar') AS avatar,
           json_extract(L.data, '$.decknumber') AS decknumber,
           json_extract(tM.data, '$.location') AS tmLocation,
-          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
+          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT,
+          json_extract(P.data, '$.location') AS Plocation,
+          json_extract(P.data, '$.uploadPhoto') AS uploadPhoto,
+          json_extract(P.data, '$.title') AS Ptitle,
+          json_extract(P.data, '$.description') AS Pdescription
         FROM
           [default/locations] AS L
           LEFT JOIN [default/members] AS tM ON L.id = tmLocation
+          JOIN [default/photos] AS P ON L.id = Plocation
         GROUP BY
           L.id
         ORDER BY 
@@ -39,13 +45,24 @@ datasources:
         - default/photos
   
       query: |
-        SELECT id, 
-        '$.location' AS location, 
-        '$.uploadPhoto' AS uploadPhoto 
-        FROM [default/photos] 
-        WHERE location LIKE @myParam
+        SELECT
+          L.id,
+          json_extract(L.data, '$.name') AS name,
+          json_extract(L.data, '$.type') AS type,
+          json_extract(L.data, '$.avatar') AS avatar,
+          json_extract(L.data, '$.decknumber') AS decknumber,
+          json_extract(P.data, '$.location') AS Plocation,
+          json_extract(P.data, '$.uploadPhoto') AS uploadPhoto,
+          json_extract(P.data, '$.title') AS Ptitle,
+          json_extract(P.data, '$.description') AS Pdescription
+        FROM
+          [default/locations] AS L
+          JOIN [default/photos] AS P ON L.id = Plocation
+        WHERE L.id LIKE @loc
       queryParameters:
-        myParam: =@ctx.datasources.hotspotLoc.tmLocation
+        loc: =@ctx.datasources.hotspotLoc.Lid
+
+        
 
 children:
   - type: component.list
@@ -57,7 +74,8 @@ children:
       item: 
         type: component.list-item
         options:
-          title: TBD
+          title: =@ctx.current.item.Ptitle
+          subtitle: =@ctx.current.item.Pdescription
           divider: solid
           horizontalItemSize: large
           leftElement: 

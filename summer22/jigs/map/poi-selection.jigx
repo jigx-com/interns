@@ -39,3 +39,11 @@ children:
   - type: component.location
     options:
       address: =@ctx.jig.inputs.address
+
+actions:
+  - children:
+      - type: action.open-url
+        options:
+          title: Navigate
+          url: =@ctx.jig.inputs.url
+           

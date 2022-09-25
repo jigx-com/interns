@@ -68,13 +68,13 @@ children:
       imageHeight: =@ctx.datasources.mapImages.imageHeight
       
       data: =@ctx.datasources.coordinates
-      pointColor: color1
+      pointColor: color7
       
       item:
         type: component.interactive-image-item
         options:
           id: =@ctx.current.item.LID
-          title: ''
+          title: Back 
           icon: search
           
           percentageCoordinates:

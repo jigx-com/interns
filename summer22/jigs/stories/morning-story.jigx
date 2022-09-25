@@ -24,7 +24,7 @@ stories:
   type: component.story-group
   options:
     data: =@ctx.datasources.morning
-    groupName: =("Good Morning, " & @ctx.user.displayName & "!")
+    groupName: =("Hello " & @ctx.user.displayName & "!")
     item: 
       type: component.image
       options:

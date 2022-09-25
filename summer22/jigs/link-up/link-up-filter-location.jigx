@@ -1,5 +1,5 @@
 title: Link-up
-description: TBD
+# description: TBD
 type: jig.list
 icon: conversation-chat-2
 
@@ -55,6 +55,9 @@ item:
     subtitle: =@ctx.current.item.decknumber
     label:
       title: =@ctx.current.item.count
+      color:
+        - when: true
+          color: color5
     leftElement: 
       element: avatar
       text: =($contains(@ctx.current.item.name, " ") ? ($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) ) :@ctx.current.item.name)
