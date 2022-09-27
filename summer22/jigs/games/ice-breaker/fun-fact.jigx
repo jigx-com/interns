@@ -49,6 +49,22 @@ datasources:
           '$.status' AS status
         FROM [default/game-status] 
 
+  active-fact:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/facts
+      query: |
+        SELECT 
+          id, 
+          '$.userEmail' AS userEmail, 
+          '$.fact' AS fact,
+          '$.active' AS active,
+          '$.completed' AS completed
+        FROM [default/facts] 
+        where '$.dtactive' = (select max(json_extract(data, '$.dtactive')) from [default/facts])
+
   facts:
     type: datasource.sqlite
     options:
@@ -63,9 +79,6 @@ datasources:
           '$.active' AS active,
           '$.completed' AS completed
         FROM [default/facts] 
-      #   WHERE active LIKE @param
-      # queryParameters:
-      #   param: "true"
 
   teammates:
     type: datasource.sqlite
@@ -125,7 +138,7 @@ children:
         - type: component.entity-field
           options:
             label: Fun Fact
-            value: "=@ctx.datasources.facts[active = 'true'].fact"
+            value: "=@ctx.datasources.active-fact.fact"
             isMultiline: true
   - type: component.form
     instanceId: fact
@@ -142,7 +155,7 @@ children:
           options:
             label: factid
             isHidden: true
-            initialValue: =@ctx.datasources.facts.id
+            initialValue: =@ctx.datasources.active-fact.id
         # Jigxies List
         - type: component.dropdown
           instanceId: teammatesList
@@ -177,14 +190,9 @@ actions:
           title: Submit Your Guess
           entity: default/guesses
           method: create
-          goBack: previous
+          goBack: stay
           onSuccess:
             description: Guess submitted
-            # actions:
-            #   - type: action.reset-state
-            #     options:
-            #       title: ' '
-            #       state: =@ctx.components.teammatesList.state.searchText
   # - children:
   #     - type: action.execute-entity
   #       options:
