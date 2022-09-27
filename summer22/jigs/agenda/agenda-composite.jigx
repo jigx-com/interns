@@ -1,6 +1,8 @@
 title: Agenda 
 description: =('Hello, welcome to the ' & @ctx.datasources.days.ordinal & ' day of Jigx Week 2022! Below is your daily itinerary')
 type: jig.composite
+icon: party-beer-cheers
+
 
 
 datasources:
@@ -56,7 +58,7 @@ widgets:
           options:
             source:
               uri: https://www.dropbox.com/s/nz2d5jqceq4hc5u/next-up-gray.png?raw=1
-            resizeMode: cover
+            resizeMode: contain
         - type: widget.list
           options:
             data: =@ctx.datasources.calList
@@ -78,7 +80,9 @@ widgets:
       #             $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
       #             (($hours > '22:00:00') and ($hours < '06:00:00')) ? true: false
       #           )"
-      #   - title: To party, ot not to party. That is the question. 
+      #   - title: To party, ot not to party. That is the question.
+      #     icon: loading-data
+
 
 header: 
   type: component.image

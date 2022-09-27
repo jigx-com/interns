@@ -1,6 +1,12 @@
 title: =@ctx.jig.inputs.LOCname
 type: jig.composite
 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.datasources.header.avatar
+
 datasources:
   memberInfo:
     type: datasource.sqlite
@@ -21,6 +27,24 @@ datasources:
           WHERE '$.email' LIKE @myParam
       queryParameters:
         myParam: =@ctx.user.email
+
+  header:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+  
+      entities:
+        - default/locations
+  
+      query: |
+        SELECT 
+          id, 
+          '$.avatar', 
+          '$.column2' 
+        FROM [default/locations] 
+        WHERE id = @LOC
+      queryParameters:
+        LOC: =@ctx.jig.inputs.LOC
 
 children:
   - jigId: link-up-list-members

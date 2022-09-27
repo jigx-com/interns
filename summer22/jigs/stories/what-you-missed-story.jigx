@@ -33,10 +33,10 @@ datasources:
       query: |
         SELECT 
           id, 
-          '$.uploadPhoto' AS uploadPhoto, 
+          '$.imageUrl' AS imageUrl, 
           '$.title' AS title,
           '$.location' AS location,
-          '$.description' AS description,
+          '$.subtitle' AS subtitle,
           '$.uploadedBy' AS uploadedBy
         FROM [default/photos] 
         WHERE id = @topVote
@@ -52,14 +52,14 @@ stories:
       type: component.image
       options:
         source:
-          uri: =@ctx.current.item.uploadPhoto
+          uri: =@ctx.current.item.imageUrl
         title: Most voted for photo!
-        subtitle: =@ctx.current.item.description
+        subtitle: =@ctx.current.item.subtitle
         onPress: 
           type: action.go-to
           options:
             title: View Photo Gallary
-            linkTo: photo-gallary
+            linkTo: photo-gallery
 
 # Placeholder Code
 children:

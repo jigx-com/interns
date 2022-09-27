@@ -35,7 +35,7 @@ children:
             title: =@ctx.current.item.label
             color:
               - when: true
-                color: color5
+                color: color7
                 
           rightElement: 
             element: icon
@@ -46,4 +46,4 @@ children:
           progress: 1
           color:
             - when: true
-              color: color7
+              color: color9

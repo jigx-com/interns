@@ -26,8 +26,9 @@ widgets:
     jigId: lunch-composite
     isHidden: "=(
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                  (($hours > '10:00:01') and ($hours < '17:00:00')) ? false: true
+                  (($hours > '10:00:01') and ($hours < '17:00:00') and ($contains(@ctx.user.email, 'jigx')=false))? false: true
                 )" 
+    
   - size: "2x2"
     jigId: dinner
     isHidden: "=(
@@ -36,19 +37,13 @@ widgets:
                 )" 
 
   # Tool Widgets
-  # - size: "1x1"
-  #   jigId: day1-checkIn-form
-  #   # isHidden: "=(
-  #   #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
-  #   #               (($hours < '0216:00:00')) ? false: true
-  #   #             )"
 # After day 1: replace day1-check... w/ link-up-...
   - size: "1x1"
     jigId: link-up-filter-location
-    isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
-                  (($hours > '0216:00:00')) ? false: true
-                )" 
+    # isHidden: "=(
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #               (($hours > '0216:00:00')) ? false: true
+    #             )" 
       
   - size: "1x1"
     jigId: find-my-peers-list
@@ -59,19 +54,19 @@ widgets:
 
 
   # Navigation Widget
-  # - size: "2x2"
-  #   jigId: poi
-  #   isHidden: "=(
-  #                   $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-  #                   (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
-  #                 )"
+  - size: "2x2"
+    jigId: poi
+    isHidden: "=(
+                    $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                    (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
+                  )"
 
   - size: "2x2"
     jigId: hotspot-composite
-    # isHidden: "=(
-    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-    #               (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
-    #             )"
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
+                )"
                 
   - size: "2x2"
     jigId: cruise-map-list
@@ -87,16 +82,21 @@ widgets:
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
                   ($hours > '01') and ($hours < '03') ? false: true
                 )"
-  - size: 1x1
-    jigId: dashboard
-    
-    
+#check-in Widget
+  - size: "1x1"
+    jigId: day1-checkIn-form
+    # isHidden: "=(
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #               (($hours < '0316:00:00')) ? false: true
+    #             )"  
+
 #photo gallary
   - size: "1x1"
-    jigId: photo-gallary
-  # Placeholder Widgets
-  # - size: 1x1
-  #   jigId: my-fact
+    jigId: photo-gallery
+  
+  #Controls
+  - size: 1x1
+    jigId: dashboard
   
 #builderDay Creat Team Names  
   - size: "2x2"
@@ -105,7 +105,5 @@ widgets:
                   $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
                   ($hours > '02') and ($hours < '04')? false: true
                 )"
-                
-  # - size: "1x1"
-  #   jigId: theme-colors
+              
   

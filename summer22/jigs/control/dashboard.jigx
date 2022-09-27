@@ -147,134 +147,134 @@ datasources:
       data:
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
+        - color: color11
           y: 2
         - color: color5
           y: 2
-        - color: color1
-          y: 2
-  # Color Scheme - 32 datapoints
-  color-purple:
-    type: datasource.static
-    options:
-      data:
         - color: color11
           y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
-        - color: color11
-          y: 2
-        - color: color8
-          y: 2
+  # # Color Scheme - 32 datapoints
+  # color-purple:
+  #   type: datasource.static
+  #   options:
+  #     data:
+  #       - color: color10
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color10
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color10
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color10
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color10
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2
+  #       - color: color11
+  #         y: 2
+  #       - color: color8
+  #         y: 2

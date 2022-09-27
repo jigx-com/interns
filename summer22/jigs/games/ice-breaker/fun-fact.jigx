@@ -88,20 +88,20 @@ datasources:
           [default/teammates] AS tb
           LEFT JOIN [default/members] AS tM ON tbEmail LIKE tmEmail
           
-  currentUser:
-    type: datasource.sqlite
-    options:
-      provider: DATA_PROVIDER_DYNAMIC
-      entities:
-        - default/teammates
-      query: |
-        SELECT 
-          id, 
-          '$.email' AS email
-        FROM [default/table-name] 
-        WHERE eamil = @filter
-      queryParameters:
-        filter: =@ctx.user.email
+  # currentUser:
+  #   type: datasource.sqlite
+  #   options:
+  #     provider: DATA_PROVIDER_DYNAMIC
+  #     entities:
+  #       - default/teammates
+  #     query: |
+  #       SELECT 
+  #         id, 
+  #         '$.email' AS email
+  #       FROM [default/table-name] 
+  #       WHERE eamil = @filter
+  #     queryParameters:
+  #       filter: =@ctx.user.email
         
   guesses:
     type: datasource.sqlite
@@ -177,9 +177,14 @@ actions:
           title: Submit Your Guess
           entity: default/guesses
           method: create
-          goBack: stay
+          goBack: previous
           onSuccess:
             description: Guess submitted
+            # actions:
+            #   - type: action.reset-state
+            #     options:
+            #       title: ' '
+            #       state: =@ctx.components.teammatesList.state.searchText
   # - children:
   #     - type: action.execute-entity
   #       options:

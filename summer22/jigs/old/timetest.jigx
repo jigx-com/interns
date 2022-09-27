@@ -14,10 +14,10 @@ datasources:
       query: |
         SELECT
           id,
-          '$.uploadPhoto' AS uploadPhoto,
+          '$.imageUrl' AS imageUrl,
           '$.title' AS title,
           '$.expireDate' AS expire,
-          '$.description' AS description
+          '$.subtitle' AS subtitle
         FROM
           [default/photos]
 

@@ -22,7 +22,7 @@ datasources:
         SELECT
           'Team 1' as x,
           COUNT(points) as y,
-          'color3' as color
+          'color2' as color
         FROM cte
   team2: 
     type: datasource.sqlite
@@ -44,7 +44,7 @@ datasources:
         SELECT
           'Team 2' as x,
           COUNT(points) as y,
-          'color4' as color
+          'color3' as color
         FROM cte
   team3: 
     type: datasource.sqlite
@@ -66,7 +66,7 @@ datasources:
         SELECT
           'Team 3' as x,
           COUNT(points) as y,
-          'color5' as color
+          'color4' as color
         FROM cte
   team4: 
     type: datasource.sqlite
@@ -88,7 +88,7 @@ datasources:
         SELECT
           'Team 4' as x,
           COUNT(points) as y,
-          'color6' as color
+          'color5' as color
         FROM cte
   team5: 
     type: datasource.sqlite
@@ -110,7 +110,7 @@ datasources:
         SELECT
           'Team 5' as x,
           COUNT(points) as y,
-          'color7' as color
+          'color6' as color
         FROM cte
   team6: 
     type: datasource.sqlite
@@ -132,7 +132,7 @@ datasources:
         SELECT
           'Team 6' as x,
           COUNT(points) as y,
-          'color8' as color
+          'color9' as color
         FROM cte
   team7: 
     type: datasource.sqlite
@@ -154,7 +154,7 @@ datasources:
         SELECT
           'Team 7' as x,
           COUNT(points) as y,
-          'color9' as color
+          'color10' as color
         FROM cte
 
 children:

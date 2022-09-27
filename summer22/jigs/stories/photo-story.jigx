@@ -20,9 +20,9 @@ datasources:
       query: |
         SELECT 
           id, 
-          '$.description', 
+          '$.subtitle', 
           '$.title',
-          '$.uploadPhoto',
+          '$.imageUrl',
           '$.linkTo' AS linkTo,
           '$.buttonTitle' AS buttonTitle,
           '$.setOrder' AS setOrder
@@ -42,17 +42,17 @@ stories:
         title: Photos 
         subtitle: Vote for your favorite photo!
         source:
-          uri: =@ctx.current.item.uploadPhoto
+          uri: =@ctx.current.item.imageUrl
         onPress: 
           type: action.go-to
           options:
             title: =@ctx.current.item.buttonTitle
             linkTo: =@ctx.current.item.linkTo
             parameters:
-              avatar: =@ctx.current.item.uploadPhoto
+              avatar: =@ctx.current.item.imageUrl
               photoId: =@ctx.current.item.id
               photoTitle: =@ctx.current.item.title
-              description: =@ctx.current.item.description
+              subtitle: =@ctx.current.item.subtitle
 
 children:
   - type: component.entity

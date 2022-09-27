@@ -146,7 +146,7 @@ children:
             title: =(@ctx.current.item.reactions & ($number(@ctx.current.item.reactions) = 1 ? ' reaction' :' reactions'))
             color:
               - when: true
-                color: color5
+                color: color7
           # Swipe to like comment
           swipeable:
             left:

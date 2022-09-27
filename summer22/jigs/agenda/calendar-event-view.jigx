@@ -1,6 +1,12 @@
 title: View Event
 type: jig.default
 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNhbGVuZGFyfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60
+
 children:
   - type: component.entity
     options:
@@ -8,40 +14,40 @@ children:
         - type: component.entity-field
           options:
             label: Subject
-            value: =@ctx.jig.inputs.subject
+            value: Workshop #=@ctx.jig.inputs.subject
         - type: component.field-row
           options:
             children:
               - type: component.entity-field
                 options:
                   label: Start Time
-                  value: =@ctx.jig.inputs.startTime
+                  value: '9:30' #=@ctx.jig.inputs.startTime
               - type: component.entity-field
                 options:
                   label: End Time
-                  value: =@ctx.jig.inputs.endTime
+                  value: '12:30' #=@ctx.jig.inputs.endTime
         - type: component.field-row
           options:
             children:
               - type: component.entity-field
                 options:
                   label: Speaker
-                  value: =@ctx.jig.inputs.speakerOne
+                  value: 'Adriaan' #=@ctx.jig.inputs.speakerOne
               - type: component.entity-field
                 options:
                   label: Speaker
-                  value: =@ctx.jig.inputs.speakerTwo
+                  value: 'Grant' #=@ctx.jig.inputs.speakerTwo
         - type: component.entity-field
           options:
             label: Location Name
-            value: =@ctx.jig.inputs.agendaDetail
+            value: 'Le Labo Coworking' #=@ctx.jig.inputs.agendaDetail
         - type: component.entity-field
           options:
             label: Location Address
-            value: =@ctx.jig.inputs.location
+            value: '6 Rue du Congrès, 06000 Nice, France' #=@ctx.jig.inputs.location
   - type: component.location
     options:
-      address: =@ctx.jig.inputs.location
+      address: '6 Rue du Congrès, 06000 Nice, France' #=@ctx.jig.inputs.location
       zoomLevel: 14
       
 

@@ -41,10 +41,10 @@ datasources:
       query: |
         SELECT 
           id, 
-          '$.uploadPhoto' AS uploadPhoto, 
+          '$.imageUrl' AS imageUrl, 
           '$.title' AS title,
           '$.location' AS location,
-          '$.description' AS description,
+          '$.subtitle' AS subtitle,
           '$.uploadedBy' AS uploadedBy
         FROM [default/photos] 
         WHERE id = @topVote
@@ -66,10 +66,10 @@ children:
   - type: component.image
     options:
       source:
-        uri: =@ctx.datasources.photo.uploadPhoto
+        uri: =@ctx.datasources.photo.imageUrl
       height: 300
       title: =@ctx.datasources.photo.title
-      subtitle: =@ctx.datasources.photo.description
+      subtitle: =@ctx.datasources.photo.subtitle
       resizeMode: center
 
   - type: component.entity

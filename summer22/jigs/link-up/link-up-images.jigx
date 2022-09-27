@@ -28,9 +28,9 @@ datasources:
       query: |
         SELECT id, 
         '$.location' AS location, 
-        '$.uploadPhoto',
+        '$.imageUrl',
         '$.title',
-        '$.description'
+        '$.subtitle'
         FROM [default/photos] 
         WHERE location LIKE @myParam
       queryParameters:
@@ -47,10 +47,10 @@ children:
         type: component.list-item
         options:
           title: =@ctx.current.item.title
-          subtitle: =@ctx.current.item.description
+          subtitle: =@ctx.current.item.subtitle
           divider: solid
           horizontalItemSize: large
           leftElement: 
             element: image
             text: ''
-            uri: =@ctx.current.item.uploadPhoto
+            uri: =@ctx.current.item.imageUrl

@@ -13,15 +13,15 @@ datasources:
       query: |
         SELECT
           id,
-          '$.subject',
-          '$.startDateTime',
-          '$.endDateTime',
-          '$.location',
-          '$.speakerOne',
-          '$.speakerTwo',
-          '$.endTime',
-          '$.startTime',
-          '$.agendaDetail'
+          '$.subject' AS subject,
+          '$.startDateTime' AS startDateTime,
+          '$.endDateTime' AS endDateTime,
+          '$.location' AS location,
+          '$.speakerOne' AS speakerOne,
+          '$.speakerTwo' AS speakerTwo,
+          '$.endTime' AS endTime,
+          '$.startTime' AS startTime,
+          '$.agendaDetail' AS agendaDetail
         FROM
           [default/calendar]
 

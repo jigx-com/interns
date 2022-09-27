@@ -1,0 +1,32 @@
+type: jig.document
+title: Latest Photos
+icon: picture-landscape
+
+datasources:
+  images:
+    type: datasource.sqlite
+    options:
+      provider: DATA_PROVIDER_DYNAMIC
+      entities:
+        - default/photos
+      query: |
+        SELECT 
+          id, 
+          '$.imageUrl' AS imageUrl, 
+          '$.title' AS title, 
+          '$.subtitle' AS subtitle, 
+          '$.createdOn' AS createdOn,
+          '$.uploadedBy' AS uploadedBy
+        FROM [default/photos] 
+      # ORDER BY '$.createdOn' DESC
+          
+source: 
+  documentType: GALLERY
+  images: =@ctx.datasources.images
+    # =[$map(@ctx.datasources.images, function($v, $i, $a) {
+    #   {
+    #     "imageUrl": $v.url,
+    #     "title": "Title" & $i,
+    #     "subtitle": "Subtitle" & $i
+    #   }
+    # })]

@@ -21,9 +21,9 @@ datasources:
           json_extract(tM.data, '$.location') AS tmLocation,
           COUNT(json_extract(tM.data, '$.firstName')) AS COUNT,
           json_extract(P.data, '$.location') AS Plocation,
-          json_extract(P.data, '$.uploadPhoto') AS uploadPhoto,
+          json_extract(P.data, '$.imageUrl') AS imageUrl,
           json_extract(P.data, '$.title') AS Ptitle,
-          json_extract(P.data, '$.description') AS Pdescription
+          json_extract(P.data, '$.subtitle') AS Psubtitle
         FROM
           [default/locations] AS L
           LEFT JOIN [default/members] AS tM ON L.id = tmLocation

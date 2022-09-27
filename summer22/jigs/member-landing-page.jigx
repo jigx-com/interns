@@ -40,9 +40,9 @@ datasources:
         SELECT 
           id, 
           '$.uploadedBy' AS uploadedBy, 
-          '$.uploadPhoto' AS uploadPhoto 
+          '$.imageUrl' AS imageUrl 
         FROM [default/photos] 
-        WHERE uploadPhoto LIKE @firstName
+        WHERE imageUrl LIKE @firstName
       queryParameters:
         firstName: =@ctx.jig.inputs.firstName
 

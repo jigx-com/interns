@@ -3,6 +3,11 @@ description: Share photos and quotes
 type: jig.default
 icon: camera
 
+# onFocus: 
+#   type: action.reset-state
+#   options:
+#     state: =@ctx.
+
 datasources:
   locationDropdown: 
     type: datasource.sqlite
@@ -28,7 +33,7 @@ children:
       children:
         # Image Upload
         - type: component.media-field
-          instanceId: uploadPhoto
+          instanceId: imageUrl
           options:
             label: Upload a Photo
             mediaType: image
@@ -42,7 +47,7 @@ children:
             isRequired: true
         # Photo Description
         - type: component.text-field
-          instanceId: description
+          instanceId: subtitle
           options:
             label: Description
             isRequired: false
@@ -96,48 +101,55 @@ children:
             label: ''
             value: b
             isHidden: true
+        #created On
+        - type: component.text-field
+          instanceId: createdOn
+          options:
+            label: createdon
+            value: =$now()
+            isHidden: true
 
-
+            
 actions:
   - children:
-      - type: action.execute-entity
+      - type: action.action-list
         options:
           title: Upload Photo
-          provider: DATA_PROVIDER_DYNAMIC
-          entity: default/photos
-          method: create
-          goBack: home
-          onSuccess: 
-            type: action.action-list
-            options:
-              actions:
-                - type: action.confirm
-                  options:
-                    isConfirmedAutomatically: true
-                    onConfirmed: 
-                      type: action.go-back
-                    modal:
-                      title: ""
-                - type: action.sync-entities
-                  options:
-                    provider: DATA_PROVIDER_DYNAMIC
-                    force: true
-                    entities:
-                      - entity: default/photos
-                # - type: action.reset-state
-                #   options:
-                #     state: =@ctx.solution.state.photostories.
-          data:
-            uploadPhoto: =@ctx.components.uploadPhoto.state.value
-            title: =@ctx.components.title.state.value
-            description: =@ctx.components.description.state.value
-            cruiseFilter: =@ctx.components.cruiseFilter.state.value
-            location: =@ctx.components.location.state.value
-            expireDate: =($millis() + 86400000)
-            uploadedBy: =@ctx.components.uploadedBy.state.value
-            buttonTitle: =@ctx.components.buttonTitle.state.value
-            linkTo: =@ctx.components.linkTo.state.value
-            setOrder: =@ctx.components.setOrder.state.value
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/photos
+                method: create
+                goBack: stay
+                data:
+                  imageUrl: =@ctx.components.imageUrl.state.value
+                  title: =@ctx.components.title.state.value
+                  subtitle: =@ctx.components.subtitle.state.value
+                  cruiseFilter: =@ctx.components.cruiseFilter.state.value
+                  location: =@ctx.components.location.state.value
+                  expireDate: =($millis() + 86400000)
+                  uploadedBy: =@ctx.components.uploadedBy.state.value
+                  buttonTitle: =@ctx.components.buttonTitle.state.value
+                  linkTo: =@ctx.components.linkTo.state.value
+                  setOrder: =@ctx.components.setOrder.state.value
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.imageUrl.state.value
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.title.state.value
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.subtitle.state.value
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.location.state.selected
+            - type: action.reset-state
+              options:
+                state: =@ctx.jig.components.location.state.value
+            - type: action.go-back
+
 
 
 
@@ -170,7 +182,7 @@ actions:
 #                           entities:
 #                             - entity: default/photos
 #                 data:
-#                   uploadPhoto: =@ctx.components.uploadPhoto.state.value
+#                   imageUrl: =@ctx.components.imageUrl.state.value
 #                   title: =@ctx.components.title.state.value
 #                   description: =@ctx.components.description.state.value
 #                   cruiseFilter: =@ctx.components.cruiseFilter.state.value

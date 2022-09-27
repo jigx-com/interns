@@ -22,13 +22,13 @@ children:
           instanceId: organizationId
           options:
             label: Organization Id
-            value: 11111112-2dbe-4687-b98c-09b01c039743
+            value: 352b1215-51fb-48fb-bfd0-0d285f9dfe79
             isHidden: true
         - type: component.text-field
           instanceId: solutionId
           options:
             label: Solution Id
-            value: 002d83e6-b9f5-4872-906b-55522eb31b0f
+            value: e686edcd-5653-486c-8167-e378a13ea2b8
             isHidden: true
         - type: component.text-field
           instanceId: jigxReferenceId

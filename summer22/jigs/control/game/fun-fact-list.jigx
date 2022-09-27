@@ -51,8 +51,8 @@ item:
           goBack: stay
           data: 
             id: =@ctx.current.item.factId
-            active: "=@ctx.datasources.facts[id] = @ctx.current.item.factId ? 'true' : 'false'" #"true"
-            completed: "=@ctx.datasources.facts[id] = @ctx.current.item.factId or completed = 'true' ? 'true' : 'false'" #"true"
+            active: "=@ctx.datasources.fact-list[factId] = @ctx.current.item.factId ? 'true' : 'false'" #"true"
+            completed: "=@ctx.datasources.fact-list[factId] = @ctx.current.item.factId or completed = 'true' ? 'true' : 'false'" #"true"
     # List Styling
-    # style:
-    #   isDisabled: =(@ctx.current.item.completed = "true" ? true :false)
+    style:
+      isDisabled: =(@ctx.current.item.completed = "true" ? true :false)

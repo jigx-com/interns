@@ -57,7 +57,7 @@ item:
       title: =@ctx.current.item.count
       color:
         - when: true
-          color: color5
+          color: color7
     leftElement: 
       element: avatar
       text: =($contains(@ctx.current.item.name, " ") ? ($substring($substringBefore(@ctx.current.item.name, " "), 1, 1) & $substring($substringAfter(@ctx.current.item.name, " ") , 1, 1) ) :@ctx.current.item.name)

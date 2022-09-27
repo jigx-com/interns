@@ -15,6 +15,12 @@ widgets:
           align: center
 badge: =@ctx.datasources.hotspotLoc.COUNT
 
+header: 
+  type: component.image
+  options:
+    source:
+      uri: =@ctx.datasources.hotspotLoc.avatar
+
 datasources:
   hotspotLoc: 
     type: datasource.sqlite
@@ -27,7 +33,7 @@ datasources:
   
       query: |
         SELECT
-          L.id,
+          L.id AS Lid,
           json_extract(L.data, '$.name') AS name,
           json_extract(L.data, '$.type') AS type,
           json_extract(L.data, '$.avatar') AS avatar,
@@ -50,3 +56,16 @@ children:
   - jigId: hotspot-images
     
   - jigId: hotspot-location
+    
+#This action does not currenlty work
+actions:
+  - children:
+      - type: action.execute-entity
+        options:
+          title: Join Party
+          provider: DATA_PROVIDER_DYNAMIC
+          entity: default/members
+          method: update
+          goBack: previous
+          data:
+            location: =@ctx.datasources.hotspotLoc.Lid
