@@ -25,7 +25,6 @@ datasources:
         ON json_extract(F.data, '$.userEmail') LIKE json_extract(M.data, '$.email')
         ORDER BY firstName ASC, lastName ASC
 
-
 data: =@ctx.datasources.fact-list
 item:
   type: component.list-item
@@ -50,9 +49,13 @@ item:
           method: update
           goBack: stay
           data: 
+            #"=@ctx.datasources.fact-list[].{ 'id': id, 'active': id = @ctx.current.item.id ? 'true' : 'false', 'completed': id = @ctx.current.item.id or completed = 'true' ? 'true' : 'false' }[]"
             id: =@ctx.current.item.factId
-            active: "=@ctx.datasources.fact-list[factId] = @ctx.current.item.factId ? 'true' : 'false'" #"true"
-            completed: "=@ctx.datasources.fact-list[factId] = @ctx.current.item.factId or completed = 'true' ? 'true' : 'false'" #"true"
+            active: "true"
+            dtactive: =$toMillis($now())
+            #active: "=@ctx.datasources.facts[id] = @ctx.current.item.factId ? 'true' : 'false'" #"true"
+            # completed: "=@ctx.datasources.facts[id] = @ctx.current.item.factId or completed = 'true' ? 'true' : 'false'" #"true"
+            completed: "true" #"true"
     # List Styling
     style:
       isDisabled: =(@ctx.current.item.completed = "true" ? true :false)
