@@ -64,7 +64,7 @@ children:
           options:
             label: Time Test
             value: "=(
-                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                       ($substring($hours, 0, 5) > @ctx.current.item.timeframe) ? true: false
                     )" 
 
@@ -74,17 +74,17 @@ children:
           options:
             label: time
             value: "=(
-                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ')
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ')
                     )"
                     
               # and ($hours < '10:00:00')
             
 # Past Time Table Expressions      
-#$expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
-#$expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
+#$expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') < '23:59:59')
+#$expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') > '17:00:01')
 # Current Time Test Examples:
-# "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01'))"
-# "=( $expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59')
-#     $expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')
+# "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') < '23:59:59') AND ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') > '17:00:01'))"
+# "=( $expr1 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') < '23:59:59')
+#     $expr2 := ($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') > '17:00:01')
 #   ($expr1 AND $expr2) ? true: false)"
-# "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') < '23:59:59') AND (($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ') > '17:00:01')) ? false: true)" 
+# "=(($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') < '23:59:59') AND (($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ') > '17:00:01')) ? false: true)" 

@@ -36,7 +36,7 @@ datasources:
         FROM
           [default/calendar]
         WHERE
-          day LIKE strftime('%d', 'now', '-07:00')
+          day LIKE strftime('%d', 'now', '+02:00')
         ORDER BY
           '$.startDateTime'
     
@@ -54,7 +54,7 @@ datasources:
         '$.numeral' AS numeral,
         '$.ordinal' AS ordinal
         FROM [default/days] 
-        WHERE day LIKE strftime('%d', 'now', '-07:00')
+        WHERE day LIKE strftime('%d', 'now', '+02:00')
 
 
 data: =@ctx.datasources.agendaList
@@ -77,7 +77,7 @@ item:
           color: color14
     style:
       isDisabled: "=(
-                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                       ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
                     )" 
     onPress: 
@@ -87,7 +87,7 @@ item:
         
 # placeholders:
 #   - when: "=(
-#               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+#               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
 #               ($hours > '22:00:00') and ($hours < '06:00:00')) ? true: false
 #             )"
 #   - title: To party, ot not to party. That is the question.

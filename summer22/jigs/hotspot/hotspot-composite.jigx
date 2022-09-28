@@ -49,6 +49,23 @@ datasources:
           count DESC
         LIMIT
           1
+          
+  currentMember:
+    type: datasource.sqlite
+    options:
+      isDocument: true
+      provider: DATA_PROVIDER_DYNAMIC
+    
+      entities:
+        - default/members
+    
+      query: |
+        SELECT 
+        id,
+        '$.email' 
+        FROM [default/members] WHERE '$.email' = @myParam
+      queryParameters:
+        myParam: =@ctx.user.email
 
 children:
   - jigId: hotspot-members
@@ -68,4 +85,6 @@ actions:
           method: update
           goBack: previous
           data:
+            id: =@ctx.datasources.currentMember.id
             location: =@ctx.datasources.hotspotLoc.Lid
+            time-of-location: =$now()

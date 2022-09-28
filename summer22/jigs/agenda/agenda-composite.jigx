@@ -28,10 +28,10 @@ datasources:
           '$.endTime' AS endTime,
           '$.startTime' AS startTime 
         FROM [default/calendar] 
-        WHERE day LIKE strftime('%d', 'now', '-07:00') AND endTime > @currentTime
+        WHERE day LIKE strftime('%d', 'now', '+02:00') AND endTime > @currentTime
         ORDER BY '$.startDateTime'
       queryParameters:
-         currentTime: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' '))
+         currentTime: =($substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' '))
         
   days:
     type: datasource.sqlite
@@ -47,7 +47,7 @@ datasources:
         '$.numeral' AS numeral,
         '$.ordinal' AS ordinal
         FROM [default/days] 
-        WHERE day LIKE strftime('%d', 'now', '-07:00') 
+        WHERE day LIKE strftime('%d', 'now', '+02:00') 
 
 widgets:
   "4x2": 
@@ -72,16 +72,18 @@ widgets:
                   name: =@ctx.current.item.icon
                 style:
                   isDisabled: "=(
-                          $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                          $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                           ($substring($hours, 0, 5) > @ctx.current.item.endTime) ? true: false
                         )" 
-      # placeholders:
-      #   - when: "=(
-      #             $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
-      #             (($hours > '22:00:00') and ($hours < '06:00:00')) ? true: false
-      #           )"
-      #   - title: To party, ot not to party. That is the question.
-      #     icon: loading-data
+      placeholders:
+        - when: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
+                  (($hours > '22:00:00') and ($hours < '06:00:00')) ? true : false
+                )"
+          title: To party, ot not to party. That is the question.
+          icon: loading-data
+
+      
 
 
 header: 

@@ -19,15 +19,10 @@ datasources:
           json_extract(L.data, '$.avatar') AS avatar,
           json_extract(L.data, '$.decknumber') AS decknumber,
           json_extract(tM.data, '$.location') AS tmLocation,
-          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT,
-          json_extract(P.data, '$.location') AS Plocation,
-          json_extract(P.data, '$.imageUrl') AS imageUrl,
-          json_extract(P.data, '$.title') AS Ptitle,
-          json_extract(P.data, '$.subtitle') AS Psubtitle
+          COUNT(json_extract(tM.data, '$.firstName')) AS COUNT
         FROM
           [default/locations] AS L
           LEFT JOIN [default/members] AS tM ON L.id = tmLocation
-          JOIN [default/photos] AS P ON L.id = Plocation
         GROUP BY
           L.id
         ORDER BY 

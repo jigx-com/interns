@@ -14,15 +14,14 @@ datasources:
       query: |
         SELECT 
           id, 
-          '$.email' AS userEmail
+          '$.email' AS userEmail,
+          '$.firstName' AS firstName,
+          '$.lastName' AS lastName
         FROM 
           [default/members]
-        WHERE email = @myParam
+        WHERE userEmail Like @myParam
       queryParameters:
         myParam: =@ctx.user.email
-
-# outputs:
-#   checkUserEmail: "=($exists(@ctx.datasources.checkUserEmail.userEmail) ? true: false)"
 
 header: 
   type: component.image
@@ -34,6 +33,7 @@ children:
   - type: component.form
     instanceId: check-in-form
     options:
+      isDiscardChangesAlertEnabled: false
       children:
         - type: component.avatar-field
           instanceId: avatar 
@@ -46,84 +46,66 @@ children:
                 instanceId: firstName
                 options:
                   label: First Name*
+                  initialValue: =@ctx.datasources.checkUserEmail.firstName
                   isRequired: true
               - type: component.text-field
                 instanceId: lastName
                 options:
                   label: Last Name*
+                  initialValue: =@ctx.datasources.checkUserEmail.lastName
                   isRequired: true
-        - type: component.field-row
+        - type: component.email-field
+          instanceId: email
           options:
-            children:
-              - type: component.email-field
-                instanceId: email
-                options:
-                  label: Email*
-                  initialValue: =@ctx.user.email
-                  style:
-                    flex: 6
-                  isRequired: true
-              - type: component.date-picker
-                instanceId: DOB
-                options:
-                  label: Date of Birth
-                  format: L
-                  isRequired: false
-                  style:
-                    flex: 4
-        - type: component.field-row
+            label: Email*
+            initialValue: =@ctx.user.email
+            style:
+              flex: 6
+              isDisabled: true
+            isRequired: true
+        - type: component.number-field
+          instanceId: emergencyConNum
           options:
-            children:
-              - type: component.number-field
-                instanceId: emergencyConNum
-                options:
-                  label: Emergency Contact Number*
-                  style:
-                    flex: 2
-                  isRequired: true
-              - type: component.text-field
-                instanceId: emergencyConName
-                options:
-                  label: Emergency Contact Name*
-                  isRequired: true
+            label: Emergency Contact Number*
+            isRequired: true
+        - type: component.text-field
+          instanceId: emergencyConName
+          options:
+            label: Emergency Contact Name*
+            isRequired: true
         - type: component.text-field
           instanceId: dietReq
           options:
             label: Dietary Requirement
             isRequired: false
-        - type: component.checkbox
-          instanceId: isSpouse 
-          options:
-            label: Spouse 
-            isRequired: false
-        - type: component.text-field
-          instanceId: strtLocation
-          options:
-            label: Location 
-            isHidden: true
-        - type: component.text-field
-          instanceId: dailyVote
-          options:
-            label: ''
-            initialValue: n/a
-            isHidden: true
+
             
 actions:
   - children:
-      - type: action.submit-form
+      - type: action.action-list
         options:
-          formId: check-in-form
-          provider: DATA_PROVIDER_DYNAMIC
-          entity: default/members
-          title: Check-In
+          title: Submit Form
+          actions:
+            - type: action.execute-entity
+              options:
+                provider: DATA_PROVIDER_DYNAMIC
+                entity: default/members
+                method: update
+                goBack: stay
+                data:
+                  id: =@ctx.datasources.checkUserEmail.id
+                  firstName: =@ctx.jig.components.firstName.state.value
+                  lastName: =@ctx.jig.components.lastName.state.value
+                  avatar: =@ctx.jig.components.avatar.state.value
+                  emergencyConNum: =@ctx.jig.components.emergencyConNum.state.value
+                  emergencyConName: =@ctx.jig.components.emergencyConName.state.value
+                  dietReq: =@ctx.jig.components.dietReq.state.value
+                  location: ''
+                  dailyVote: ''
+                onSuccess: 
+                  type: action.go-back
 
-# actions:
-#   - children:
-#       - type: action.set-state
-#         options:
-#           title: Check-In
-#           state: hidden
-#           value: 
+
             
             
               

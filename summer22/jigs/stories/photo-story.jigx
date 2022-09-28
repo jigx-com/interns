@@ -2,11 +2,18 @@ title: Welcome
 type: jig.default
 
 onFocus: 
-  type: action.sync-entities
+  type: action.action-list
   options:
-    provider: DATA_PROVIDER_DYNAMIC
-    entities:
-      - entity: default/photos
+    actions:
+      - type: action.sync-entities
+        options:
+          provider: DATA_PROVIDER_DYNAMIC
+          entities:
+            - entity: default/photos
+      - type: action.set-state
+        options:
+          state: =@ctx.solution.state.photoDtFilterTime
+          value: =$toMillis($now())
         
 datasources:
   photos:
@@ -25,9 +32,13 @@ datasources:
           '$.imageUrl',
           '$.linkTo' AS linkTo,
           '$.buttonTitle' AS buttonTitle,
-          '$.setOrder' AS setOrder
+          '$.setOrder' AS setOrder,
+          '$.expireDate' AS expireDate
         FROM [default/photos] 
+        WHERE expireDate >= @param
         ORDER BY setOrder
+      queryParameters:
+        param: =@ctx.solution.state.photoDtFilterTime.value
 
 stories:
   instanceId: photostories

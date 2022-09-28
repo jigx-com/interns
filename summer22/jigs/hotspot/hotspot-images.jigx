@@ -61,9 +61,7 @@ datasources:
         WHERE L.id LIKE @loc
       queryParameters:
         loc: =@ctx.datasources.hotspotLoc.Lid
-
         
-
 children:
   - type: component.list
     options:
@@ -81,4 +79,4 @@ children:
           leftElement: 
             element: image
             text: ''
-            uri: =@ctx.datasources.photos.imageUrl
+            uri: =@ctx.current.item.imageUrl

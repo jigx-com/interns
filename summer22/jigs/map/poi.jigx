@@ -52,7 +52,7 @@ datasources:
         id, 
         '$.day' AS day
         FROM [default/days] 
-        WHERE day LIKE strftime('%d', 'now', '-07:00')
+        WHERE day LIKE strftime('%d', 'now', '+02:00')
      # DISTINCT location
       queryParameters:
         myParam: value
@@ -79,7 +79,7 @@ datasources:
           '$.location' AS location,
           '$.googleURL' AS googleURL
         FROM [default/poi] 
-        WHERE day LIKE strftime('%d', 'now', '-07:00')
+        WHERE day LIKE strftime('%d', 'now', '+02:00')
         ORDER BY name ASC
 
 data: =@ctx.datasources.poi

@@ -1,20 +1,21 @@
 title: Fun Fact
 type: jig.default
-widgets:
-  2x2: 
-    type: widget.list
-    options:
-      top:
-        type: component.trend
-        options:
-          title: "🧐 Guess, who it is:"
-          style:
-            isValueHidden: true
-      data: =@ctx.datasources.facts
-      item:         
-        type: component.list-item
-        options:
-          title: =('"' & @ctx.datasources.facts[active = 'true'].fact & '"')
+icon: controls-play
+# widgets:
+#   2x2: 
+#     type: widget.list
+#     options:
+#       top:
+#         type: component.trend
+#         options:
+#           title: "🧐 Guess, who it is:"
+#           style:
+#             isValueHidden: true
+#       data: =@ctx.datasources.facts
+#       item:         
+#         type: component.list-item
+#         options:
+#           title: =('"' & @ctx.datasources.facts[active = 'true'].fact & '"')
           
 
 header: 
@@ -89,17 +90,16 @@ datasources:
         - default/members
       query: |
         SELECT
-          tb.id AS tbID,
-          json_extract(tb.data, '$.firstName') AS tbfirstName,
-          json_extract(tb.data, '$.lastName') AS lastName,
-          json_extract(tb.data, '$.team') AS team,
-          json_extract(tb.data, '$.voted') AS voted,
-          json_extract(tb.data, '$.email') AS tbEmail,
-          json_extract(tM.data, '$.avatar') AS avatar,
-          json_extract(tM.data, '$.email') AS tmEmail
+          T.id AS Tid,
+          json_extract(T.data, '$.teamNum') AS teamNum,
+          json_extract(T.data, '$.email') AS TEmail,
+          json_extract(M.data, '$.avatar') AS avatar,
+          json_extract(M.data, '$.email') AS MEmail,
+          json_extract(M.data, '$.firstName') AS firstName,
+          json_extract(M.data, '$.lastName') AS lastName
         FROM
-          [default/teammates] AS tb
-          LEFT JOIN [default/members] AS tM ON tbEmail LIKE tmEmail
+          [default/teammates] AS T
+          LEFT JOIN [default/members] AS M ON TEmail LIKE MEmail
           
   # currentUser:
   #   type: datasource.sqlite
@@ -165,8 +165,8 @@ children:
             item:
               type: component.dropdown-item
               options:
-                title: =@ctx.current.item.tbfirstName & ' ' & @ctx.current.item.lastName
-                value: =@ctx.current.item.tbID
+                title: =@ctx.current.item.firstName & ' ' & @ctx.current.item.lastName
+                value: =@ctx.current.item.Tid
                 leftElement: 
                   element: avatar
                   text: =($substring($substringBefore(@ctx.current.item.tbfirstName, " "), 0, 1) & $substring($substringAfter(@ctx.current.item.lastName, " ") , 0, 1) )
@@ -193,6 +193,7 @@ actions:
           goBack: stay
           onSuccess:
             description: Guess submitted
+
   # - children:
   #     - type: action.execute-entity
   #       options:
@@ -230,3 +231,4 @@ placeholders:
   - when: "=$count(@ctx.datasources.guesses[factid = @ctx.datasources.facts[active = 'true'].id and player = @ctx.user.email] ) > 0"
     title: Let's wait for Grant...
     icon: is-offline
+    

@@ -19,20 +19,20 @@ widgets:
   - size: "2x2"
     jigId: breakfast
     isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                   (($hours > '00:00:00') and ($hours < '10:00:00')) ? false: true
                 )" 
   - size: "2x2"
     jigId: lunch-composite
     isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                   (($hours > '10:00:01') and ($hours < '17:00:00') and ($contains(@ctx.user.email, 'jigx')=false))? false: true
                 )" 
     
   - size: "2x2"
     jigId: dinner
     isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                   (($hours > '17:00:01') and ($hours < '23:59:59')) ? false: true
                 )" 
 
@@ -41,7 +41,7 @@ widgets:
   - size: "1x1"
     jigId: link-up-filter-location
     # isHidden: "=(
-    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '+0200'), ' ');
     #               (($hours > '0216:00:00')) ? false: true
     #             )" 
       
@@ -57,38 +57,38 @@ widgets:
   - size: "2x2"
     jigId: poi
     isHidden: "=(
-                    $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                    $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                     (($hours > '07:00:00') and ($hours < '18:00:00')) ? false: true
                   )"
 
   - size: "2x2"
     jigId: hotspot-composite
     isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
                   (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
                 )"
                 
   - size: "2x2"
     jigId: cruise-map-list
     # isHidden: "=(
-    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '-0700'), ' ');
+    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ');
     #               (($hours > '07:00:00') and ($hours < '18:00:00')) ? true: false
     #             )"
 
 #Fun Fact
-  - size: "2x2"
+  - size: "1x1"
     jigId: fun-fact
     isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '+0200'), ' ');
                   ($hours > '01') and ($hours < '03') ? false: true
                 )"
 #check-in Widget
   - size: "1x1"
     jigId: day1-checkIn-form
-    # isHidden: "=(
-    #               $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '-0700'), ' ');
-    #               (($hours < '0316:00:00')) ? false: true
-    #             )"  
+    isHidden: "=(
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01][H01]:[m01]:[s01] [z]', '+0200'), ' ');
+                  (($hours < '0316:00:00')) ? false: true
+                )"  
 
 #photo gallary
   - size: "1x1"
@@ -102,7 +102,7 @@ widgets:
   - size: "2x2"
     jigId: create-team-names
     isHidden: "=(
-                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '-0700'), ' ');
+                  $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '+0200'), ' ');
                   ($hours > '02') and ($hours < '04')? false: true
                 )"
               

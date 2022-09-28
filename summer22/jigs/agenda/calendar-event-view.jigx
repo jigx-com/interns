@@ -14,42 +14,41 @@ children:
         - type: component.entity-field
           options:
             label: Subject
-            value: Workshop #=@ctx.jig.inputs.subject
+            value: =@ctx.jig.inputs.subject
         - type: component.field-row
           options:
             children:
               - type: component.entity-field
                 options:
                   label: Start Time
-                  value: '9:30' #=@ctx.jig.inputs.startTime
+                  value: =@ctx.jig.inputs.startTime
               - type: component.entity-field
                 options:
                   label: End Time
-                  value: '12:30' #=@ctx.jig.inputs.endTime
+                  value: =@ctx.jig.inputs.endTime
         - type: component.field-row
           options:
             children:
               - type: component.entity-field
                 options:
                   label: Speaker
-                  value: 'Adriaan' #=@ctx.jig.inputs.speakerOne
+                  value: =@ctx.jig.inputs.speakerOne
               - type: component.entity-field
                 options:
                   label: Speaker
-                  value: 'Grant' #=@ctx.jig.inputs.speakerTwo
+                  value: =@ctx.jig.inputs.speakerTwo
         - type: component.entity-field
           options:
             label: Location Name
-            value: 'Le Labo Coworking' #=@ctx.jig.inputs.agendaDetail
+            value: =@ctx.jig.inputs.agendaDetail
         - type: component.entity-field
           options:
             label: Location Address
-            value: '6 Rue du Congrès, 06000 Nice, France' #=@ctx.jig.inputs.location
+            value: =@ctx.jig.inputs.location
   - type: component.location
     options:
-      address: '6 Rue du Congrès, 06000 Nice, France' #=@ctx.jig.inputs.location
+      address: =@ctx.jig.inputs.location
       zoomLevel: 14
-      
 
 actions:
   - children:
