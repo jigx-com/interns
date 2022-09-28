@@ -9,14 +9,13 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
       entities:
         - default/photos
-      query: |
-        SELECT 
-          id, 
-          '$.imageUrl' AS imageUrl, 
-          '$.title' AS title, 
-          '$.subtitle' AS subtitle, 
+      query: | 
+        SELECT
+          id,
+          '$.imageUrl' AS imageUrl,
+          '$.title' AS title,
           '$.createdOn' AS createdOn,
-          '$.uploadedBy' AS uploadedBy
+          '$.uploadedBy' AS subtitle
         FROM [default/photos] 
       # ORDER BY '$.createdOn' DESC
           
