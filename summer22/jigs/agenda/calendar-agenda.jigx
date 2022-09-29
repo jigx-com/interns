@@ -19,6 +19,7 @@ datasources:
           '$.location' AS location,
           '$.speakerOne' AS speakerOne,
           '$.speakerTwo' AS speakerTwo,
+          '$.speakerThree' AS speakerThree,
           '$.endTime' AS endTime,
           '$.startTime' AS startTime,
           '$.agendaDetail' AS agendaDetail
@@ -47,6 +48,7 @@ item:
           location: =@ctx.current.item.location
           speakerOne: =@ctx.current.item.speakerOne
           speakerTwo: =@ctx.current.item.speakerTwo
+          speakerThree: =@ctx.current.item.speakerThree
           endTime: =@ctx.current.item.endTime
           startTime: =@ctx.current.item.startTime
           agendaDetail: =@ctx.current.item.agendaDetail

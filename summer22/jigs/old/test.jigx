@@ -9,9 +9,9 @@ datasources:
       provider: DATA_PROVIDER_DYNAMIC
   
       entities:
-        - default/deckMapLocations
+        - default/gameStories
   
-      query: SELECT id FROM [default/deckMapLocations]
+      query: SELECT id FROM [default/gameStories]
 
 children:
   - type: component.location

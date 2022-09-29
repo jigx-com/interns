@@ -2,7 +2,8 @@
 title: Controls
 description: Where to go?
 type: jig.default
-icon: cog-double
+icon: button-play
+
 header: 
   type: component.image
   options:

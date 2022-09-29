@@ -37,6 +37,10 @@ children:
                 options:
                   label: Speaker
                   value: =@ctx.jig.inputs.speakerTwo
+              - type: component.entity-field
+                options:
+                  label: Speaker
+                  value: =@ctx.jig.inputs.speakerThree
         - type: component.entity-field
           options:
             label: Location Name

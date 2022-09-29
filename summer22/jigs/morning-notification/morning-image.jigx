@@ -10,18 +10,31 @@ datasources:
       entities:
         - default/members
       # Get top voted photo id
-      query: |
+      query: |    
         SELECT
-          '$.dailyVote' AS photoId
+          '$.dailyVote',
+          COUNT(json_extract(data, '$.dailyVote')) AS voteCount
         FROM
           [default/members]
         GROUP BY
           '$.dailyVote'
-        ORDER BY
-          COUNT('$.dailyVote') DESC
-        LIMIT
-          1
-  
+        HAVING
+          COUNT (json_extract(data, '$.dailyVote')) = (
+            SELECT
+              MAX(mycount)
+            FROM
+              (
+                SELECT
+                  json_extract(data, '$.dailyVote'),
+                  COUNT(json_extract(data, '$.dailyVote')) AS mycount
+                FROM
+                  [default/members]
+          WHERE trim(json_extract(data, '$.dailyVote')) != ''
+                GROUP BY
+                  '$.dailyVote'
+              )
+          )
+              
   photo: 
     type: datasource.sqlite
     options:
@@ -41,7 +54,7 @@ datasources:
         FROM [default/photos] 
         WHERE id = @topVote
       queryParameters:
-        topVote: =@ctx.datasources.topVotedPhoto.photoId
+        topVote: =@ctx.datasources.topVotedPhoto.dailyVote
 
 children:
   - type: component.image

@@ -74,7 +74,7 @@ children:
           options:
             label: time
             value: "=(
-                      $hours := $substringBefore($fromMillis($toMillis($now()), '[H01]:[m01]:[s01] [z]', '+0200'), ' ')
+                      $hours := $substringBefore($fromMillis($toMillis($now()), '[D01] [z]', '+0200'), ' ')
                     )"
                     
               # and ($hours < '10:00:00')
