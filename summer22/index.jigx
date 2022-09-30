@@ -106,4 +106,5 @@ widgets:
                   ($hours > '02') and ($hours < '04')? false: true
                 )"
               
+              
   

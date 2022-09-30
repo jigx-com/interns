@@ -34,7 +34,7 @@ children:
           instanceId: jigxReferenceId
           options:
             label: Jig Reference Id
-            initialValue: morning-story #=@ctx.jig.inputs.linkTo
+            initialValue: =@ctx.jig.inputs.linkTo
             isHidden: true
       isDiscardChangesAlertEnabled: false
         
